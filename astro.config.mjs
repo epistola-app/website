@@ -10,7 +10,7 @@ const EPISTOLA_OPENAPI_SCHEMA_URL =
 
 // https://astro.build/config
 export default defineConfig({
-  base: import.meta.env.NODE_ENV === "production" ? "/website/" : "/",
+  base: import.meta.env.NODE_ENV === "development" ? "/" : "/website/",
   integrations: [
     starlight({
       customCss: ["./src/styles/custom.css"],
