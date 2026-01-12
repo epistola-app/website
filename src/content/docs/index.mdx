@@ -1,36 +1,41 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
+title: Epistola Suite Documentation
+description: Enterprise document management and template system
 template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
-  image:
-    file: ../../assets/houston.webp
+  title: Epistola Suite
+  tagline: Modern document management with multi-tenant architecture, version control, and powerful templating
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Get Started
+      link: /guides/installation/
       icon: right-arrow
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
+      variant: primary
+    - text: View API Docs
+      link: /api
       icon: external
       variant: minimal
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
+## Documentation Sections
 
 <CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
+  <Card title="Guides" icon="open-book">
+    Step-by-step guides for features, integrations, and workflows
+  </Card>
+  <Card title="API Reference" icon="puzzle">
+    REST API documentation with OpenAPI specification
+  </Card>
+  <Card title="Architecture" icon="setting">
+    System design, domain models, and architectural patterns
+  </Card>
+  <Card title="Project" icon="star">
+    Roadmap and project information
+  </Card>
 </CardGrid>
+
+## Quick Links
+
+- **[Brand Guide](/guides/brandguide)**: Design system and visual guidelines
+- **[Testing](/guides/testing)**: Testing strategy and examples
