@@ -93,7 +93,7 @@ Epistola Suite is a document generation platform designed for both developers an
 
 ## Contributing
 
-See [CONTRIBUTING.md](../CONTRIBUTING.md) for contribution guidelines.
+See [CONTRIBUTING.md](https://github.com/epistola-app/epistola-suite/blob/main/README.md) for contribution guidelines.
 
 ## Tracking
 

@@ -1,0 +1,23 @@
+---
+import "../styles/global.css";
+import Header from "./header.astro";
+import Footer from "./footer.astro";
+---
+
+<html lang="en" class="light scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Document</title>
+  </head>
+  <body
+    class="font-sans antialiased bg-white dark:bg-accent-dark text-accent-dark dark:text-accent-light transition-colors duration-300 flex flex-col min-h-screen"
+  >
+    <Header />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

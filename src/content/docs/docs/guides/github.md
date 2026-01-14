@@ -5,27 +5,6 @@ title: GitHub Repository Guide
 
 This document explains how GitHub is configured for the Epistola Suite project, covering CI/CD, issue management, releases, and community features.
 
-## Table of Contents
-
-- [CI/CD Workflows](#cicd-workflows)
-  - [Build and Test](#build-and-test)
-  - [Docker Publishing](#docker-publishing)
-  - [Label Sync](#label-sync)
-  - [Project Sync](#project-sync)
-- [Versioning and Releases](#versioning-and-releases)
-- [SBOM (Software Bill of Materials)](#sbom-software-bill-of-materials)
-- [Issue Management](#issue-management)
-  - [Issue Templates](#issue-templates)
-  - [Labels](#labels)
-- [Pull Requests](#pull-requests)
-- [Security](#security)
-  - [Docker Image Signing](#docker-image-signing)
-- [GitHub Discussions](#github-discussions)
-- [GitHub App for Project Sync](#github-app-for-project-sync)
-- [Repository Settings](#repository-settings)
-
----
-
 ## CI/CD Workflows
 
 All workflows are defined in `.github/workflows/`.
@@ -180,7 +159,7 @@ CycloneDX SBOMs are generated for both backend and frontend dependencies and att
 | `epistola-backend-{version}-sbom.json` | Backend (Kotlin/Java) dependencies |
 | `epistola-editor-{version}-sbom.json` | Frontend (TypeScript/npm) dependencies |
 
-For detailed SBOM documentation, see [docs/sbom.md](sbom.md).
+For detailed SBOM documentation, see [docs/sbom](../../guides/sbom).
 
 ---
 

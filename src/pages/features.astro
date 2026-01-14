@@ -1,0 +1,105 @@
+---
+import EverythingYouNeed from "../components/everything-you-need.astro";
+import Join from "../components/join.astro";
+import Layout from "../components/layout.astro";
+---
+
+<Layout>
+  <section
+    class="pt-32 pb-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800"
+  >
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto">
+        <h1
+          class="text-5xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white"
+        >
+          Powerful Features for
+          <span class="block mt-2 text-accent-teal">
+            Modern SaaS Products
+          </span>
+        </h1>
+        <p class="text-xl text-gray-600 dark:text-gray-300">
+          Everything you need to build, launch, and scale your SaaS business.
+        </p>
+      </div>
+    </div>
+  </section>
+  <EverythingYouNeed />
+  <section class="py-20 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+        <div>
+          <h2 class="text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+            Built for Performance
+          </h2>
+          <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+            Our template is optimized for speed and SEO. Built with Astro, your
+            pages will load instantly and rank higher in search results.
+          </p>
+          <ul class="space-y-4">
+            <li class="flex items-start">
+              <svg
+                class="w-6 h-6 text-accent-teal mr-3 flex-shrink-0"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700 dark:text-gray-300"
+                >Lightning-fast page loads</span
+              >
+            </li>
+            <li class="flex items-start">
+              <svg
+                class="w-6 h-6 text-accent-teal mr-3 flex-shrink-0"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700 dark:text-gray-300"
+                >SEO optimized out of the box</span
+              >
+            </li>
+            <li class="flex items-start">
+              <svg
+                class="w-6 h-6 text-accent-teal mr-3 flex-shrink-0"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd"></path>
+              </svg>
+              <span class="text-gray-700 dark:text-gray-300"
+                >Mobile-first responsive design</span
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="bg-accent-teal rounded-2xl p-8 shadow-2xl">
+          <div class="bg-white dark:bg-gray-900 rounded-lg p-6">
+            <div class="text-center">
+              <div
+                class="text-4xl font-bold text-gray-900 dark:text-white mb-2"
+              >
+                99.9%
+              </div>
+              <div class="text-gray-600 dark:text-gray-400">
+                Uptime Guarantee
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Join />
+</Layout>

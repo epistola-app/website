@@ -56,10 +56,10 @@ The REST API is defined using OpenAPI 3.1 specification and code-generated:
 - **Generated Server**: Kotlin Spring interfaces
 - **Controller**: Implements generated interfaces, routes to mediator
 
-See [REST API Documentation](/api) for endpoint details.
+See [REST API Documentation](../../api) for endpoint details.
 
 ## Further Reading
 
-- [Domain Models](/architecture/domain/) - Entity relationships
-- [CQRS Pattern](/architecture/cqrs/) - Command/Query separation
-- [Testing Guide](/guides/testing/) - Test architecture
+- [Domain Models](../../architecture/domain/) - Entity relationships
+- [CQRS Pattern](../../architecture/cqrs/) - Command/Query separation
+- [Testing Guide](../../guides/testing/) - Test architecture

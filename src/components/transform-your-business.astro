@@ -1,0 +1,34 @@
+---
+import HeroCta from "./ui/hero-cta.astro";
+---
+
+<section class="relative py-32 md:py-40 overflow-hidden">
+  <div class="absolute inset-0">
+    <img
+      src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=1920&h=1080&fit=crop"
+      alt=""
+      class="w-full h-full object-cover"
+    />
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-gray-900/90 via-gray-900/70 to-gray-900/50 backdrop-blur-sm"
+    >
+    </div>
+  </div>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2
+        class="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-8 leading-tight tracking-tight text-white"
+      >
+        Transform Your Business Today
+      </h2>
+      <p
+        class="text-xl md:text-2xl lg:text-3xl mb-12 leading-relaxed font-light text-white/90"
+      >
+        Join thousands of companies already using SaaSKit to grow their
+        business. Start your free trial and see the difference.
+      </p>
+
+      <HeroCta url="/register" text="Start Free Trial" />
+    </div>
+  </div>
+</section>
