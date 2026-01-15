@@ -1,0 +1,31 @@
+---
+import { prepareURL } from "../../lib/URL-helpers";
+
+interface Props {
+  url: string;
+  text: string;
+  variant?: "primary" | "secondary" | "teal";
+  className?: string;
+}
+
+const { url, text, className, variant = "primary" } = Astro.props;
+
+if (url.at(0) !== "/") {
+  throw new Error(`CtaButton url must start with '/'. Received: ${url}`);
+}
+
+const variants = {
+  primary:
+    "bg-black dark:bg-white text-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90",
+  secondary:
+    "bg-white dark:bg-accent-dark text-black dark:text-white border border-black/20 dark:border-white/20 hover:bg-gray-50 dark:hover:bg-accent-dark/80",
+  teal: "bg-white text-accent-teal hover:bg-neutral-100",
+};
+---
+
+<a
+  href={prepareURL(url)}
+  class={`block px-8 py-4 text-center ${variants[variant]} rounded-lg font-semibold text-lg transition-all shadow-lg hover:shadow-xl ${className}`}
+>
+  {text}
+</a>

@@ -2,16 +2,16 @@
 import { prepareURL } from "../lib/URL-helpers";
 
 const navItems = [
-  { label: "Features", href: "features" },
-  { label: "Pricing", href: "pricing" },
-  { label: "Integrations", href: "integrations" },
-  { label: "Blog", href: "blog" },
-  { label: "Docs", href: "docs" },
+  { label: "Features", href: "/features" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Integrations", href: "/integrations" },
+  { label: "Blog", href: "/blog" },
+  { label: "Docs", href: "/docs" },
 ];
 
 const ctaItems = [
-  { label: "Login", href: "login" },
-  { label: "Get Started", href: "register", primary: true },
+  { label: "Login", href: "/login" },
+  { label: "Get Started", href: "/register", primary: true },
 ];
 
 const logoHref = import.meta.env.BASE_URL;
@@ -179,13 +179,13 @@ const logoHref = import.meta.env.BASE_URL;
     <!-- Mobile Navigation -->
     <div
       id="mobile-menu"
-      class="hidden md:hidden pb-4 border-t border-gray-200 dark:border-gray-800 mt-2 pt-4"
+      class="hidden md:hidden p-4 border-t border-gray-200 dark:border-gray-800 mt-2 h-screen"
     >
       <div class="flex flex-col space-y-3">
         {
           navItems.map((item) => (
             <a
-              href={item.href}
+              href={prepareURL(item.href)}
               class="text-accent-dark dark:text-accent-light/90 hover:text-accent-dark dark:hover:text-accent-light transition-colors font-medium py-2"
             >
               {item.label}
@@ -195,10 +195,10 @@ const logoHref = import.meta.env.BASE_URL;
         {
           ctaItems.map((item) => (
             <a
-              href={item.href}
+              href={prepareURL(item.href)}
               class:list={[
                 item.primary
-                  ? "px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-black/90 dark:hover:bg-white/90 transition-all font-medium text-center"
+                  ? "px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-black/90 dark:hover:bg-white/90 transition-all font-medium text-center mt-8"
                   : "text-accent-dark dark:text-accent-light/90 hover:text-accent-dark dark:hover:text-accent-light transition-colors font-medium py-2",
               ]}
             >
@@ -219,6 +219,12 @@ const logoHref = import.meta.env.BASE_URL;
 
   function toggleMenu() {
     const isOpen = mobileMenu?.classList.toggle("hidden") === false;
+
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
     menuButton?.setAttribute("aria-expanded", isOpen.toString());
 

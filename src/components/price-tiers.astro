@@ -1,5 +1,5 @@
 ---
-
+import CtaButton from "./ui/cta-button.astro";
 ---
 
 <section class="py-20 bg-white dark:bg-gray-900">
@@ -22,9 +22,7 @@
     <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
       <div
         class="relative p-8 rounded-2xl bg-white/80 dark:bg-white/5 backdrop-blur-md border border-gray-200/50 dark:border-white/10 text-gray-900 dark:text-white shadow-xl"
-        style="
-                  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-                "
+        style="box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);"
       >
         <h3 class="text-3xl md:text-4xl font-black mb-3">Starter</h3>
         <p class="text-lg mb-8 text-gray-600 dark:text-gray-400">
@@ -88,11 +86,7 @@
             >
           </li>
         </ul>
-        <a
-          href="/register"
-          class="block w-full text-center px-6 py-3 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl bg-black dark:bg-white text-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90"
-          >Get Started</a
-        >
+        <CtaButton url="/register" text="Get Started" />
       </div>
       <div
         class="relative p-8 rounded-2xl bg-accent-teal text-white shadow-2xl scale-105 border-2 border-white/20"
@@ -181,17 +175,11 @@
             ><span class="text-base md:text-lg font-medium">Source files</span>
           </li>
         </ul>
-        <a
-          href="/register"
-          class="block w-full text-center px-6 py-3 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl bg-white text-accent-teal hover:bg-white/90"
-          >Get Started</a
-        >
+        <CtaButton url="/register" text="Get Started" variant="teal" />
       </div>
       <div
         class="relative p-8 rounded-2xl bg-white/80 dark:bg-white/5 backdrop-blur-md border border-gray-200/50 dark:border-white/10 text-gray-900 dark:text-white shadow-xl"
-        style="
-                  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-                "
+        style="box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);"
       >
         <h3 class="text-3xl md:text-4xl font-black mb-3">Enterprise</h3>
         <p class="text-lg mb-8 text-gray-600 dark:text-gray-400">
@@ -272,11 +260,7 @@
             ><span class="text-base md:text-lg font-medium">Team training</span>
           </li>
         </ul>
-        <a
-          href="/register"
-          class="block w-full text-center px-6 py-3 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl bg-black dark:bg-white text-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90"
-          >Get Started</a
-        >
+        <CtaButton url="/register" text="Get Started" />
       </div>
     </div>
   </div>

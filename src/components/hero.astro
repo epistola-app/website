@@ -1,5 +1,5 @@
 ---
-import HeroCta from "./ui/hero-cta.astro";
+import CtaButton from "./ui/cta-button.astro";
 ---
 
 <section
@@ -81,8 +81,8 @@ import HeroCta from "./ui/hero-cta.astro";
       </p>
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <HeroCta url="/register" text="Get Started Free" />
-        <HeroCta url="/features" text="View Features" />
+        <CtaButton url="/register" text="Get Started Free" />
+        <CtaButton url="/features" text="View Features" variant="secondary" />
       </div>
 
       <div class="mt-16 grid grid-cols-3 gap-6 max-w-2xl mx-auto">

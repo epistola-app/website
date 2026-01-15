@@ -1,4 +1,6 @@
 ---
+import CtaButton from "./ui/cta-button.astro";
+
 
 ---
 
@@ -31,15 +33,9 @@
         pages. Start your journey today.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a
-          href="/register"
-          class="px-8 py-4 bg-black dark:bg-white text-white dark:text-black rounded-lg font-semibold text-lg hover:bg-black/90 dark:hover:bg-white/90 transition-all"
-          tabindex="0">Get Started Free</a
-        ><a
-          href="/pricing"
-          class="px-8 py-4 bg-white dark:bg-accent-dark text-black dark:text-white border border-black/20 dark:border-white/20 rounded-lg font-semibold text-lg hover:bg-gray-50 dark:hover:bg-accent-dark/80 transition-all"
-          tabindex="0">View Pricing</a
-        >
+        <CtaButton url="/register" text="Get Started Free" />
+        <CtaButton url="/pricing" text="View Pricing" variant="secondary" />
+
       </div>
     </div>
   </div>

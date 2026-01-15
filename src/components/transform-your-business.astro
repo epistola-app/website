@@ -1,5 +1,5 @@
 ---
-import HeroCta from "./ui/hero-cta.astro";
+import HeroCta from "./ui/cta-button.astro";
 ---
 
 <section class="relative py-32 md:py-40 overflow-hidden">
@@ -28,7 +28,7 @@ import HeroCta from "./ui/hero-cta.astro";
         business. Start your free trial and see the difference.
       </p>
 
-      <HeroCta url="/register" text="Start Free Trial" />
+      <HeroCta url="/register" text="Start Free Trial" variant="secondary" className="w-min text-nowrap mx-auto" />
     </div>
   </div>
 </section>
