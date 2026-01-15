@@ -18,7 +18,7 @@ export default defineConfig({
     starlight({
       customCss: ["./src/styles/custom.css"],
       plugins: [
-        // starlightLinksValidator(),
+        starlightLinksValidator(),
         starlightThemeFlexoki(),
         starlightOpenAPI([
           {

@@ -6,19 +6,20 @@ hero:
   title: Epistola Suite
   tagline: Modern document management with multi-tenant architecture, version control, and powerful templating
 ---
+import { prepareURL } from '../../../lib/URL-helpers';
 import { LinkButton } from '@astrojs/starlight/components';
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
   <div class="actions">
     <LinkButton 
-    href={`${import.meta.env.BASE_URL}docs/guides/installation/`} 
+    href={prepareURL("docs/guides/installation")} 
     icon='right-arrow'
     variant='primary'
     >
       Get Started
     </LinkButton>
     <LinkButton 
-    href={`${import.meta.env.BASE_URL}docs/api`} 
+    href={prepareURL("docs/api")}
     icon='external'
     variant='minimal'
     >
@@ -45,5 +46,5 @@ import { Card, CardGrid } from '@astrojs/starlight/components';
 
 ## Quick Links
 
-- **[Brand Guide](docs/guides/brandguide)**: Design system and visual guidelines 
-- **[Testing](docs/guides/testing)**: Testing strategy and examples
+- **<a href={prepareURL("docs/guides/brandguide")}>Brand Guide</a>**: Design system and visual guidelines
+- **<a href={prepareURL("docs/guides/testing")}>Testing</a>**: Testing strategy and examples

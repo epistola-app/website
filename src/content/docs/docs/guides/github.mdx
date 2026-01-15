@@ -2,6 +2,7 @@
 title: GitHub Repository Guide
 ---
 
+import { prepareURL } from "../../../../lib/URL-helpers";
 
 This document explains how GitHub is configured for the Epistola Suite project, covering CI/CD, issue management, releases, and community features.
 
@@ -159,7 +160,7 @@ CycloneDX SBOMs are generated for both backend and frontend dependencies and att
 | `epistola-backend-{version}-sbom.json` | Backend (Kotlin/Java) dependencies |
 | `epistola-editor-{version}-sbom.json` | Frontend (TypeScript/npm) dependencies |
 
-For detailed SBOM documentation, see [docs/sbom](../../guides/sbom).
+For detailed SBOM documentation, see <a href={prepareURL("docs/guides/sbom")}>docs/sbom</a>.
 
 ---
 

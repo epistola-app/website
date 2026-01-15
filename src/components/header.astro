@@ -1,19 +1,20 @@
 ---
+import { prepareURL } from "../lib/URL-helpers";
 
 const navItems = [
-  { label: "Features", href: "/features" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Integrations", href: "/integrations" },
-  { label: "Blog", href: "/blog" },
-  { label: "Docs", href: "/docs" }
+  { label: "Features", href: "features" },
+  { label: "Pricing", href: "pricing" },
+  { label: "Integrations", href: "integrations" },
+  { label: "Blog", href: "blog" },
+  { label: "Docs", href: "docs" },
 ];
 
 const ctaItems = [
-  { label: "Login", href: "/login" },
-  { label: "Get Started", href: "/register", primary: true }
+  { label: "Login", href: "login" },
+  { label: "Get Started", href: "register", primary: true },
 ];
 
-const logoHref = import.meta.env.BASE_URL
+const logoHref = import.meta.env.BASE_URL;
 ---
 
 <header
@@ -68,7 +69,10 @@ const logoHref = import.meta.env.BASE_URL
   <nav class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
-      <a href={logoHref} class="flex items-center space-x-2 group relative z-10">
+      <a
+        href={logoHref}
+        class="flex items-center space-x-2 group relative z-10"
+      >
         <div
           class="w-8 h-8 bg-accent-dark dark:bg-accent-teal rounded-lg flex items-center justify-center group-hover:scale-105 transition-transform shadow-sm"
         >
@@ -84,17 +88,17 @@ const logoHref = import.meta.env.BASE_URL
       </a>
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center space-x-8">
-        {navItems.map((item) => (
-          <a
-            href={item.href}
-            class="text-accent-dark dark:text-accent-light/90 hover:text-accent-dark dark:hover:text-accent-light transition-colors font-medium text-sm relative group"
-          >
-            {item.label}
-            <span
-              class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-teal group-hover:w-full transition-all duration-300"
-            ></span>
-          </a>
-        ))}
+        {
+          navItems.map((item) => (
+            <a
+              href={prepareURL(item.href)}
+              class="text-accent-dark dark:text-accent-light/90 hover:text-accent-dark dark:hover:text-accent-light transition-colors font-medium text-sm relative group"
+            >
+              {item.label}
+              <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-teal group-hover:w-full transition-all duration-300" />
+            </a>
+          ))
+        }
       </div>
       <!-- Right side actions -->
       <div class="flex items-center space-x-4">
@@ -121,18 +125,20 @@ const logoHref = import.meta.env.BASE_URL
             </svg>
           </div>
         </button>
-        {ctaItems.map((item) => (
-          <a
-            href={item.href}
-            class:list={[
-              item.primary
-                ? "hidden sm:inline-block px-5 py-2 bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-black/90 dark:hover:bg-white/90 transition-all font-medium text-sm shadow-sm hover:shadow-md"
-                : "hidden sm:inline-block text-accent-dark dark:text-accent-light/90 hover:text-accent-dark dark:hover:text-accent-light transition-colors font-medium text-sm"
-            ]}
-          >
-            {item.label}
-          </a>
-        ))}
+        {
+          ctaItems.map((item) => (
+            <a
+              href={prepareURL(item.href)}
+              class:list={[
+                item.primary
+                  ? "hidden sm:inline-block px-5 py-2 bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-black/90 dark:hover:bg-white/90 transition-all font-medium text-sm shadow-sm hover:shadow-md"
+                  : "hidden sm:inline-block text-accent-dark dark:text-accent-light/90 hover:text-accent-dark dark:hover:text-accent-light transition-colors font-medium text-sm",
+              ]}
+            >
+              {item.label}
+            </a>
+          ))
+        }
         <!-- Mobile menu button -->
         <button
           id="mobile-menu-button"
@@ -176,67 +182,74 @@ const logoHref = import.meta.env.BASE_URL
       class="hidden md:hidden pb-4 border-t border-gray-200 dark:border-gray-800 mt-2 pt-4"
     >
       <div class="flex flex-col space-y-3">
-        {navItems.map((item) => (
-          <a
-            href={item.href}
-            class="text-accent-dark dark:text-accent-light/90 hover:text-accent-dark dark:hover:text-accent-light transition-colors font-medium py-2"
-          >
-            {item.label}
-          </a>
-        ))}
-        {ctaItems.map((item) => (
-          <a
-            href={item.href}
-            class:list={[
-              item.primary
-                ? "px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-black/90 dark:hover:bg-white/90 transition-all font-medium text-center"
-                : "text-accent-dark dark:text-accent-light/90 hover:text-accent-dark dark:hover:text-accent-light transition-colors font-medium py-2"
-            ]}
-          >
-            {item.label}
-          </a>
-        ))}
+        {
+          navItems.map((item) => (
+            <a
+              href={item.href}
+              class="text-accent-dark dark:text-accent-light/90 hover:text-accent-dark dark:hover:text-accent-light transition-colors font-medium py-2"
+            >
+              {item.label}
+            </a>
+          ))
+        }
+        {
+          ctaItems.map((item) => (
+            <a
+              href={item.href}
+              class:list={[
+                item.primary
+                  ? "px-4 py-2 bg-black dark:bg-white text-white dark:text-black rounded-lg hover:bg-black/90 dark:hover:bg-white/90 transition-all font-medium text-center"
+                  : "text-accent-dark dark:text-accent-light/90 hover:text-accent-dark dark:hover:text-accent-light transition-colors font-medium py-2",
+              ]}
+            >
+              {item.label}
+            </a>
+          ))
+        }
       </div>
     </div>
   </nav>
 </header>
 
 <script>
-  const menuButton = document.getElementById('mobile-menu-button');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const hamburgerIcon = document.getElementById('hamburger-icon');
-  const closeIcon = document.getElementById('close-icon');
+  const menuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const hamburgerIcon = document.getElementById("hamburger-icon");
+  const closeIcon = document.getElementById("close-icon");
 
   function toggleMenu() {
-    const isOpen = mobileMenu?.classList.toggle('hidden') === false;
-    
-    menuButton?.setAttribute('aria-expanded', isOpen.toString());
-    
-    hamburgerIcon?.classList.toggle('hidden', isOpen);
-    closeIcon?.classList.toggle('hidden', !isOpen);
+    const isOpen = mobileMenu?.classList.toggle("hidden") === false;
+
+    menuButton?.setAttribute("aria-expanded", isOpen.toString());
+
+    hamburgerIcon?.classList.toggle("hidden", isOpen);
+    closeIcon?.classList.toggle("hidden", !isOpen);
   }
 
   function closeMenu() {
-    mobileMenu?.classList.add('hidden');
-    menuButton?.setAttribute('aria-expanded', 'false');
-    hamburgerIcon?.classList.remove('hidden');
-    closeIcon?.classList.add('hidden');
+    mobileMenu?.classList.add("hidden");
+    menuButton?.setAttribute("aria-expanded", "false");
+    hamburgerIcon?.classList.remove("hidden");
+    closeIcon?.classList.add("hidden");
   }
 
-  menuButton?.addEventListener('click', toggleMenu);
+  menuButton?.addEventListener("click", toggleMenu);
 
-  mobileMenu?.querySelectorAll('a').forEach((link) => {
-    link.addEventListener('click', closeMenu);
+  mobileMenu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMenu);
   });
 
-  document.addEventListener('click', (e) => {
-    if (!menuButton?.contains(e.target as Node) && !mobileMenu?.contains(e.target as Node)) {
+  document.addEventListener("click", (e) => {
+    if (
+      !menuButton?.contains(e.target as Node) &&
+      !mobileMenu?.contains(e.target as Node)
+    ) {
       closeMenu();
     }
   });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
       closeMenu();
     }
   });

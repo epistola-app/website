@@ -1,12 +1,14 @@
 ---
+import { prepareURL } from "../lib/URL-helpers";
+
 const footerLinks = [
   {
     title: "Product",
     links: [
-      { href: "/features", text: "Features" },
-      { href: "/pricing", text: "Pricing" },
-      { href: "/integrations", text: "Integrations" },
-      { href: "/docs/guides/installation", text: "Documentation" },
+      { href: "features", text: "Features" },
+      { href: "pricing", text: "Pricing" },
+      { href: "integrations", text: "Integrations" },
+      { href: "docs/guides/installation", text: "Documentation" },
       { href: "#", text: "API Reference" },
       { href: "#", text: "Changelog" },
     ],
@@ -14,7 +16,7 @@ const footerLinks = [
   {
     title: "Company",
     links: [
-      { href: "/blog", text: "Blog" },
+      { href: "blog", text: "Blog" },
       { href: "#", text: "About" },
       { href: "#", text: "Careers" },
       { href: "#", text: "Contact" },
@@ -183,7 +185,7 @@ const footerLinks = [
                   {section.links.map((link) => (
                     <li>
                       <a
-                        href={link.href}
+                        href={prepareURL(link.href)}
                         class="text-white/80 hover:text-white transition-colors text-sm font-medium"
                       >
                         {link.text}

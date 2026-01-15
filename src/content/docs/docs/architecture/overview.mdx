@@ -2,6 +2,7 @@
 title: System Overview
 description: High-level architecture of Epistola Suite
 ---
+import { prepareURL } from '../../../../lib/URL-helpers';
 
 ## Architecture
 
@@ -46,7 +47,7 @@ Key domain entities:
 - **Versions**: Historical versions with draft/published/archived states
 - **Activations**: Active version per environment
 
-<!-- See [Kotlin API Documentation](/api/kotlin/index.html) for detailed domain model reference. -->
+{/* See [Kotlin API Documentation](/api/kotlin/index.html) for detailed domain model reference. */}
 
 ## API Architecture
 
@@ -56,10 +57,10 @@ The REST API is defined using OpenAPI 3.1 specification and code-generated:
 - **Generated Server**: Kotlin Spring interfaces
 - **Controller**: Implements generated interfaces, routes to mediator
 
-See [REST API Documentation](../../api) for endpoint details.
+See <a href={prepareURL("docs/api")}>REST API Documentation</a> for endpoint details.
 
 ## Further Reading
 
-- [Domain Models](../../architecture/domain/) - Entity relationships
-- [CQRS Pattern](../../architecture/cqrs/) - Command/Query separation
-- [Testing Guide](../../guides/testing/) - Test architecture
+- <a href={prepareURL("docs/architecture/domain/")}>Domain Models</a> - Entity relationships
+- <a href={prepareURL("docs/architecture/cqrs/")}>CQRS Pattern</a> - Command/Query separation
+- <a href={prepareURL("docs/guides/testing/")}>Testing Guide</a> - Test architecture
