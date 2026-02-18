@@ -1,0 +1,75 @@
+---
+import CtaButton from "./ui/cta-button.astro";
+
+const tiers = [
+  {
+    name: "Community",
+    price: "Free",
+    cadence: "open source",
+    description: "Self-host Epistola under the AGPL license with community support.",
+    features: ["Full editor + renderer", "Common Ground adapters", "Docker/Kubernetes images"],
+    tone: "tone-mint",
+  },
+  {
+    name: "Support",
+    price: "€1.2k",
+    cadence: "per month",
+    description: "Commercial support for teams running Epistola themselves.",
+    features: ["Priority fixes", "Upgrade guidance", "Architecture reviews"],
+    highlighted: true,
+    tone: "tone-peach",
+  },
+  {
+    name: "Managed",
+    price: "Custom",
+    cadence: "per month",
+    description: "Hosted Epistola with SLAs, monitoring, and dedicated environments.",
+    features: ["SLA-backed hosting", "Custom connectors", "Dedicated success engineer"],
+    tone: "tone-lilac",
+  },
+];
+---
+
+<section class="py-24">
+  <div class="mx-auto max-w-6xl px-4">
+    <div class="text-center">
+      <p class="eyebrow">Pricing</p>
+      <h2 class="mt-4 text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white">
+        Choose the support level you need.
+      </h2>
+    </div>
+    <div class="mt-16 grid gap-6 md:grid-cols-3">
+      {tiers.map((tier) => (
+        <div
+          class={`surface-card ${tier.tone} flex flex-col rounded-[32px] p-8 shadow-lg ${tier.highlighted ? 'ring-2 ring-[var(--color-brand-500)]' : ''}`}
+        >
+          <div class="flex items-start justify-between">
+            <div>
+              <p class="text-sm font-semibold text-[var(--color-gray-500)]">{tier.cadence}</p>
+              <h3 class="mt-2 text-3xl font-semibold text-[var(--color-gray-900)] dark:text-white">{tier.name}</h3>
+            </div>
+            <p class="text-3xl font-semibold text-[var(--color-brand-600)]">{tier.price}</p>
+          </div>
+          <p class="mt-4 text-sm text-[var(--muted-text)]">{tier.description}</p>
+          <ul class="mt-6 space-y-3 text-sm text-[var(--color-gray-700)] dark:text-white/80">
+            {tier.features.map((feature) => (
+              <li class="flex items-center gap-2">
+                <span class="h-2 w-2 rounded-full bg-[var(--color-brand-500)]"></span>
+                {feature}
+              </li>
+            ))}
+          </ul>
+          <div class="mt-8">
+            <CtaButton
+              url={tier.name === "Community" ? "https://github.com/epistola-app" : tier.highlighted ? "https://demo.epistola.app" : "/register"}
+              text={tier.name === "Community" ? "View on GitHub" : tier.highlighted ? "Open demo" : "Talk to sales"}
+              variant={tier.highlighted ? "primary" : tier.name === "Community" ? "ghost" : "secondary"}
+              className="w-full"
+              external={tier.name === "Community" || tier.highlighted}
+            />
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+---
+
+---
+
+<section class="py-20">
+  <div class="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-4 md:grid-cols-4">
+    {[
+      { label: "templates in git", value: "8.2k" },
+      { label: "render jobs / day", value: "140k" },
+      { label: "pdf/a compliance", value: "100%" },
+      { label: "docker pull / month", value: "4.1k" },
+    ].map((item, index) => (
+      <div
+        class={`surface-card ${index % 2 === 0 ? 'tone-peach' : 'tone-mint'} p-6 text-center`}
+      >
+        <p class="text-4xl font-semibold text-[var(--color-brand-700)]">{item.value}</p>
+        <p class="mt-2 text-sm font-medium uppercase tracking-[0.2em] text-[var(--color-gray-400)]">
+          {item.label}
+        </p>
+      </div>
+    ))}
+  </div>
+</section>

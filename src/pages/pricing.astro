@@ -1,0 +1,23 @@
+---
+import Faqs from "../components/faqs.astro";
+import Join from "../components/join.astro";
+import Layout from "../components/layout.astro";
+import PriceTiers from "../components/price-tiers.astro";
+---
+
+<Layout>
+  <section class="pt-32 pb-16">
+    <div class="mx-auto max-w-3xl px-4 text-center">
+      <p class="eyebrow">Pricing</p>
+      <h1 class="mt-6 text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white">
+        Open source core, supported when you need it.
+      </h1>
+      <p class="mt-4 text-lg text-[var(--muted-text)]">
+        Run Epistola yourself for free or choose a support plan for managed hosting, SLAs, and dedicated guidance.
+      </p>
+    </div>
+  </section>
+  <PriceTiers />
+  <Faqs />
+  <Join />
+</Layout>

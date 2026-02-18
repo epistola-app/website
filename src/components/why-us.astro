@@ -1,0 +1,44 @@
+---
+const reasons = [
+  {
+    title: "Open-source first",
+    copy: "Inspect every line of code, contribute renderers, and self-host on your own infrastructure.",
+  },
+  {
+    title: "Common Ground native",
+    copy: "Epistola speaks ZGW APIs and aligns with Dutch municipal standards out of the box.",
+  },
+  {
+    title: "Integrates anywhere",
+    copy: "Expose a simple HTTP API so workflow engines like GZAC or Valtimo stay in control.",
+  },
+  {
+    title: "Quality output",
+    copy: "PDF/A, PDF/X, web-ready bundles, and template testing pipelines keep every document consistent.",
+  },
+];
+---
+
+<section class="py-24">
+  <div class="mx-auto max-w-5xl px-4">
+    <div class="text-center">
+      <p class="eyebrow">Why Epistola</p>
+      <h2 class="mt-4 text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white">
+        A single-purpose document generator you can trust.
+      </h2>
+      <p class="mt-4 text-lg text-[var(--muted-text)]">
+        Keep your processes simple: orchestrate elsewhere, render here, and never worry about PDF fidelity again.
+      </p>
+    </div>
+    <div class="mt-16 grid gap-8 md:grid-cols-2">
+      {reasons.map((reason) => (
+        <div class="rounded-3xl border border-black/5 bg-white/80 p-8 shadow-sm dark:bg-white/5">
+          <h3 class="text-2xl font-semibold text-[var(--color-gray-900)] dark:text-white">
+            {reason.title}
+          </h3>
+          <p class="mt-3 text-sm text-[var(--muted-text)]">{reason.copy}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

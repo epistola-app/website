@@ -1,0 +1,60 @@
+---
+import EverythingYouNeed from "../components/everything-you-need.astro";
+import Join from "../components/join.astro";
+import Layout from "../components/layout.astro";
+---
+
+<Layout>
+  <section class="pt-32 pb-16">
+    <div class="mx-auto max-w-3xl px-4 text-center">
+      <p class="eyebrow">Platform overview</p>
+      <h1 class="mt-6 text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white">
+        Epistola renders PDFs. Your products handle everything else.
+      </h1>
+      <p class="mt-4 text-lg text-[var(--muted-text)]">
+        Templates, data bindings, and a rendering engine that respects Common Ground standards — all open source.
+      </p>
+    </div>
+  </section>
+  <EverythingYouNeed />
+  <section class="py-20">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+        <div>
+          <h2 class="text-3xl font-semibold text-[var(--color-gray-900)] dark:text-white">
+            Built for integrators
+          </h2>
+          <p class="mt-4 text-lg text-[var(--muted-text)]">
+            Keep your workflows untouched. Epistola exposes a predictable interface for any orchestrator.
+          </p>
+          <ul class="space-y-4">
+            {[
+              "JSON in, PDF out — that simple",
+              "Common Ground schema + zaakdocument metadata",
+              "Webhooks and storage adapters for your destinations",
+            ].map((item) => (
+              <li class="flex items-start">
+                <svg
+                  class="mr-3 h-6 w-6 text-[var(--color-brand-600)]"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clip-rule="evenodd"></path>
+                </svg>
+                <span class="text-[var(--color-gray-700)] dark:text-gray-300">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="rounded-[32px] border border-black/10 bg-white/80 p-8 text-center shadow-xl dark:bg-white/5">
+          <p class="text-5xl font-semibold text-[var(--color-brand-700)]">240 ms</p>
+          <p class="mt-2 text-sm uppercase tracking-[0.3em] text-[var(--color-gray-400)]">avg render time</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Join />
+</Layout>

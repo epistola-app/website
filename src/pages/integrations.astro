@@ -1,0 +1,73 @@
+---
+import Layout from "../components/layout.astro";
+import IntegrationsCard from "../components/integrations-card.astro";
+import Join from "../components/join.astro";
+---
+
+<Layout>
+  <section class="pt-32 pb-16">
+    <div class="mx-auto max-w-3xl px-4 text-center">
+      <p class="eyebrow">Integrations</p>
+      <h1 class="mt-6 text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white">
+        Plug Epistola into Common Ground platforms in days.
+      </h1>
+      <p class="mt-4 text-lg text-[var(--muted-text)]">
+        Use our adapters for GZAC, Valtimo, and ZGW APIs or integrate any product over HTTPS.
+      </p>
+    </div>
+  </section>
+  <IntegrationsCard />
+  <section class="py-20">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <h2
+          class="text-3xl md:text-4xl font-semibold mb-8 text-center text-[var(--color-gray-900)] dark:text-white"
+        >
+          Integration process
+        </h2>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center">
+            <div
+              class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-black/10"
+            >
+              <div class="text-2xl font-black text-[var(--color-brand-600)]">01</div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-[var(--color-gray-900)] dark:text-white">
+              Map your data
+            </h3>
+            <p class="text-[var(--muted-text)]">
+              Align your zaak, besluit, or custom payloads with template variables.
+            </p>
+          </div>
+          <div class="text-center">
+            <div
+              class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-black/10"
+            >
+              <div class="text-2xl font-black text-[var(--color-brand-600)]">02</div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-[var(--color-gray-900)] dark:text-white">
+              Link orchestrator
+            </h3>
+            <p class="text-[var(--muted-text)]">
+              Call Epistola over HTTPS or message queue, send JSON, and await the PDF response.
+            </p>
+          </div>
+          <div class="text-center">
+            <div
+              class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-black/10"
+            >
+              <div class="text-2xl font-black text-[var(--color-brand-600)]">03</div>
+            </div>
+            <h3 class="text-xl font-semibold mb-2 text-[var(--color-gray-900)] dark:text-white">
+              Deliver documents
+            </h3>
+            <p class="text-[var(--muted-text)]">
+              Push finished files into your DMS, send to citizens, or attach back to the case system.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Join />
+</Layout>

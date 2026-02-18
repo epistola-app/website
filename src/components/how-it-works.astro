@@ -1,0 +1,36 @@
+---
+const steps = [
+  {
+    title: "Design",
+    body: "Create and version templates inside Epistola or GitHub, using the components your teams know.",
+  },
+  {
+    title: "Render",
+    body: "Send JSON to the render API. Epistola merges data, runs validators, and outputs PDF/A or HTML.",
+  },
+  {
+    title: "Deliver",
+    body: "Return the file to your orchestrator or push it to storage, DMS, or messaging queues via hooks.",
+  },
+];
+---
+
+<section class="py-24">
+  <div class="mx-auto max-w-5xl px-4">
+    <div class="text-center">
+      <p class="eyebrow">How it works</p>
+      <h2 class="mt-4 text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white">
+        A single path from template to PDF.
+      </h2>
+    </div>
+    <div class="mt-16 grid gap-8 md:grid-cols-3">
+      {steps.map((step, index) => (
+        <div class="relative rounded-3xl border border-black/5 bg-white/80 p-6 shadow-sm dark:bg-white/5">
+          <span class="text-sm font-semibold text-[var(--color-brand-600)]">0{index + 1}</span>
+          <h3 class="mt-4 text-2xl font-semibold text-[var(--color-gray-900)] dark:text-white">{step.title}</h3>
+          <p class="mt-3 text-sm text-[var(--muted-text)]">{step.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

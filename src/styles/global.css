@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+:root {
+  --color-brand-50: #f4f6ff;
+  --color-brand-100: #e2e8ff;
+  --color-brand-200: #cdd7ff;
+  --color-brand-300: #b2c2ff;
+  --color-brand-400: #8ca4ff;
+  --color-brand-500: #708bff;
+  --color-brand-600: #596ff0;
+  --color-brand-700: #4a5ecc;
+  --color-brand-800: #3a4ba2;
+  --color-brand-900: #27336e;
+
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-900: #111827;
+
+  --color-success-100: #dcfce7;
+  --color-success-500: #22c55e;
+  --color-warning-100: #fef3c7;
+  --color-warning-500: #f59e0b;
+  --color-danger-100: #fee2e2;
+  --color-danger-500: #ef4444;
+
+  --color-accent-peach: #f8c7b7;
+  --color-accent-coral: #f5a69d;
+  --color-accent-mint: #b6e6dd;
+  --color-accent-lilac: #dfcffd;
+  --color-accent-peach-rgb: 248, 199, 183;
+  --color-accent-coral-rgb: 245, 166, 157;
+  --color-accent-mint-rgb: 182, 230, 221;
+  --color-accent-lilac-rgb: 223, 207, 253;
+
+  --font-heading: 'Space Grotesk', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 12px;
+
+  --shadow-soft: 0 12px 30px rgba(12, 19, 38, 0.08);
+  --shadow-hard: 0 30px 60px rgba(12, 19, 38, 0.12);
+
+  --page-bg: linear-gradient(135deg, #fff9f5 0%, #f4f9ff 60%, #f8f4ff 100%);
+  --page-text: var(--color-gray-900);
+  --card-bg: #ffffffee;
+  --muted-text: var(--color-gray-500);
+}
+
+:root[data-theme='dark'] {
+  --page-bg: radial-gradient(circle at 25% 20%, #111527 0%, #05060f 65%);
+  --page-text: #f5f6ff;
+  --card-bg: linear-gradient(170deg, rgba(20, 24, 40, 0.95), rgba(12, 15, 27, 0.94));
+  --muted-text: #a7b2db;
+  --color-accent-peach: #f29f8a;
+  --color-accent-coral: #ef8b83;
+  --color-accent-mint: #7dd8c6;
+  --color-accent-lilac: #b7a5f5;
+  --color-accent-peach-rgb: 242, 159, 138;
+  --color-accent-coral-rgb: 239, 139, 131;
+  --color-accent-mint-rgb: 125, 216, 198;
+  --color-accent-lilac-rgb: 183, 165, 245;
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--page-bg);
+    color: var(--page-text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  .surface-card {
+    background: var(--card-bg);
+    border-radius: 18px;
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    box-shadow: 0 20px 45px rgba(23, 46, 87, 0.08);
+  }
+
+  [data-theme='dark'] .surface-card {
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .surface-card[data-tone='quiet'] {
+    border-style: dashed;
+    box-shadow: none;
+  }
+
+  .tone-peach {
+    background: linear-gradient(140deg, rgba(var(--color-accent-peach-rgb), 0.5), rgba(255, 255, 255, 0.95));
+    border-color: rgba(var(--color-accent-peach-rgb), 0.35);
+  }
+
+  .tone-mint {
+    background: linear-gradient(140deg, rgba(var(--color-accent-mint-rgb), 0.45), rgba(255, 255, 255, 0.95));
+    border-color: rgba(var(--color-accent-mint-rgb), 0.3);
+  }
+
+  .tone-lilac {
+    background: linear-gradient(140deg, rgba(var(--color-accent-lilac-rgb), 0.45), rgba(255, 255, 255, 0.95));
+    border-color: rgba(var(--color-accent-lilac-rgb), 0.35);
+  }
+
+  [data-theme='dark'] .tone-peach {
+    background: linear-gradient(145deg, rgba(var(--color-accent-peach-rgb), 0.15), rgba(14, 18, 32, 0.95));
+    border-color: rgba(var(--color-accent-peach-rgb), 0.2);
+  }
+
+  [data-theme='dark'] .tone-mint {
+    background: linear-gradient(145deg, rgba(var(--color-accent-mint-rgb), 0.18), rgba(14, 18, 32, 0.95));
+    border-color: rgba(var(--color-accent-mint-rgb), 0.25);
+  }
+
+  [data-theme='dark'] .tone-lilac {
+    background: linear-gradient(145deg, rgba(var(--color-accent-lilac-rgb), 0.2), rgba(14, 18, 32, 0.95));
+    border-color: rgba(var(--color-accent-lilac-rgb), 0.25);
+  }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-accent-coral);
+  }
+
+  [data-theme='dark'] .eyebrow {
+    color: var(--color-accent-mint);
+  }
+
+  .hero-gradient {
+    opacity: 0.85;
+    background-image: radial-gradient(circle at 15% 20%, rgba(var(--color-accent-peach-rgb), 0.55), transparent 55%), radial-gradient(circle at 80% 0%, rgba(var(--color-accent-lilac-rgb), 0.65), transparent 45%), linear-gradient(135deg, rgba(var(--color-accent-mint-rgb), 0.45), transparent 65%);
+  }
+
+  [data-theme='dark'] .hero-gradient {
+    opacity: 0.5;
+    background-image: radial-gradient(circle at 20% 10%, rgba(var(--color-accent-lilac-rgb), 0.25), transparent 50%), radial-gradient(circle at 75% 15%, rgba(var(--color-accent-peach-rgb), 0.25), transparent 50%), linear-gradient(135deg, rgba(14, 18, 32, 0.9), rgba(7, 9, 18, 0.95));
+  }
+
+  .cta-primary {
+    background: linear-gradient(120deg, var(--color-accent-coral), var(--color-brand-500));
+    color: white;
+    border-radius: var(--radius-md);
+    padding: 0.9rem 1.8rem;
+    font-weight: 600;
+    box-shadow: 0 12px 25px rgba(244, 164, 150, 0.4);
+  }
+
+  [data-theme='dark'] .cta-primary {
+    background: linear-gradient(120deg, rgba(var(--color-accent-coral-rgb), 0.85), rgba(92, 116, 230, 0.95));
+    box-shadow: 0 18px 30px rgba(0, 0, 0, 0.55);
+  }
+
+  .cta-secondary {
+    border-radius: var(--radius-md);
+    padding: 0.9rem 1.8rem;
+    border: 1px solid rgba(17, 24, 39, 0.12);
+    color: var(--page-text);
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  .cta-secondary[data-variant='ghost'] {
+    background: transparent;
+    border-color: transparent;
+  }
+
+  [data-theme='dark'] .cta-secondary {
+    background: rgba(18, 24, 43, 0.8);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: var(--page-text);
+  }
+}
+
+@theme {
+  --dark-mode: class;
+}

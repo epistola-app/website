@@ -1,0 +1,50 @@
+---
+import Accordion from "./accordion.astro";
+
+
+const faqItems = [
+  {
+    question: "How fast can we launch?",
+    answer:
+      "Most teams move from the demo environment to production in about 6 weeks. We help migrate a core set of templates and connect your orchestrator so you stay focused on your product.",
+  },
+  {
+    question: "Can Epistola connect to our legacy systems?",
+    answer:
+      "Yes. We provide adapters for major CRMs, loan origination, core banking, and signature vendors. Our platform exposes REST/GraphQL APIs and event hooks for everything else.",
+  },
+  {
+    question: "How is compliance handled?",
+    answer:
+      "Policy teams codify guardrails once. Every template, clause, and channel inherits those controls with auditable checkpoints and approval workflows.",
+  },
+  {
+    question: "What support is included?",
+    answer:
+      "Scale and Enterprise plans include dedicated delivery managers, 24/7 support, and quarterly governance reviews.",
+  },
+];
+---
+
+<section class="py-20 bg-gray-50 dark:bg-gray-800">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2
+        class="text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight tracking-tight"
+      >
+        <span
+          class="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 dark:from-white dark:via-gray-100 dark:to-white bg-clip-text text-transparent"
+          >Frequently asked</span
+        ><br /><span class="text-accent-teal">questions</span>
+      </h2>
+      <p
+        class="text-xl md:text-2xl text-gray-600 dark:text-gray-300 font-light"
+      >
+        Everything you need to know about the template
+      </p>
+    </div>
+    <div class="max-w-3xl mx-auto">
+      <Accordion items={faqItems} />
+    </div>
+  </div>
+</section>

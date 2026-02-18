@@ -1,0 +1,67 @@
+---
+const toneClasses = ["tone-peach", "tone-mint", "tone-lilac"];
+
+const features = [
+  {
+    title: "Visual template editor",
+    body: "Design templates with partials, loops, and data bindings that export to the same Git repo you deploy.",
+    badge: "Templates",
+  },
+  {
+    title: "Data-driven rendering",
+    body: "Accept JSON payloads from any orchestrator and map them to placeholders with schema validation.",
+    badge: "Data",
+  },
+  {
+    title: "Common Ground adapters",
+    body: "Native support for ZGW resources, zaakdocumenten, and result types so municipalities stay compliant.",
+    badge: "Adapters",
+  },
+  {
+    title: "Deployment ready",
+    body: "Run Epistola as a Docker container, Kubernetes job, or serverless task with health endpoints.",
+    badge: "Runtime",
+  },
+  {
+    title: "Output quality",
+    body: "Generate PDF/A and PDF/X files with embedded fonts, barcode overlays, and postal marks.",
+    badge: "Rendering",
+  },
+  {
+    title: "Extension hooks",
+    body: "Use webhooks to push finished documents into DMS, object stores, or messaging buses.",
+    badge: "Integrations",
+  },
+];
+---
+
+<section class="py-24">
+  <div class="mx-auto max-w-6xl px-4">
+    <div class="text-center">
+      <p class="eyebrow">Everything you need to render PDFs</p>
+      <h2 class="mt-4 text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white">
+        Epistola does templates and rendering — nothing else.
+      </h2>
+      <p class="mt-4 text-lg text-[var(--muted-text)]">
+        Keep workflows in the products that orchestrate your cases while Epistola focuses on perfect output.
+      </p>
+    </div>
+    <div class="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {features.map((feature, index) => (
+        <div
+          class={`surface-card ${toneClasses[index % toneClasses.length]} relative overflow-hidden rounded-3xl p-6 transition hover:-translate-y-1`}
+        >
+          <span class="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-brand-500)]">{feature.badge}</span>
+          <h3 class="mt-4 text-2xl font-semibold text-[var(--color-gray-900)] dark:text-white">
+            {feature.title}
+          </h3>
+          <p class="mt-3 text-sm text-[var(--muted-text)]">{feature.body}</p>
+          <div class="mt-6 flex items-center gap-2 text-sm font-semibold text-[var(--color-brand-600)]">
+            Learn more
+            <span aria-hidden="true">→</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

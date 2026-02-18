@@ -1,0 +1,20 @@
+---
+import CtaButton from "./ui/cta-button.astro";
+
+
+---
+
+<section class="py-24">
+  <div class="surface-card tone-peach mx-auto max-w-4xl rounded-[40px] border border-black/10 px-6 py-16 text-center shadow-2xl">
+    <h2 class="text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white">
+      Ready to plug Epistola into your product?
+    </h2>
+    <p class="mt-4 text-lg text-[var(--muted-text)]">
+      We’ll review your templates, map the Common Ground payloads, and help you expose a render endpoint your orchestrator can call.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-4">
+      <CtaButton url="https://demo.epistola.app" text="Open demo" variant="primary" external />
+      <CtaButton url="/pricing" text="Review plans" variant="secondary" />
+    </div>
+  </div>
+</section>

@@ -1,0 +1,44 @@
+---
+import Layout from "../components/layout.astro";
+---
+
+<Layout title="Epistola · Privacy" description="How Epistola handles data when you run the platform or engage with our website.">
+  <section class="pt-32 pb-16">
+    <div class="mx-auto max-w-3xl px-4">
+      <p class="eyebrow">Privacy</p>
+      <h1 class="mt-4 text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white">
+        How we handle data
+      </h1>
+      <p class="mt-4 text-lg text-[var(--muted-text)]">
+        Epistola is an open-source renderer. When you self-host it, your organization remains in full control of all data.
+        The following details cover how we treat information for our public website, demo environment, and optional managed service.
+      </p>
+      <div class="mt-12 space-y-10 text-[var(--color-gray-700)] dark:text-white/80">
+        <section>
+          <h2 class="text-2xl font-semibold text-[var(--color-gray-900)] dark:text-white">Website analytics</h2>
+          <p class="mt-3">
+            We only collect anonymous traffic statistics (page views, referrers, and device types) to understand how visitors discover Epistola. We do not use advertising cookies or share analytics data with third parties.
+          </p>
+        </section>
+        <section>
+          <h2 class="text-2xl font-semibold text-[var(--color-gray-900)] dark:text-white">Demo environment</h2>
+          <p class="mt-3">
+            The hosted demo runs sample templates and placeholder data. Documents generated in the demo are automatically purged within 24 hours. Do not upload personal or production datasets to the demo instance.
+          </p>
+        </section>
+        <section>
+          <h2 class="text-2xl font-semibold text-[var(--color-gray-900)] dark:text-white">Managed service</h2>
+          <p class="mt-3">
+            If you opt for Epistola’s managed offering, a separate Data Processing Agreement (DPA) specifies responsibilities, retention, and regional hosting options. We only process the data required to provide the service and never reuse it for other purposes.
+          </p>
+        </section>
+        <section>
+          <h2 class="text-2xl font-semibold text-[var(--color-gray-900)] dark:text-white">Contact</h2>
+          <p class="mt-3">
+            For privacy-related questions or DPA requests, email <a class="underline hover:text-[var(--color-brand-600)]" href="mailto:privacy@epistola.app">privacy@epistola.app</a>.
+          </p>
+        </section>
+      </div>
+    </div>
+  </section>
+</Layout>

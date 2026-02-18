@@ -1,0 +1,21 @@
+---
+import CtaButton from "./ui/cta-button.astro";
+---
+
+<section class="relative overflow-hidden py-28">
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,#f8c7b7,transparent_60%),radial-gradient(circle_at_bottom,#dfcffd,transparent_55%)] dark:bg-[radial-gradient(circle_at_top,#1a1f36,transparent_65%),radial-gradient(circle_at_bottom,#101326,transparent_65%)]"></div>
+  <div class="absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-transparent dark:from-[#05060b]/50"></div>
+  <div class="relative mx-auto max-w-4xl px-4 text-center text-[var(--color-gray-900)] dark:text-white">
+    <p class="eyebrow text-[var(--color-brand-600)]">Deploy anywhere</p>
+    <h2 class="mt-6 text-4xl font-semibold sm:text-5xl">
+      Keep orchestration elsewhere. Let Epistola handle the PDFs.
+    </h2>
+    <p class="mt-6 text-lg text-[var(--muted-text)] dark:text-white/80">
+      Self-host with Docker, run on Kubernetes, or consume the managed service. Either way, you stay in control of data, security, and release cadence.
+    </p>
+    <div class="mt-10 flex flex-wrap justify-center gap-4">
+      <CtaButton url="https://demo.epistola.app" text="Open demo" variant="secondary" external />
+      <CtaButton url="/integrations" text="View integrations" variant="ghost" />
+    </div>
+  </div>
+</section>

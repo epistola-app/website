@@ -1,0 +1,76 @@
+---
+import { prepareURL } from "../lib/URL-helpers";
+
+const footerLinks = [
+  {
+    title: "Product",
+    links: [
+      { href: "/features", text: "Platform" },
+      { href: "/integrations", text: "Integrations" },
+      { href: "/pricing", text: "Pricing" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { href: "https://docs.epistola.app", text: "Documentation", external: true },
+      { href: "/blog", text: "Blog" },
+      { href: "https://docs.epistola.app/docs/guides/brandguide", text: "Brand", external: true },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { href: "/", text: "Careers" },
+      { href: "/", text: "Contact" },
+      { href: "/", text: "Security" },
+    ],
+  },
+];
+---
+
+<footer class="mt-auto bg-gradient-to-br from-[#fdf5f0] via-[#f3f6ff] to-[#f7f2ff] text-[var(--color-gray-800)] dark:bg-gradient-to-br dark:from-[#090c16] dark:via-[#060712] dark:to-[#05060d] dark:text-white">
+  <div class="mx-auto max-w-6xl px-4 py-16">
+    <div class="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
+      <div>
+        <div class="flex items-center gap-3 text-lg font-semibold text-[var(--color-gray-900)] dark:text-white">
+          <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--color-accent-coral)]/40 text-[var(--color-brand-700)]">E</div>
+          Epistola
+        </div>
+        <p class="mt-4 text-sm text-[var(--muted-text)] dark:text-white/70">
+          Open-source document generator for Common Ground platforms. Render PDFs from your own workflows.
+        </p>
+      </div>
+      {footerLinks.map((section) => (
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-[var(--color-gray-500)] dark:text-white/60">{section.title}</p>
+          <ul class="mt-4 space-y-2 text-sm text-[var(--color-gray-700)] dark:text-white/70">
+            {section.links.map((link) => {
+              const href = link.external ? link.href : prepareURL(link.href);
+              return (
+                <li>
+                  <a
+                    href={href}
+                    class="transition hover:text-[var(--color-brand-600)] dark:text-white/75 dark:hover:text-[var(--color-accent-mint)]"
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noreferrer" : undefined}
+                  >
+                    {link.text}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ))}
+    </div>
+    <div class="mt-12 flex flex-col gap-4 border-t border-black/10 pt-6 text-xs text-[var(--color-gray-500)] dark:border-white/10 dark:text-white/60 sm:flex-row sm:items-center sm:justify-between">
+      <p>© {new Date().getFullYear()} Epistola. All rights reserved.</p>
+      <div class="flex gap-4">
+        <a class="hover:text-[var(--color-brand-600)] dark:text-white/70 dark:hover:text-[var(--color-accent-mint)]" href={prepareURL("/privacy")}>Privacy</a>
+        <a class="hover:text-[var(--color-brand-600)] dark:text-white/70 dark:hover:text-[var(--color-accent-mint)]" href={prepareURL("/terms")}>Terms</a>
+        <a class="hover:text-[var(--color-brand-600)] dark:text-white/70 dark:hover:text-[var(--color-accent-mint)]" href={prepareURL("/security")}>Security</a>
+      </div>
+    </div>
+  </div>
+</footer>

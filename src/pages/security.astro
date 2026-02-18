@@ -1,0 +1,40 @@
+---
+import Layout from "../components/layout.astro";
+---
+
+<Layout title="Epistola · Security" description="Security posture for the Epistola project, demo, and managed offering.">
+  <section class="pt-32 pb-16">
+    <div class="mx-auto max-w-3xl px-4">
+      <p class="eyebrow">Security</p>
+      <h1 class="mt-4 text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white">
+        Security practices
+      </h1>
+      <div class="mt-10 space-y-10 text-[var(--color-gray-700)] dark:text-white/80">
+        <section>
+          <h2 class="text-2xl font-semibold text-[var(--color-gray-900)] dark:text-white">Code transparency</h2>
+          <p class="mt-3">
+            Epistola is open source. All changes are reviewed via pull requests and undergo automated linting, tests, and dependency scanning before release.
+          </p>
+        </section>
+        <section>
+          <h2 class="text-2xl font-semibold text-[var(--color-gray-900)] dark:text-white">Self-hosting</h2>
+          <p class="mt-3">
+            When you run Epistola yourself, you control the infrastructure, networking, and access policies. We recommend isolating render nodes, enabling TLS everywhere, and monitoring outputs for unauthorized changes.
+          </p>
+        </section>
+        <section>
+          <h2 class="text-2xl font-semibold text-[var(--color-gray-900)] dark:text-white">Managed service</h2>
+          <p class="mt-3">
+            Managed environments are deployed in dedicated namespaces with network policies, encrypted storage, and 24/7 monitoring. We support EU-region hosting on request.
+          </p>
+        </section>
+        <section>
+          <h2 class="text-2xl font-semibold text-[var(--color-gray-900)] dark:text-white">Responsible disclosure</h2>
+          <p class="mt-3">
+            Report vulnerabilities privately to <a class="underline hover:text-[var(--color-brand-600)]" href="mailto:security@epistola.app">security@epistola.app</a>. We’ll acknowledge receipt within two business days and coordinate remediation steps.
+          </p>
+        </section>
+      </div>
+    </div>
+  </section>
+</Layout>

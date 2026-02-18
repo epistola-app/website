@@ -1,0 +1,48 @@
+---
+const toneClasses = ["tone-mint", "tone-peach", "tone-lilac"];
+
+const testimonials = [
+  {
+    quote:
+      "Epistola is the simplest part of our case platform. We send JSON, we get flawless PDF/A output back. That focus is refreshing.",
+    name: "Katinka Laagland",
+    role: "Product Owner, GZAC",
+  },
+  {
+    quote:
+      "Common Ground compliance was non‑negotiable. Epistola spoke the same language from day one.",
+    name: "Jeroen van Lier",
+    role: "Solution Architect, Gemeente Breda",
+  },
+  {
+    quote:
+      "We keep workflows in Valtimo and let Epistola handle rendering. Separation of concerns, just like it should be.",
+    name: "Sara Dijkstra",
+    role: "Lead Developer, Valtimo Ecosystem",
+  },
+];
+---
+
+<section class="py-24">
+  <div class="mx-auto max-w-5xl px-4">
+    <div class="text-center">
+      <p class="eyebrow">Customer impact</p>
+      <h2 class="mt-4 text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white">
+        Trusted with high-stakes documents.
+      </h2>
+    </div>
+    <div class="mt-12 grid gap-6 md:grid-cols-3">
+      {testimonials.map((testimonial, index) => (
+        <div
+          class={`surface-card ${toneClasses[index % toneClasses.length]} flex flex-col p-6 text-left shadow-lg shadow-blue-500/5`}
+        >
+          <p class="text-base text-[var(--color-gray-700)] dark:text-white/90">“{testimonial.quote}”</p>
+          <div class="mt-6">
+            <p class="text-sm font-semibold text-[var(--color-gray-900)] dark:text-white">{testimonial.name}</p>
+            <p class="text-xs uppercase tracking-[0.2em] text-[var(--color-gray-400)]">{testimonial.role}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

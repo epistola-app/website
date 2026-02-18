@@ -1,0 +1,70 @@
+---
+import "../styles/global.css";
+import Header from "./header.astro";
+import Footer from "./footer.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Epistola · Document Intelligence Platform",
+  description =
+    "Epistola helps operations teams author, govern, and deliver complex documents across every channel.",
+} = Astro.props as Props;
+
+const themeStorageKey = "epistola-theme";
+
+const themeBootstrap = `(() => {
+  const storageKey = '${themeStorageKey}';
+  const root = document.documentElement;
+  const prefersDarkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+  const setTheme = (theme) => {
+    root.dataset.theme = theme;
+  };
+
+  const storedTheme = window.localStorage.getItem(storageKey);
+  if (storedTheme) {
+    setTheme(storedTheme);
+  } else {
+    setTheme(prefersDarkQuery.matches ? 'dark' : 'light');
+  }
+
+  const handleSystemChange = (event) => {
+    if (!window.localStorage.getItem(storageKey)) {
+      setTheme(event.matches ? 'dark' : 'light');
+    }
+  };
+
+  if (typeof prefersDarkQuery.addEventListener === 'function') {
+    prefersDarkQuery.addEventListener('change', handleSystemChange);
+  } else if (typeof prefersDarkQuery.addListener === 'function') {
+    prefersDarkQuery.addListener(handleSystemChange);
+  }
+})();`;
+---
+
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Epistola" />
+    <meta name="theme-color" content="#2563eb" />
+    <script is:inline>{themeBootstrap}</script>
+  </head>
+  <body class="font-sans antialiased flex flex-col min-h-screen">
+    <Header />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

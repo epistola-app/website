@@ -1,0 +1,85 @@
+---
+interface Props {
+  items: { question: string; answer: string }[];
+  allowMultiple?: boolean;
+  initialOpenIndex?: number | null;
+}
+
+const { 
+  items, 
+  allowMultiple = false, 
+  initialOpenIndex = 0 
+} = Astro.props;
+---
+
+<div class="accordion space-y-4">
+  {items.map((item, index) => (
+    <div class="border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden">
+      <button
+        class="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+        aria-expanded={index === initialOpenIndex ? "true" : "false"}
+        data-accordion-item
+      >
+        <span
+          class="text-lg md:text-xl font-bold text-gray-900 dark:text-white"
+        >{item.question}</span>
+        <svg
+          class="w-5 h-5 text-gray-500 transition-transform duration-300"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M19 9l-7 7-7-7"
+          ></path>
+        </svg>
+      </button>
+      <div 
+        class="grid transition-[grid-template-rows] duration-300 ease-out"
+        data-accordion-content
+        style={`grid-template-rows: ${index === initialOpenIndex ? '1fr' : '0fr'}`}
+      >
+        <div class="overflow-hidden">
+          <div
+            class="px-6 pb-4 text-base md:text-lg text-gray-600 dark:text-gray-400 leading-relaxed"
+          >{item.answer}</div>
+        </div>
+      </div>
+    </div>
+  ))}
+</div>
+
+<script define:vars={{ allowMultiple }}>
+  document.querySelectorAll('[data-accordion-item]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      const content = button.nextElementSibling;
+      const icon = button.querySelector('svg');
+
+      if (isExpanded) {
+        button.setAttribute('aria-expanded', 'false');
+        content.style.gridTemplateRows = '0fr';
+        if (icon) icon.classList.remove('rotate-180');
+      } else {
+        if (!allowMultiple) {
+          document.querySelectorAll('[data-accordion-item]').forEach((otherButton) => {
+            if (otherButton !== button && otherButton.getAttribute('aria-expanded') === 'true') {
+              otherButton.setAttribute('aria-expanded', 'false');
+              const otherContent = otherButton.nextElementSibling;
+              const otherIcon = otherButton.querySelector('svg');
+              if (otherContent) otherContent.style.gridTemplateRows = '0fr';
+              if (otherIcon) otherIcon.classList.remove('rotate-180');
+            }
+          });
+        }
+
+        button.setAttribute('aria-expanded', 'true');
+        content.style.gridTemplateRows = '1fr';
+        if (icon) icon.classList.add('rotate-180');
+      }
+    });
+  });
+</script>
