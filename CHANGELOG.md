@@ -18,6 +18,7 @@ All notable changes to this project will be documented here.
 - Refreshed the color system with pastel gradients and softer card treatments for a friendlier visual tone.
 - Added standalone privacy, terms, and security pages that the footer links reference.
 - Reframed every blog article (Document Generation Lab intro, Epistola pipeline guide, DocGen best practices, advanced theming) around Epistola's document generation workflows, DocOps guidance, and multi-brand theming, renaming the slugs/titles to match their new focus.
+- Updated the homepage + features screens to highlight concrete Epistola Suite capabilities (Lit/ProseMirror editor, JSON Schema contracts, expression engines, iText renderer, multi-tenant governance, Helm/Keycloak deploys) and introduced a DocOps architecture section showing the editor → template service → render pipeline.
 
 ### Removed
 - Starlight-powered documentation, related content collections, and custom docs styles from this repository (future docs live on a separate site).

@@ -1,5 +1,6 @@
 ---
 import EverythingYouNeed from "../components/everything-you-need.astro";
+import DocOpsArchitecture from "../components/docops-architecture.astro";
 import Join from "../components/join.astro";
 import Layout from "../components/layout.astro";
 ---
@@ -17,6 +18,7 @@ import Layout from "../components/layout.astro";
     </div>
   </section>
   <EverythingYouNeed />
+  <DocOpsArchitecture />
   <section class="py-20">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
@@ -25,13 +27,13 @@ import Layout from "../components/layout.astro";
             Built for integrators
           </h2>
           <p class="mt-4 text-lg text-[var(--muted-text)]">
-            Keep your workflows untouched. Epistola exposes a predictable interface for any orchestrator.
+            Leave orchestration, queues, and authorisation where they live today. Epistola exposes a guarded render surface that fits into any Common Ground or bespoke platform.
           </p>
           <ul class="space-y-4">
             {[
-              "JSON in, PDF out — that simple",
-              "Common Ground schema + zaakdocument metadata",
-              "Webhooks and storage adapters for your destinations",
+              "JSON Schema Draft 2020-12 validation before render",
+              "Immutable template versions per environment and tenant",
+              "OpenAPI 3.1 endpoints + adaptive batch job webhooks",
             ].map((item) => (
               <li class="flex items-start">
                 <svg
@@ -50,9 +52,9 @@ import Layout from "../components/layout.astro";
           </ul>
         </div>
         <div class="rounded-[32px] border border-black/10 bg-white/80 p-8 text-center shadow-xl dark:bg-white/5">
-          <p class="text-5xl font-semibold text-[var(--color-brand-700)]">240 ms</p>
-          <p class="mt-2 text-sm uppercase tracking-[0.3em] text-[var(--color-gray-400)]">avg render time</p>
-        </div>
+          <p class="text-5xl font-semibold text-[var(--color-brand-700)]">50–200 ms</p>
+          <p class="mt-2 text-sm uppercase tracking-[0.3em] text-[var(--color-gray-400)]">render window (iText)</p>
+          </div>
       </div>
     </div>
   </section>

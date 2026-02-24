@@ -9,12 +9,12 @@ import CtaButton from "./ui/cta-button.astro";
   </div>
   <div class="mx-auto grid max-w-6xl grid-cols-1 gap-16 px-4 lg:grid-cols-[1.1fr_0.9fr]">
     <div>
-      <p class="eyebrow mb-6">Open Source PDF Generation</p>
+      <p class="eyebrow mb-6">Document generation platform</p>
       <h1 class="text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white sm:text-5xl lg:text-[3.5rem]">
-        Generate rock-solid PDFs from templates you design yourself.
+        Visual authoring, typed data contracts, and a render API in one stack.
       </h1>
       <p class="mt-6 text-lg text-[var(--muted-text)]">
-        Epistola focuses on one thing: turn Common Ground compatible templates into production-ready PDFs. No workflows or case logic — just a fast renderer that you wire into GZAC, Valtimo, or any orchestrator that needs documents.
+        Epistola Suite combines a Lit/ProseMirror editor, JSON Schema contracts, and an iText-powered renderer. Multi-tenant governance, immutable template versions, and environment promotions are built in so developers and DocOps teams can deliver compliant PDFs without inventing new tooling.
       </p>
       <div class="mt-10 flex flex-wrap gap-4">
         <CtaButton url="https://demo.epistola.app" text="Open demo" variant="primary" external />
@@ -27,19 +27,19 @@ import CtaButton from "./ui/cta-button.astro";
       </div>
       <div class="mt-12 grid gap-6 sm:grid-cols-3">
         <div class="surface-card tone-peach p-5 shadow-sm">
-          <p class="text-sm font-medium text-[var(--color-gray-500)]">Common Ground</p>
-          <p class="mt-2 text-3xl font-semibold text-[var(--color-brand-700)]">100%</p>
-          <p class="text-sm text-[var(--color-gray-500)]">API &amp; data model compliant</p>
+          <p class="text-sm font-medium text-[var(--color-gray-500)]">Template versions</p>
+          <p class="mt-2 text-3xl font-semibold text-[var(--color-brand-700)]">200+</p>
+          <p class="text-sm text-[var(--color-gray-500)]">per variant with draft/publish states</p>
         </div>
         <div class="surface-card tone-mint p-5 shadow-sm">
-          <p class="text-sm font-medium text-[var(--color-gray-500)]">Templates rendered</p>
-          <p class="mt-2 text-3xl font-semibold">8,200+</p>
-          <p class="text-sm text-[var(--color-gray-500)]">checked into Git</p>
+          <p class="text-sm font-medium text-[var(--color-gray-500)]">Render latency</p>
+          <p class="mt-2 text-3xl font-semibold">50–200 ms</p>
+          <p class="text-sm text-[var(--color-gray-500)]">direct iText pipeline</p>
         </div>
         <div class="surface-card tone-lilac p-5 shadow-sm">
-          <p class="text-sm font-medium text-[var(--color-gray-500)]">Integrations</p>
-          <p class="mt-2 text-3xl font-semibold">10+</p>
-          <p class="text-sm text-[var(--color-gray-500)]">orchestrators &amp; case systems</p>
+          <p class="text-sm font-medium text-[var(--color-gray-500)]">Tenants onboarded</p>
+          <p class="mt-2 text-3xl font-semibold">Multi-tenant</p>
+          <p class="text-sm text-[var(--color-gray-500)]">role &amp; environment isolation</p>
         </div>
       </div>
     </div>
@@ -47,50 +47,50 @@ import CtaButton from "./ui/cta-button.astro";
       <div class="surface-card relative overflow-hidden rounded-3xl border border-black/10 bg-white p-8 dark:bg-[rgba(15,23,42,.9)]">
         <div class="absolute -left-12 top-6 h-24 w-24 rounded-full bg-[var(--color-brand-100)] blur-3xl"></div>
         <div class="absolute -right-16 bottom-0 h-32 w-32 rounded-full bg-[var(--color-brand-200)] blur-3xl"></div>
-        <div class="relative space-y-6">
-          <div>
-            <p class="text-xs font-semibold uppercase tracking-[0.4em] text-[var(--color-brand-500)]">Template preview</p>
-            <h2 class="mt-2 text-2xl font-semibold">Bericht-template · Gemeente</h2>
-          </div>
-          <div class="space-y-4 rounded-2xl border border-dashed border-black/10 bg-[var(--color-gray-50)]/70 p-4 text-sm dark:bg-white/5">
-            <div class="flex items-center justify-between">
-              <span class="font-medium">Revision</span>
-              <span class="rounded-full bg-[var(--color-brand-100)] px-3 py-1 text-xs font-semibold text-[var(--color-brand-700)]">v8 synced</span>
+          <div class="relative space-y-6">
+            <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.4em] text-[var(--color-brand-500)]">Template variant</p>
+            <h2 class="mt-2 text-2xl font-semibold">Correspondentie · nl_corporate</h2>
             </div>
-            <div class="grid gap-3 text-sm">
-              <div class="rounded-xl bg-white/90 p-3 shadow-sm dark:bg-black/20">
-                <p class="text-xs uppercase tracking-[0.2em] text-[var(--color-gray-400)]">Automation</p>
-                <p class="mt-1 font-semibold">YAML data → Mustache blocks</p>
+            <div class="space-y-4 rounded-2xl border border-dashed border-black/10 bg-[var(--color-gray-50)]/70 p-4 text-sm dark:bg-white/5">
+              <div class="flex items-center justify-between">
+                <span class="font-medium">Revision</span>
+                <span class="rounded-full bg-[var(--color-brand-100)] px-3 py-1 text-xs font-semibold text-[var(--color-brand-700)]">v12 · Published</span>
               </div>
-              <div class="rounded-xl bg-white/90 p-3 shadow-sm dark:bg-black/20">
-                <p class="text-xs uppercase tracking-[0.2em] text-[var(--color-gray-400)]">Signatures</p>
-                <p class="mt-1 font-semibold">PDF/X ready for upload</p>
-              </div>
-              <div class="rounded-xl bg-white/90 p-3 shadow-sm dark:bg-black/20">
+              <div class="grid gap-3 text-sm">
+                <div class="rounded-xl bg-white/90 p-3 shadow-sm dark:bg-black/20">
+                <p class="text-xs uppercase tracking-[0.2em] text-[var(--color-gray-400)]">Data contract</p>
+                <p class="mt-1 font-semibold">JSON Schema · Draft 2020-12</p>
+                </div>
+                <div class="rounded-xl bg-white/90 p-3 shadow-sm dark:bg-black/20">
+                <p class="text-xs uppercase tracking-[0.2em] text-[var(--color-gray-400)]">Expressions</p>
+                <p class="mt-1 font-semibold">JSONata · GraalJS · Path</p>
+                </div>
+                <div class="rounded-xl bg-white/90 p-3 shadow-sm dark:bg-black/20">
                 <p class="text-xs uppercase tracking-[0.2em] text-[var(--color-gray-400)]">Guardrails</p>
-                <p class="mt-1 font-semibold">Schema validation · 0 errors</p>
+                <p class="mt-1 font-semibold">Tenant scoped · audit logged</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="rounded-2xl border border-[var(--color-brand-100)] bg-[var(--color-brand-50)]/80 p-5 text-sm shadow-inner dark:bg-[rgba(37,99,235,.15)]">
-            <p class="text-[var(--color-brand-800)] font-medium">Render log</p>
+            <div class="rounded-2xl border border-[var(--color-brand-100)] bg-[var(--color-brand-50)]/80 p-5 text-sm shadow-inner dark:bg-[rgba(37,99,235,.15)]">
+            <p class="text-[var(--color-brand-800)] font-medium">Job timeline</p>
             <ul class="mt-3 space-y-2">
               <li class="flex items-center gap-2">
                 <span class="h-2 w-2 rounded-full bg-[var(--color-success-500)]"></span>
-                HTML → PDF conversion in 240 ms
+                PENDING → PROCESSING in 12 ms (batch size auto tuned)
               </li>
               <li class="flex items-center gap-2">
                 <span class="h-2 w-2 rounded-full bg-[var(--color-success-500)]"></span>
-                Output pushed to S3 bucket `gzac-docs`
+                RENDER COMPLETE · checksum stored
               </li>
               <li class="flex items-center gap-2">
                 <span class="h-2 w-2 rounded-full bg-[var(--color-warning-500)]"></span>
-                Missing `contactpersoon` variable (warning)
+                Delivery hook retried (S3 503) · resolved
               </li>
             </ul>
           </div>
+          </div>
         </div>
       </div>
-    </div>
   </div>
 </section>

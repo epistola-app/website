@@ -7,19 +7,19 @@
     <div class="space-y-6">
       <p class="eyebrow">Built for orchestrators</p>
       <h2 class="text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white">
-        Slot into GZAC, Valtimo, or any Common Ground stack.
+        Drop into ZGW, Valtimo, or bespoke stacks without touching workflows.
       </h2>
       <p class="text-lg text-[var(--muted-text)]">
-        Epistola doesn’t reinvent processes. It receives data from your workflow engine, renders a PDF, and hands the file back through stable APIs.
+        Epistola exposes a narrow surface: JSON in, PDF/DOCX/HTML out. Multi-tenant auth via Keycloak, Helm charts, and health probes make it feel like any other platform service in your cluster.
       </p>
       <div class="grid gap-6 sm:grid-cols-2">
         <div class="surface-card tone-mint p-5 shadow-sm">
-          <p class="text-sm font-semibold">Common Ground data</p>
-          <p class="mt-2 text-sm text-[var(--muted-text)]">Adheres to ZGW APIs and JSON schema so municipalities can plug in immediately.</p>
+          <p class="text-sm font-semibold">Common Ground fluent</p>
+          <p class="mt-2 text-sm text-[var(--muted-text)]">Understands zaak, document, and resultaat payloads with schema validation before rendering.</p>
         </div>
         <div class="surface-card tone-lilac p-5 shadow-sm">
-          <p class="text-sm font-semibold">Developer friendly</p>
-          <p class="mt-2 text-sm text-[var(--muted-text)]">Templates live in Git, rendered through Docker images or Kubernetes jobs.</p>
+          <p class="text-sm font-semibold">Operations ready</p>
+          <p class="mt-2 text-sm text-[var(--muted-text)]">Ships as Docker/Helm with Keycloak/OIDC profiles, Prometheus metrics, and GitHub Actions pipelines.</p>
         </div>
       </div>
     </div>
@@ -28,21 +28,21 @@
         <div class="flex items-center justify-between">
           <div>
             <p class="text-xs uppercase tracking-[0.4em] text-[var(--color-gray-400)]">Render job</p>
-            <p class="text-lg font-semibold">Zaak document · Besluit</p>
+            <p class="text-lg font-semibold">Render job · Besluit</p>
           </div>
           <span class="rounded-full bg-[var(--color-brand-100)] px-3 py-1 text-xs font-semibold text-[var(--color-brand-700)]">Live</span>
         </div>
         <ol class="space-y-4">
-          {["GZAC", "Epistola", "Case system"].map((stage, index) => (
+          {["Orchestrator", "Epistola Suite", "Destinations"].map((stage, index) => (
             <li class="flex items-start gap-4">
               <span class="mt-1 flex h-7 w-7 items-center justify-center rounded-full border border-black/10 text-xs font-semibold">
                 {index + 1}
               </span>
               <div>
                 <p class="text-sm font-semibold">{stage}</p>
-                <p class="text-sm text-[var(--muted-text)]">{index === 0 && "Send zaak, besluit, and zaakdocument payload to Epistola"}
-                  {index === 1 && "Merge template with JSON, render PDF/A, store checksum"}
-                  {index === 2 && "Receive URL + metadata to continue workflow"}
+                <p class="text-sm text-[var(--muted-text)]">{index === 0 && "Emit signed JSON + tenant slug; webhooks register batch IDs"}
+                  {index === 1 && "Resolve schema, pick active version, render via iText, log checksum"}
+                  {index === 2 && "Consume webhook/storage callback with URL, metadata, and audit refs"}
                 </p>
               </div>
             </li>
