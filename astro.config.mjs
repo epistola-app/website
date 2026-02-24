@@ -6,7 +6,7 @@ const basePath = process.env.DEPLOY_TARGET === "gh-pages" ? "/website" : "/";
 
 export default defineConfig({
   base: basePath,
-  site: "https://epistola-app.github.io",
+  site: "https://epistola.app",
   vite: {
     plugins: [tailwindcss()],
   },

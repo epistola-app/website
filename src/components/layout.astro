@@ -58,6 +58,8 @@ const themeBootstrap = `(() => {
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Epistola" />
     <meta name="theme-color" content="#2563eb" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'" />
     <script is:inline>{themeBootstrap}</script>
   </head>
   <body class="font-sans antialiased flex flex-col min-h-screen">
