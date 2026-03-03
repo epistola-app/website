@@ -1,54 +1,84 @@
 ---
-
+import Card from "./ui/card.astro";
+import Title from "./ui/title.astro";
 ---
 
 <section class="py-24">
   <div class="mx-auto grid max-w-6xl gap-12 px-4 md:grid-cols-2">
     <div class="space-y-6">
       <p class="eyebrow">Built for orchestrators</p>
-      <h2 class="text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white">
+      <Title level={2}>
         Drop into ZGW, Valtimo, or bespoke stacks without touching workflows.
-      </h2>
+      </Title>
       <p class="text-lg text-[var(--muted-text)]">
-        Epistola exposes a narrow surface: JSON in, PDF/DOCX/HTML out. Multi-tenant auth via Keycloak, Helm charts, and health probes make it feel like any other platform service in your cluster.
+        Epistola exposes a narrow surface: JSON in, PDF/DOCX/HTML out.
+        Multi-tenant auth via Keycloak, Helm charts, and health probes make it
+        feel like any other platform service in your cluster.
       </p>
       <div class="grid gap-6 sm:grid-cols-2">
-        <div class="surface-card tone-mint p-5 shadow-sm">
+        <Card variant="subtle" padding="sm">
           <p class="text-sm font-semibold">Common Ground fluent</p>
-          <p class="mt-2 text-sm text-[var(--muted-text)]">Understands zaak, document, and resultaat payloads with schema validation before rendering.</p>
-        </div>
-        <div class="surface-card tone-lilac p-5 shadow-sm">
+          <p class="mt-2 text-sm text-[var(--muted-text)]">
+            Understands zaak, document, and resultaat payloads with schema
+            validation before rendering.
+          </p>
+        </Card>
+        <Card variant="subtle" padding="sm">
           <p class="text-sm font-semibold">Operations ready</p>
-          <p class="mt-2 text-sm text-[var(--muted-text)]">Ships as Docker/Helm with Keycloak/OIDC profiles, Prometheus metrics, and GitHub Actions pipelines.</p>
-        </div>
+          <p class="mt-2 text-sm text-[var(--muted-text)]">
+            Ships as Docker/Helm with Keycloak/OIDC profiles, Prometheus
+            metrics, and GitHub Actions pipelines.
+          </p>
+        </Card>
       </div>
     </div>
-    <div class="surface-card tone-peach relative overflow-hidden rounded-3xl border border-black/10 bg-white p-8">
+    <Card
+      variant="default"
+      radius="2xl"
+      padding="lg"
+      shadow="md"
+      class="relative overflow-hidden"
+    >
       <div class="relative space-y-5">
         <div class="flex items-center justify-between">
           <div>
-            <p class="text-xs uppercase tracking-[0.4em] text-[var(--color-gray-400)]">Render job</p>
+            <p
+              class="text-xs uppercase tracking-[0.16em] text-[var(--color-peach-paper-chip-text)]"
+            >
+              Render job
+            </p>
             <p class="text-lg font-semibold">Render job · Besluit</p>
           </div>
-          <span class="rounded-full bg-[var(--color-brand-100)] px-3 py-1 text-xs font-semibold text-[var(--color-brand-700)]">Live</span>
+          <span
+            class="rounded-full border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-3 py-1 text-xs font-semibold text-[var(--color-peach-paper-accent)]"
+            >Live</span
+          >
         </div>
         <ol class="space-y-4">
-          {["Orchestrator", "Epistola Suite", "Destinations"].map((stage, index) => (
-            <li class="flex items-start gap-4">
-              <span class="mt-1 flex h-7 w-7 items-center justify-center rounded-full border border-black/10 text-xs font-semibold">
-                {index + 1}
-              </span>
-              <div>
-                <p class="text-sm font-semibold">{stage}</p>
-                <p class="text-sm text-[var(--muted-text)]">{index === 0 && "Emit signed JSON + tenant slug; webhooks register batch IDs"}
-                  {index === 1 && "Resolve schema, pick active version, render via iText, log checksum"}
-                  {index === 2 && "Consume webhook/storage callback with URL, metadata, and audit refs"}
-                </p>
-              </div>
-            </li>
-          ))}
+          {
+            ["Orchestrator", "Epistola Suite", "Destinations"].map(
+              (stage, index) => (
+                <li class="flex items-start gap-4">
+                  <span class="mt-1 flex h-7 w-7 items-center justify-center rounded-full border border-[var(--color-peach-paper-border)] text-xs font-semibold">
+                    {index + 1}
+                  </span>
+                  <div>
+                    <p class="text-sm font-semibold">{stage}</p>
+                    <p class="text-sm text-[var(--muted-text)]">
+                      {index === 0 &&
+                        "Emit signed JSON + tenant slug; webhooks register batch IDs"}
+                      {index === 1 &&
+                        "Resolve schema, pick active version, render via iText, log checksum"}
+                      {index === 2 &&
+                        "Consume webhook/storage callback with URL, metadata, and audit refs"}
+                    </p>
+                  </div>
+                </li>
+              ),
+            )
+          }
         </ol>
       </div>
-    </div>
+    </Card>
   </div>
 </section>

@@ -1,19 +1,22 @@
 ---
 import EverythingYouNeed from "../components/everything-you-need.astro";
+import Card from "../components/ui/card.astro";
 import DocOpsArchitecture from "../components/docops-architecture.astro";
 import Join from "../components/join.astro";
 import Layout from "../components/layout.astro";
+import Title from "../components/ui/title.astro";
 ---
 
 <Layout>
   <section class="pt-32 pb-16">
     <div class="mx-auto max-w-3xl px-4 text-center">
       <p class="eyebrow">Platform overview</p>
-      <h1 class="mt-6 text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white">
+      <Title level={1} class="mt-6">
         Epistola renders PDFs. Your products handle everything else.
-      </h1>
+      </Title>
       <p class="mt-4 text-lg text-[var(--muted-text)]">
-        Templates, data bindings, and a rendering engine that respects Common Ground standards — all open source.
+        Templates, data bindings, and a rendering engine that respects Common
+        Ground standards — all open source.
       </p>
     </div>
   </section>
@@ -23,38 +26,57 @@ import Layout from "../components/layout.astro";
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
         <div>
-          <h2 class="text-3xl font-semibold text-[var(--color-gray-900)] dark:text-white">
-            Built for integrators
-          </h2>
+          <Title level={2}> Built for integrators </Title>
           <p class="mt-4 text-lg text-[var(--muted-text)]">
-            Leave orchestration, queues, and authorisation where they live today. Epistola exposes a guarded render surface that fits into any Common Ground or bespoke platform.
+            Leave orchestration, queues, and authorisation where they live
+            today. Epistola exposes a guarded render surface that fits into any
+            Common Ground or bespoke platform.
           </p>
           <ul class="space-y-4">
-            {[
-              "JSON Schema Draft 2020-12 validation before render",
-              "Immutable template versions per environment and tenant",
-              "OpenAPI 3.1 endpoints + adaptive batch job webhooks",
-            ].map((item) => (
-              <li class="flex items-start">
-                <svg
-                  class="mr-3 h-6 w-6 text-[var(--color-brand-600)]"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clip-rule="evenodd"></path>
-                </svg>
-                <span class="text-[var(--color-gray-700)] dark:text-gray-300">{item}</span>
-              </li>
-            ))}
+            {
+              [
+                "JSON Schema Draft 2020-12 validation before render",
+                "Immutable template versions per environment and tenant",
+                "OpenAPI 3.1 endpoints + adaptive batch job webhooks",
+              ].map((item) => (
+                <li class="flex items-start">
+                  <svg
+                    class="mr-3 h-6 w-6 text-[var(--color-peach-paper-accent)]"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                  <span class="text-[var(--color-peach-paper-copy)]">
+                    {item}
+                  </span>
+                </li>
+              ))
+            }
           </ul>
         </div>
-        <div class="rounded-[32px] border border-black/10 bg-white/80 p-8 text-center shadow-xl dark:bg-white/5">
-          <p class="text-5xl font-semibold text-[var(--color-brand-700)]">50–200 ms</p>
-          <p class="mt-2 text-sm uppercase tracking-[0.3em] text-[var(--color-gray-400)]">render window (iText)</p>
-          </div>
+        <Card
+          variant="default"
+          radius="3xl"
+          padding="lg"
+          shadow="md"
+          class="text-center"
+        >
+          <p
+            class="text-5xl font-semibold text-[var(--color-peach-paper-accent)]"
+          >
+            50–200 ms
+          </p>
+          <p
+            class="mt-2 text-sm uppercase tracking-[0.12em] text-[var(--color-peach-paper-chip-text)]"
+          >
+            render window (iText)
+          </p>
+        </Card>
       </div>
     </div>
   </section>

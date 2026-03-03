@@ -1,0 +1,100 @@
+---
+import { cn } from "../../lib/cn";
+import { prepareURL } from "../../lib/URL-helpers";
+
+type ButtonVariant = "primary" | "secondary" | "link";
+type ButtonSize = "sm" | "md" | "lg";
+
+interface Props {
+  href?: string;
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  class?: string;
+  external?: boolean;
+  type?: "button" | "submit" | "reset";
+  disabled?: boolean;
+  target?: string;
+  rel?: string;
+}
+
+const {
+  href,
+  variant = "secondary",
+  size = "md",
+  class: className = "",
+  external,
+  type = "button",
+  disabled = false,
+  target,
+  rel,
+  ...restProps
+} = Astro.props as Props;
+
+const isLink = typeof href === "string";
+const isExternal = isLink ? (external ?? /^(https?:)?\/\//.test(href)) : false;
+
+if (isLink && !isExternal && !href.startsWith("/")) {
+  throw new Error(
+    `Button href must start with '/' for internal links. Received: ${href}`,
+  );
+}
+
+const resolvedHref = isLink
+  ? isExternal
+    ? href
+    : prepareURL(href)
+  : undefined;
+
+const variantClasses: Record<ButtonVariant, string> = {
+  primary:
+    "border border-transparent bg-[var(--color-peach-paper-accent)] text-white hover:bg-[var(--color-peach-paper-accent-hover)]",
+  secondary:
+    "border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] text-[var(--color-peach-paper-heading)] hover:border-[var(--color-peach-paper-border-strong)]",
+  link: "h-auto rounded-none border-none bg-transparent px-0 py-0 text-[var(--color-peach-paper-accent)] hover:underline",
+};
+
+const sizeClasses: Record<ButtonSize, string> = {
+  sm: "px-3 py-2 text-xs",
+  md: "px-4 py-2 text-sm",
+  lg: "px-6 py-3 text-base",
+};
+
+const linkSizeClasses: Record<ButtonSize, string> = {
+  sm: "text-xs",
+  md: "text-sm",
+  lg: "text-base",
+};
+
+const resolvedSizeClasses =
+  variant === "link" ? linkSizeClasses[size] : sizeClasses[size];
+
+const classes = cn(
+  "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-peach-paper-accent)] disabled:cursor-not-allowed disabled:opacity-60",
+  variantClasses[variant],
+  resolvedSizeClasses,
+  disabled && isLink && "pointer-events-none",
+  className,
+);
+
+const targetValue = isExternal ? (target ?? "_blank") : target;
+const relValue = isExternal ? (rel ?? "noreferrer") : rel;
+---
+
+{
+  isLink ? (
+    <a
+      href={disabled ? undefined : resolvedHref}
+      class={classes}
+      target={targetValue}
+      rel={relValue}
+      aria-disabled={disabled ? "true" : undefined}
+      {...restProps}
+    >
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={classes} disabled={disabled} {...restProps}>
+      <slot />
+    </button>
+  )
+}

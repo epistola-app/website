@@ -1,17 +1,33 @@
 ---
+
 ---
 
-<section class="border-y border-black/5 bg-gradient-to-r from-[var(--color-accent-peach)]/20 via-white to-[var(--color-accent-lilac)]/20 py-12 dark:border-white/5 dark:bg-gradient-to-r dark:from-[#090c17] dark:via-[#070912] dark:to-[#05070d]">
+<section
+  class="border-y border-[var(--color-peach-paper-border-soft)] py-12 [background-image:var(--gradient-peach-paper-soft)]"
+>
   <div class="mx-auto flex max-w-6xl flex-col items-center gap-8 px-4">
-    <p class="text-center text-xs font-semibold uppercase tracking-[0.4em] text-[var(--color-gray-400)] dark:text-white/60">
+    <p
+      class="text-center text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-peach-paper-copy)]"
+    >
       Trusted in regulated industries
     </p>
-    <div class="flex w-full flex-wrap items-center justify-center gap-8 opacity-80">
-      {(["Northwind Mutual", "Asteria Bank", "Linea Health", "Continuum Energy", "Cenith Legal", "Polaris"]).map((name) => (
-        <div class="flex items-center justify-center rounded-2xl border border-black/5 px-6 py-3 text-sm font-semibold tracking-widest text-[var(--color-gray-500)] dark:border-white/10 dark:text-white/70">
-          {name}
-        </div>
-      ))}
+    <div
+      class="flex w-full flex-wrap items-center justify-center gap-8 opacity-80"
+    >
+      {
+        [
+          "Northwind Mutual",
+          "Asteria Bank",
+          "Linea Health",
+          "Continuum Energy",
+          "Cenith Legal",
+          "Polaris",
+        ].map((name) => (
+          <div class="flex items-center justify-center rounded-2xl border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-6 py-3 text-sm font-semibold tracking-[0.08em] text-[var(--color-peach-paper-copy)]">
+            {name}
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>

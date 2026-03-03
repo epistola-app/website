@@ -1,13 +1,21 @@
 ---
-
+import Button from "./ui/button.astro";
+import Card from "./ui/card.astro";
+import Title from "./ui/title.astro";
 ---
 
 <section class="py-20">
-  <div class="surface-card tone-lilac mx-auto max-w-3xl rounded-[32px] border border-black/5 p-10 text-center shadow-2xl">
+  <Card
+    variant="brand"
+    radius="3xl"
+    padding="none"
+    shadow="lg"
+    class="mx-auto max-w-3xl p-10 text-center"
+  >
     <p class="eyebrow">Newsletter</p>
-    <h2 class="mt-4 text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white">
+    <Title level={2} class="mt-4">
       Operational patterns from document-heavy teams.
-    </h2>
+    </Title>
     <p class="mt-4 text-sm text-[var(--muted-text)]">
       Monthly insights on governance, compliance, and automation. No noise.
     </p>
@@ -18,15 +26,21 @@
           type="email"
           required
           placeholder="you@company.com"
-          class="w-full rounded-2xl border border-black/10 bg-white/80 px-5 py-4 text-sm font-medium text-[var(--color-gray-900)] placeholder:text-[var(--color-gray-400)] focus:border-[var(--color-brand-500)] focus:outline-none dark:bg-black/30 dark:text-white"
+          class="w-full rounded-2xl border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-5 py-4 text-sm font-medium text-[var(--color-peach-paper-heading)] placeholder:text-[var(--color-peach-paper-chip-text)] focus:border-[var(--color-peach-paper-border-strong)] focus:outline-none"
         />
       </label>
-      <button type="submit" class="cta-primary w-full sm:w-auto">
+      <Button
+        type="submit"
+        variant="primary"
+        size="lg"
+        class="w-full sm:w-auto"
+      >
         Subscribe
-      </button>
+      </Button>
     </form>
-    <p class="mt-4 text-xs text-[var(--color-gray-400)]">
-      By subscribing you agree to receive Epistola updates. You can unsubscribe anytime.
+    <p class="mt-4 text-xs text-[var(--color-peach-paper-chip-text)]">
+      By subscribing you agree to receive Epistola updates. You can unsubscribe
+      anytime.
     </p>
-  </div>
+  </Card>
 </section>

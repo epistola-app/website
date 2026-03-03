@@ -1,96 +1,177 @@
 ---
-import CtaButton from "./ui/cta-button.astro";
+import Button from "./ui/button.astro";
+import Card from "./ui/card.astro";
+import Title from "./ui/title.astro";
 ---
 
-<section class="relative overflow-hidden pt-40 pb-24">
-  <div class="absolute inset-0 -z-10">
-    <div class="absolute inset-x-0 top-0 h-72 bg-gradient-to-b from-[var(--color-accent-peach)]/60 via-transparent to-transparent dark:from-[#0f1224]/70"></div>
-    <div class="absolute inset-0 hero-gradient"></div>
+<section
+  class="relative overflow-hidden pt-40 pb-24 [background-image:var(--gradient-peach-paper-soft)]"
+>
+  <div
+    class="absolute inset-0 -z-10 opacity-70 [background-image:var(--gradient-peach-paper)]"
+  >
   </div>
-  <div class="mx-auto grid max-w-6xl grid-cols-1 gap-16 px-4 lg:grid-cols-[1.1fr_0.9fr]">
+  <div
+    class="mx-auto grid max-w-6xl grid-cols-1 gap-16 px-4 lg:grid-cols-[1.1fr_0.9fr]"
+  >
     <div>
       <p class="eyebrow mb-6">Document generation platform</p>
-      <h1 class="text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white sm:text-5xl lg:text-[3.5rem]">
+      <Title level={1} class="lg:text-[3.5rem]">
         Visual authoring, typed data contracts, and a render API in one stack.
-      </h1>
+      </Title>
       <p class="mt-6 text-lg text-[var(--muted-text)]">
-        Epistola Suite combines a Lit/ProseMirror editor, JSON Schema contracts, and an iText-powered renderer. Multi-tenant governance, immutable template versions, and environment promotions are built in so developers and DocOps teams can deliver compliant PDFs without inventing new tooling.
+        Epistola Suite combines a Lit/ProseMirror editor, JSON Schema contracts,
+        and an iText-powered renderer. Multi-tenant governance, immutable
+        template versions, and environment promotions are built in so developers
+        and DocOps teams can deliver compliant PDFs without inventing new
+        tooling.
       </p>
       <div class="mt-10 flex flex-wrap gap-4">
-        <CtaButton url="https://demo.epistola.app" text="Open demo" variant="primary" external />
-        <CtaButton
-          url="https://docs.epistola.app"
-          text="Explore docs"
+        <Button
+          href="https://demo.epistola.app"
+          variant="primary"
+          size="lg"
+          external>Open demo</Button
+        >
+        <Button
+          href="https://docs.epistola.app"
           variant="secondary"
+          size="lg"
           external
-        />
+        >
+          Explore docs
+        </Button>
       </div>
       <div class="mt-12 grid gap-6 sm:grid-cols-3">
-        <div class="surface-card tone-peach p-5 shadow-sm">
-          <p class="text-sm font-medium text-[var(--color-gray-500)]">Template versions</p>
-          <p class="mt-2 text-3xl font-semibold text-[var(--color-brand-700)]">200+</p>
-          <p class="text-sm text-[var(--color-gray-500)]">per variant with draft/publish states</p>
-        </div>
-        <div class="surface-card tone-mint p-5 shadow-sm">
-          <p class="text-sm font-medium text-[var(--color-gray-500)]">Render latency</p>
+        <Card variant="subtle" padding="sm">
+          <p class="text-sm font-medium text-[var(--color-peach-paper-copy)]">
+            Template versions
+          </p>
+          <p
+            class="mt-2 text-3xl font-semibold text-[var(--color-peach-paper-accent)]"
+          >
+            200+
+          </p>
+          <p class="text-sm text-[var(--color-peach-paper-copy)]">
+            per variant with draft/publish states
+          </p>
+        </Card>
+        <Card variant="subtle" padding="sm">
+          <p class="text-sm font-medium text-[var(--color-peach-paper-copy)]">
+            Render latency
+          </p>
           <p class="mt-2 text-3xl font-semibold">50–200 ms</p>
-          <p class="text-sm text-[var(--color-gray-500)]">direct iText pipeline</p>
-        </div>
-        <div class="surface-card tone-lilac p-5 shadow-sm">
-          <p class="text-sm font-medium text-[var(--color-gray-500)]">Tenants onboarded</p>
+          <p class="text-sm text-[var(--color-peach-paper-copy)]">
+            direct iText pipeline
+          </p>
+        </Card>
+        <Card variant="subtle" padding="sm">
+          <p class="text-sm font-medium text-[var(--color-peach-paper-copy)]">
+            Tenants onboarded
+          </p>
           <p class="mt-2 text-3xl font-semibold">Multi-tenant</p>
-          <p class="text-sm text-[var(--color-gray-500)]">role &amp; environment isolation</p>
-        </div>
+          <p class="text-sm text-[var(--color-peach-paper-copy)]">
+            role &amp; environment isolation
+          </p>
+        </Card>
       </div>
     </div>
     <div class="relative">
-      <div class="surface-card relative overflow-hidden rounded-3xl border border-black/10 bg-white p-8 dark:bg-[rgba(15,23,42,.9)]">
-        <div class="absolute -left-12 top-6 h-24 w-24 rounded-full bg-[var(--color-brand-100)] blur-3xl"></div>
-        <div class="absolute -right-16 bottom-0 h-32 w-32 rounded-full bg-[var(--color-brand-200)] blur-3xl"></div>
-          <div class="relative space-y-6">
-            <div>
-            <p class="text-xs font-semibold uppercase tracking-[0.4em] text-[var(--color-brand-500)]">Template variant</p>
-            <h2 class="mt-2 text-2xl font-semibold">Correspondentie · nl_corporate</h2>
+      <Card
+        variant="default"
+        radius="3xl"
+        padding="lg"
+        shadow="md"
+        class="relative overflow-hidden"
+      >
+        <div
+          class="absolute -left-12 top-6 h-24 w-24 rounded-full bg-[var(--color-peach-paper-border)] blur-3xl"
+        >
+        </div>
+        <div
+          class="absolute -right-16 bottom-0 h-32 w-32 rounded-full bg-[var(--color-peach-paper-border-strong)] blur-3xl"
+        >
+        </div>
+        <div class="relative space-y-6">
+          <div>
+            <p
+              class="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-peach-paper-accent)]"
+            >
+              Template variant
+            </p>
+            <Title level={2} class="mt-2 text-2xl"
+              >Correspondentie · nl_corporate</Title
+            >
+          </div>
+          <div
+            class="space-y-4 rounded-2xl border border-dashed border-[var(--color-peach-paper-border-soft)] bg-[var(--color-peach-paper-surface-soft)] p-4 text-sm"
+          >
+            <div class="flex items-center justify-between">
+              <span class="font-medium">Revision</span>
+              <span
+                class="rounded-full border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-3 py-1 text-xs font-semibold text-[var(--color-peach-paper-accent)]"
+                >v12 · Published</span
+              >
             </div>
-            <div class="space-y-4 rounded-2xl border border-dashed border-black/10 bg-[var(--color-gray-50)]/70 p-4 text-sm dark:bg-white/5">
-              <div class="flex items-center justify-between">
-                <span class="font-medium">Revision</span>
-                <span class="rounded-full bg-[var(--color-brand-100)] px-3 py-1 text-xs font-semibold text-[var(--color-brand-700)]">v12 · Published</span>
-              </div>
-              <div class="grid gap-3 text-sm">
-                <div class="rounded-xl bg-white/90 p-3 shadow-sm dark:bg-black/20">
-                <p class="text-xs uppercase tracking-[0.2em] text-[var(--color-gray-400)]">Data contract</p>
+            <div class="grid gap-3 text-sm">
+              <div
+                class="rounded-xl bg-[var(--color-peach-paper-chip-bg)] p-3 shadow-sm"
+              >
+                <p
+                  class="text-xs uppercase tracking-[0.12em] text-[var(--color-peach-paper-chip-text)]"
+                >
+                  Data contract
+                </p>
                 <p class="mt-1 font-semibold">JSON Schema · Draft 2020-12</p>
-                </div>
-                <div class="rounded-xl bg-white/90 p-3 shadow-sm dark:bg-black/20">
-                <p class="text-xs uppercase tracking-[0.2em] text-[var(--color-gray-400)]">Expressions</p>
+              </div>
+              <div
+                class="rounded-xl bg-[var(--color-peach-paper-chip-bg)] p-3 shadow-sm"
+              >
+                <p
+                  class="text-xs uppercase tracking-[0.12em] text-[var(--color-peach-paper-chip-text)]"
+                >
+                  Expressions
+                </p>
                 <p class="mt-1 font-semibold">JSONata · GraalJS · Path</p>
-                </div>
-                <div class="rounded-xl bg-white/90 p-3 shadow-sm dark:bg-black/20">
-                <p class="text-xs uppercase tracking-[0.2em] text-[var(--color-gray-400)]">Guardrails</p>
+              </div>
+              <div
+                class="rounded-xl bg-[var(--color-peach-paper-chip-bg)] p-3 shadow-sm"
+              >
+                <p
+                  class="text-xs uppercase tracking-[0.12em] text-[var(--color-peach-paper-chip-text)]"
+                >
+                  Guardrails
+                </p>
                 <p class="mt-1 font-semibold">Tenant scoped · audit logged</p>
-                </div>
               </div>
             </div>
-            <div class="rounded-2xl border border-[var(--color-brand-100)] bg-[var(--color-brand-50)]/80 p-5 text-sm shadow-inner dark:bg-[rgba(37,99,235,.15)]">
-            <p class="text-[var(--color-brand-800)] font-medium">Job timeline</p>
+          </div>
+          <div
+            class="rounded-2xl border border-[var(--color-peach-paper-border-strong)] bg-[var(--color-peach-paper-chip-bg)] p-5 text-sm shadow-inner"
+          >
+            <p class="font-medium text-[var(--color-peach-paper-heading)]">
+              Job timeline
+            </p>
             <ul class="mt-3 space-y-2">
               <li class="flex items-center gap-2">
-                <span class="h-2 w-2 rounded-full bg-[var(--color-success-500)]"></span>
+                <span class="h-2 w-2 rounded-full bg-[var(--color-success-500)]"
+                ></span>
                 PENDING → PROCESSING in 12 ms (batch size auto tuned)
               </li>
               <li class="flex items-center gap-2">
-                <span class="h-2 w-2 rounded-full bg-[var(--color-success-500)]"></span>
+                <span class="h-2 w-2 rounded-full bg-[var(--color-success-500)]"
+                ></span>
                 RENDER COMPLETE · checksum stored
               </li>
               <li class="flex items-center gap-2">
-                <span class="h-2 w-2 rounded-full bg-[var(--color-warning-500)]"></span>
+                <span class="h-2 w-2 rounded-full bg-[var(--color-warning-500)]"
+                ></span>
                 Delivery hook retried (S3 503) · resolved
               </li>
             </ul>
           </div>
-          </div>
         </div>
-      </div>
+      </Card>
+    </div>
   </div>
 </section>
