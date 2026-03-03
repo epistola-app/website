@@ -69,12 +69,12 @@ Use Epistola's telemetry webhooks to forward structured events into Datadog, Hon
 
 ## 9. Common Anti-Patterns
 
-| Anti-pattern | Why it hurts | Better approach |
-| --- | --- | --- |
-| Copy-pasted templates | Drift, accidental edits | Reference shared partials or components |
-| Manual redlines | Slow, inconsistent | Use tracked clauses + review UI |
-| Hard-coded assets | Break on rebrand/CDN updates | Resolve through asset manifest with fallbacks |
-| QA only in PDF | Hidden HTML/email issues | Run parity tests across every output type |
+| Anti-pattern          | Why it hurts                 | Better approach                               |
+| --------------------- | ---------------------------- | --------------------------------------------- |
+| Copy-pasted templates | Drift, accidental edits      | Reference shared partials or components       |
+| Manual redlines       | Slow, inconsistent           | Use tracked clauses + review UI               |
+| Hard-coded assets     | Break on rebrand/CDN updates | Resolve through asset manifest with fallbacks |
+| QA only in PDF        | Hidden HTML/email issues     | Run parity tests across every output type     |
 
 ## 10. Operational Checklist
 

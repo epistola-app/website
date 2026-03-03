@@ -5,7 +5,14 @@ date: 2026-02-10
 updatedDate: 2026-02-10
 author: "Epistola Team"
 cover: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&h=630&fit=crop&q=80"
-tags: ["document-generation", "design-systems", "theming", "docops", "accessibility"]
+tags:
+  [
+    "document-generation",
+    "design-systems",
+    "theming",
+    "docops",
+    "accessibility",
+  ]
 ---
 
 ## Why Theming Matters in DocOps
@@ -92,7 +99,7 @@ Templates read tokens through helpers (`{{ tokens.color.accent }}`), so flipping
 Use color math libraries to derive tints/shades automatically:
 
 ```ts
-import { darken, lighten } from 'polished';
+import { darken, lighten } from "polished";
 
 export const palette = (accent: string) => ({
   accent,
@@ -146,12 +153,12 @@ The renderer merges `core` tokens with the requested theme so the same template 
 
 ## 8. Troubleshooting
 
-| Symptom | Root Cause | Fix |
-| --- | --- | --- |
-| Colors look washed out in PDF | RGB palette not converted to CMYK-safe values | Clamp values or provide print-specific palette |
-| Email buttons misaligned | Table-based layout missing explicit widths | Add fixed widths + align attributes |
-| DOCX bullets wrong font | Theme overrides limited to paragraph styles | Update numbering styles or embed fonts |
-| Brand assets missing | CDN blocked by downstream recipients | Use Epistola-managed asset storage + signed URLs |
+| Symptom                       | Root Cause                                    | Fix                                              |
+| ----------------------------- | --------------------------------------------- | ------------------------------------------------ |
+| Colors look washed out in PDF | RGB palette not converted to CMYK-safe values | Clamp values or provide print-specific palette   |
+| Email buttons misaligned      | Table-based layout missing explicit widths    | Add fixed widths + align attributes              |
+| DOCX bullets wrong font       | Theme overrides limited to paragraph styles   | Update numbering styles or embed fonts           |
+| Brand assets missing          | CDN blocked by downstream recipients          | Use Epistola-managed asset storage + signed URLs |
 
 ## Conclusion
 

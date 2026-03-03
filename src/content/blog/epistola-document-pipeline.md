@@ -110,10 +110,10 @@ Epistola can hydrate documents from static fixtures, REST APIs, SQL queries, or 
 export default defineConfig({
   datasets: {
     orderConfirmation: {
-      source: 'postgres',
+      source: "postgres",
       connection: process.env.DATABASE_URL,
-      query: 'select * from orders where id = $1',
-      parameters: ['orderId'],
+      query: "select * from orders where id = $1",
+      parameters: ["orderId"],
     },
   },
 });
@@ -148,12 +148,12 @@ Inspect `manifest.json` to view metadata (hashes, render time, template version)
 Use Playwright or Vitest to regression-test generated documents. Example snapshot test:
 
 ```ts
-import { renderDocument } from '../test/utils/render';
+import { renderDocument } from "../test/utils/render";
 
-test('totals match line items', async () => {
-  const doc = await renderDocument('order-confirmation', 'order-1098');
+test("totals match line items", async () => {
+  const doc = await renderDocument("order-confirmation", "order-1098");
   expect(doc.data.totals.grandTotal).toBeCloseTo(
-    doc.data.lineItems.reduce((sum, item) => sum + item.total, 0)
+    doc.data.lineItems.reduce((sum, item) => sum + item.total, 0),
   );
 });
 ```
@@ -200,12 +200,12 @@ Push render metrics into Datadog/Prometheus via the telemetry webhook to keep Do
 
 ## 10. Troubleshooting
 
-| Issue | Likely Cause | Fix |
-| --- | --- | --- |
-| Blank PDF pages | Absolute positioning without page context | Use `@page` CSS and avoid negative margins |
-| Missing assets | External logo blocked | Upload assets into Epistola storage or sign URLs |
-| Encoding issues | Source data not UTF-8 | Normalize to UTF-8 before ingestion |
-| Slow renders | Large datasets or unoptimized loops | Paginate data, pre-compute aggregates |
+| Issue           | Likely Cause                              | Fix                                              |
+| --------------- | ----------------------------------------- | ------------------------------------------------ |
+| Blank PDF pages | Absolute positioning without page context | Use `@page` CSS and avoid negative margins       |
+| Missing assets  | External logo blocked                     | Upload assets into Epistola storage or sign URLs |
+| Encoding issues | Source data not UTF-8                     | Normalize to UTF-8 before ingestion              |
+| Slow renders    | Large datasets or unoptimized loops       | Paginate data, pre-compute aggregates            |
 
 ## Next Steps
 

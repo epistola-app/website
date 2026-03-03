@@ -5,11 +5,13 @@ All notable changes to this project will be documented here.
 ## [Unreleased]
 
 ### Added
+
 - New Epistola-branded marketing layout, hero, navigation, footer, and section components.
 - Shared design tokens for the marketing experience plus updated CTA button variants.
 - Renewed README describing the project + contribution workflow.
 
 ### Changed
+
 - Replaced legacy SaaSKit imagery/copy with Epistola positioning and document-intelligence messaging.
 - Restyled pricing, integrations, features, testimonials, and newsletter sections for consistency with the new design system.
 - Navigation now links to the dedicated docs site at `docs.epistola.app` and CTA buttons support external URLs.
@@ -21,4 +23,5 @@ All notable changes to this project will be documented here.
 - Updated the homepage + features screens to highlight concrete Epistola Suite capabilities (Lit/ProseMirror editor, JSON Schema contracts, expression engines, iText renderer, multi-tenant governance, Helm/Keycloak deploys) and introduced a DocOps architecture section showing the editor → template service → render pipeline.
 
 ### Removed
+
 - Starlight-powered documentation, related content collections, and custom docs styles from this repository (future docs live on a separate site).

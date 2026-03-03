@@ -8,6 +8,12 @@ export default defineConfig({
   base: basePath,
   site: "https://epistola.app",
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss({
+        optimize: {
+          minify: true,
+        },
+      }),
+    ],
   },
 });
