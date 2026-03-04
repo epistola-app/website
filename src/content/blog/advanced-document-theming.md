@@ -5,14 +5,7 @@ date: 2026-02-10
 updatedDate: 2026-02-10
 author: "Epistola Team"
 cover: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&h=630&fit=crop&q=80"
-tags:
-  [
-    "document-generation",
-    "design-systems",
-    "theming",
-    "docops",
-    "accessibility",
-  ]
+tags: ["document-generation", "design-systems", "theming", "docops", "accessibility"]
 ---
 
 ## Why Theming Matters in DocOps

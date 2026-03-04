@@ -8,13 +8,8 @@ const tiers = [
     name: "Community",
     price: "Free",
     cadence: "open source",
-    description:
-      "Self-host Epistola under the AGPL license with community support.",
-    features: [
-      "Full editor + renderer",
-      "Common Ground adapters",
-      "Docker/Kubernetes images",
-    ],
+    description: "Self-host Epistola under the AGPL license with community support.",
+    features: ["Full editor + renderer", "Common Ground adapters", "Docker/Kubernetes images"],
     cardVariant: "subtle",
   },
   {
@@ -30,13 +25,8 @@ const tiers = [
     name: "Managed",
     price: "Custom",
     cadence: "per month",
-    description:
-      "Hosted Epistola with SLAs, monitoring, and dedicated environments.",
-    features: [
-      "SLA-backed hosting",
-      "Custom connectors",
-      "Dedicated success engineer",
-    ],
+    description: "Hosted Epistola with SLAs, monitoring, and dedicated environments.",
+    features: ["SLA-backed hosting", "Custom connectors", "Dedicated success engineer"],
     cardVariant: "default",
   },
 ];
@@ -60,20 +50,14 @@ const tiers = [
           >
             <div class="flex items-start justify-between">
               <div>
-                <p class="text-sm font-semibold text-[var(--color-peach-paper-chip-text)]">
-                  {tier.cadence}
-                </p>
+                <p class="text-sm font-semibold text-[var(--color-peach-paper-chip-text)]">{tier.cadence}</p>
                 <Title level={3} class="mt-2 text-3xl">
                   {tier.name}
                 </Title>
               </div>
-              <p class="text-3xl font-semibold text-[var(--color-peach-paper-accent)]">
-                {tier.price}
-              </p>
+              <p class="text-3xl font-semibold text-[var(--color-peach-paper-accent)]">{tier.price}</p>
             </div>
-            <p class="mt-4 text-sm text-[var(--muted-text)]">
-              {tier.description}
-            </p>
+            <p class="mt-4 text-sm text-[var(--muted-text)]">{tier.description}</p>
             <ul class="mt-6 space-y-3 text-sm text-[var(--color-peach-paper-copy)]">
               {tier.features.map((feature) => (
                 <li class="flex items-center gap-2">
@@ -91,26 +75,12 @@ const tiers = [
                       ? "https://demo.epistola.app"
                       : "/register"
                 }
-                variant={
-                  tier.highlighted
-                    ? "primary"
-                    : tier.name === "Community"
-                      ? "link"
-                      : "secondary"
-                }
+                variant={tier.highlighted ? "primary" : tier.name === "Community" ? "link" : "secondary"}
                 size="lg"
-                class={
-                  tier.name === "Community"
-                    ? "w-full justify-start sm:justify-center"
-                    : "w-full justify-center"
-                }
+                class={tier.name === "Community" ? "w-full justify-start sm:justify-center" : "w-full justify-center"}
                 external={tier.name === "Community" || tier.highlighted}
               >
-                {tier.name === "Community"
-                  ? "View on GitHub"
-                  : tier.highlighted
-                    ? "Open demo"
-                    : "Talk to sales"}
+                {tier.name === "Community" ? "View on GitHub" : tier.highlighted ? "Open demo" : "Talk to sales"}
               </Button>
             </div>
           </Card>

@@ -5,27 +5,15 @@ import Title from "./ui/title.astro";
 ---
 
 <section class="py-24">
-  <Card
-    variant="brand"
-    radius="4xl"
-    shadow="lg"
-    padding="none"
-    class="mx-auto max-w-4xl px-6 py-16 text-center"
-  >
+  <Card variant="brand" radius="4xl" shadow="lg" padding="none" class="mx-auto max-w-4xl px-6 py-16 text-center">
     <Title level={2}> Ready to plug Epistola into your product? </Title>
     <p class="mt-4 text-lg text-[var(--muted-text)]">
-      We’ll review your templates, map the Common Ground payloads, and help you
-      expose a render endpoint your orchestrator can call.
+      We’ll review your templates, map the Common Ground payloads, and help you expose a render endpoint your
+      orchestrator can call.
     </p>
     <div class="mt-8 flex flex-wrap justify-center gap-4">
-      <Button
-        href="https://demo.epistola.app"
-        variant="primary"
-        size="lg"
-        external>Open demo</Button
-      >
-      <Button href="/pricing" variant="secondary" size="lg">Review plans</Button
-      >
+      <Button href="https://demo.epistola.app" variant="primary" size="lg" external>Open demo</Button>
+      <Button href="/pricing" variant="secondary" size="lg">Review plans</Button>
     </div>
   </Card>
 </section>

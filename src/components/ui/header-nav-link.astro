@@ -35,17 +35,14 @@ const normalizedHref = normalizePath(resolvedHref);
 const isActive =
   !external &&
   (normalizedCurrentPath === normalizedHref ||
-    (normalizedHref !== "/" &&
-      normalizedCurrentPath.startsWith(`${normalizedHref}/`)));
+    (normalizedHref !== "/" && normalizedCurrentPath.startsWith(`${normalizedHref}/`)));
 
 const classes = cn(
   mobile
-    ? "rounded-xl border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-4 py-3 text-[var(--color-peach-paper-heading)] transition-colors hover:border-[var(--color-peach-paper-border-strong)]"
-    : "group relative pb-2 transition hover:text-[var(--color-peach-paper-accent)]",
+    ? "rounded-none border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-4 py-3 text-[var(--color-peach-paper-heading)] uppercase font-[family-name:var(--font-mono)] text-sm tracking-wider transition-colors hover:border-[var(--color-peach-paper-border-strong)]"
+    : "group relative pb-2 transition hover:text-[var(--color-peach-paper-accent)] uppercase font-[family-name:var(--font-mono)] text-sm tracking-wider",
   isActive && !mobile && "text-[var(--color-peach-paper-accent)]",
-  isActive &&
-    mobile &&
-    "border-[var(--color-peach-paper-border-strong)] text-[var(--color-peach-paper-accent)]",
+  isActive && mobile && "border-[var(--color-peach-paper-border-strong)] text-[var(--color-peach-paper-accent)]",
   className,
 );
 ---

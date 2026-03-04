@@ -18,10 +18,7 @@ const { mobile = false, class: className = "", id } = Astro.props as Props;
       data-theme-toggle
       aria-label="Toggle theme"
       aria-pressed="false"
-      class={cn(
-        "inline-flex items-center gap-3 text-sm font-semibold text-[var(--color-peach-paper-copy)]",
-        className,
-      )}
+      class={cn("inline-flex items-center gap-3 text-sm font-semibold text-[var(--color-peach-paper-copy)]", className)}
     >
       <span>Theme</span>
       <span
@@ -30,10 +27,10 @@ const { mobile = false, class: className = "", id } = Astro.props as Props;
       >
         Light
       </span>
-      <span class="relative h-6 w-12 rounded-full border border-[var(--color-peach-paper-border)] p-0.5">
+      <span class="relative h-6 w-12 rounded-none border border-[var(--color-peach-paper-border)] p-0.5">
         <span
           data-theme-toggle-pill
-          class="block h-5 w-5 rounded-full bg-[var(--color-peach-paper-accent)] transition-transform"
+          class="block h-5 w-5 rounded-none bg-[var(--color-peach-paper-accent)] transition-transform"
         />
       </span>
     </button>
@@ -45,20 +42,14 @@ const { mobile = false, class: className = "", id } = Astro.props as Props;
       aria-label="Switch to dark theme"
       aria-pressed="false"
       class={cn(
-        "flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] text-[var(--color-peach-paper-heading)] transition hover:border-[var(--color-peach-paper-border-strong)] hover:text-[var(--color-peach-paper-accent)]",
+        "flex h-10 w-10 items-center justify-center rounded-none border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] text-[var(--color-peach-paper-heading)] transition hover:border-[var(--color-peach-paper-border-strong)] hover:text-[var(--color-peach-paper-accent)]",
         className,
       )}
     >
       <span class="sr-only" data-theme-toggle-label>
         Switch to dark theme
       </span>
-      <svg
-        class="h-5 w-5"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.5"
-      >
+      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <path
           data-theme-toggle-icon-path
           stroke-linecap="round"

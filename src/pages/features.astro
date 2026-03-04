@@ -11,12 +11,9 @@ import Title from "../components/ui/title.astro";
   <section class="pt-32 pb-16">
     <div class="mx-auto max-w-3xl px-4 text-center">
       <p class="eyebrow">Platform overview</p>
-      <Title level={1} class="mt-6">
-        Epistola renders PDFs. Your products handle everything else.
-      </Title>
+      <Title level={1} class="mt-6"> Epistola renders PDFs. Your products handle everything else. </Title>
       <p class="mt-4 text-lg text-[var(--muted-text)]">
-        Templates, data bindings, and a rendering engine that respects Common
-        Ground standards — all open source.
+        Templates, data bindings, and a rendering engine that respects Common Ground standards — all open source.
       </p>
     </div>
   </section>
@@ -28,9 +25,8 @@ import Title from "../components/ui/title.astro";
         <div>
           <Title level={2}> Built for integrators </Title>
           <p class="mt-4 text-lg text-[var(--muted-text)]">
-            Leave orchestration, queues, and authorisation where they live
-            today. Epistola exposes a guarded render surface that fits into any
-            Common Ground or bespoke platform.
+            Leave orchestration, queues, and authorisation where they live today. Epistola exposes a guarded render
+            surface that fits into any Common Ground or bespoke platform.
           </p>
           <ul class="space-y-4">
             {
@@ -51,29 +47,15 @@ import Title from "../components/ui/title.astro";
                       clip-rule="evenodd"
                     />
                   </svg>
-                  <span class="text-[var(--color-peach-paper-copy)]">
-                    {item}
-                  </span>
+                  <span class="text-[var(--color-peach-paper-copy)]">{item}</span>
                 </li>
               ))
             }
           </ul>
         </div>
-        <Card
-          variant="default"
-          radius="3xl"
-          padding="lg"
-          shadow="md"
-          class="text-center"
-        >
-          <p
-            class="text-5xl font-semibold text-[var(--color-peach-paper-accent)]"
-          >
-            50–200 ms
-          </p>
-          <p
-            class="mt-2 text-sm uppercase tracking-[0.12em] text-[var(--color-peach-paper-chip-text)]"
-          >
+        <Card variant="default" radius="3xl" padding="lg" shadow="md" class="text-center">
+          <p class="text-5xl font-semibold text-[var(--color-peach-paper-accent)]">50–200 ms</p>
+          <p class="mt-2 text-sm uppercase tracking-[0.12em] text-[var(--color-peach-paper-chip-text)]">
             render window (iText)
           </p>
         </Card>

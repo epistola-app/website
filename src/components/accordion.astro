@@ -17,21 +17,14 @@ const { items, allowMultiple = false, initialOpenIndex = 0 } = Astro.props;
           aria-expanded={index === initialOpenIndex ? "true" : "false"}
           data-accordion-item
         >
-          <span class="text-lg font-bold text-[var(--color-peach-paper-heading)] md:text-xl">
-            {item.question}
-          </span>
+          <span class="text-lg font-bold text-[var(--color-peach-paper-heading)] md:text-xl">{item.question}</span>
           <svg
             class="h-5 w-5 text-[var(--color-peach-paper-chip-text)] transition-transform duration-300"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M19 9l-7 7-7-7"
-            />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
           </svg>
         </button>
         <div
@@ -63,20 +56,15 @@ const { items, allowMultiple = false, initialOpenIndex = 0 } = Astro.props;
         if (icon) icon.classList.remove("rotate-180");
       } else {
         if (!allowMultiple) {
-          document
-            .querySelectorAll("[data-accordion-item]")
-            .forEach((otherButton) => {
-              if (
-                otherButton !== button &&
-                otherButton.getAttribute("aria-expanded") === "true"
-              ) {
-                otherButton.setAttribute("aria-expanded", "false");
-                const otherContent = otherButton.nextElementSibling;
-                const otherIcon = otherButton.querySelector("svg");
-                if (otherContent) otherContent.style.gridTemplateRows = "0fr";
-                if (otherIcon) otherIcon.classList.remove("rotate-180");
-              }
-            });
+          document.querySelectorAll("[data-accordion-item]").forEach((otherButton) => {
+            if (otherButton !== button && otherButton.getAttribute("aria-expanded") === "true") {
+              otherButton.setAttribute("aria-expanded", "false");
+              const otherContent = otherButton.nextElementSibling;
+              const otherIcon = otherButton.querySelector("svg");
+              if (otherContent) otherContent.style.gridTemplateRows = "0fr";
+              if (otherIcon) otherIcon.classList.remove("rotate-180");
+            }
+          });
         }
 
         button.setAttribute("aria-expanded", "true");

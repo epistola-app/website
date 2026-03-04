@@ -34,20 +34,13 @@ const isLink = typeof href === "string";
 const isExternal = isLink ? (external ?? /^(https?:)?\/\//.test(href)) : false;
 
 if (isLink && !isExternal && !href.startsWith("/")) {
-  throw new Error(
-    `Button href must start with '/' for internal links. Received: ${href}`,
-  );
+  throw new Error(`Button href must start with '/' for internal links. Received: ${href}`);
 }
 
-const resolvedHref = isLink
-  ? isExternal
-    ? href
-    : prepareURL(href)
-  : undefined;
+const resolvedHref = isLink ? (isExternal ? href : prepareURL(href)) : undefined;
 
 const variantClasses: Record<ButtonVariant, string> = {
-  primary:
-    "border border-transparent bg-[#b7684e] text-white hover:bg-[#9d5741]",
+  primary: "border border-transparent bg-[#b7684e] text-white hover:bg-[#9d5741]",
   secondary:
     "border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] text-[var(--color-peach-paper-heading)] hover:bg-[var(--color-peach-paper-surface)] hover:border-[var(--color-peach-paper-border-strong)]",
   link: "h-auto rounded-none border-none bg-transparent px-0 py-0 text-[var(--color-peach-paper-accent)] hover:underline",
@@ -65,8 +58,7 @@ const linkSizeClasses: Record<ButtonSize, string> = {
   lg: "text-base",
 };
 
-const resolvedSizeClasses =
-  variant === "link" ? linkSizeClasses[size] : sizeClasses[size];
+const resolvedSizeClasses = variant === "link" ? linkSizeClasses[size] : sizeClasses[size];
 
 const classes = cn(
   "inline-flex items-center justify-center gap-2 rounded-none font-semibold transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-peach-paper-accent)] disabled:cursor-not-allowed disabled:opacity-60",

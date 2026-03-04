@@ -152,9 +152,7 @@ import { renderDocument } from "../test/utils/render";
 
 test("totals match line items", async () => {
   const doc = await renderDocument("order-confirmation", "order-1098");
-  expect(doc.data.totals.grandTotal).toBeCloseTo(
-    doc.data.lineItems.reduce((sum, item) => sum + item.total, 0),
-  );
+  expect(doc.data.totals.grandTotal).toBeCloseTo(doc.data.lineItems.reduce((sum, item) => sum + item.total, 0));
 });
 ```
 

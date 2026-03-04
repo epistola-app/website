@@ -48,11 +48,8 @@ const {
       (() => {
         const storageKey = "epistola-theme";
         const root = document.documentElement;
-        const prefersDarkQuery = window.matchMedia(
-          "(prefers-color-scheme: dark)",
-        );
-        const moonPath =
-          "M12 3.75A8.25 8.25 0 1 0 20.25 12 6.75 6.75 0 0 1 12 3.75z";
+        const prefersDarkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        const moonPath = "M12 3.75A8.25 8.25 0 1 0 20.25 12 6.75 6.75 0 0 1 12 3.75z";
         const sunPath =
           "M12 3v1.5m0 15V21m8.485-8.485H19m-14 0H3m15.364 6.364-1.06-1.06M6.697 6.697 5.636 5.636m12.728 0-1.06 1.06M6.697 17.303l-1.06 1.06M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z";
 
@@ -72,8 +69,7 @@ const {
           }
         };
 
-        const getSystemTheme = () =>
-          prefersDarkQuery.matches ? "dark" : "light";
+        const getSystemTheme = () => (prefersDarkQuery.matches ? "dark" : "light");
 
         const updateToggleUI = (theme) => {
           const isDark = theme === "dark";
@@ -82,9 +78,7 @@ const {
             toggle.setAttribute("aria-pressed", String(isDark));
             const srLabel = toggle.querySelector("[data-theme-toggle-label]");
             if (srLabel) {
-              srLabel.textContent = isDark
-                ? "Switch to light theme"
-                : "Switch to dark theme";
+              srLabel.textContent = isDark ? "Switch to light theme" : "Switch to dark theme";
             }
 
             const state = toggle.querySelector("[data-theme-toggle-state]");
@@ -93,19 +87,13 @@ const {
             }
           });
 
-          document
-            .querySelectorAll("[data-theme-toggle-pill]")
-            .forEach((pill) => {
-              pill.style.transform = isDark
-                ? "translateX(24px)"
-                : "translateX(0)";
-            });
+          document.querySelectorAll("[data-theme-toggle-pill]").forEach((pill) => {
+            pill.style.transform = isDark ? "translateX(24px)" : "translateX(0)";
+          });
 
-          document
-            .querySelectorAll("[data-theme-toggle-icon-path]")
-            .forEach((iconPath) => {
-              iconPath.setAttribute("d", isDark ? sunPath : moonPath);
-            });
+          document.querySelectorAll("[data-theme-toggle-icon-path]").forEach((iconPath) => {
+            iconPath.setAttribute("d", isDark ? sunPath : moonPath);
+          });
         };
 
         const applyTheme = (theme, persist = false) => {
@@ -179,9 +167,7 @@ const {
       import Lenis from "lenis";
 
       const root = document.documentElement;
-      const reducedMotionQuery = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      );
+      const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
       let lenis;
       let rafId;
 

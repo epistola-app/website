@@ -11,13 +11,8 @@ import Card from "./ui/card.astro";
         { label: "pdf/a compliance", value: "100%" },
         { label: "docker pull / month", value: "4.1k" },
       ].map((item, index) => (
-        <Card
-          variant={index % 2 === 0 ? "subtle" : "default"}
-          class="text-center"
-        >
-          <p class="text-4xl font-semibold text-[var(--color-peach-paper-accent)]">
-            {item.value}
-          </p>
+        <Card variant={index % 2 === 0 ? "subtle" : "default"} class="text-center">
+          <p class="text-4xl font-semibold text-[var(--color-peach-paper-accent)]">{item.value}</p>
           <p class="mt-2 text-sm font-medium uppercase tracking-[0.12em] text-[var(--color-peach-paper-chip-text)]">
             {item.label}
           </p>

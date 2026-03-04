@@ -53,15 +53,11 @@ const pipeline = [
     <div class="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
       <div>
         <p class="eyebrow">DocOps architecture</p>
-        <Title level={2} class="mt-4">
-          Everything from editor to render API runs on the same opinionated
-          stack.
-        </Title>
+        <Title level={2} class="mt-4"> Everything from editor to render API runs on the same opinionated stack. </Title>
         <p class="mt-4 text-lg text-[var(--muted-text)]">
-          Epistola Suite isn’t a generic CMS. It is a multi-tenant document
-          platform: Lit/ProseMirror editor, template service built on CQRS,
-          iText renderer, and REST/Helm deployment tooling. Each persona plugs
-          into the layer they need without reimplementing the stack.
+          Epistola Suite isn’t a generic CMS. It is a multi-tenant document platform: Lit/ProseMirror editor, template
+          service built on CQRS, iText renderer, and REST/Helm deployment tooling. Each persona plugs into the layer
+          they need without reimplementing the stack.
         </p>
         <div class="mt-10 space-y-6">
           {
@@ -85,21 +81,11 @@ const pipeline = [
         </div>
       </div>
       <div>
-        <Card
-          variant="default"
-          radius="3xl"
-          padding="lg"
-          shadow="md"
-          class="relative overflow-hidden"
-        >
-          <div
-            class="absolute -top-16 right-0 h-32 w-32 rounded-full bg-[var(--color-peach-paper-border)] blur-3xl"
-          >
+        <Card variant="default" radius="3xl" padding="lg" shadow="md" class="relative overflow-hidden">
+          <div class="absolute -top-16 right-0 h-32 w-32 rounded-full bg-[var(--color-peach-paper-border)] blur-3xl">
           </div>
           <div class="relative">
-            <p
-              class="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-peach-paper-chip-text)]"
-            >
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-peach-paper-chip-text)]">
               Render pipeline
             </p>
             <Title level={3} class="mt-3">Data ➝ Template ➝ PDF</Title>
@@ -108,16 +94,10 @@ const pipeline = [
                 pipeline.map((stage, index) => (
                   <div class="relative rounded-2xl border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] p-5">
                     <div class="flex items-center justify-between">
-                      <p class="text-sm font-semibold text-[var(--color-peach-paper-heading)]">
-                        {stage.title}
-                      </p>
-                      <span class="text-xs font-semibold text-[var(--color-peach-paper-accent)]">
-                        Step {index + 1}
-                      </span>
+                      <p class="text-sm font-semibold text-[var(--color-peach-paper-heading)]">{stage.title}</p>
+                      <span class="text-xs font-semibold text-[var(--color-peach-paper-accent)]">Step {index + 1}</span>
                     </div>
-                    <p class="mt-3 text-sm text-[var(--muted-text)]">
-                      {stage.note}
-                    </p>
+                    <p class="mt-3 text-sm text-[var(--muted-text)]">{stage.note}</p>
                     {index < pipeline.length - 1 && (
                       <div class="mt-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-peach-paper-chip-text)]">
                         Next
@@ -133,8 +113,8 @@ const pipeline = [
             >
               <p class="font-semibold">Observability</p>
               <p class="mt-2">
-                Adaptive batch logging, Prometheus counters, and structured
-                problem+json errors make renders auditable in any SIEM.
+                Adaptive batch logging, Prometheus counters, and structured problem+json errors make renders auditable
+                in any SIEM.
               </p>
             </div>
           </div>

@@ -22,17 +22,13 @@ const steps = [
   <div class="mx-auto max-w-5xl px-4">
     <div class="text-center">
       <p class="eyebrow">How it works</p>
-      <Title level={2} class="mt-4">
-        A single path from template to PDF.
-      </Title>
+      <Title level={2} class="mt-4"> A single path from template to PDF. </Title>
     </div>
     <div class="mt-16 grid gap-8 md:grid-cols-3">
       {
         steps.map((step, index) => (
           <Card variant="subtle" class="relative">
-            <span class="text-sm font-semibold text-[var(--color-peach-paper-accent)]">
-              0{index + 1}
-            </span>
+            <span class="text-sm font-semibold text-[var(--color-peach-paper-accent)]">0{index + 1}</span>
             <Title level={3} class="mt-4">
               {step.title}
             </Title>
