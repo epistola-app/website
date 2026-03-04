@@ -1,23 +1,31 @@
 ---
+import AccentureLogo from "../assets/logos/accenture_logo.svg?raw";
+import ElasticLogo from "../assets/logos/elastic_logo.svg?raw";
+import MckinseyLogo from "../assets/logos/mckinsey_co_logo.svg?raw";
+import MitLogo from "../assets/logos/mit_logo.svg?raw";
 
+const logos = [
+  { svg: AccentureLogo, label: "Accenture" },
+  { svg: ElasticLogo, label: "Elastic" },
+  { svg: MckinseyLogo, label: "McKinsey & Company" },
+  { svg: MitLogo, label: "MIT" },
+];
 ---
 
-<section
-  class="border-y border-[var(--color-peach-paper-border-soft)] py-12 [background-image:var(--gradient-peach-paper-soft)]"
->
-  <div class="mx-auto flex max-w-6xl flex-col items-center gap-8 px-4">
-    <p class="text-center text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-peach-paper-copy)]">
-      Trusted in regulated industries
+<section class="py-12">
+  <div class="container mx-auto flex w-full flex-col items-center gap-8 px-4 lg:flex-row lg:justify-between">
+    <p
+      class="text-center text-sm font-semibold uppercase tracking-widest text-(--color-peach-paper-copy) lg:text-left font-mono"
+    >
+      / Trusted in regulated industries
     </p>
-    <div class="flex w-full flex-wrap items-center justify-center gap-8 opacity-80">
+    <div class="flex flex-wrap items-center justify-center gap-8 lg:justify-end">
       {
-        ["Northwind Mutual", "Asteria Bank", "Linea Health", "Continuum Energy", "Cenith Legal", "Polaris"].map(
-          (name) => (
-            <div class="flex items-center justify-center rounded-2xl border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-6 py-3 text-sm font-semibold tracking-[0.08em] text-[var(--color-peach-paper-copy)]">
-              {name}
-            </div>
-          ),
-        )
+        logos.map((logo) => (
+          <span class="flex h-7 w-auto opacity-50 items-center" aria-label={logo.label} title={logo.label} role="img">
+            <Fragment set:html={logo.svg} />
+          </span>
+        ))
       }
     </div>
   </div>
