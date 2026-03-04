@@ -4,7 +4,7 @@ import { cn } from "../../lib/cn";
 type CardTag = "div" | "section" | "article" | "aside" | "li";
 type CardVariant = "default" | "subtle" | "brand" | "outline";
 type CardPadding = "none" | "sm" | "md" | "lg";
-type CardRadius = "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
+type CardRadius = "none" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
 type CardShadow = "none" | "sm" | "md" | "lg";
 
 interface Props {
@@ -20,7 +20,7 @@ const {
   as = "div",
   variant = "default",
   padding = "md",
-  radius = "2xl",
+  radius = "none",
   shadow = "sm",
   class: className = "",
   ...restProps
@@ -47,6 +47,7 @@ const paddingClasses: Record<CardPadding, string> = {
 };
 
 const radiusClasses: Record<CardRadius, string> = {
+  none: "rounded-none",
   md: "rounded-lg",
   lg: "rounded-xl",
   xl: "rounded-2xl",
