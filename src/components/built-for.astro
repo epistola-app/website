@@ -1,64 +1,261 @@
 ---
-import Card from "./ui/card.astro";
+import MonoTitle from "./ui/mono-title.astro";
 import Title from "./ui/title.astro";
+
+const workflowSteps = [
+  {
+    title: "Submit payload",
+    description: "Orchestrator sends signed JSON + tenant slug and registers a render batch.",
+    inactiveLabel: "Next",
+    isActive: true,
+    card: {
+      eyebrow: "Current render job",
+      title: "Payload intake · Besluit",
+      badge: "Queued",
+      stages: [
+        {
+          label: "Orchestrator",
+          detail: "Emit signed JSON + tenant slug; webhooks register batch IDs.",
+        },
+        {
+          label: "Validation",
+          detail: "Verify schema version, tenant access, and required fields.",
+        },
+        {
+          label: "Queue",
+          detail: "Assign job ID and enqueue render on the tenant pool.",
+        },
+      ],
+    },
+  },
+  {
+    title: "Render job",
+    description: "Epistola resolves schema, selects template version, and renders output.",
+    inactiveLabel: "Next",
+    isActive: false,
+    card: {
+      eyebrow: "Current render job",
+      title: "Render job · Besluit",
+      badge: "Rendering",
+      stages: [
+        {
+          label: "Template",
+          detail: "Resolve schema, pick active version, and lock template assets.",
+        },
+        {
+          label: "Renderer",
+          detail: "Render via iText with audit logging and checksum hashing.",
+        },
+        {
+          label: "Artifacts",
+          detail: "Persist PDF/DOCX/HTML outputs and register storage refs.",
+        },
+      ],
+    },
+  },
+  {
+    title: "Deliver outputs",
+    description: "Webhooks and storage callbacks provide URLs, metadata, and audit refs.",
+    inactiveLabel: "Last",
+    isActive: false,
+    card: {
+      eyebrow: "Current render job",
+      title: "Delivery · Besluit",
+      badge: "Delivered",
+      stages: [
+        {
+          label: "Callbacks",
+          detail: "Send webhook with URLs, metadata, and audit references.",
+        },
+        {
+          label: "Storage",
+          detail: "Write outputs to tenant storage adapters and retain logs.",
+        },
+        {
+          label: "Archive",
+          detail: "Seal job metadata and surface history to orchestrators.",
+        },
+      ],
+    },
+  },
+];
 ---
 
-<section class="py-24">
-  <div class="mx-auto grid max-w-6xl gap-12 px-4 md:grid-cols-2">
-    <div class="space-y-6">
-      <p class="eyebrow">Built for orchestrators</p>
-      <Title level={2}> Drop into ZGW, Valtimo, or bespoke stacks without touching workflows. </Title>
+<section class="py-24" data-built-for>
+  <div class="container mx-auto flex flex-col gap-32 px-4">
+    <div class="flex flex-col gap-12 justify-center items-center max-w-5xl mx-auto text-balance text-center">
+      <MonoTitle>/ Built for orchestrators</MonoTitle>
+      <Title level={2}>Drop into ZGW, Valtimo, or bespoke stacks without touching workflows.</Title>
       <p class="text-lg text-[var(--muted-text)]">
         Epistola exposes a narrow surface: JSON in, PDF/DOCX/HTML out. Multi-tenant auth via Keycloak, Helm charts, and
         health probes make it feel like any other platform service in your cluster.
       </p>
-      <div class="grid gap-6 sm:grid-cols-2">
-        <Card variant="subtle" padding="sm">
-          <p class="text-sm font-semibold">Common Ground fluent</p>
-          <p class="mt-2 text-sm text-[var(--muted-text)]">
-            Understands zaak, document, and resultaat payloads with schema validation before rendering.
-          </p>
-        </Card>
-        <Card variant="subtle" padding="sm">
-          <p class="text-sm font-semibold">Operations ready</p>
-          <p class="mt-2 text-sm text-[var(--muted-text)]">
-            Ships as Docker/Helm with Keycloak/OIDC profiles, Prometheus metrics, and GitHub Actions pipelines.
-          </p>
-        </Card>
+    </div>
+    <div class="grid gap-6 lg:grid-cols-2">
+      <div class="flex flex-col gap-4">
+        {
+          workflowSteps.map((step, index) => (
+            <button
+              type="button"
+              data-step-button
+              data-step-index={index}
+              data-inactive-label={step.inactiveLabel}
+              data-active={step.isActive ? "true" : "false"}
+              class:list={{
+                "flex w-full flex-col gap-2 border border-[var(--color-peach-paper-border)] px-5 py-4 text-left transition": true,
+                "opacity-70": true,
+                "bg-[var(--color-peach-paper-chip-bg)]": step.isActive,
+                "text-[var(--color-peach-paper-copy)]": true,
+              }}
+              aria-pressed={step.isActive ? "true" : "false"}
+            >
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold uppercase tracking-[0.18em]">Step {index + 1}</span>
+                <span class="text-xs font-semibold uppercase tracking-[0.16em]" data-step-status>
+                  {step.isActive ? "Active" : step.inactiveLabel}
+                </span>
+              </div>
+              <div>
+                <p class="text-base font-semibold">{step.title}</p>
+                <p class="mt-1 text-sm text-[var(--muted-text)]">{step.description}</p>
+              </div>
+            </button>
+          ))
+        }
+      </div>
+      <div class="relative">
+        {
+          workflowSteps.map((step, index) => (
+            <div
+              class:list={{
+                "relative flex flex-col h-full gap-6 border border-[var(--color-peach-paper-border)] px-6 py-6": true,
+                hidden: !step.isActive,
+              }}
+              data-step-panel
+              data-step-index={index}
+              aria-hidden={step.isActive ? "false" : "true"}
+            >
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-xs uppercase tracking-[0.16em] text-[var(--color-peach-paper-chip-text)]">
+                    {step.card.eyebrow}
+                  </p>
+                  <p class="text-lg font-semibold">{step.card.title}</p>
+                </div>
+                <span class="border min-w-32 text-center border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-3 py-1 text-xs font-semibold text-[var(--color-peach-paper-accent)]">
+                  {step.card.badge}
+                </span>
+              </div>
+              <ol class="flex flex-col grow justify-between">
+                {step.card.stages.map((stage, stageIndex) => (
+                  <li
+                    class="flex items-start gap-4 transition-opacity duration-300"
+                    data-step-item
+                    data-step-item-index={stageIndex}
+                  >
+                    <span class="mt-1 flex h-7 w-7 items-center justify-center border border-[var(--color-peach-paper-border)] text-xs font-semibold">
+                      {stageIndex + 1}
+                    </span>
+                    <div>
+                      <p class="text-sm font-semibold">{stage.label}</p>
+                      <p class="text-sm text-[var(--muted-text)]">{stage.detail}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ))
+        }
       </div>
     </div>
-    <Card variant="default" radius="2xl" padding="lg" shadow="md" class="relative overflow-hidden">
-      <div class="relative space-y-5">
-        <div class="flex items-center justify-between">
-          <div>
-            <p class="text-xs uppercase tracking-[0.16em] text-[var(--color-peach-paper-chip-text)]">Render job</p>
-            <p class="text-lg font-semibold">Render job · Besluit</p>
-          </div>
-          <span
-            class="rounded-full border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-3 py-1 text-xs font-semibold text-[var(--color-peach-paper-accent)]"
-            >Live</span
-          >
-        </div>
-        <ol class="space-y-4">
-          {
-            ["Orchestrator", "Epistola Suite", "Destinations"].map((stage, index) => (
-              <li class="flex items-start gap-4">
-                <span class="mt-1 flex h-7 w-7 items-center justify-center rounded-full border border-[var(--color-peach-paper-border)] text-xs font-semibold">
-                  {index + 1}
-                </span>
-                <div>
-                  <p class="text-sm font-semibold">{stage}</p>
-                  <p class="text-sm text-[var(--muted-text)]">
-                    {index === 0 && "Emit signed JSON + tenant slug; webhooks register batch IDs"}
-                    {index === 1 && "Resolve schema, pick active version, render via iText, log checksum"}
-                    {index === 2 && "Consume webhook/storage callback with URL, metadata, and audit refs"}
-                  </p>
-                </div>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </Card>
   </div>
 </section>
+
+<script is:inline>
+  const sections = document.querySelectorAll("[data-built-for]");
+
+  const initSection = (section) => {
+    const buttons = Array.from(section.querySelectorAll("[data-step-button]"));
+    const panels = Array.from(section.querySelectorAll("[data-step-panel]"));
+
+    if (!buttons.length || !panels.length) return;
+
+    const setActive = (activeIndex, shouldAnimate = false) => {
+      buttons.forEach((button, index) => {
+        const isActive = index === activeIndex;
+        const status = button.querySelector("[data-step-status]");
+        const inactiveLabel = button.getAttribute("data-inactive-label") || "Next";
+
+        button.classList.toggle("bg-[var(--color-peach-paper-chip-bg)]", isActive);
+        button.classList.toggle("opacity-70", !isActive);
+        button.setAttribute("aria-pressed", String(isActive));
+        button.setAttribute("data-active", isActive ? "true" : "false");
+
+        if (status) {
+          status.textContent = isActive ? "Active" : inactiveLabel;
+        }
+      });
+
+      panels.forEach((panel, index) => {
+        const isActive = index === activeIndex;
+        panel.setAttribute("aria-hidden", String(!isActive));
+
+        if (isActive) {
+          panel.classList.remove("hidden");
+          const items = Array.from(panel.querySelectorAll("[data-step-item]"));
+          const totalStagger = 150;
+          const stepDelay = items.length > 1 ? totalStagger / (items.length - 1) : 0;
+
+          if (shouldAnimate) {
+            items.forEach((item) => {
+              item.classList.add("opacity-0");
+              item.classList.remove("opacity-100");
+              const itemIndex = Number(item.getAttribute("data-step-item-index")) || 0;
+              item.style.transitionDelay = `${itemIndex * stepDelay}ms`;
+            });
+
+            requestAnimationFrame(() => {
+              items.forEach((item) => {
+                item.classList.add("opacity-100");
+                item.classList.remove("opacity-0");
+              });
+            });
+          } else {
+            items.forEach((item) => {
+              item.classList.add("opacity-100");
+              item.classList.remove("opacity-0");
+              item.style.transitionDelay = "0ms";
+            });
+          }
+        } else {
+          const items = Array.from(panel.querySelectorAll("[data-step-item]"));
+          items.forEach((item) => {
+            item.classList.add("opacity-0");
+            item.classList.remove("opacity-100");
+            item.style.transitionDelay = "0ms";
+          });
+          panel.classList.add("hidden");
+        }
+      });
+    };
+
+    const defaultIndex = Math.max(
+      0,
+      buttons.findIndex((button) => button.getAttribute("data-active") === "true"),
+    );
+
+    setActive(defaultIndex, false);
+
+    buttons.forEach((button, index) => {
+      button.addEventListener("click", () => setActive(index, true));
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      sections.forEach(initSection);
+    });
+  } else {
+    sections.forEach(initSection);
+  }
+</script>

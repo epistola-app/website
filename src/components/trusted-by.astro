@@ -3,6 +3,7 @@ import AccentureLogo from "../assets/logos/accenture_logo.svg?raw";
 import ElasticLogo from "../assets/logos/elastic_logo.svg?raw";
 import MckinseyLogo from "../assets/logos/mckinsey_co_logo.svg?raw";
 import MitLogo from "../assets/logos/mit_logo.svg?raw";
+import MonoTitle from "./ui/mono-title.astro";
 
 const logos = [
   { svg: AccentureLogo, label: "Accenture" },
@@ -14,11 +15,7 @@ const logos = [
 
 <section class="py-12">
   <div class="container mx-auto flex w-full flex-col items-center gap-8 px-4 lg:flex-row lg:justify-between">
-    <p
-      class="text-center text-sm font-semibold uppercase tracking-widest text-(--color-peach-paper-copy) lg:text-left font-mono"
-    >
-      / Trusted in regulated industries
-    </p>
+    <MonoTitle>/ Trusted in regulated industries</MonoTitle>
     <div class="flex flex-wrap items-center justify-center gap-8 lg:justify-end">
       {
         logos.map((logo) => (
