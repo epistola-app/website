@@ -1,6 +1,6 @@
 ---
 import Card from "./ui/card.astro";
-import Title from "./ui/title.astro";
+import Section from "./ui/section.astro";
 
 const cardVariants = ["subtle", "default", "brand"] as const;
 
@@ -25,26 +25,22 @@ const testimonials = [
 ];
 ---
 
-<section class="py-24">
-  <div class="mx-auto max-w-5xl px-4">
-    <div class="text-center">
-      <p class="eyebrow">Customer impact</p>
-      <Title level={2} class="mt-4"> Trusted with high-stakes documents. </Title>
-    </div>
-    <div class="mt-12 grid gap-6 md:grid-cols-3">
-      {
-        testimonials.map((testimonial, index) => (
-          <Card variant={cardVariants[index % cardVariants.length]} shadow="md" class="flex flex-col text-left">
-            <p class="text-base text-[var(--color-peach-paper-heading)]">“{testimonial.quote}”</p>
-            <div class="mt-6">
-              <p class="text-sm font-semibold text-[var(--color-peach-paper-heading)]">{testimonial.name}</p>
-              <p class="text-xs uppercase tracking-[0.12em] text-[var(--color-peach-paper-chip-text)]">
-                {testimonial.role}
-              </p>
-            </div>
-          </Card>
-        ))
-      }
-    </div>
-  </div>
-</section>
+<Section
+  monoTitle="/ Customer impact"
+  title="Trusted with high-stakes documents."
+  contentClass="grid gap-6 md:grid-cols-3"
+>
+  {
+    testimonials.map((testimonial) => (
+      <Card variant="subtle" shadow="none" class="flex flex-col text-left">
+        <p class="text-base text-[var(--color-peach-paper-heading)]">“{testimonial.quote}”</p>
+        <div class="mt-6">
+          <p class="text-sm font-semibold text-[var(--color-peach-paper-heading)]">{testimonial.name}</p>
+          <p class="text-xs uppercase tracking-[0.12em] text-[var(--color-peach-paper-chip-text)]">
+            {testimonial.role}
+          </p>
+        </div>
+      </Card>
+    ))
+  }
+</Section>

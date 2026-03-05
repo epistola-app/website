@@ -1,0 +1,44 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { cn } from "../../lib/cn";
+import MonoTitle from "./mono-title.astro";
+import Title from "./title.astro";
+
+type DivAttributes = Omit<HTMLAttributes<"div">, "class" | "style">;
+
+interface Props extends Omit<HTMLAttributes<"section">, "class" | "style"> {
+  monoTitle: string;
+  title: string;
+  description?: string;
+  titleLevel?: 1 | 2 | 3 | 4 | 5 | 6;
+  contentClass?: string;
+  containerProps?: DivAttributes;
+  contentProps?: DivAttributes;
+}
+
+const {
+  monoTitle,
+  title,
+  description,
+  titleLevel = 2,
+  contentClass,
+  containerProps,
+  contentProps,
+  ...restProps
+} = Astro.props as Props;
+
+const contentClasses = cn("w-full", contentClass);
+---
+
+<section class="py-24" {...restProps}>
+  <div class="container mx-auto flex flex-col gap-16 px-4" {...containerProps}>
+    <div class="mx-auto flex max-w-6xl flex-col items-center justify-center gap-12 text-center text-balance">
+      <MonoTitle>{monoTitle}</MonoTitle>
+      <Title level={titleLevel}>{title}</Title>
+      {description ? <p class="max-w-5xl text-lg text-(--muted-text) text-pretty">{description}</p> : null}
+    </div>
+    <div class={contentClasses} {...contentProps}>
+      <slot />
+    </div>
+  </div>
+</section>

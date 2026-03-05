@@ -61,7 +61,7 @@ const linkSizeClasses: Record<ButtonSize, string> = {
 const resolvedSizeClasses = variant === "link" ? linkSizeClasses[size] : sizeClasses[size];
 
 const classes = cn(
-  "inline-flex items-center justify-center gap-2 rounded-none font-semibold transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-peach-paper-accent)] disabled:cursor-not-allowed disabled:opacity-60",
+  "inline-flex items-center justify-center gap-2 rounded-none font-semibold uppercase font-[family-name:var(--font-mono)] tracking-wider transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-peach-paper-accent)] disabled:cursor-not-allowed disabled:opacity-60",
   variantClasses[variant],
   resolvedSizeClasses,
   disabled && isLink && "pointer-events-none",

@@ -1,20 +1,14 @@
 ---
 import Button from "./ui/button.astro";
-import Title from "./ui/title.astro";
+import Section from "./ui/section.astro";
 ---
 
-<section class="relative overflow-hidden py-28">
-  <div class="absolute inset-0 [background-image:var(--gradient-peach-paper-soft)]"></div>
-  <div class="relative mx-auto max-w-4xl px-4 text-center text-[var(--color-peach-paper-heading)]">
-    <p class="eyebrow">Deploy anywhere</p>
-    <Title level={2} class="mt-6 sm:text-5xl"> Keep orchestration elsewhere. Let Epistola handle the PDFs. </Title>
-    <p class="mt-6 text-lg text-[var(--muted-text)]">
-      Self-host with Docker, run on Kubernetes, or consume the managed service. Either way, you stay in control of data,
-      security, and release cadence.
-    </p>
-    <div class="mt-10 flex flex-wrap justify-center gap-4">
-      <Button href="https://demo.epistola.app" variant="secondary" size="lg" external> Open demo </Button>
-      <Button href="/integrations" variant="link" size="lg">View integrations</Button>
-    </div>
-  </div>
-</section>
+<Section
+  monoTitle="/ Deploy Anywhere"
+  title="Keep orchestration elsewhere. Let Epistola handle the PDFs."
+  description="Self-host with Docker, run on Kubernetes, or consume the managed service. Either way, you stay in control of data, security, and release cadence."
+  contentClass="flex flex-wrap justify-center gap-4"
+>
+  <Button href="https://demo.epistola.app" variant="secondary" size="md" external>Open demo</Button>
+  <Button href="/integrations" variant="link" size="md">View integrations</Button>
+</Section>

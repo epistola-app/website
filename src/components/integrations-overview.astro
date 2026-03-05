@@ -1,0 +1,33 @@
+---
+import Card from "./ui/card.astro";
+import Section from "./ui/section.astro";
+---
+
+<Section
+  monoTitle="/ Connect everything"
+  title="Drop Epistola into any orchestrator stack."
+  description="Common Ground APIs keep municipalities compliant while hooks expose your own destinations."
+  contentClass="space-y-10"
+>
+  <div class="grid gap-6 md:grid-cols-3">
+    <Card variant="subtle">
+      <p class="text-sm font-semibold">Core banking</p>
+      <p class="mt-2 text-sm text-[var(--muted-text)]">nCino, FIS, Fiserv, Jack Henry</p>
+    </Card>
+    <Card variant="subtle">
+      <p class="text-sm font-semibold">CRM + workflow</p>
+      <p class="mt-2 text-sm text-[var(--muted-text)]">Salesforce, ServiceNow, Jira, Workday</p>
+    </Card>
+    <Card variant="subtle">
+      <p class="text-sm font-semibold">Messaging + delivery</p>
+      <p class="mt-2 text-sm text-[var(--muted-text)]">Digikoppeling, eHerkenning, DocuSign, SMS gateways</p>
+    </Card>
+  </div>
+  <Card variant="outline" class="text-sm text-[var(--muted-text)]">
+    <p class="font-semibold text-[var(--color-peach-paper-heading)]">Open API</p>
+    <p class="mt-2">
+      Every resource — templates, clauses, policies, deliveries, and datasets — is accessible through REST and GraphQL
+      endpoints with SCIM provisioning. Event hooks broadcast lifecycle events to your data lake or observability stack.
+    </p>
+  </Card>
+</Section>

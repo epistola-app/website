@@ -1,6 +1,5 @@
 ---
-import MonoTitle from "./ui/mono-title.astro";
-import Title from "./ui/title.astro";
+import Section from "./ui/section.astro";
 
 const workflowSteps = [
   {
@@ -81,95 +80,89 @@ const workflowSteps = [
 ];
 ---
 
-<section class="py-24" data-built-for>
-  <div class="container mx-auto flex flex-col gap-32 px-4">
-    <div class="flex flex-col gap-12 justify-center items-center max-w-5xl mx-auto text-balance text-center">
-      <MonoTitle>/ Built for orchestrators</MonoTitle>
-      <Title level={2}>Drop into ZGW, Valtimo, or bespoke stacks without touching workflows.</Title>
-      <p class="text-lg text-(--muted-text)">
-        Epistola exposes a narrow surface: JSON in, PDF/DOCX/HTML out. Multi-tenant auth via Keycloak, Helm charts, and
-        health probes make it feel like any other platform service in your cluster.
-      </p>
-    </div>
-    <div class="grid gap-6 lg:grid-cols-2">
-      <div class="flex flex-col gap-4">
-        {
-          workflowSteps.map((step, index) => (
-            <button
-              type="button"
-              data-step-button
-              data-step-index={index}
-              data-inactive-label={step.inactiveLabel}
-              data-active={step.isActive ? "true" : "false"}
-              class:list={{
-                "flex w-full flex-col gap-2 border border-(--color-peach-paper-border) px-5 py-4 text-left transition": true,
-                "opacity-70": true,
-                "bg-(--color-peach-paper-chip-bg)": step.isActive,
-                "text-(--color-peach-paper-copy)": true,
-              }}
-              aria-pressed={step.isActive ? "true" : "false"}
-            >
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-semibold uppercase tracking-[0.18em]">Step {index + 1}</span>
-                <span class="text-xs font-semibold uppercase tracking-[0.16em]" data-step-status>
-                  {step.isActive ? "Active" : step.inactiveLabel}
-                </span>
-              </div>
-              <div>
-                <p class="text-base font-semibold">{step.title}</p>
-                <p class="mt-1 text-sm text-(--muted-text)">{step.description}</p>
-              </div>
-            </button>
-          ))
-        }
-      </div>
-      <div class="relative">
-        {
-          workflowSteps.map((step, index) => (
-            <div
-              class:list={{
-                "relative bg-(--color-peach-paper-chip-bg) flex flex-col h-full gap-6 border border-(--color-peach-paper-border) px-6 py-6": true,
-                hidden: !step.isActive,
-              }}
-              data-step-panel
-              data-step-index={index}
-              aria-hidden={step.isActive ? "false" : "true"}
-            >
-              <div class="flex items-center justify-between">
-                <div>
-                  <p class="text-xs uppercase tracking-[0.16em] text-(--color-peach-paper-chip-text)">
-                    {step.card.eyebrow}
-                  </p>
-                  <p class="text-lg font-semibold">{step.card.title}</p>
-                </div>
-                <span class="border min-w-32 text-center border-(--color-peach-paper-border) bg-(--color-peach-paper-chip-bg) px-3 py-1 text-xs font-semibold text-(--color-peach-paper-accent)">
-                  {step.card.badge}
-                </span>
-              </div>
-              <ol class="flex flex-col grow justify-between">
-                {step.card.stages.map((stage, stageIndex) => (
-                  <li
-                    class="flex items-start gap-4 transition-opacity duration-300"
-                    data-step-item
-                    data-step-item-index={stageIndex}
-                  >
-                    <span class="mt-1 flex h-7 w-7 items-center justify-center border border-(--color-peach-paper-border) text-xs font-semibold">
-                      {stageIndex + 1}
-                    </span>
-                    <div>
-                      <p class="text-sm font-semibold">{stage.label}</p>
-                      <p class="text-sm text-(--muted-text)">{stage.detail}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          ))
-        }
-      </div>
-    </div>
+<Section
+  monoTitle="/ Built for orchestrators"
+  title="Drop into ZGW, Valtimo, or bespoke stacks without touching workflows."
+  description="Epistola exposes a narrow surface: JSON in, PDF/DOCX/HTML out. Multi-tenant auth via Keycloak, Helm charts, and health probes make it feel like any other platform service in your cluster."
+  contentClass="grid gap-6 lg:grid-cols-2"
+  data-built-for
+>
+  <div class="flex flex-col gap-4">
+    {
+      workflowSteps.map((step, index) => (
+        <button
+          type="button"
+          data-step-button
+          data-step-index={index}
+          data-inactive-label={step.inactiveLabel}
+          data-active={step.isActive ? "true" : "false"}
+          class:list={{
+            "flex w-full flex-col gap-2 border border-(--color-peach-paper-border) px-5 py-4 text-left transition": true,
+            "opacity-70": true,
+            "bg-(--color-peach-paper-chip-bg)": step.isActive,
+            "text-(--color-peach-paper-copy)": true,
+          }}
+          aria-pressed={step.isActive ? "true" : "false"}
+        >
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold uppercase tracking-[0.18em]">Step {index + 1}</span>
+            <span class="text-xs font-semibold uppercase tracking-[0.16em]" data-step-status>
+              {step.isActive ? "Active" : step.inactiveLabel}
+            </span>
+          </div>
+          <div>
+            <p class="text-base font-semibold">{step.title}</p>
+            <p class="mt-1 text-sm text-(--muted-text)">{step.description}</p>
+          </div>
+        </button>
+      ))
+    }
   </div>
-</section>
+  <div class="relative">
+    {
+      workflowSteps.map((step, index) => (
+        <div
+          class:list={{
+            "relative bg-(--color-peach-paper-chip-bg) flex flex-col h-full gap-6 border border-(--color-peach-paper-border) px-6 py-6": true,
+            hidden: !step.isActive,
+          }}
+          data-step-panel
+          data-step-index={index}
+          aria-hidden={step.isActive ? "false" : "true"}
+        >
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-xs uppercase tracking-[0.16em] text-(--color-peach-paper-chip-text)">
+                {step.card.eyebrow}
+              </p>
+              <p class="text-lg font-semibold">{step.card.title}</p>
+            </div>
+            <span class="border min-w-32 text-center border-(--color-peach-paper-border) bg-(--color-peach-paper-chip-bg) px-3 py-1 text-xs font-semibold text-(--color-peach-paper-accent)">
+              {step.card.badge}
+            </span>
+          </div>
+          <ol class="flex flex-col grow justify-between">
+            {step.card.stages.map((stage, stageIndex) => (
+              <li
+                class="flex items-start gap-4 transition-opacity duration-300"
+                data-step-item
+                data-step-item-index={stageIndex}
+              >
+                <span class="mt-1 flex h-7 w-7 items-center justify-center border border-(--color-peach-paper-border) text-xs font-semibold">
+                  {stageIndex + 1}
+                </span>
+                <div>
+                  <p class="text-sm font-semibold">{stage.label}</p>
+                  <p class="text-sm text-(--muted-text)">{stage.detail}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      ))
+    }
+  </div>
+</Section>
 
 <script is:inline>
   const sections = document.querySelectorAll("[data-built-for]");

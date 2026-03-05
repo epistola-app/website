@@ -4,6 +4,7 @@ import Card from "./ui/card.astro";
 import MonoTitle from "./ui/mono-title.astro";
 import Title from "./ui/title.astro";
 import Button from "./ui/button.astro";
+import Section from "./ui/section.astro";
 
 const cardVariants = ["subtle", "default", "brand"] as const;
 
@@ -41,32 +42,26 @@ const features = [
 ];
 ---
 
-<section class="py-24">
-  <div class="container mx-auto flex flex-col gap-12 px-4">
-    <div class="flex flex-col gap-12 justify-center items-center max-w-5xl mx-auto text-balance text-center">
-      <MonoTitle>/ Everything you need to render PDFs</MonoTitle>
-      <Title level={2}> Epistola does templates and rendering — nothing else. </Title>
-      <p class="text-lg text-(--muted-text)">
-        Keep workflows in the products that orchestrate your cases while Epistola focuses on perfect output.
-      </p>
-    </div>
-    <div class="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {
-        features.map((feature, index) => (
-          <Card variant={cardVariants[index % cardVariants.length]} shadow="none" class="relative overflow-hidden">
-            <MonoTitle>{feature.badge}</MonoTitle>
-            <Title level={3} class="mt-4">
-              {feature.title}
-            </Title>
-            <p class="mt-3 text-sm text-(--muted-text)">{feature.body}</p>
-            <Button variant="primary" size="sm" class="group mt-6 flex items-center gap-2">
-              Learn more
-              {/* <span aria-hidden="true">→</span> */}
-              <ArrowRight size={16} class="transition-transform group-hover:translate-x-1.5" />
-            </Button>
-          </Card>
-        ))
-      }
-    </div>
-  </div>
-</section>
+<Section
+  monoTitle="/ Everything you need to render PDFs"
+  title="Epistola does templates and rendering — nothing else."
+  description="Keep workflows in the products that orchestrate your cases while Epistola focuses on perfect output."
+  contentClass="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+>
+  {
+    features.map((feature, index) => (
+      <Card variant={cardVariants[index % cardVariants.length]} shadow="none" class="relative overflow-hidden">
+        <MonoTitle>{feature.badge}</MonoTitle>
+        <Title level={3} class="mt-4">
+          {feature.title}
+        </Title>
+        <p class="mt-3 text-sm text-(--muted-text)">{feature.body}</p>
+        <Button variant="primary" size="sm" class="group mt-6 flex items-center gap-2">
+          Learn more
+          {/* <span aria-hidden="true">→</span> */}
+          <ArrowRight size={16} class="transition-transform group-hover:translate-x-1.5" />
+        </Button>
+      </Card>
+    ))
+  }
+</Section>
