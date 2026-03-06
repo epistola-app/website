@@ -10,14 +10,14 @@ const lanes = [
     bullets: [
       "Block library: text, tables, columns, clauses, headers, footers",
       "Undo/redo + autosave stacks",
-      "Inline JSONata + GraalJS expression tester",
+      "Inline expression tester",
     ],
   },
   {
     title: "Developers",
     body: "Version templates in Git, run Testcontainers suites, and invoke the OpenAPI-render API from orchestrators.",
     bullets: [
-      "CQRS commands for template + theme automation",
+      "API commands for template + theme automation",
       "Adaptive batch jobs with job states and metrics",
       "Webhooks + storage adapters (S3, Azure, DMS)",
     ],
@@ -40,7 +40,7 @@ const pipeline = [
   },
   {
     title: "Generation engine",
-    note: "iText Core · expression sandbox · token cascade",
+    note: "10k+ docs/min · expression sandbox · token cascade",
   },
   {
     title: "Delivery",
@@ -52,7 +52,7 @@ const pipeline = [
 <Section
   monoTitle="/ DocOps architecture"
   title="Everything from editor to render API runs on the same opinionated stack."
-  description="Epistola Suite isn’t a generic CMS. It is a multi-tenant document platform: Lit/ProseMirror editor, template service built on CQRS, iText renderer, and REST/Helm deployment tooling. Each persona plugs into the layer they need without reimplementing the stack."
+  description="Epistola Suite isn’t a generic CMS. It is a multi-tenant document platform: a visual editor, template service, renderer, and REST/Helm deployment tooling. Each persona plugs into the layer they need without reimplementing the stack."
   contentClass="grid grid-cols-1 gap-8 lg:grid-cols-3"
 >
   {
