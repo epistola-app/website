@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f5f0eb"/>
+  <rect x="460" y="290" width="70" height="50" rx="6" fill="none" stroke="#c4a882" stroke-width="3"/>
+  <line x1="480" y1="308" x2="515" y2="308" stroke="#c4a882" stroke-width="2" stroke-linecap="round"/>
+  <line x1="480" y1="320" x2="505" y2="320" stroke="#c4a882" stroke-width="2" stroke-linecap="round"/>
+  <line x1="530" y1="315" x2="560" y2="315" stroke="#c4a882" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="558,310 568,315 558,320" fill="#c4a882"/>
+  <rect x="565" y="295" width="70" height="40" rx="6" fill="none" stroke="#c4a882" stroke-width="3"/>
+  <circle cx="600" cy="315" r="10" fill="none" stroke="#c4a882" stroke-width="2"/>
+  <path d="M596 315 L600 311 L604 315 L600 319 Z" fill="#c4a882"/>
+  <line x1="635" y1="315" x2="665" y2="315" stroke="#c4a882" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="663,310 673,315 663,320" fill="#c4a882"/>
+  <rect x="670" y="290" width="70" height="50" rx="6" fill="none" stroke="#c4a882" stroke-width="3"/>
+  <text x="705" y="320" font-family="serif" font-size="20" fill="#c4a882" text-anchor="middle">PDF</text>
+</svg>

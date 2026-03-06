@@ -3,7 +3,7 @@ title: "Epistola Document Generation Best Practices"
 description: "A practical playbook for building reliable, compliant, and fast document generation workflows with Epistola."
 date: 2026-02-10
 author: "Epistola Team"
-cover: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=630&fit=crop&q=80"
+cover: "/blog/placeholder-best-practices.svg"
 tags: ["best-practices", "docops", "automation", "document-generation"]
 ---
 

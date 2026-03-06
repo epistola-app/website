@@ -4,7 +4,7 @@ description: "How to build multi-brand, multi-channel design systems for Epistol
 date: 2026-02-10
 updatedDate: 2026-02-10
 author: "Epistola Team"
-cover: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1200&h=630&fit=crop&q=80"
+cover: "/blog/placeholder-theming.svg"
 tags: ["document-generation", "design-systems", "theming", "docops", "accessibility"]
 ---
 

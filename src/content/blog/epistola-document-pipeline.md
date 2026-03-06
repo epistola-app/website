@@ -3,7 +3,7 @@ title: "Build Your First Epistola Document Pipeline"
 description: "Spin up a production-ready document generation pipeline with Epistola. Learn the fastest path from templates and data models to audited PDF, DOCX, and HTML deliverables."
 date: 2026-02-10
 author: "Epistola Team"
-cover: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&h=630&fit=crop&q=80"
+cover: "/blog/placeholder-pipeline.svg"
 tags: ["getting-started", "docops", "document-generation", "tutorial"]
 ---
 

@@ -3,7 +3,7 @@ title: "Introducing the Epistola Document Generation Lab"
 description: "A quick tour of what we'll publish about automated document generation, DocOps workflows, and everything Epistola is building."
 date: 2026-02-10
 author: "Epistola Team"
-cover: "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?w=1200&h=630&fit=crop&q=80"
+cover: "/blog/placeholder-lab.svg"
 tags: ["announcement", "docops", "document-generation"]
 ---
 
