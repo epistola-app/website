@@ -1,8 +1,12 @@
 ---
+import Card from "./ui/card.astro";
+import Section from "./ui/section.astro";
+import Title from "./ui/title.astro";
+
 const steps = [
   {
     title: "Model + author",
-    body: "Define JSON Schema contracts, manage variants, and drag blocks in the Lit/ProseMirror editor with live PDF preview.",
+    body: "Define input variables per template, manage variants, and drag blocks in the visual editor with live PDF preview.",
   },
   {
     title: "Promote + govern",
@@ -10,27 +14,25 @@ const steps = [
   },
   {
     title: "Render + deliver",
-    body: "Call the REST API or batch jobs, let iText render PDFs in milliseconds, then push artifacts via storage adapters or webhooks.",
+    body: "Call the REST API or batch jobs, render PDFs in milliseconds, then push artifacts via storage adapters or webhooks.",
   },
 ];
 ---
 
-<section class="py-24">
-  <div class="mx-auto max-w-5xl px-4">
-    <div class="text-center">
-      <p class="eyebrow">How it works</p>
-      <h2 class="mt-4 text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white">
-        A single path from template to PDF.
-      </h2>
-    </div>
-    <div class="mt-16 grid gap-8 md:grid-cols-3">
-      {steps.map((step, index) => (
-        <div class="relative rounded-3xl border border-black/5 bg-white/80 p-6 shadow-sm dark:bg-white/5">
-          <span class="text-sm font-semibold text-[var(--color-brand-600)]">0{index + 1}</span>
-          <h3 class="mt-4 text-2xl font-semibold text-[var(--color-gray-900)] dark:text-white">{step.title}</h3>
-          <p class="mt-3 text-sm text-[var(--muted-text)]">{step.body}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+<Section
+  monoTitle="/ How it works"
+  title="A single path from template to PDF."
+  contentClass="mx-auto grid gap-8 md:grid-cols-3"
+>
+  {
+    steps.map((step, index) => (
+      <Card variant="subtle" class="relative">
+        <span class="text-sm font-semibold text-[var(--color-peach-paper-accent)]">0{index + 1}</span>
+        <Title level={3} class="mt-4">
+          {step.title}
+        </Title>
+        <p class="mt-3 text-sm text-[var(--muted-text)]">{step.body}</p>
+      </Card>
+    ))
+  }
+</Section>

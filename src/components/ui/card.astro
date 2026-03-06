@@ -1,0 +1,74 @@
+---
+import { cn } from "../../lib/cn";
+
+type CardTag = "div" | "section" | "article" | "aside" | "li";
+type CardVariant = "default" | "subtle" | "brand" | "outline";
+type CardPadding = "none" | "sm" | "md" | "lg";
+type CardRadius = "none" | "md" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
+type CardShadow = "none" | "sm" | "md" | "lg";
+
+interface Props {
+  as?: CardTag;
+  variant?: CardVariant;
+  padding?: CardPadding;
+  radius?: CardRadius;
+  shadow?: CardShadow;
+  class?: string;
+}
+
+const {
+  as = "div",
+  variant = "default",
+  padding = "md",
+  radius = "none",
+  shadow = "sm",
+  class: className = "",
+  ...restProps
+} = Astro.props as Props;
+
+const Tag = as;
+
+const variantClasses: Record<CardVariant, string> = {
+  default: "border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-surface)]",
+  subtle: "border border-[var(--color-peach-paper-border-soft)] bg-[var(--color-peach-paper-surface-soft)]",
+  brand: "border border-[var(--color-peach-paper-border-strong)] [background-image:var(--gradient-peach-paper-card)]",
+  outline: "border border-dashed border-[var(--color-peach-paper-border-soft)] bg-transparent",
+};
+
+const paddingClasses: Record<CardPadding, string> = {
+  none: "",
+  sm: "p-5",
+  md: "p-6",
+  lg: "p-8",
+};
+
+const radiusClasses: Record<CardRadius, string> = {
+  none: "rounded-none",
+  md: "rounded-lg",
+  lg: "rounded-xl",
+  xl: "rounded-2xl",
+  "2xl": "rounded-3xl",
+  "3xl": "rounded-[32px]",
+  "4xl": "rounded-[40px]",
+};
+
+const shadowClasses: Record<CardShadow, string> = {
+  none: "",
+  sm: "shadow-sm shadow-black/5 dark:shadow-black/20",
+  md: "shadow-lg shadow-black/10 dark:shadow-black/35",
+  lg: "shadow-2xl shadow-black/10 dark:shadow-black/45",
+};
+
+const classes = cn(
+  "transition-colors",
+  variantClasses[variant],
+  paddingClasses[padding],
+  radiusClasses[radius],
+  shadowClasses[shadow],
+  className,
+);
+---
+
+<Tag class={classes} {...restProps}>
+  <slot />
+</Tag>

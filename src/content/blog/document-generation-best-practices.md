@@ -3,7 +3,7 @@ title: "Epistola Document Generation Best Practices"
 description: "A practical playbook for building reliable, compliant, and fast document generation workflows with Epistola."
 date: 2026-02-10
 author: "Epistola Team"
-cover: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=630&fit=crop&q=80"
+cover: "/blog/placeholder-best-practices.svg"
 tags: ["best-practices", "docops", "automation", "document-generation"]
 ---
 
@@ -69,12 +69,12 @@ Use Epistola's telemetry webhooks to forward structured events into Datadog, Hon
 
 ## 9. Common Anti-Patterns
 
-| Anti-pattern | Why it hurts | Better approach |
-| --- | --- | --- |
-| Copy-pasted templates | Drift, accidental edits | Reference shared partials or components |
-| Manual redlines | Slow, inconsistent | Use tracked clauses + review UI |
-| Hard-coded assets | Break on rebrand/CDN updates | Resolve through asset manifest with fallbacks |
-| QA only in PDF | Hidden HTML/email issues | Run parity tests across every output type |
+| Anti-pattern          | Why it hurts                 | Better approach                               |
+| --------------------- | ---------------------------- | --------------------------------------------- |
+| Copy-pasted templates | Drift, accidental edits      | Reference shared partials or components       |
+| Manual redlines       | Slow, inconsistent           | Use tracked clauses + review UI               |
+| Hard-coded assets     | Break on rebrand/CDN updates | Resolve through asset manifest with fallbacks |
+| QA only in PDF        | Hidden HTML/email issues     | Run parity tests across every output type     |
 
 ## 10. Operational Checklist
 

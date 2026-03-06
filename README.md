@@ -26,8 +26,9 @@ src/
 
 ### Design System
 
-- `src/styles/global.css` defines brand tokens (color, typography, spacing) consumed across every section.
-- Shared utility classes such as `.surface-card`, `.cta-primary`, and `.eyebrow` ensure consistency across sections.
+- `src/styles/global.css` defines design tokens (including Peach Paper light/dark surface tokens).
+- `src/styles/STYLE_SYSTEM.md` documents style rules, token usage, and dark theme expectations.
+- Use reusable UI primitives in `src/components/ui/` (`Card`, `Button`, `Title`) for consistent styling.
 
 ### Content
 

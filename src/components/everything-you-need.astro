@@ -1,5 +1,12 @@
 ---
-const toneClasses = ["tone-peach", "tone-mint", "tone-lilac"];
+import { ArrowRight } from "@lucide/astro";
+import Card from "./ui/card.astro";
+import MonoTitle from "./ui/mono-title.astro";
+import Title from "./ui/title.astro";
+import Button from "./ui/button.astro";
+import Section from "./ui/section.astro";
+
+const cardVariants = ["subtle", "default", "brand"] as const;
 
 const features = [
   {
@@ -9,17 +16,17 @@ const features = [
   },
   {
     title: "Visual editor",
-    body: "Lit + ProseMirror blocks with drag/drop, conditional logic, loops, live PDF preview, and inline expression chips.",
+    body: "Drag-and-drop blocks with conditional logic, loops, live PDF preview, and inline expression chips.",
     badge: "Authoring",
   },
   {
     title: "Expression engine",
-    body: "Choose JSONata, sandboxed GraalJS, or simple path bindings to calculate totals, clauses, and formatting on the fly.",
+    body: "Use flexible expressions to calculate totals, format values, and apply conditional logic. Define input variables per template.",
     badge: "Logic",
   },
   {
     title: "Direct PDF renderer",
-    body: "iText Core 9.5 builds layouts without HTML passes, delivering PDF/A and PDF/X outputs in 50–200 ms.",
+    body: "Render PDF/A and PDF/X outputs directly — no HTML conversion step. Handles 10,000+ documents per minute on simple hardware.",
     badge: "Rendering",
   },
   {
@@ -35,33 +42,26 @@ const features = [
 ];
 ---
 
-<section class="py-24">
-  <div class="mx-auto max-w-6xl px-4">
-    <div class="text-center">
-      <p class="eyebrow">Everything you need to render PDFs</p>
-      <h2 class="mt-4 text-4xl font-semibold text-[var(--color-gray-900)] dark:text-white">
-        Epistola does templates and rendering — nothing else.
-      </h2>
-      <p class="mt-4 text-lg text-[var(--muted-text)]">
-        Keep workflows in the products that orchestrate your cases while Epistola focuses on perfect output.
-      </p>
-    </div>
-    <div class="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {features.map((feature, index) => (
-        <div
-          class={`surface-card ${toneClasses[index % toneClasses.length]} relative overflow-hidden rounded-3xl p-6 transition hover:-translate-y-1`}
-        >
-          <span class="text-xs font-semibold uppercase tracking-[0.3em] text-[var(--color-brand-500)]">{feature.badge}</span>
-          <h3 class="mt-4 text-2xl font-semibold text-[var(--color-gray-900)] dark:text-white">
-            {feature.title}
-          </h3>
-          <p class="mt-3 text-sm text-[var(--muted-text)]">{feature.body}</p>
-          <div class="mt-6 flex items-center gap-2 text-sm font-semibold text-[var(--color-brand-600)]">
-            Learn more
-            <span aria-hidden="true">→</span>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+<Section
+  monoTitle="/ Everything you need to render PDFs"
+  title="Epistola does templates and rendering — nothing else."
+  description="Keep workflows in the products that orchestrate your cases while Epistola focuses on perfect output."
+  contentClass="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+>
+  {
+    features.map((feature, index) => (
+      <Card variant={cardVariants[index % cardVariants.length]} shadow="none" class="relative overflow-hidden">
+        <MonoTitle>{feature.badge}</MonoTitle>
+        <Title level={3} class="mt-4">
+          {feature.title}
+        </Title>
+        <p class="mt-3 text-sm text-(--muted-text)">{feature.body}</p>
+        <Button variant="primary" size="sm" class="group mt-6 flex items-center gap-2">
+          Learn more
+          {/* <span aria-hidden="true">→</span> */}
+          <ArrowRight size={16} class="transition-transform group-hover:translate-x-1.5" />
+        </Button>
+      </Card>
+    ))
+  }
+</Section>

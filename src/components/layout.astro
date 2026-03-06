@@ -10,43 +10,11 @@ interface Props {
 
 const {
   title = "Epistola · Document Intelligence Platform",
-  description =
-    "Epistola helps operations teams author, govern, and deliver complex documents across every channel.",
+  description = "Epistola helps operations teams author, govern, and deliver complex documents across every channel.",
 } = Astro.props as Props;
-
-const themeStorageKey = "epistola-theme";
-
-const themeBootstrap = `(() => {
-  const storageKey = '${themeStorageKey}';
-  const root = document.documentElement;
-  const prefersDarkQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-  const setTheme = (theme) => {
-    root.dataset.theme = theme;
-  };
-
-  const storedTheme = window.localStorage.getItem(storageKey);
-  if (storedTheme) {
-    setTheme(storedTheme);
-  } else {
-    setTheme(prefersDarkQuery.matches ? 'dark' : 'light');
-  }
-
-  const handleSystemChange = (event) => {
-    if (!window.localStorage.getItem(storageKey)) {
-      setTheme(event.matches ? 'dark' : 'light');
-    }
-  };
-
-  if (typeof prefersDarkQuery.addEventListener === 'function') {
-    prefersDarkQuery.addEventListener('change', handleSystemChange);
-  } else if (typeof prefersDarkQuery.addListener === 'function') {
-    prefersDarkQuery.addListener(handleSystemChange);
-  }
-})();`;
 ---
 
-<html lang="en" class="scroll-smooth">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -59,14 +27,228 @@ const themeBootstrap = `(() => {
     <meta property="og:site_name" content="Epistola" />
     <meta name="theme-color" content="#2563eb" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'" />
-    <script is:inline>{themeBootstrap}</script>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none';
+                     script-src 'self' 'unsafe-inline';
+                     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+                     font-src 'self' https://fonts.gstatic.com;
+                     img-src 'self';
+                     connect-src 'self';
+                     form-action 'self';
+                     base-uri 'self'"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <script is:inline>
+      (() => {
+        const storageKey = "epistola-theme";
+        const root = document.documentElement;
+        const prefersDarkQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        const moonPath = "M12 3.75A8.25 8.25 0 1 0 20.25 12 6.75 6.75 0 0 1 12 3.75z";
+        const sunPath =
+          "M12 3v1.5m0 15V21m8.485-8.485H19m-14 0H3m15.364 6.364-1.06-1.06M6.697 6.697 5.636 5.636m12.728 0-1.06 1.06M6.697 17.303l-1.06 1.06M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z";
+
+        const getStoredTheme = () => {
+          try {
+            return window.localStorage.getItem(storageKey);
+          } catch {
+            return null;
+          }
+        };
+
+        const storeTheme = (theme) => {
+          try {
+            window.localStorage.setItem(storageKey, theme);
+          } catch {
+            // Ignore storage write failures
+          }
+        };
+
+        const getSystemTheme = () => (prefersDarkQuery.matches ? "dark" : "light");
+
+        const updateToggleUI = (theme) => {
+          const isDark = theme === "dark";
+
+          document.querySelectorAll("[data-theme-toggle]").forEach((toggle) => {
+            toggle.setAttribute("aria-pressed", String(isDark));
+            const srLabel = toggle.querySelector("[data-theme-toggle-label]");
+            if (srLabel) {
+              srLabel.textContent = isDark ? "Switch to light theme" : "Switch to dark theme";
+            }
+
+            const state = toggle.querySelector("[data-theme-toggle-state]");
+            if (state) {
+              state.textContent = isDark ? "Dark" : "Light";
+            }
+          });
+
+          document.querySelectorAll("[data-theme-toggle-pill]").forEach((pill) => {
+            pill.style.transform = isDark ? "translateX(24px)" : "translateX(0)";
+          });
+
+          document.querySelectorAll("[data-theme-toggle-icon-path]").forEach((iconPath) => {
+            iconPath.setAttribute("d", isDark ? sunPath : moonPath);
+          });
+        };
+
+        const applyTheme = (theme, persist = false) => {
+          root.dataset.theme = theme;
+          if (persist) {
+            storeTheme(theme);
+          }
+          updateToggleUI(theme);
+        };
+
+        const resolveTheme = () => getStoredTheme() || getSystemTheme();
+
+        root.dataset.theme = resolveTheme();
+
+        const toggleTheme = () => {
+          const currentTheme = root.dataset.theme || resolveTheme();
+          const nextTheme = currentTheme === "dark" ? "light" : "dark";
+          applyTheme(nextTheme, true);
+        };
+
+        document.addEventListener("click", (event) => {
+          if (!(event.target instanceof Element)) {
+            return;
+          }
+
+          const toggle = event.target.closest("[data-theme-toggle]");
+          if (!toggle) {
+            return;
+          }
+
+          event.preventDefault();
+          toggleTheme();
+        });
+
+        const syncThemeFromPreference = (event) => {
+          if (!getStoredTheme()) {
+            applyTheme(event.matches ? "dark" : "light");
+          }
+        };
+
+        if (typeof prefersDarkQuery.addEventListener === "function") {
+          prefersDarkQuery.addEventListener("change", syncThemeFromPreference);
+        } else if (typeof prefersDarkQuery.addListener === "function") {
+          prefersDarkQuery.addListener(syncThemeFromPreference);
+        }
+
+        const syncThemeUI = () => {
+          updateToggleUI(root.dataset.theme || resolveTheme());
+        };
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", syncThemeUI, {
+            once: true,
+          });
+        } else {
+          syncThemeUI();
+        }
+
+        document.addEventListener("astro:page-load", syncThemeUI);
+      })();
+    </script>
   </head>
-  <body class="font-sans antialiased flex flex-col min-h-screen">
+  <body class="font-sans antialiased flex flex-col min-h-screen overflow-x-hidden">
     <Header />
     <main class="flex-1">
       <slot />
     </main>
     <Footer />
+
+    <script>
+      // @ts-nocheck
+      import Lenis from "lenis";
+
+      const root = document.documentElement;
+      const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let lenis;
+      let rafId;
+
+      const stopRafLoop = () => {
+        if (!rafId) {
+          return;
+        }
+
+        window.cancelAnimationFrame(rafId);
+        rafId = undefined;
+      };
+
+      const startRafLoop = () => {
+        const raf = (time) => {
+          lenis?.raf(time);
+          rafId = window.requestAnimationFrame(raf);
+        };
+
+        rafId = window.requestAnimationFrame(raf);
+      };
+
+      const destroyLenis = () => {
+        stopRafLoop();
+        lenis?.destroy();
+        lenis = undefined;
+        delete window.__lenis;
+      };
+
+      const createLenis = () => {
+        lenis = new Lenis({
+          smoothWheel: true,
+          duration: 1.1,
+          anchors: true,
+        });
+
+        window.__lenis = lenis;
+        startRafLoop();
+      };
+
+      const syncLenisWithMotionPreference = () => {
+        if (reducedMotionQuery.matches) {
+          destroyLenis();
+          root.dataset.lenisState = "disabled-reduced-motion";
+          return;
+        }
+
+        if (lenis) {
+          root.dataset.lenisState = "ready";
+          lenis.resize();
+          return;
+        }
+
+        createLenis();
+        root.dataset.lenisState = "ready";
+      };
+
+      syncLenisWithMotionPreference();
+
+      const onMotionPreferenceChange = () => {
+        syncLenisWithMotionPreference();
+      };
+
+      if (typeof reducedMotionQuery.addEventListener === "function") {
+        reducedMotionQuery.addEventListener("change", onMotionPreferenceChange);
+      } else if (typeof reducedMotionQuery.addListener === "function") {
+        reducedMotionQuery.addListener(onMotionPreferenceChange);
+      }
+
+      document.addEventListener("astro:page-load", () => {
+        syncLenisWithMotionPreference();
+      });
+
+      window.addEventListener("beforeunload", () => {
+        destroyLenis();
+      });
+
+      // Future GSAP + ScrollTrigger integration:
+      // lenis.on("scroll", ScrollTrigger.update);
+      // gsap.ticker.add((time) => lenis.raf(time * 1000));
+      // gsap.ticker.lagSmoothing(0);
+    </script>
   </body>
 </html>

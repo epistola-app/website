@@ -1,0 +1,68 @@
+---
+import { cn } from "../../lib/cn";
+import { prepareURL } from "../../lib/URL-helpers";
+
+interface Props {
+  href: string;
+  label: string;
+  external?: boolean;
+  mobile?: boolean;
+  currentPath?: string;
+  class?: string;
+}
+
+const {
+  href,
+  label,
+  external = false,
+  mobile = false,
+  currentPath = Astro.url.pathname,
+  class: className = "",
+} = Astro.props as Props;
+
+const resolvedHref = external ? href : prepareURL(href);
+
+const normalizePath = (value: string): string => {
+  const path = value.split(/[?#]/)[0] || "/";
+  if (path === "/") {
+    return path;
+  }
+  return path.replace(/\/+$/, "");
+};
+
+const normalizedCurrentPath = normalizePath(currentPath);
+const normalizedHref = normalizePath(resolvedHref);
+const isActive =
+  !external &&
+  (normalizedCurrentPath === normalizedHref ||
+    (normalizedHref !== "/" && normalizedCurrentPath.startsWith(`${normalizedHref}/`)));
+
+const classes = cn(
+  mobile
+    ? "rounded-none border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-4 py-3 text-[var(--color-peach-paper-heading)] uppercase font-[family-name:var(--font-mono)] text-sm tracking-wider transition-colors hover:border-[var(--color-peach-paper-border-strong)]"
+    : "group relative pb-2 transition hover:text-[var(--color-peach-paper-accent)] uppercase font-[family-name:var(--font-mono)] text-sm tracking-wider",
+  isActive && !mobile && "text-[var(--color-peach-paper-accent)]",
+  isActive && mobile && "border-[var(--color-peach-paper-border-strong)] text-[var(--color-peach-paper-accent)]",
+  className,
+);
+---
+
+<a
+  href={resolvedHref}
+  class={classes}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noreferrer" : undefined}
+  aria-current={isActive ? "page" : undefined}
+>
+  {label}
+  {
+    !mobile && (
+      <span
+        class={cn(
+          "absolute inset-x-0 bottom-0 h-0.5 origin-left bg-[var(--color-peach-paper-accent)] transition",
+          isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
+        )}
+      />
+    )
+  }
+</a>

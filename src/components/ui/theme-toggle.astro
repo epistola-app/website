@@ -1,0 +1,62 @@
+---
+import { cn } from "../../lib/cn";
+
+interface Props {
+  mobile?: boolean;
+  class?: string;
+  id?: string;
+}
+
+const { mobile = false, class: className = "", id } = Astro.props as Props;
+---
+
+{
+  mobile ? (
+    <button
+      id={id}
+      type="button"
+      data-theme-toggle
+      aria-label="Toggle theme"
+      aria-pressed="false"
+      class={cn("inline-flex items-center gap-3 text-sm font-semibold text-[var(--color-peach-paper-copy)]", className)}
+    >
+      <span>Theme</span>
+      <span
+        data-theme-toggle-state
+        class="text-[10px] uppercase tracking-[0.14em] text-[var(--color-peach-paper-copy)]"
+      >
+        Light
+      </span>
+      <span class="relative h-6 w-12 rounded-none border border-[var(--color-peach-paper-border)] p-0.5">
+        <span
+          data-theme-toggle-pill
+          class="block h-5 w-5 rounded-none bg-[var(--color-peach-paper-accent)] transition-transform"
+        />
+      </span>
+    </button>
+  ) : (
+    <button
+      id={id}
+      type="button"
+      data-theme-toggle
+      aria-label="Switch to dark theme"
+      aria-pressed="false"
+      class={cn(
+        "flex h-10 w-10 items-center justify-center rounded-none border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] text-[var(--color-peach-paper-heading)] transition hover:border-[var(--color-peach-paper-border-strong)] hover:text-[var(--color-peach-paper-accent)]",
+        className,
+      )}
+    >
+      <span class="sr-only" data-theme-toggle-label>
+        Switch to dark theme
+      </span>
+      <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path
+          data-theme-toggle-icon-path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M12 3.75A8.25 8.25 0 1 0 20.25 12 6.75 6.75 0 0 1 12 3.75z"
+        />
+      </svg>
+    </button>
+  )
+}
