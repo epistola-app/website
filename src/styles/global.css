@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "lenis/dist/lenis.css";
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
@@ -37,7 +36,7 @@
   --gradient-peach-paper-soft: linear-gradient(180deg, rgba(255, 249, 244, 0.72) 0%, rgba(248, 244, 255, 0.56) 100%);
   --gradient-peach-paper-deep: linear-gradient(145deg, #fff7f1 0%, #f7f2ff 52%, #f1f6ff 100%);
   --color-peach-paper-surface: rgba(255, 250, 246, 0.92);
-  --color-peach-paper-surface-soft: rgba(255, 252, 248, 0.78);
+  --color-peach-paper-surface-soft: rgba(255, 252, 248, 1);
   --color-peach-paper-surface-strong: #fff4ec;
   --color-peach-paper-border-soft: #edd5c9;
   --color-peach-paper-nav-border: rgba(215, 171, 151, 0.5);
@@ -106,6 +105,40 @@
 
   [data-theme="dark"] .eyebrow {
     color: var(--color-peach-paper-accent);
+  }
+
+  .footer-reveal {
+    z-index: 0;
+  }
+}
+
+@media (min-width: 64rem) {
+  @supports (animation-timeline: view()) {
+    .footer-reveal__inner {
+      animation: footer-reveal-enter linear both;
+      animation-range: entry 0% cover 36%;
+      animation-timeline: view();
+    }
+  }
+}
+
+@keyframes footer-reveal-enter {
+  from {
+    opacity: 0.35;
+    transform: translateY(2rem);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-reveal__inner {
+    animation: none;
+    opacity: 1;
+    transform: none;
   }
 }
 

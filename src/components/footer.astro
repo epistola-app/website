@@ -1,6 +1,8 @@
 ---
 import { prepareURL } from "../lib/URL-helpers";
 
+const logoHref = import.meta.env.BASE_URL;
+
 const footerLinks = [
   {
     title: "Product",
@@ -20,74 +22,94 @@ const footerLinks = [
       },
       { href: "/blog", text: "Blog" },
       {
-        href: "https://docs.epistola.app/docs/guides/brandguide",
-        text: "Brand",
+        href: "https://github.com/epistola-app",
+        text: "GitHub",
         external: true,
       },
     ],
   },
   {
-    title: "Company",
+    title: "Trust",
     links: [
-      { href: "/", text: "Careers" },
-      { href: "/", text: "Contact" },
-      { href: "/", text: "Security" },
+      { href: "/security", text: "Security" },
+      { href: "/privacy", text: "Privacy" },
+      { href: "/terms", text: "Terms" },
     ],
   },
 ];
 ---
 
-<footer class="mt-auto text-[var(--color-peach-paper-copy)] [background-image:var(--gradient-peach-paper-deep)]">
-  <div class="mx-auto max-w-6xl px-4 py-16">
-    <div class="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
+<footer class="footer-reveal mt-auto border-t border-[var(--color-peach-paper-nav-border)] text-[var(--color-peach-paper-copy)] lg:sticky lg:bottom-0">
+  <div class="footer-reveal__inner container mx-auto px-4 py-14 lg:py-16">
+    <div class="grid gap-10 border-b border-[var(--color-peach-paper-border)] pb-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
       <div>
-        <div class="flex items-center gap-3 text-lg font-semibold text-[var(--color-peach-paper-heading)]">
-          <div
-            class="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] text-[var(--color-peach-paper-heading)]"
-          >
-            E
+        <a href={logoHref} class="inline-flex items-center gap-3">
+          <img src="/logo.svg" alt="Epistola logo" class="h-10 w-10" />
+          <div class="flex flex-col">
+            <span class="text-base font-semibold tracking-tight text-[var(--color-peach-paper-heading)]">Epistola</span>
+            <span class="text-[10px] uppercase tracking-[0.16em] text-[var(--color-peach-paper-copy)]">Documents</span>
           </div>
-          Epistola
-        </div>
-        <p class="mt-4 text-sm text-[var(--color-peach-paper-copy)]">
-          Open-source document generator for Common Ground platforms. Render PDFs from your own workflows.
+        </a>
+
+        <p class="mt-4 max-w-sm text-sm leading-6 text-[var(--color-peach-paper-copy)]">
+          Open-source document generation for Common Ground teams and integrators.
         </p>
+
+        <div class="mt-6 flex flex-col gap-2 text-sm">
+          <a
+            href="https://docs.epistola.app"
+            target="_blank"
+            rel="noreferrer"
+            class="transition hover:text-[var(--color-peach-paper-accent)]"
+          >
+            docs.epistola.app
+          </a>
+          <a
+            href="mailto:hello@epistola.app"
+            class="transition hover:text-[var(--color-peach-paper-accent)]"
+          >
+            hello@epistola.app
+          </a>
+        </div>
       </div>
-      {
-        footerLinks.map((section) => (
-          <div>
-            <p class="text-sm font-semibold uppercase tracking-[0.14em] text-[var(--color-peach-paper-copy)]">
-              {section.title}
-            </p>
-            <ul class="mt-4 space-y-2 text-sm text-[var(--color-peach-paper-heading)]">
-              {section.links.map((link) => {
-                const href = link.external ? link.href : prepareURL(link.href);
-                return (
-                  <li>
-                    <a
-                      href={href}
-                      class="transition hover:text-[var(--color-peach-paper-accent)]"
-                      target={link.external ? "_blank" : undefined}
-                      rel={link.external ? "noreferrer" : undefined}
-                    >
-                      {link.text}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ))
-      }
+
+      <div class="md:col-span-3 grid gap-8 sm:grid-cols-3">
+        {
+          footerLinks.map((section) => (
+            <div>
+              <p class="text-sm font-semibold text-[var(--color-peach-paper-heading)]">
+                {section.title}
+              </p>
+              <ul class="mt-4 space-y-2 text-sm text-[var(--color-peach-paper-copy)]">
+                {section.links.map((link) => {
+                  const href = link.external ? link.href : prepareURL(link.href);
+
+                  return (
+                    <li>
+                      <a
+                        href={href}
+                        class="transition hover:text-[var(--color-peach-paper-heading)]"
+                        target={link.external ? "_blank" : undefined}
+                        rel={link.external ? "noreferrer" : undefined}
+                      >
+                        {link.text}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
     </div>
-    <div
-      class="mt-12 flex flex-col gap-4 border-t border-[var(--color-peach-paper-border)] pt-6 text-xs text-[var(--color-peach-paper-copy)] sm:flex-row sm:items-center sm:justify-between"
-    >
+
+    <div class="mt-6 flex flex-col gap-3 text-xs text-[var(--color-peach-paper-copy)] sm:flex-row sm:items-center sm:justify-between">
       <p>© {new Date().getFullYear()} Epistola. All rights reserved.</p>
-      <div class="flex gap-4">
-        <a class="hover:text-[var(--color-peach-paper-accent)]" href={prepareURL("/privacy")}>Privacy</a>
-        <a class="hover:text-[var(--color-peach-paper-accent)]" href={prepareURL("/terms")}>Terms</a>
-        <a class="hover:text-[var(--color-peach-paper-accent)]" href={prepareURL("/security")}>Security</a>
+      <div class="flex flex-wrap gap-4">
+        <a class="transition hover:text-[var(--color-peach-paper-heading)]" href={prepareURL("/privacy")}>Privacy</a>
+        <a class="transition hover:text-[var(--color-peach-paper-heading)]" href={prepareURL("/terms")}>Terms</a>
+        <a class="transition hover:text-[var(--color-peach-paper-heading)]" href={prepareURL("/security")}>Security</a>
       </div>
     </div>
   </div>
