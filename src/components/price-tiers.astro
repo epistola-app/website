@@ -1,6 +1,7 @@
 ---
 import Button from "./ui/button.astro";
 import Card from "./ui/card.astro";
+import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
 
 const tiers = [
@@ -32,60 +33,51 @@ const tiers = [
 ];
 ---
 
-<section class="py-24">
-  <div class="mx-auto max-w-6xl px-4">
-    <div class="text-center">
-      <p class="eyebrow">Pricing</p>
-      <Title level={2} class="mt-4"> Choose the support level you need. </Title>
-    </div>
-    <div class="mt-16 grid gap-6 md:grid-cols-3">
-      {
-        tiers.map((tier) => (
-          <Card
-            variant={tier.cardVariant}
-            radius="3xl"
-            padding="lg"
-            shadow="md"
-            class={`flex flex-col ${tier.highlighted ? "ring-2 ring-[var(--color-peach-paper-accent)]" : ""}`}
+<Section monoTitle="/ Pricing plans" title="Choose the support level you need." contentClass="grid gap-6 md:grid-cols-3">
+  {
+    tiers.map((tier) => (
+      <Card
+        variant={tier.cardVariant}
+        padding="lg"
+        shadow="none"
+        class={`flex flex-col ${tier.highlighted ? "ring-2 ring-[var(--color-peach-paper-accent)]" : ""}`}
+      >
+        <div class="flex items-start justify-between">
+          <div>
+            <p class="text-sm font-semibold text-[var(--color-peach-paper-chip-text)]">{tier.cadence}</p>
+            <Title level={3} class="mt-2 text-3xl">
+              {tier.name}
+            </Title>
+          </div>
+          <p class="text-3xl font-semibold text-[var(--color-peach-paper-accent)]">{tier.price}</p>
+        </div>
+        <p class="mt-4 text-sm text-[var(--muted-text)]">{tier.description}</p>
+        <ul class="mt-6 space-y-3 text-sm text-[var(--color-peach-paper-copy)]">
+          {tier.features.map((feature) => (
+            <li class="flex items-center gap-2">
+              <span class="h-2 w-2 bg-[var(--color-peach-paper-accent)]" />
+              {feature}
+            </li>
+          ))}
+        </ul>
+        <div class="mt-8">
+          <Button
+            href={
+              tier.name === "Community"
+                ? "https://github.com/epistola-app"
+                : tier.highlighted
+                  ? "https://demo.epistola.app"
+                  : "/register"
+            }
+            variant={tier.highlighted ? "primary" : tier.name === "Community" ? "link" : "secondary"}
+            size="md"
+            class={tier.name === "Community" ? "w-full justify-start sm:justify-center" : "w-full justify-center"}
+            external={tier.name === "Community" || tier.highlighted}
           >
-            <div class="flex items-start justify-between">
-              <div>
-                <p class="text-sm font-semibold text-[var(--color-peach-paper-chip-text)]">{tier.cadence}</p>
-                <Title level={3} class="mt-2 text-3xl">
-                  {tier.name}
-                </Title>
-              </div>
-              <p class="text-3xl font-semibold text-[var(--color-peach-paper-accent)]">{tier.price}</p>
-            </div>
-            <p class="mt-4 text-sm text-[var(--muted-text)]">{tier.description}</p>
-            <ul class="mt-6 space-y-3 text-sm text-[var(--color-peach-paper-copy)]">
-              {tier.features.map((feature) => (
-                <li class="flex items-center gap-2">
-                  <span class="h-2 w-2 rounded-full bg-[var(--color-peach-paper-accent)]" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-            <div class="mt-8">
-              <Button
-                href={
-                  tier.name === "Community"
-                    ? "https://github.com/epistola-app"
-                    : tier.highlighted
-                      ? "https://demo.epistola.app"
-                      : "/register"
-                }
-                variant={tier.highlighted ? "primary" : tier.name === "Community" ? "link" : "secondary"}
-                size="md"
-                class={tier.name === "Community" ? "w-full justify-start sm:justify-center" : "w-full justify-center"}
-                external={tier.name === "Community" || tier.highlighted}
-              >
-                {tier.name === "Community" ? "View on GitHub" : tier.highlighted ? "Open demo" : "Talk to sales"}
-              </Button>
-            </div>
-          </Card>
-        ))
-      }
-    </div>
-  </div>
-</section>
+            {tier.name === "Community" ? "View on GitHub" : tier.highlighted ? "Open demo" : "Talk to sales"}
+          </Button>
+        </div>
+      </Card>
+    ))
+  }
+</Section>

@@ -1,0 +1,47 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import MonoTitle from "./ui/mono-title.astro";
+import Title from "./ui/title.astro";
+
+interface Props extends Omit<HTMLAttributes<"section">, "class" | "style"> {
+  monoTitle: string;
+  title: string;
+  description: string;
+}
+
+const { monoTitle, title, description, ...restProps } = Astro.props as Props;
+---
+
+<section class="relative flex min-h-[60vh] items-center overflow-hidden pt-32 pb-16 lg:min-h-[70vh]" {...restProps}>
+  <div class="relative container mx-auto px-4">
+    <div class="mx-auto flex max-w-5xl flex-col items-center gap-8 text-center text-balance">
+      <MonoTitle>{monoTitle}</MonoTitle>
+      <Title level={1} class="text-4xl leading-tight sm:text-5xl lg:text-6xl">{title}</Title>
+      <p class="max-w-3xl text-lg text-[var(--muted-text)]">{description}</p>
+    </div>
+  </div>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    viewBox="0 0 1422 800"
+    class="pointer-events-none absolute inset-0 -z-1"
+    opacity="0.35"
+  >
+    <defs>
+      <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="page-hero-oscillate-grad">
+        <stop stop-color="hsl(15, 42%, 51%)" stop-opacity="1" offset="0%"> </stop>
+        <stop stop-color="hsl(15, 42%, 51%)" stop-opacity="1" offset="100%"> </stop>
+      </linearGradient>
+    </defs>
+    <g stroke-width="1" stroke="hsl(32, 100%, 51%)" fill="none" stroke-linecap="round">
+      <path d="M 0 1000 Q 355.5 180 711 400 Q 1066.5 620 1422 1000" opacity="0.22"> </path>
+      <path d="M 0 875 Q 355.5 180 711 400 Q 1066.5 620 1422 875" opacity="0.44"> </path>
+      <path d="M 0 750 Q 355.5 180 711 400 Q 1066.5 620 1422 750" opacity="0.27"> </path>
+      <path d="M 0 625 Q 355.5 180 711 400 Q 1066.5 620 1422 625" opacity="0.28"> </path>
+      <path d="M 0 500 Q 355.5 180 711 400 Q 1066.5 620 1422 500" opacity="0.32"> </path>
+      <path d="M 0 375 Q 355.5 180 711 400 Q 1066.5 620 1422 375" opacity="0.63"> </path>
+      <path d="M 0 250 Q 355.5 180 711 400 Q 1066.5 620 1422 250" opacity="0.64"> </path>
+    </g>
+  </svg>
+</section>
