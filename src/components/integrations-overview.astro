@@ -5,29 +5,35 @@ import Section from "./ui/section.astro";
 
 <Section
   monoTitle="/ Connect everything"
-  title="Drop Epistola into any orchestrator stack."
-  description="Common Ground APIs keep municipalities compliant while hooks expose your own destinations."
+  title="Wire Epistola in through the APIs you already own."
+  description="Common Ground support ships out of the box today; other orchestrators are delivered via custom adapters while we expand the integration catalog."
   contentClass="space-y-10"
 >
   <div class="grid gap-6 md:grid-cols-3">
     <Card variant="subtle">
-      <p class="text-sm font-semibold">Core banking</p>
-      <p class="mt-2 text-sm text-[var(--muted-text)]">nCino, FIS, Fiserv, Jack Henry</p>
+      <p class="text-sm font-semibold">Common Ground ready</p>
+      <p class="mt-2 text-sm text-[var(--muted-text)]">
+        Built-in alignment with Common Ground APIs keeps municipalities compliant without reinventing orchestration.
+      </p>
     </Card>
     <Card variant="subtle">
-      <p class="text-sm font-semibold">CRM + workflow</p>
-      <p class="mt-2 text-sm text-[var(--muted-text)]">Salesforce, ServiceNow, Jira, Workday</p>
+      <p class="text-sm font-semibold">Open REST API</p>
+      <p class="mt-2 text-sm text-[var(--muted-text)]">
+        Every template, clause, and delivery endpoint is controllable via our documented REST interface, ready for any stack.
+      </p>
     </Card>
     <Card variant="subtle">
-      <p class="text-sm font-semibold">Messaging + delivery</p>
-      <p class="mt-2 text-sm text-[var(--muted-text)]">Digikoppeling, eHerkenning, DocuSign, SMS gateways</p>
+      <p class="text-sm font-semibold">Custom adapters</p>
+      <p class="mt-2 text-sm text-[var(--muted-text)]">
+        We co-design integrations for the orchestrators on your roadmap—no prebuilt connectors yet, but expert services on call.
+      </p>
     </Card>
   </div>
   <Card variant="outline" class="text-sm text-[var(--muted-text)]">
-    <p class="font-semibold text-[var(--color-peach-paper-heading)]">Open API</p>
+    <p class="font-semibold text-[var(--color-peach-paper-heading)]">Integration roadmap</p>
     <p class="mt-2">
-      Every resource — templates, clauses, policies, deliveries, and datasets — is accessible through REST and GraphQL
-      endpoints with SCIM provisioning. Event hooks broadcast lifecycle events to your data lake or observability stack.
+      We're actively validating packaged connectors for leading municipal orchestrators. Until those land, teams can move
+      forward using REST endpoints, event hooks, and service engagements tailored to their environment.
     </p>
   </Card>
 </Section>

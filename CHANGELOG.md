@@ -21,6 +21,7 @@ All notable changes to this project will be documented here.
 - Added standalone privacy, terms, and security pages that the footer links reference.
 - Reframed every blog article (Document Generation Lab intro, Epistola pipeline guide, DocGen best practices, advanced theming) around Epistola's document generation workflows, DocOps guidance, and multi-brand theming, renaming the slugs/titles to match their new focus.
 - Updated the homepage + features screens to highlight concrete Epistola Suite capabilities (Lit/ProseMirror editor, JSON Schema contracts, expression engines, iText renderer, multi-tenant governance, Helm/Keycloak deploys) and introduced a DocOps architecture section showing the editor → template service → render pipeline.
+- FAQ and integrations copy now explain the realistic launch timeline, Common Ground-first legacy approach, compliance logging, and that packaged orchestrator connectors remain on the roadmap.
 
 ### Removed
 
