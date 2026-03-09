@@ -11,7 +11,7 @@ const { items, allowMultiple = false, initialOpenIndex = 0 } = Astro.props;
 <div class="accordion space-y-4">
   {
     items.map((item, index) => (
-      <div class="overflow-hidden rounded-xl border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)]">
+      <div class="overflow-hidden border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)]">
         <button
           class="flex w-full items-center justify-between px-6 py-4 text-left transition-colors hover:bg-[var(--color-peach-paper-surface-soft)]"
           aria-expanded={index === initialOpenIndex ? "true" : "false"}
