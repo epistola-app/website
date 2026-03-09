@@ -2,20 +2,16 @@
 import Faqs from "../components/faqs.astro";
 import Join from "../components/join.astro";
 import Layout from "../components/layout.astro";
+import PageHero from "../components/page-hero.astro";
 import PriceTiers from "../components/price-tiers.astro";
-import Title from "../components/ui/title.astro";
 ---
 
 <Layout>
-  <section class="pt-32 pb-16">
-    <div class="mx-auto max-w-3xl px-4 text-center">
-      <p class="eyebrow">Pricing</p>
-      <Title level={1} class="mt-6"> Open source core, supported when you need it. </Title>
-      <p class="mt-4 text-lg text-[var(--muted-text)]">
-        Run Epistola yourself for free or choose a support plan for managed hosting, SLAs, and dedicated guidance.
-      </p>
-    </div>
-  </section>
+  <PageHero
+    monoTitle="/ Pricing"
+    title="Open source core, supported when you need it."
+    description="Run Epistola yourself for free or choose a support plan for managed hosting, SLAs, and dedicated guidance."
+  />
   <PriceTiers />
   <Faqs />
   <Join />
