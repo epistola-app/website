@@ -158,97 +158,9 @@ const {
   </head>
   <body class="font-sans antialiased flex flex-col min-h-screen overflow-x-hidden">
     <Header />
-    <main class="flex-1">
+    <main class="relative z-10 flex-1 bg-[var(--color-peach-paper-surface-soft)]">
       <slot />
     </main>
     <Footer />
-
-    <script>
-      // @ts-nocheck
-      import Lenis from "lenis";
-
-      const root = document.documentElement;
-      const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-      let lenis;
-      let rafId;
-
-      const stopRafLoop = () => {
-        if (!rafId) {
-          return;
-        }
-
-        window.cancelAnimationFrame(rafId);
-        rafId = undefined;
-      };
-
-      const startRafLoop = () => {
-        const raf = (time) => {
-          lenis?.raf(time);
-          rafId = window.requestAnimationFrame(raf);
-        };
-
-        rafId = window.requestAnimationFrame(raf);
-      };
-
-      const destroyLenis = () => {
-        stopRafLoop();
-        lenis?.destroy();
-        lenis = undefined;
-        delete window.__lenis;
-      };
-
-      const createLenis = () => {
-        lenis = new Lenis({
-          smoothWheel: true,
-          duration: 1.1,
-          anchors: true,
-        });
-
-        window.__lenis = lenis;
-        startRafLoop();
-      };
-
-      const syncLenisWithMotionPreference = () => {
-        if (reducedMotionQuery.matches) {
-          destroyLenis();
-          root.dataset.lenisState = "disabled-reduced-motion";
-          return;
-        }
-
-        if (lenis) {
-          root.dataset.lenisState = "ready";
-          lenis.resize();
-          return;
-        }
-
-        createLenis();
-        root.dataset.lenisState = "ready";
-      };
-
-      syncLenisWithMotionPreference();
-
-      const onMotionPreferenceChange = () => {
-        syncLenisWithMotionPreference();
-      };
-
-      if (typeof reducedMotionQuery.addEventListener === "function") {
-        reducedMotionQuery.addEventListener("change", onMotionPreferenceChange);
-      } else if (typeof reducedMotionQuery.addListener === "function") {
-        reducedMotionQuery.addListener(onMotionPreferenceChange);
-      }
-
-      document.addEventListener("astro:page-load", () => {
-        syncLenisWithMotionPreference();
-      });
-
-      window.addEventListener("beforeunload", () => {
-        destroyLenis();
-      });
-
-      // Future GSAP + ScrollTrigger integration:
-      // lenis.on("scroll", ScrollTrigger.update);
-      // gsap.ticker.add((time) => lenis.raf(time * 1000));
-      // gsap.ticker.lagSmoothing(0);
-    </script>
   </body>
 </html>
