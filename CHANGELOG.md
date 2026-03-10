@@ -12,7 +12,7 @@ All notable changes to this project will be documented here.
 
 ### Changed
 
-- Replaced legacy SaaSKit imagery/copy with Epistola positioning and document-intelligence messaging.
+- Replaced legacy SaaSKit imagery/copy with Epistola positioning and document-generation messaging.
 - Restyled pricing, integrations, features, testimonials, and newsletter sections for consistency with the new design system.
 - Navigation now links to the dedicated docs site at `docs.epistola.app` and CTA buttons support external URLs.
 - The Astro `base` path now defaults to `/` in development and only switches to `/website` when `DEPLOY_TARGET=gh-pages` for GitHub Pages builds.
@@ -23,6 +23,7 @@ All notable changes to this project will be documented here.
 - Updated the homepage + features screens to highlight concrete Epistola Suite capabilities (Lit/ProseMirror editor, JSON Schema contracts, expression engines, iText renderer, multi-tenant governance, Helm/Keycloak deploys) and introduced a DocOps architecture section showing the editor → template service → render pipeline.
 - FAQ and integrations copy now explain the realistic launch timeline, Common Ground-first legacy approach, compliance logging, and that packaged orchestrator connectors remain on the roadmap.
 - Features page now adds a lifecycle diagram plus detailed sections covering templates, schemas/examples, feedback with screenshots, theming, and the asset manager sourced from the Epistola Suite implementation, including a dedicated variant resolver flow diagram and anchored “Learn more” buttons.
+- Homepage hero + DocOps copy now emphasise that Epistola is a single-purpose document generation engine (not a document-intelligence suite).
 
 ### Removed
 
