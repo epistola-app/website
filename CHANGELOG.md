@@ -24,6 +24,7 @@ All notable changes to this project will be documented here.
 - FAQ and integrations copy now explain the realistic launch timeline, Common Ground-first legacy approach, compliance logging, and that packaged orchestrator connectors remain on the roadmap.
 - Features page now adds a lifecycle diagram plus detailed sections covering templates, schemas/examples, feedback with screenshots, theming, and the asset manager sourced from the Epistola Suite implementation, including a dedicated variant resolver flow diagram and anchored “Learn more” buttons.
 - Homepage hero + DocOps copy now emphasise that Epistola is a single-purpose document generation engine (not a document-intelligence suite).
+- Hero + Deploy sections now highlight both Epistola Suite demo (`demo.epistola.app`) and the Valtimo plugin demo (`valtimo-demo.epsitola.app`).
 
 ### Removed
 
