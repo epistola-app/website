@@ -63,7 +63,7 @@
   --gradient-peach-paper-soft: linear-gradient(180deg, rgba(26, 17, 16, 0.78) 0%, rgba(45, 34, 51, 0.65) 100%);
   --gradient-peach-paper-deep: linear-gradient(150deg, #181111 0%, #221825 52%, #2c2235 100%);
   --color-peach-paper-surface: rgba(36, 25, 24, 0.92);
-  --color-peach-paper-surface-soft: rgba(43, 30, 30, 0.76);
+  --color-peach-paper-surface-soft: rgba(43, 30, 30, 1);
   --color-peach-paper-surface-strong: #362726;
   --color-peach-paper-border-soft: #6b4a4b;
   --color-peach-paper-nav-border: rgba(120, 84, 93, 0.58);
