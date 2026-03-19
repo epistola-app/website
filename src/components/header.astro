@@ -2,12 +2,14 @@
 import Button from "./ui/button.astro";
 import HeaderNavLink from "./ui/header-nav-link.astro";
 import ThemeToggle from "./ui/theme-toggle.astro";
+import SuiteDemoButton from "./buttons/suite-demo-button.astro";
+import { URLS } from "../lib/URL-helpers";
 
 const navItems = [
   { label: "Platform", href: "/features" },
   { label: "Integrations", href: "/integrations" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Docs", href: "https://docs.epistola.app", external: true },
+  { label: "Docs", href: URLS.DOCS, external: true },
   { label: "Blog", href: "/blog" },
 ];
 
@@ -46,9 +48,7 @@ const currentPath = Astro.url.pathname;
     <div class="hidden items-center gap-3 lg:flex">
       <ThemeToggle />
       <Button href="/login" variant="secondary" size="md"> Sign in </Button>
-      <Button href="https://demo.epistola.app" variant="primary" size="md" external>
-        Open demo
-      </Button>
+      <SuiteDemoButton />
     </div>
     <dialog
       id="mobile-nav"
@@ -78,9 +78,7 @@ const currentPath = Astro.url.pathname;
         <Button href="/login" variant="secondary" size="md" class="w-full justify-center">
           Sign in
         </Button>
-        <Button href="https://demo.epistola.app" variant="primary" size="md" class="w-full justify-center" external>
-          Open demo
-        </Button>
+        <SuiteDemoButton />
       </div>
       <ThemeToggle mobile class="mt-8 p-4" />
     </dialog>

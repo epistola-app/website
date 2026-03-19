@@ -2,6 +2,8 @@
 import Button from "./ui/button.astro";
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
+import SuiteDemoButton from "./buttons/suite-demo-button.astro";
+import { URLS } from "../lib/URL-helpers";
 ---
 
 <Section
@@ -20,7 +22,7 @@ import Section from "./ui/section.astro";
         <p class="mt-2 text-sm text-[var(--muted-text)]">Concrete rollout plan tailored to your orchestrator stack.</p>
       </div>
       <div class="flex flex-col gap-3 sm:flex-row md:flex-col md:items-stretch">
-        <Button href="https://demo.epistola.app" variant="primary" size="md" external>Open demo</Button>
+        <SuiteDemoButton />
         <Button href="/pricing" variant="secondary" size="md">Review plans</Button>
       </div>
     </div>

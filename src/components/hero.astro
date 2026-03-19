@@ -2,7 +2,9 @@
 import HeroStats from "./hero-stats.astro";
 import Button from "./ui/button.astro";
 import Title from "./ui/title.astro";
+import SuiteDemoButton from "./buttons/suite-demo-button.astro";
 import { ArrowRight } from "@lucide/astro";
+import { URLS } from "../lib/URL-helpers";
 ---
 
 <section
@@ -28,15 +30,12 @@ import { ArrowRight } from "@lucide/astro";
         along for the ride.
       </p>
       <div class="flex flex-col gap-3 w-full justify-center lg:flex-row lg:gap-4 lg:justify-start">
-        <Button href="https://demo.epistola.app" variant="primary" size="md" external class="group">
-          Suite demo
-          <ArrowRight class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-        </Button>
-        <Button href="https://valtimo-demo.epistola.app" variant="secondary" size="md" external class="group">
+        <SuiteDemoButton />
+        <Button href={URLS.VALTIMO_DEMO} variant="secondary" size="md" external class="group">
           Valtimo demo
           <ArrowRight class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
         </Button>
-        <Button href="https://docs.epistola.app" variant="secondary" size="md" external> Explore docs </Button>
+        <Button href={URLS.DOCS} variant="secondary" size="md" external> Explore docs </Button>
       </div>
     </div>
   </div>

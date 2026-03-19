@@ -3,6 +3,8 @@ import Button from "./ui/button.astro";
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
+import SuiteDemoButton from "./buttons/suite-demo-button.astro";
+import { URLS } from "../lib/URL-helpers";
 
 const tiers = [
   {
@@ -61,21 +63,19 @@ const tiers = [
           ))}
         </ul>
         <div class="mt-8">
-          <Button
-            href={
-              tier.name === "Community"
-                ? "https://github.com/epistola-app"
-                : tier.highlighted
-                  ? "https://demo.epistola.app"
-                  : "/register"
-            }
-            variant={tier.highlighted ? "primary" : tier.name === "Community" ? "link" : "secondary"}
-            size="md"
-            class={tier.name === "Community" ? "w-full justify-start sm:justify-center" : "w-full justify-center"}
-            external={tier.name === "Community" || tier.highlighted}
-          >
-            {tier.name === "Community" ? "View on GitHub" : tier.highlighted ? "Open demo" : "Talk to sales"}
-          </Button>
+          {tier.highlighted ? (
+            <SuiteDemoButton />
+          ) : (
+            <Button
+              href={tier.name === "Community" ? URLS.GITHUB : "/register"}
+              variant={tier.name === "Community" ? "link" : "secondary"}
+              size="md"
+              class={tier.name === "Community" ? "w-full justify-start sm:justify-center" : "w-full justify-center"}
+              external={tier.name === "Community"}
+            >
+              {tier.name === "Community" ? "View on GitHub" : "Talk to sales"}
+            </Button>
+          )}
         </div>
       </Card>
     ))

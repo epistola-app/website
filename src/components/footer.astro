@@ -1,5 +1,5 @@
 ---
-import { prepareURL } from "../lib/URL-helpers";
+import { prepareURL, URLS, EMAILS } from "../lib/URL-helpers";
 
 const logoHref = import.meta.env.BASE_URL;
 
@@ -16,13 +16,13 @@ const footerLinks = [
     title: "Resources",
     links: [
       {
-        href: "https://docs.epistola.app",
+        href: URLS.DOCS,
         text: "Documentation",
         external: true,
       },
       { href: "/blog", text: "Blog" },
       {
-        href: "https://github.com/epistola-app",
+        href: URLS.GITHUB,
         text: "GitHub",
         external: true,
       },
@@ -57,7 +57,7 @@ const footerLinks = [
 
         <div class="mt-6 flex flex-col gap-2 text-sm">
           <a
-            href="https://docs.epistola.app"
+            href={URLS.DOCS}
             target="_blank"
             rel="noreferrer"
             class="transition hover:text-[var(--color-peach-paper-accent)]"
@@ -65,7 +65,7 @@ const footerLinks = [
             docs.epistola.app
           </a>
           <a
-            href="mailto:hello@epistola.app"
+            href={EMAILS.HELLO}
             class="transition hover:text-[var(--color-peach-paper-accent)]"
           >
             hello@epistola.app

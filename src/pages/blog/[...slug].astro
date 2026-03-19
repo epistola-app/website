@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from "../../components/layout.astro";
 import Title from "../../components/ui/title.astro";
-import { prepareURL } from "../../lib/URL-helpers";
+import { prepareURL, OG_TYPES } from "../../lib/URL-helpers";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -28,7 +28,22 @@ function formatDate(date: Date): string {
 }
 ---
 
-<Layout title={post.data.title} description={post.data.description} image={post.data.cover}>
+<Layout
+  title={post.data.title}
+  description={post.data.description}
+  image={post.data.cover}
+  og={{
+    type: OG_TYPES.ARTICLE,
+    url: Astro.url.href,
+    article: {
+      author: post.data.author,
+      publishedTime: post.data.date,
+      modifiedTime: post.data.updatedDate,
+      section: "Blog",
+      tags: post.data.tags,
+    },
+  }}
+>
   <article class="pt-32 pb-20">
     {
       post.data.cover && (
