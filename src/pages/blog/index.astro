@@ -3,27 +3,52 @@ import { getCollection } from "astro:content";
 import Layout from "../../components/layout.astro";
 import Title from "../../components/ui/title.astro";
 import { prepareURL } from "../../lib/URL-helpers";
-const posts = await getCollection("blog");
+import { useTranslations } from "../../i18n";
+
+const { t, locale } = useTranslations(Astro);
+const common = t("common");
+
+const allPosts = await getCollection("blog");
+const posts = allPosts.filter((post) => post.data.locale === locale || (!post.data.locale && locale === "en"));
 const sortedPosts = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
 function formatDate(date: Date): string {
-  return date.toLocaleDateString("en-US", {
+  return date.toLocaleDateString(locale === "nl" ? "nl-NL" : "en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 }
+
+const blogTranslations = {
+  en: {
+    title: "Blog · Epistola",
+    description: "Latest news, updates, and insights from the Epistola team about document intelligence, DocOps, and enterprise document generation.",
+    heading: "Our Blog",
+    subtitle: "Latest news, updates, and insights",
+    readMore: "Read more",
+  },
+  nl: {
+    title: "Blog · Epistola",
+    description: "Laatste nieuws, updates, en inzichten van het Epistola team over document intelligence, DocOps, en enterprise documentgeneratie.",
+    heading: "Onze Blog",
+    subtitle: "Laatste nieuws, updates, en inzichten",
+    readMore: "Lees meer",
+  },
+};
+
+const content = blogTranslations[locale];
 ---
 
 <Layout
-  title="Blog · Epistola"
-  description="Latest news, updates, and insights from the Epistola team about document intelligence, DocOps, and enterprise document generation."
+  title={content.title}
+  description={content.description}
 >
   <section class="pt-32 pb-20 [background-image:var(--gradient-peach-paper-soft)]">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <Title level={1} class="mb-6 text-5xl font-bold md:text-6xl"> Our Blog </Title>
-        <p class="text-xl text-[var(--muted-text)]">Latest news, updates, and insights</p>
+        <Title level={1} class="mb-6 text-5xl font-bold md:text-6xl">{content.heading}</Title>
+        <p class="text-xl text-[var(--muted-text)]">{content.subtitle}</p>
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {
@@ -58,7 +83,7 @@ function formatDate(date: Date): string {
                   href={`${prepareURL("/blog/" + post.slug)}`}
                   class="inline-flex items-center gap-1 font-semibold text-[var(--color-peach-paper-accent)] hover:underline"
                 >
-                  Read more
+                  {content.readMore}
                   <span>→</span>
                 </a>
               </div>

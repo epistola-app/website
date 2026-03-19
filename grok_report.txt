@@ -1,0 +1,95 @@
+**1. How can we convince the user to use Epistola**
+
+Your current hero and "Why Epistola" sections already do a strong job of positioning it as the **single-purpose, trustworthy engine** that "turns structured data into perfect PDFs" without AI bloat or workflow drag. That's a powerful differentiator in a market full of over-engineered tools.
+
+To make conviction stronger and faster (like Stripe or Supabase do instantly):
+
+- **Lead with the pain + promise in the hero**: Change the subheadline to something benefit-first like "Stop fighting PDF fidelity in regulated workflows. Model once, render perfectly every time — self-hosted, open-source, and built for orchestrators like Valtimo/ZGW." Add a one-click "Deploy with Docker" or "See live editor demo" CTA right under it.
+- **Add immediate social proof**: Replace placeholder logos and anonymous "Customer Name" testimonials with real ones (names, photos, companies, and quantifiable wins like "Cut document errors from 12% to 0% and saved 3 weeks per release"). Stripe and Carbone.io nail this with named enterprise stories (Hertz, Salesforce users).
+- **Show, don't just tell**: The biggest missing piece is **trust through demonstration**. "Introduction video coming soon" is a huge conversion killer. Replace it with a 60-second loom-style video or embedded GIF of the visual editor + live PDF preview. Users in regulated industries buy when they see compliance in action (PDF/A, version gating, audit trails).
+- **Offer a zero-friction next step**: Add a prominent "Try the editor in browser" sandbox (even read-only) or "One-click self-host demo on GitHub Codespaces/Docker Play". Supabase and PDFMonkey convert visitors by letting them play immediately.
+
+This turns your "we're the reliable one" message into "try it and you'll never go back."
+
+**2. How can we make certain things better**
+
+- **"Introduction video coming soon"** → Replace immediately. Even a short screen recording of drag-and-drop + live preview + render would 10x engagement.
+- **Navigation & structure**: Right now it's one long scroll with #anchors. Add a sticky top nav (Product, Features, Docs, Pricing, Blog, GitHub) and a left sidebar on longer pages like a real docs site. This is table-stakes for technical products (see Vercel or Supabase).
+- **Jargon & accessibility**: Terms like "promote render-ready versions", "DocOps architecture", ZGW/Valtimo/Common Ground are perfect for your core users but alienate others. Add tooltips or a "Glossary" section. Lead every technical section with a one-sentence plain-English benefit.
+- **Testimonials & stats**: Make them specific and visual. Add real names/roles + metrics. Surface your impressive stats (50–200ms latency, 140k render jobs/day, 100% PDF/A) with icons/charts instead of plain text.
+- **Mobile experience**: Ensure the visual editor screenshots and how-it-works steps stack cleanly (most enterprise visitors check on mobile first).
+
+**3. What can we do differently compared to other similar landing/documentation websites of very good companies**
+
+Top performers (Stripe, Supabase, Vercel, Carbone.io, PDFMonkey) all share these traits that Epistola currently lacks:
+
+- **Instant interactivity** — Stripe has live checkout demos, PDFMonkey has real-time template preview in the dashboard, Supabase has copy-paste starter templates. You have none.
+- **Clear quickstart path** — Every great site has "Get started in 5 minutes" with code snippet + deploy button. You have excellent "How it works" steps but no copy-paste OpenAPI example or Docker command visible above the fold.
+- **Hybrid landing + docs** — Supabase/Vercel have seamless nav between marketing and full docs with search. You’re currently pure landing with no searchable docs sidebar.
+- **Developer-first details** — Vercel and Stripe show code snippets everywhere. Add a live "Render this JSON → PDF" playground on the homepage.
+- **Differentiation you already have (lean into it)**: Most competitors (Carbone, PDFMonkey) are either closed-source or HTML-to-PDF (which breaks fidelity). You’re direct PDF renderer + native Common Ground + multi-tenant governance + open-source self-host. That’s your killer combo — make it the hero differentiator instead of burying it in "Why Epistola".
+
+**4. How can we explain ourselves better to the user**
+
+Current explanation is technically excellent but starts too deep. Use the classic "Benefits → Features → Proof" pyramid that Stripe/Supabase use:
+
+- **Hero**: Benefit ("Perfect PDFs, zero fidelity issues, full control").
+- **How it works**: 3-step visual (Model → Govern → Render) — you already have this, just make it bigger with icons.
+- **Roles section** (Business authors / Developers / Platform ops) — this is gold and unique. Expand it with mini personas + screenshots of what each sees.
+- **Add a "Why not other tools?" comparison table** (like Carbone does implicitly): vs HTML-based generators (fidelity problems), vs AI tools (unpredictable), vs closed-source (vendor lock-in).
+
+Use progressive disclosure: short plain-English first, then technical deep-dive for devs.
+
+**5. How can we explain strong features of Epistola to the user (better content, videos etc.)**
+
+Your strongest features are:
+
+- Visual editor with live PDF preview + expression chips
+- Immutable versions + environment promotion + approvals
+- Direct PDF/A & PDF/X renderer (no HTML step)
+- Multi-tenant governance + RBAC
+- Native Common Ground / ZGW integration
+- 10k+ docs/min on modest hardware
+
+**How to explain them better**:
+- **Per-feature mini sections** with:
+  - 15-second GIF/video (drag blocks → live preview; promote version → approval flow).
+  - One-sentence benefit + bullet proof points.
+  - Code snippet for the API call (developers love this).
+- **Dedicated "In Action" page** or carousel with 3 real use-case videos (e.g., "Municipal besluit rendering", "Invoice batch", "Contract with conditional clauses").
+- **Interactive demo** — embed a read-only version of the editor (huge conversion lift, like PDFMonkey’s dashboard preview).
+- **Feature comparison cards** showing side-by-side with competitors (you win on compliance, speed, governance).
+
+**6. Compared to other similar landing/documentation websites of successful companies, what did we do good, what can we do better and what we lack**
+
+**What we did good** (actually better than many):
+- Crystal-clear single-purpose focus ("we only do PDFs").
+- Excellent separation of concerns for orchestrators.
+- Strong enterprise governance story (versions, tenants, approvals) — most competitors don’t have this depth.
+- Native Dutch/Common Ground alignment — unique moat.
+- Solid performance stats and open-source self-host messaging.
+
+**What we can do better**:
+- Visual polish and demos (video placeholders hurt credibility).
+- Onboarding friction (no quickstart, no sandbox).
+- Social proof quality (generic testimonials vs named + metrics like Carbone/Stripe).
+
+**What we lack** (biggest gaps vs Stripe/Supabase/Vercel/Carbone):
+- Searchable docs + sidebar navigation.
+- Live code/examples/playground on the landing page.
+- Transparent pricing (even "self-host free / managed contact us").
+- GitHub link + stars (if the repo is public — make it prominent).
+- Real customer logos and case studies with numbers.
+- "Try it free in browser" entry point.
+
+**7. What should we focus on primarily**
+
+**Top 3 priorities right now (in order)**:
+
+1. **Replace the video placeholder + add one killer interactive demo** (editor preview or render playground). This alone will probably double time-on-page and conversions. Do this first — it’s the highest-leverage change.
+2. **Turn this into a proper hybrid landing + documentation site** (add top nav + left sidebar docs, Quickstart page with Docker one-liner + first API call, full OpenAPI reference). Right now it feels like marketing-only; users expect docs from a technical product.
+3. **Simplify hero messaging + add real social proof** (specific testimonials, logos, one big "Deploy in 60 seconds" CTA).
+
+Do these three and the site will feel like a mature, trustworthy enterprise tool instead of an early-stage landing page. The technical foundation is already excellent — you just need to make it instantly understandable and demo-able.
+
+If you want, share access to the editor or a Figma file and I can give exact copy suggestions or mockups for the new sections. This has huge potential — the niche focus and governance features are genuinely stronger than most competitors.

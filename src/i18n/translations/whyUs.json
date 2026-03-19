@@ -1,0 +1,48 @@
+{
+  "en": {
+    "monoTitle": "/ Why Epistola",
+    "title": "A single-purpose document generator you can trust.",
+    "description": "Keep your processes simple: orchestrate elsewhere, render here, and never worry about PDF fidelity again.",
+    "reasons": [
+      {
+        "title": "Open-source first",
+        "copy": "Inspect every line of code, contribute renderers, and self-host on your own infrastructure."
+      },
+      {
+        "title": "Common Ground native",
+        "copy": "Epistola speaks ZGW APIs and aligns with Dutch municipal standards out of the box."
+      },
+      {
+        "title": "Integrates anywhere",
+        "copy": "Expose a simple HTTP API so workflow engines like GZAC or Valtimo stay in control."
+      },
+      {
+        "title": "Quality output",
+        "copy": "PDF/A, PDF/X, web-ready bundles, and template testing pipelines keep every document consistent."
+      }
+    ]
+  },
+  "nl": {
+    "monoTitle": "/ Waarom Epistola",
+    "title": "Een single-purpose document generator die je kunt vertrouwen.",
+    "description": "Houd je processen simpel: orkestreer elders, render hier, en maak je nooit meer zorgen over PDF kwaliteit.",
+    "reasons": [
+      {
+        "title": "Open-source first",
+        "copy": "Inspecteer elke regel code, draag renderers bij, en host zelf op je eigen infrastructuur."
+      },
+      {
+        "title": "Common Ground native",
+        "copy": "Epistola spreekt ZGW API's en sluit out-of-the-box aan op Nederlandse gemeentelijke standaarden."
+      },
+      {
+        "title": "Overal te integreren",
+        "copy": "Bied een simpele HTTP API aan zodat workflow engines zoals GZAC of Valtimo de controle houden."
+      },
+      {
+        "title": "Kwaliteit output",
+        "copy": "PDF/A, PDF/X, web-ready bundles, en template testing pipelines houden elk document consistent."
+      }
+    ]
+  }
+}

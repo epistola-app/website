@@ -11,6 +11,7 @@ export const collections = {
       author: z.string().default("Anonymous"),
       cover: z.string().optional(),
       tags: z.array(z.string()).default([]),
+      locale: z.enum(["en", "nl"]).default("en"),
     }),
   }),
 };

@@ -1,0 +1,22 @@
+{
+  "en": {
+    "platform": "Platform",
+    "integrations": "Integrations",
+    "pricing": "Pricing",
+    "docs": "Docs",
+    "blog": "Blog",
+    "signIn": "Sign in",
+    "getDemo": "Get demo",
+    "menu": "Menu"
+  },
+  "nl": {
+    "platform": "Platform",
+    "integrations": "Integraties",
+    "pricing": "Prijzen",
+    "docs": "Documentatie",
+    "blog": "Blog",
+    "signIn": "Inloggen",
+    "getDemo": "Demo aanvragen",
+    "menu": "Menu"
+  }
+}

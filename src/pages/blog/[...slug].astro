@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import Layout from "../../components/layout.astro";
 import Title from "../../components/ui/title.astro";
 import { prepareURL, OG_TYPES } from "../../lib/URL-helpers";
+import { useTranslations } from "../../i18n";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -15,17 +16,40 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content, headings } = await post.render();
 
+const { t, locale } = useTranslations(Astro);
+const postLocale = post.data.locale || "en";
+
 const allPosts = await getCollection("blog");
-const sortedPosts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const postsInSameLocale = allPosts.filter((p) => (p.data.locale || "en") === postLocale);
+const sortedPosts = postsInSameLocale.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 const relatedPosts = sortedPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
 function formatDate(date: Date): string {
-  return date.toLocaleDateString("en-US", {
+  return date.toLocaleDateString(postLocale === "nl" ? "nl-NL" : "en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 }
+
+const blogPostTranslations = {
+  en: {
+    updated: "Updated",
+    by: "By",
+    backToBlog: "Back to Blog",
+    relatedPosts: "Related Posts",
+    tableOfContents: "Table of Contents",
+  },
+  nl: {
+    updated: "Bijgewerkt",
+    by: "Door",
+    backToBlog: "Terug naar Blog",
+    relatedPosts: "Gerelateerde Posts",
+    tableOfContents: "Inhoudsopgave",
+  },
+};
+
+const content = blogPostTranslations[postLocale];
 ---
 
 <Layout
@@ -68,12 +92,12 @@ function formatDate(date: Date): string {
               post.data.updatedDate && (
                 <>
                   <span>•</span>
-                  <span>Updated {formatDate(post.data.updatedDate)}</span>
+                  <span>{content.updated} {formatDate(post.data.updatedDate)}</span>
                 </>
               )
             }
             <span>•</span>
-            <span>By {post.data.author}</span>
+            <span>{content.by} {post.data.author}</span>
           </div>
           <Title level={1} class="mb-6 font-black leading-tight">
             {post.data.title}
@@ -106,7 +130,7 @@ function formatDate(date: Date): string {
                 class="inline-flex items-center gap-2 font-semibold text-[var(--color-peach-paper-accent)] hover:underline"
               >
                 <span>←</span>
-                Back to Blog
+                {content.backToBlog}
               </a>
             </div>
 
@@ -114,7 +138,7 @@ function formatDate(date: Date): string {
               relatedPosts.length > 0 && (
                 <div class="mt-16 border-t border-[var(--color-peach-paper-border)] pt-16">
                   <Title level={2} class="mb-8 font-bold">
-                    Related Posts
+                    {content.relatedPosts}
                   </Title>
                   <div class="grid md:grid-cols-3 gap-6">
                     {relatedPosts.map((relatedPost) => (
@@ -154,7 +178,7 @@ function formatDate(date: Date): string {
                 headings.length > 0 && (
                   <div class="rounded-xl border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] p-4 shadow-lg backdrop-blur-sm">
                     <Title level={3} class="mb-4 text-base font-bold">
-                      Table of Contents
+                      {content.tableOfContents}
                     </Title>
                     <nav class="text-xs">
                       <ul class="space-y-0">

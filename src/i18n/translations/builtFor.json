@@ -1,0 +1,106 @@
+{
+  "en": {
+    "monoTitle": "/ Built for orchestrators",
+    "title": "Drop into ZGW, Valtimo, or bespoke stacks without touching workflows.",
+    "description": "Epistola exposes a narrow surface: JSON in, PDF/DOCX/HTML out. Multi-tenant auth via Keycloak, Helm charts, and health probes make it feel like any other platform service in your cluster.",
+    "steps": [
+      {
+        "title": "Submit payload",
+        "description": "Orchestrator sends signed JSON + tenant slug and registers a render batch.",
+        "inactiveLabel": "Next",
+        "card": {
+          "eyebrow": "Current render job",
+          "title": "Payload intake · Besluit",
+          "badge": "Queued",
+          "stages": [
+            { "label": "Orchestrator", "detail": "Emit signed JSON + tenant slug; webhooks register batch IDs." },
+            { "label": "Validation", "detail": "Verify schema version, tenant access, and required fields." },
+            { "label": "Queue", "detail": "Assign job ID and enqueue render on the tenant pool." }
+          ]
+        }
+      },
+      {
+        "title": "Render job",
+        "description": "Epistola resolves schema, selects template version, and renders output.",
+        "inactiveLabel": "Next",
+        "card": {
+          "eyebrow": "Current render job",
+          "title": "Render job · Besluit",
+          "badge": "Rendering",
+          "stages": [
+            { "label": "Template", "detail": "Resolve schema, pick active version, and lock template assets." },
+            { "label": "Renderer", "detail": "Render with audit logging and checksum hashing." },
+            { "label": "Artifacts", "detail": "Persist PDF/DOCX/HTML outputs and register storage refs." }
+          ]
+        }
+      },
+      {
+        "title": "Deliver outputs",
+        "description": "Webhooks and storage callbacks provide URLs, metadata, and audit refs.",
+        "inactiveLabel": "Last",
+        "card": {
+          "eyebrow": "Current render job",
+          "title": "Delivery · Besluit",
+          "badge": "Delivered",
+          "stages": [
+            { "label": "Callbacks", "detail": "Send webhook with URLs, metadata, and audit references." },
+            { "label": "Storage", "detail": "Write outputs to tenant storage adapters and retain logs." },
+            { "label": "Archive", "detail": "Seal job metadata and surface history to orchestrators." }
+          ]
+        }
+      }
+    ]
+  },
+  "nl": {
+    "monoTitle": "/ Gebouwd voor orchestrators",
+    "title": "Integreer in ZGW, Valtimo, of maatwerk stacks zonder workflows aan te passen.",
+    "description": "Epistola exposeert een smal oppervlak: JSON in, PDF/DOCX/HTML uit. Multi-tenant auth via Keycloak, Helm charts, en health probes maken het aanvoelen als elke andere platform service in je cluster.",
+    "steps": [
+      {
+        "title": "Verstuur payload",
+        "description": "Orchestrator stuurt signed JSON + tenant slug en registreert een render batch.",
+        "inactiveLabel": "Volgende",
+        "card": {
+          "eyebrow": "Huidige render job",
+          "title": "Payload intake · Besluit",
+          "badge": "In wachtrij",
+          "stages": [
+            { "label": "Orchestrator", "detail": "Emit signed JSON + tenant slug; webhooks registeren batch IDs." },
+            { "label": "Validatie", "detail": "Verifieer schema versie, tenant toegang, en verplichte velden." },
+            { "label": "Wachtrij", "detail": "Wijs job ID toe en plaats render in de tenant pool." }
+          ]
+        }
+      },
+      {
+        "title": "Render job",
+        "description": "Epistola resolved schema, selecteert template versie, en rendert output.",
+        "inactiveLabel": "Volgende",
+        "card": {
+          "eyebrow": "Huidige render job",
+          "title": "Render job · Besluit",
+          "badge": "Renderen",
+          "stages": [
+            { "label": "Template", "detail": "Resolve schema, kies actieve versie, en lock template assets." },
+            { "label": "Renderer", "detail": "Render met audit logging en checksum hashing." },
+            { "label": "Artifacts", "detail": "Persisteer PDF/DOCX/HTML outputs en registreer storage refs." }
+          ]
+        }
+      },
+      {
+        "title": "Lever outputs",
+        "description": "Webhooks en storage callbacks bieden URLs, metadata, en audit refs.",
+        "inactiveLabel": "Laatste",
+        "card": {
+          "eyebrow": "Huidige render job",
+          "title": "Levering · Besluit",
+          "badge": "Geleverd",
+          "stages": [
+            { "label": "Callbacks", "detail": "Stuur webhook met URLs, metadata, en audit references." },
+            { "label": "Storage", "detail": "Schrijf outputs naar tenant storage adapters en bewaar logs." },
+            { "label": "Archief", "detail": "Seal job metadata en toon geschiedenis aan orchestrators." }
+          ]
+        }
+      }
+    ]
+  }
+}

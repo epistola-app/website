@@ -4,16 +4,20 @@ import IntegrationsOverview from "../components/integrations-overview.astro";
 import IntegrationsProcess from "../components/integrations-process.astro";
 import Join from "../components/join.astro";
 import PageHero from "../components/page-hero.astro";
+import { useTranslations } from "../i18n";
+
+const { t } = useTranslations(Astro);
+const integrations = t("integrations");
 ---
 
 <Layout
-  title="Integrations · Epistola"
-  description="Native adapters for GZAC, Valtimo, and ZGW APIs. Integrate Epistola into Common Ground platforms or any system over HTTPS."
+  title={integrations.page.title}
+  description={integrations.page.description}
 >
   <PageHero
-    monoTitle="/ Integrations"
-    title="Plug Epistola into Common Ground platforms in days."
-    description="Use our adapters for GZAC, Valtimo, and ZGW APIs or integrate any product over HTTPS."
+    monoTitle={integrations.hero.monoTitle}
+    title={integrations.hero.title}
+    description={integrations.hero.description}
   />
   <IntegrationsOverview />
   <IntegrationsProcess />

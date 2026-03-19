@@ -1,39 +1,28 @@
 ---
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
+import { useTranslations } from "../i18n";
+
+const { t } = useTranslations(Astro);
+const integrations = t("integrationsOverview");
 ---
 
 <Section
-  monoTitle="/ Connect everything"
-  title="Wire Epistola in through the APIs you already own."
-  description="Common Ground support ships out of the box today; other orchestrators are delivered via custom adapters while we expand the integration catalog."
+  monoTitle={integrations.monoTitle}
+  title={integrations.title}
+  description={integrations.description}
   contentClass="space-y-10"
 >
   <div class="grid gap-6 md:grid-cols-3">
-    <Card variant="subtle">
-      <p class="text-sm font-semibold">Common Ground ready</p>
-      <p class="mt-2 text-sm text-[var(--muted-text)]">
-        Built-in alignment with Common Ground APIs keeps municipalities compliant without reinventing orchestration.
-      </p>
-    </Card>
-    <Card variant="subtle">
-      <p class="text-sm font-semibold">Open REST API</p>
-      <p class="mt-2 text-sm text-[var(--muted-text)]">
-        Every template, clause, and delivery endpoint is controllable via our documented REST interface, ready for any stack.
-      </p>
-    </Card>
-    <Card variant="subtle">
-      <p class="text-sm font-semibold">Custom adapters</p>
-      <p class="mt-2 text-sm text-[var(--muted-text)]">
-        We co-design integrations for the orchestrators on your roadmap—no prebuilt connectors yet, but expert services on call.
-      </p>
-    </Card>
+    {integrations.cards.map((card) => (
+      <Card variant="subtle">
+        <p class="text-sm font-semibold">{card.title}</p>
+        <p class="mt-2 text-sm text-[var(--muted-text)]">{card.body}</p>
+      </Card>
+    ))}
   </div>
   <Card variant="outline" class="text-sm text-[var(--muted-text)]">
-    <p class="font-semibold text-[var(--color-peach-paper-heading)]">Integration roadmap</p>
-    <p class="mt-2">
-      We're actively validating packaged connectors for leading municipal orchestrators. Until those land, teams can move
-      forward using REST endpoints, event hooks, and service engagements tailored to their environment.
-    </p>
+    <p class="font-semibold text-[var(--color-peach-paper-heading)]">{integrations.roadmapTitle}</p>
+    <p class="mt-2">{integrations.roadmapText}</p>
   </Card>
 </Section>

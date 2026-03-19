@@ -1,89 +1,20 @@
 ---
 import Section from "./ui/section.astro";
+import { useTranslations } from "../i18n";
 
-const workflowSteps = [
-  {
-    title: "Submit payload",
-    description: "Orchestrator sends signed JSON + tenant slug and registers a render batch.",
-    inactiveLabel: "Next",
-    isActive: true,
-    card: {
-      eyebrow: "Current render job",
-      title: "Payload intake · Besluit",
-      badge: "Queued",
-      stages: [
-        {
-          label: "Orchestrator",
-          detail: "Emit signed JSON + tenant slug; webhooks register batch IDs.",
-        },
-        {
-          label: "Validation",
-          detail: "Verify schema version, tenant access, and required fields.",
-        },
-        {
-          label: "Queue",
-          detail: "Assign job ID and enqueue render on the tenant pool.",
-        },
-      ],
-    },
-  },
-  {
-    title: "Render job",
-    description: "Epistola resolves schema, selects template version, and renders output.",
-    inactiveLabel: "Next",
-    isActive: false,
-    card: {
-      eyebrow: "Current render job",
-      title: "Render job · Besluit",
-      badge: "Rendering",
-      stages: [
-        {
-          label: "Template",
-          detail: "Resolve schema, pick active version, and lock template assets.",
-        },
-        {
-          label: "Renderer",
-          detail: "Render with audit logging and checksum hashing.",
-        },
-        {
-          label: "Artifacts",
-          detail: "Persist PDF/DOCX/HTML outputs and register storage refs.",
-        },
-      ],
-    },
-  },
-  {
-    title: "Deliver outputs",
-    description: "Webhooks and storage callbacks provide URLs, metadata, and audit refs.",
-    inactiveLabel: "Last",
-    isActive: false,
-    card: {
-      eyebrow: "Current render job",
-      title: "Delivery · Besluit",
-      badge: "Delivered",
-      stages: [
-        {
-          label: "Callbacks",
-          detail: "Send webhook with URLs, metadata, and audit references.",
-        },
-        {
-          label: "Storage",
-          detail: "Write outputs to tenant storage adapters and retain logs.",
-        },
-        {
-          label: "Archive",
-          detail: "Seal job metadata and surface history to orchestrators.",
-        },
-      ],
-    },
-  },
-];
+const { t } = useTranslations(Astro);
+const builtFor = t("builtFor");
+
+const workflowSteps = builtFor.steps.map((step, index) => ({
+  ...step,
+  isActive: index === 0,
+}));
 ---
 
 <Section
-  monoTitle="/ Built for orchestrators"
-  title="Drop into ZGW, Valtimo, or bespoke stacks without touching workflows."
-  description="Epistola exposes a narrow surface: JSON in, PDF/DOCX/HTML out. Multi-tenant auth via Keycloak, Helm charts, and health probes make it feel like any other platform service in your cluster."
+  monoTitle={builtFor.monoTitle}
+  title={builtFor.title}
+  description={builtFor.description}
   contentClass="grid gap-6 lg:grid-cols-2"
   data-built-for
 >

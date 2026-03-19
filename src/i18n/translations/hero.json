@@ -1,0 +1,18 @@
+{
+  "en": {
+    "title": "The open-source document generation engine for enterprise teams.",
+    "subtitle": "Epistola only does one job: turn structured data into perfect PDFs. Model templates, validate JSON Schema inputs, and promote render-ready versions across environments without dragging workflows or AI intelligence along for the ride.",
+    "ctaPrimary": "Get demo",
+    "ctaSecondary": "Valtimo demo",
+    "ctaDocs": "Explore docs",
+    "mobileTitle": "The open-source document generation engine for enterprise teams."
+  },
+  "nl": {
+    "title": "De open-source documentgeneratie-engine voor enterprise teams.",
+    "subtitle": "Epistola doet maar één ding: gestructureerde data omzetten in perfecte PDF's. Modelleer templates, valideer JSON Schema inputs, en promoot render-klare versies over omgevingen zonder workflows of AI-intelligentie mee te slepen.",
+    "ctaPrimary": "Demo aanvragen",
+    "ctaSecondary": "Valtimo demo",
+    "ctaDocs": "Verken documentatie",
+    "mobileTitle": "De open-source documentgeneratie-engine voor enterprise teams."
+  }
+}

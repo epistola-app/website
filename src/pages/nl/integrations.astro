@@ -1,0 +1,25 @@
+---
+import Layout from "../../components/layout.astro";
+import IntegrationsOverview from "../../components/integrations-overview.astro";
+import IntegrationsProcess from "../../components/integrations-process.astro";
+import Join from "../../components/join.astro";
+import PageHero from "../../components/page-hero.astro";
+import { useTranslations } from "../../i18n";
+
+const { t } = useTranslations(Astro);
+const integrations = t("integrations");
+---
+
+<Layout
+  title={integrations.page.title}
+  description={integrations.page.description}
+>
+  <PageHero
+    monoTitle={integrations.hero.monoTitle}
+    title={integrations.hero.title}
+    description={integrations.hero.description}
+  />
+  <IntegrationsOverview />
+  <IntegrationsProcess />
+  <Join />
+</Layout>

@@ -3,16 +3,19 @@ import Button from "./ui/button.astro";
 import HeaderNavLink from "./ui/header-nav-link.astro";
 import ThemeToggle from "./ui/theme-toggle.astro";
 import SuiteDemoButton from "./buttons/suite-demo-button.astro";
+import LanguageSwitcher from "./language-switcher.astro";
 import { URLS } from "../lib/URL-helpers";
+import { useTranslations } from "../i18n";
+
+const { t } = useTranslations(Astro);
+const nav = t("nav");
 
 const navItems = [
-  { label: "Platform", href: "/features" },
-  { label: "Integrations", href: "/integrations" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "About", href: "/about" },
-  { label: "Docs", href: "/docs" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
+  { label: nav.platform, href: "/features" },
+  { label: nav.integrations, href: "/integrations" },
+  { label: nav.pricing, href: "/pricing" },
+  { label: nav.docs, href: URLS.DOCS, external: true },
+  { label: nav.blog, href: "/blog" },
 ];
 
 const logoHref = import.meta.env.BASE_URL;
@@ -39,7 +42,7 @@ const currentPath = Astro.url.pathname;
       command="show-modal"
       commandfor="mobile-nav"
     >
-      <span class="sr-only">Open navigation</span>
+      <span class="sr-only">{nav.openNavigation}</span>
       <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h12M4 17h16"></path>
       </svg>
@@ -48,7 +51,9 @@ const currentPath = Astro.url.pathname;
       {navItems.map((item) => <HeaderNavLink {...item} currentPath={currentPath} />)}
     </div>
     <div class="hidden items-center gap-3 lg:flex">
+      <LanguageSwitcher />
       <ThemeToggle />
+      <Button href="/login" variant="secondary" size="md">{nav.signIn}</Button>
       <SuiteDemoButton />
     </div>
     <dialog
@@ -58,12 +63,12 @@ const currentPath = Astro.url.pathname;
     >
       <div class="flex h-22 p-4 items-center justify-between">
         <p class="text-sm font-semibold uppercase font-[family-name:var(--font-mono)] tracking-wider text-[var(--color-peach-paper-copy)]">
-          Menu
+          {nav.menu}
         </p>
         <button
           id="nav-close"
           class="flex h-10 w-10 items-center justify-center rounded-none border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] text-[var(--color-peach-paper-heading)]"
-          aria-label="Close navigation"
+          aria-label={nav.close}
           command="close"
           commandfor="mobile-nav"
         >
@@ -76,6 +81,9 @@ const currentPath = Astro.url.pathname;
         {navItems.map((item) => <HeaderNavLink {...item} mobile currentPath={currentPath} />)}
       </div>
       <div class="mt-8 p-4 flex flex-col gap-3">
+        <Button href="/login" variant="secondary" size="md" class="w-full justify-center">
+          {nav.signIn}
+        </Button>
         <SuiteDemoButton />
       </div>
       <ThemeToggle mobile class="mt-8 p-4" />

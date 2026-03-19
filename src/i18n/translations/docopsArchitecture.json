@@ -1,0 +1,70 @@
+{
+  "en": {
+    "monoTitle": "/ DocOps architecture",
+    "title": "Editor → template service → renderer: a single document generation lane.",
+    "description": "Epistola Suite is unapologetically about generation, not analytics or AI insights. Authors design templates, developers automate the render API, and platform teams run the Helm stack — all centered on getting compliant PDFs out the door.",
+    "lanes": [
+      {
+        "title": "Business authors",
+        "body": "Drag/drop blocks, manage schema examples, and preview PDFs with inline expression evaluation.",
+        "bullets": [
+          "Block library: text, tables, columns, clauses, headers, footers",
+          "Undo/redo + autosave stacks",
+          "Inline expression tester"
+        ]
+      },
+      {
+        "title": "Developers",
+        "body": "Version templates in Git, run Testcontainers suites, and invoke the OpenAPI-render API from orchestrators.",
+        "bullets": [
+          "API commands for template + theme automation",
+          "Adaptive batch jobs with job states and metrics",
+          "Webhooks + storage adapters (S3, Azure, DMS)"
+        ]
+      },
+      {
+        "title": "Platform ops",
+        "body": "Deploy Helm charts with Keycloak/OIDC, monitor renders, and promote versions across environments.",
+        "bullets": [
+          "Multi-tenant isolation + RBAC memberships",
+          "Environments per tenant (staging/production)",
+          "Prometheus/OTel metrics + health probes"
+        ]
+      }
+    ]
+  },
+  "nl": {
+    "monoTitle": "/ DocOps architectuur",
+    "title": "Editor → template service → renderer: een enkele documentgeneratie lane.",
+    "description": "Epistola Suite is onvergeeflijk gericht op generatie, niet op analytics of AI inzichten. Auteurs ontwerpen templates, developers automatiseren de render API, en platform teams draaien de Helm stack — allemaal gericht op het produceren van compliant PDFs.",
+    "lanes": [
+      {
+        "title": "Business auteurs",
+        "body": "Drag/drop blokken, beheer schema voorbeelden, en preview PDFs met inline expression evaluatie.",
+        "bullets": [
+          "Block library: tekst, tabellen, kolommen, clausules, headers, footers",
+          "Undo/redo + autosave stacks",
+          "Inline expression tester"
+        ]
+      },
+      {
+        "title": "Developers",
+        "body": "Versioneer templates in Git, run Testcontainers suites, en roep de OpenAPI-render API aan vanuit orchestrators.",
+        "bullets": [
+          "API commando's voor template + theme automatisering",
+          "Adaptive batch jobs met job states en metrics",
+          "Webhooks + storage adapters (S3, Azure, DMS)"
+        ]
+      },
+      {
+        "title": "Platform ops",
+        "body": "Deploy Helm charts met Keycloak/OIDC, monitor renders, en promoot versies over omgevingen.",
+        "bullets": [
+          "Multi-tenant isolatie + RBAC memberships",
+          "Omgevingen per tenant (staging/productie)",
+          "Prometheus/OTel metrics + health probes"
+        ]
+      }
+    ]
+  }
+}

@@ -2,12 +2,16 @@
 import Button from "./ui/button.astro";
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
+import { useTranslations } from "../i18n";
+
+const { t } = useTranslations(Astro);
+const mailSubscribe = t("mailSubscribe");
 ---
 
 <Section
-  monoTitle="/ Newsletter"
-  title="Operational patterns from document-heavy teams."
-  description="Monthly insights on governance, compliance, and automation. No noise."
+  monoTitle={mailSubscribe.monoTitle}
+  title={mailSubscribe.title}
+  description={mailSubscribe.description}
   contentClass="grid grid-cols-1 lg:grid-cols-6"
 >
   <Card variant="brand" padding="none" shadow="none" class="p-10 text-center lg:col-start-2 lg:col-span-4">
@@ -18,14 +22,14 @@ import Section from "./ui/section.astro";
           type="email"
           autocomplete="email"
           required
-          placeholder="you@company.com"
+          placeholder={mailSubscribe.emailPlaceholder}
           class="w-full rounded-none border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-5 py-2 text-sm font-medium text-[var(--color-peach-paper-heading)] placeholder:text-[var(--color-peach-paper-chip-text)] focus:border-[var(--color-peach-paper-border-strong)] focus:outline-none"
         />
       </label>
-      <Button type="submit" variant="primary" size="md" class="w-full sm:w-auto">Subscribe</Button>
+      <Button type="submit" variant="primary" size="md" class="w-full sm:w-auto">{mailSubscribe.subscribe}</Button>
     </form>
     <p class="mt-4 text-xs text-[var(--color-peach-paper-chip-text)]">
-      By subscribing you agree to receive Epistola updates. You can unsubscribe anytime.
+      {mailSubscribe.privacyNote}
     </p>
   </Card>
 </Section>

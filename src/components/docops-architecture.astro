@@ -2,61 +2,20 @@
 import Card from "./ui/card.astro";
 import MonoTitle from "./ui/mono-title.astro";
 import Section from "./ui/section.astro";
+import { useTranslations } from "../i18n";
 
-const lanes = [
-  {
-    title: "Business authors",
-    body: "Drag/drop blocks, manage schema examples, and preview PDFs with inline expression evaluation.",
-    bullets: [
-      "Block library: text, tables, columns, clauses, headers, footers",
-      "Undo/redo + autosave stacks",
-      "Inline expression tester",
-    ],
-  },
-  {
-    title: "Developers",
-    body: "Version templates in Git, run Testcontainers suites, and invoke the OpenAPI-render API from orchestrators.",
-    bullets: [
-      "API commands for template + theme automation",
-      "Adaptive batch jobs with job states and metrics",
-      "Webhooks + storage adapters (S3, Azure, DMS)",
-    ],
-  },
-  {
-    title: "Platform ops",
-    body: "Deploy Helm charts with Keycloak/OIDC, monitor renders, and promote versions across environments.",
-    bullets: [
-      "Multi-tenant isolation + RBAC memberships",
-      "Environments per tenant (staging/production)",
-      "Prometheus/OTel metrics + health probes",
-    ],
-  },
-];
-
-const pipeline = [
-  {
-    title: "Template service",
-    note: "Variants · versions · JSON Schema · theming",
-  },
-  {
-    title: "Generation engine",
-    note: "10k+ docs/min · expression sandbox · token cascade",
-  },
-  {
-    title: "Delivery",
-    note: "Jobs API · storage bridges · problem+json errors",
-  },
-];
+const { t } = useTranslations(Astro);
+const docops = t("docopsArchitecture");
 ---
 
 <Section
-  monoTitle="/ DocOps architecture"
-  title="Editor → template service → renderer: a single document generation lane."
-  description="Epistola Suite is unapologetically about generation, not analytics or AI insights. Authors design templates, developers automate the render API, and platform teams run the Helm stack — all centered on getting compliant PDFs out the door."
+  monoTitle={docops.monoTitle}
+  title={docops.title}
+  description={docops.description}
   contentClass="grid grid-cols-1 gap-8 lg:grid-cols-3"
 >
   {
-    lanes.map((lane) => (
+    docops.lanes.map((lane) => (
       <Card variant="subtle">
         <MonoTitle>{lane.title}</MonoTitle>
         <p class="mt-3 text-sm text-[var(--muted-text)]">{lane.body}</p>

@@ -1,0 +1,31 @@
+---
+import EverythingYouNeed from "../../components/everything-you-need.astro";
+import FeatureBreakdown from "../../components/feature-breakdown.astro";
+import DocOpsArchitecture from "../../components/docops-architecture.astro";
+import FeaturesIntegrators from "../../components/features-integrators.astro";
+import Join from "../../components/join.astro";
+import Layout from "../../components/layout.astro";
+import PageHero from "../../components/page-hero.astro";
+import TemplateDiagram from "../../components/template-diagram.astro";
+import { useTranslations } from "../../i18n";
+
+const { t } = useTranslations(Astro);
+const features = t("features");
+---
+
+<Layout
+  title={features.page.title}
+  description={features.page.description}
+>
+  <PageHero
+    monoTitle={features.hero.monoTitle}
+    title={features.hero.title}
+    description={features.hero.description}
+  />
+  <EverythingYouNeed />
+  <TemplateDiagram />
+  <FeatureBreakdown />
+  <DocOpsArchitecture />
+  <FeaturesIntegrators />
+  <Join />
+</Layout>

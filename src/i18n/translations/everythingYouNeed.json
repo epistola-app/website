@@ -1,0 +1,78 @@
+{
+  "en": {
+    "monoTitle": "/ Everything you need to render PDFs",
+    "title": "Epistola does templates and rendering — nothing else.",
+    "description": "Keep workflows in the products that orchestrate your cases while Epistola focuses on perfect output.",
+    "learnMore": "Learn more",
+    "features": [
+      {
+        "title": "Template lifecycle",
+        "body": "Variants, immutable versions, and draft/publish/archived states per tenant with audit trails and schema migrations.",
+        "badge": "Templates"
+      },
+      {
+        "title": "Visual editor",
+        "body": "Drag-and-drop blocks with conditional logic, loops, live PDF preview, and inline expression chips.",
+        "badge": "Authoring"
+      },
+      {
+        "title": "Expression engine",
+        "body": "Use flexible expressions to calculate totals, format values, and apply conditional logic. Define input variables per template.",
+        "badge": "Logic"
+      },
+      {
+        "title": "Direct PDF renderer",
+        "body": "Render PDF/A and PDF/X outputs directly — no HTML conversion step. Handles 10,000+ documents per minute on simple hardware.",
+        "badge": "Rendering"
+      },
+      {
+        "title": "Multi-tenant governance",
+        "body": "Role-based access, environment promotions (staging/production), and per-tenant default themes keep teams isolated.",
+        "badge": "Operations"
+      },
+      {
+        "title": "API + jobs",
+        "body": "OpenAPI 3.1 REST endpoints for single or batch renders with adaptive job sizing, webhooks, and storage adapters.",
+        "badge": "Delivery"
+      }
+    ]
+  },
+  "nl": {
+    "monoTitle": "/ Alles wat je nodig hebt om PDF's te renderen",
+    "title": "Epistola doet templates en rendering — niets anders.",
+    "description": "Houd workflows in de producten die je cases orkestreren terwijl Epistola zich richt op perfecte output.",
+    "learnMore": "Meer informatie",
+    "features": [
+      {
+        "title": "Template levenscyclus",
+        "body": "Varianten, onveranderlijke versies, en concept/publicatie/archief statussen per tenant met audit trails en schema migraties.",
+        "badge": "Templates"
+      },
+      {
+        "title": "Visuele editor",
+        "body": "Drag-and-drop blokken met conditionele logica, loops, live PDF preview, en inline expression chips.",
+        "badge": "Ontwerpen"
+      },
+      {
+        "title": "Expression engine",
+        "body": "Gebruik flexibele expressions om totalen te berekenen, waarden te formatteren, en conditionele logica toe te passen. Definieer input variabelen per template.",
+        "badge": "Logica"
+      },
+      {
+        "title": "Directe PDF renderer",
+        "body": "Render PDF/A en PDF/X output direct — geen HTML conversie stap. Verwerkt 10.000+ documenten per minuut op simpele hardware.",
+        "badge": "Rendering"
+      },
+      {
+        "title": "Multi-tenant governance",
+        "body": "Rol-gebaseerde toegang, omgeving promoties (staging/productie), en per-tenant default themes houden teams geïsoleerd.",
+        "badge": "Operaties"
+      },
+      {
+        "title": "API + jobs",
+        "body": "OpenAPI 3.1 REST endpoints voor single of batch renders met adaptive job sizing, webhooks, en storage adapters.",
+        "badge": "Levering"
+      }
+    ]
+  }
+}

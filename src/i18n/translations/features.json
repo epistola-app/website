@@ -1,0 +1,142 @@
+{
+  "en": {
+    "page": {
+      "title": "Features · Epistola",
+      "description": "Complete document intelligence platform: templates, data bindings, rendering engine, and Common Ground standards compliance."
+    },
+    "hero": {
+      "monoTitle": "/ Platform overview",
+      "title": "Epistola renders PDFs. Your products handle everything else.",
+      "description": "Templates, data bindings, and a rendering engine that respects Common Ground standards — all open source."
+    },
+    "templateSystem": {
+      "monoTitle": "/ Template system",
+      "title": "How Epistola templates stay organized",
+      "description": "Variants, immutable versions, JSON Schemas, and environment activations all live inside the suite so integrations stay simple.",
+      "schema": {
+        "title": "JSON Schema Draft 2020-12",
+        "examplesTitle": "Examples"
+      },
+      "template": {
+        "title": "Public Decision Letter",
+        "description": "Template slugs stay tenant-scoped. Variants inherit schema + theme but keep their own immutable version history.",
+        "resolverDescription": "Generation requests can skip `variantId`. Provide attributes such as `language=nl` or `brand=business` and the resolver scores every variant, picking the closest match and falling back to the default if nothing satisfies required criteria.",
+        "resolverTitle": "Variant resolver",
+        "resolverSubtitle": "Attribute intent → required filter → optional scoring → fallback safety net",
+        "auditTitle": "Audit trail",
+        "auditText": "Publishing locks the theme snapshot + schema hash so every request can be reproduced years later."
+      },
+      "environments": {
+        "title": "Activate per stage",
+        "subtitle": "immutable pointers",
+        "description": "Promote by switching the active version pointer; rollbacks are instant because older versions stay archived."
+      },
+      "themes": {
+        "title": "Cascade across tenants → templates → variants"
+      },
+      "validation": {
+        "title": "Schema + example replay before render",
+        "description": "Render requests fail fast if the payload drifts from the JSON Schema. Named examples replay automatically in CI to protect variant versions before they hit production environments."
+      },
+      "resolverSteps": [
+        {
+          "title": "Describe intent",
+          "description": "Callers send attributes with required vs optional flags."
+        },
+        {
+          "title": "Filter on required",
+          "description": "Any variant missing a required attribute drops out immediately."
+        },
+        {
+          "title": "Score optional matches",
+          "description": "Optional matches + specificity award points."
+        },
+        {
+          "title": "Select & fallback",
+          "description": "Highest score wins; default variant stays as the safety net."
+        }
+      ]
+    },
+    "forIntegrators": {
+      "monoTitle": "/ Built for integrators",
+      "title": "Leave orchestration where it already lives.",
+      "description": "Epistola exposes a guarded render surface that fits into Common Ground and bespoke platforms without forcing workflow rewrites.",
+      "highlights": [
+        "JSON Schema Draft 2020-12 validation before render",
+        "Immutable template versions per environment and tenant",
+        "OpenAPI 3.1 endpoints + adaptive batch job webhooks"
+      ],
+      "renderTime": "render window (iText)"
+    }
+  },
+  "nl": {
+    "page": {
+      "title": "Functies · Epistola",
+      "description": "Compleet document intelligence platform: templates, data bindings, rendering engine, en Common Ground standaarden compliance."
+    },
+    "hero": {
+      "monoTitle": "/ Platform overzicht",
+      "title": "Epistola rendert PDFs. Jouw producten behandelen de rest.",
+      "description": "Templates, data bindings, en een rendering engine die Common Ground standaarden respecteert — allemaal open source."
+    },
+    "templateSystem": {
+      "monoTitle": "/ Template systeem",
+      "title": "Hoe Epistola templates georganiseerd blijven",
+      "description": "Varianten, onveranderlijke versies, JSON Schemas, en omgeving activaties leven allemaal in de suite zodat integraties simpel blijven.",
+      "schema": {
+        "title": "JSON Schema Draft 2020-12",
+        "examplesTitle": "Voorbeelden"
+      },
+      "template": {
+        "title": "Publieke Besluitbrief",
+        "description": "Template slugs blijven tenant-scoped. Varianten erven schema + theme maar houden hun eigen onveranderlijke versie geschiedenis.",
+        "resolverDescription": "Generatie requests kunnen `variantId` overslaan. Geef attributen zoals `language=nl` of `brand=business` en de resolver scoort elke variant, kiest de beste match en valt terug op de default als niets aan de vereiste criteria voldoet.",
+        "resolverTitle": "Variant resolver",
+        "resolverSubtitle": "Attribuut intentie → verplicht filter → optionele scoring → fallback safety net",
+        "auditTitle": "Audit trail",
+        "auditText": "Publicatie locked de theme snapshot + schema hash zodat elke request jaren later gereproduceerd kan worden."
+      },
+      "environments": {
+        "title": "Activeer per stage",
+        "subtitle": "onveranderlijke pointers",
+        "description": "Promoot door de actieve versie pointer te wisselen; rollbacks zijn instant omdat oudere versies gearchiveerd blijven."
+      },
+      "themes": {
+        "title": "Cascade over tenants → templates → varianten"
+      },
+      "validation": {
+        "title": "Schema + voorbeeld replay voor render",
+        "description": "Render requests falen snel als de payload afwijkt van het JSON Schema. Named examples spelen automatisch af in CI om variant versies te beschermen voordat ze productie omgevingen bereiken."
+      },
+      "resolverSteps": [
+        {
+          "title": "Beschrijf intentie",
+          "description": "Callers sturen attributen met verplicht vs optioneel flags."
+        },
+        {
+          "title": "Filter op verplicht",
+          "description": "Elke variant die een verplicht attribuut mist valt onmiddellijk af."
+        },
+        {
+          "title": "Score optionele matches",
+          "description": "Optionele matches + specificiteit geven punten."
+        },
+        {
+          "title": "Selecteer & fallback",
+          "description": "Hoogste score wint; default variant blijft als safety net."
+        }
+      ]
+    },
+    "forIntegrators": {
+      "monoTitle": "/ Gebouwd voor integrators",
+      "title": "Laat orkestratie blijven waar het al is.",
+      "description": "Epistola exposeert een beschermd render oppervlak dat past in Common Ground en maatwerk platforms zonder workflow rewrites af te dwingen.",
+      "highlights": [
+        "JSON Schema Draft 2020-12 validatie voor render",
+        "Onveranderlijke template versies per omgeving en tenant",
+        "OpenAPI 3.1 endpoints + adaptive batch job webhooks"
+      ],
+      "renderTime": "render venster (iText)"
+    }
+  }
+}

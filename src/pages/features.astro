@@ -7,16 +7,20 @@ import Join from "../components/join.astro";
 import Layout from "../components/layout.astro";
 import PageHero from "../components/page-hero.astro";
 import TemplateDiagram from "../components/template-diagram.astro";
+import { useTranslations } from "../i18n";
+
+const { t } = useTranslations(Astro);
+const features = t("features");
 ---
 
 <Layout
-  title="Features · Epistola"
-  description="Complete document intelligence platform: templates, data bindings, rendering engine, and Common Ground standards compliance."
+  title={features.page.title}
+  description={features.page.description}
 >
   <PageHero
-    monoTitle="/ Platform overview"
-    title="Epistola renders PDFs. Your products handle everything else."
-    description="Templates, data bindings, and a rendering engine that respects Common Ground standards — all open source."
+    monoTitle={features.hero.monoTitle}
+    title={features.hero.title}
+    description={features.hero.description}
   />
   <EverythingYouNeed />
   <TemplateDiagram />

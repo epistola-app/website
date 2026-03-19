@@ -1,0 +1,96 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../../components/layout.astro";
+import Title from "../../../components/ui/title.astro";
+import { prepareURL } from "../../../lib/URL-helpers";
+import { useTranslations } from "../../../i18n";
+
+const { t, locale } = useTranslations(Astro);
+const common = t("common");
+
+const allPosts = await getCollection("blog");
+const posts = allPosts.filter((post) => post.data.locale === locale || (!post.data.locale && locale === "en"));
+const sortedPosts = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString(locale === "nl" ? "nl-NL" : "en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+const blogTranslations = {
+  en: {
+    title: "Blog · Epistola",
+    description: "Latest news, updates, and insights from the Epistola team about document intelligence, DocOps, and enterprise document generation.",
+    heading: "Our Blog",
+    subtitle: "Latest news, updates, and insights",
+    readMore: "Read more",
+  },
+  nl: {
+    title: "Blog · Epistola",
+    description: "Laatste nieuws, updates, en inzichten van het Epistola team over document intelligence, DocOps, en enterprise documentgeneratie.",
+    heading: "Onze Blog",
+    subtitle: "Laatste nieuws, updates, en inzichten",
+    readMore: "Lees meer",
+  },
+};
+
+const content = blogTranslations[locale];
+---
+
+<Layout
+  title={content.title}
+  description={content.description}
+>
+  <section class="pt-32 pb-20 [background-image:var(--gradient-peach-paper-soft)]">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <Title level={1} class="mb-6 text-5xl font-bold md:text-6xl">{content.heading}</Title>
+        <p class="text-xl text-[var(--muted-text)]">{content.subtitle}</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {
+          sortedPosts.map((post) => (
+            <article class="overflow-hidden rounded-xl border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-surface)] shadow-lg transition-shadow hover:shadow-xl">
+              <a href={`${prepareURL("/blog/" + post.slug)}`}>
+                {post.data.cover && (
+                  <img src={post.data.cover} alt={post.data.title} class="h-48 w-full object-cover" loading="lazy" />
+                )}
+              </a>
+              <div class="p-6">
+                <div class="mb-2 text-sm text-[var(--color-peach-paper-chip-text)]">{formatDate(post.data.date)}</div>
+                <Title level={2} class="mb-3 text-xl font-bold">
+                  <a
+                    href={`${prepareURL("/blog/" + post.slug)}`}
+                    class="transition-colors hover:text-[var(--color-peach-paper-accent)]"
+                  >
+                    {post.data.title}
+                  </a>
+                </Title>
+                <p class="mb-4 text-[var(--muted-text)]">{post.data.description}</p>
+                {post.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-2 mb-4">
+                    {post.data.tags.map((tag) => (
+                      <span class="rounded-full border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-2 py-1 text-xs text-[var(--color-peach-paper-accent)]">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                <a
+                  href={`${prepareURL("/blog/" + post.slug)}`}
+                  class="inline-flex items-center gap-1 font-semibold text-[var(--color-peach-paper-accent)] hover:underline"
+                >
+                  {content.readMore}
+                  <span>→</span>
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

@@ -1,29 +1,15 @@
 ---
 import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
+import { useTranslations } from "../i18n";
 
-const steps = [
-  {
-    number: "01",
-    title: "Map your data",
-    description: "Align your zaak, besluit, or custom payloads with template variables.",
-  },
-  {
-    number: "02",
-    title: "Link orchestrator",
-    description: "Call Epistola over HTTPS or message queue, send JSON, and await the PDF response.",
-  },
-  {
-    number: "03",
-    title: "Deliver documents",
-    description: "Push finished files into your DMS, send to citizens, or attach back to the case system.",
-  },
-];
+const { t } = useTranslations(Astro);
+const process = t("integrations").process;
 ---
 
-<Section monoTitle="/ Integration process" title="From payload mapping to delivery in three steps." contentClass="grid gap-8 md:grid-cols-3">
+<Section monoTitle={process.monoTitle} title={process.title} contentClass="grid gap-8 md:grid-cols-3">
   {
-    steps.map((step) => (
+    process.steps.map((step) => (
       <div class="text-center">
         <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)]">
           <div class="text-2xl font-black text-[var(--color-peach-paper-accent)]">{step.number}</div>

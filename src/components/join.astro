@@ -1,16 +1,35 @@
 ---
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
-import ContactForm from "./contact-form.astro";
+import SuiteDemoButton from "./buttons/suite-demo-button.astro";
+import { URLS } from "../lib/URL-helpers";
+import { useTranslations } from "../i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Button from "./ui/button.astro";
+
+const { t, locale } = useTranslations(Astro);
+const join = t("join");
 ---
 
 <Section
-  monoTitle="/ Next step"
-  title="Interested in what Epistola can do for your product?"
-  description="Schedule a call and ask us any of your questions."
+  monoTitle={join.monoTitle}
+  title={join.title}
+  description={join.description}
   contentClass="grid grid-cols-1 lg:grid-cols-6"
 >
   <Card variant="brand" shadow="none" padding="none" class="p-8 md:p-10 lg:col-start-2 lg:col-span-4">
-    <ContactForm />
+    <div class="grid gap-8 md:grid-cols-[1fr_auto] md:items-end">
+      <div class="text-left">
+        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-peach-paper-chip-text)]">
+          {join.whatHappensNext}
+        </p>
+        <p class="mt-3 text-sm text-[var(--muted-text)]">{join.step1}</p>
+        <p class="mt-2 text-sm text-[var(--muted-text)]">{join.step2}</p>
+      </div>
+      <div class="flex flex-col gap-3 sm:flex-row md:flex-col md:items-stretch">
+        <SuiteDemoButton />
+        <Button href={getRelativeLocaleUrl(locale, "/pricing")} variant="secondary" size="md">{join.reviewPlans}</Button>
+      </div>
+    </div>
   </Card>
 </Section>

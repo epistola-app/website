@@ -1,0 +1,20 @@
+{
+  "en": {
+    "monoTitle": "/ Trusted in regulated industries",
+    "logos": [
+      { "label": "Company A" },
+      { "label": "Company B" },
+      { "label": "Company C" },
+      { "label": "Company D" }
+    ]
+  },
+  "nl": {
+    "monoTitle": "/ Vertrouwd in gereguleerde industrieën",
+    "logos": [
+      { "label": "Bedrijf A" },
+      { "label": "Bedrijf B" },
+      { "label": "Bedrijf C" },
+      { "label": "Bedrijf D" }
+    ]
+  }
+}

@@ -2,30 +2,19 @@
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
+import { useTranslations } from "../i18n";
 
-const steps = [
-  {
-    title: "Model + author",
-    body: "Define input variables per template, manage variants, and drag blocks in the visual editor with live PDF preview.",
-  },
-  {
-    title: "Promote + govern",
-    body: "Freeze versions, assign them to staging/production environments, and gate releases behind reviewer approvals per tenant.",
-  },
-  {
-    title: "Render + deliver",
-    body: "Call the REST API or batch jobs, render PDFs in milliseconds, then push artifacts via storage adapters or webhooks.",
-  },
-];
+const { t } = useTranslations(Astro);
+const howItWorks = t("howItWorks");
 ---
 
 <Section
-  monoTitle="/ How it works"
-  title="A single path from template to PDF."
+  monoTitle={howItWorks.monoTitle}
+  title={howItWorks.title}
   contentClass="mx-auto grid gap-8 md:grid-cols-3"
 >
   {
-    steps.map((step, index) => (
+    howItWorks.steps.map((step, index) => (
       <Card variant="subtle" class="relative">
         <span class="text-sm font-semibold text-[var(--color-peach-paper-accent)]">0{index + 1}</span>
         <Title level={3} class="mt-4">

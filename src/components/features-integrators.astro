@@ -2,24 +2,22 @@
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
+import { useTranslations } from "../i18n";
 
-const integratorHighlights = [
-  "JSON Schema Draft 2020-12 validation before render",
-  "Immutable template versions per environment and tenant",
-  "OpenAPI 3.1 endpoints + adaptive batch job webhooks",
-];
+const { t } = useTranslations(Astro);
+const features = t("features");
 ---
 
 <Section
-  monoTitle="/ Built for integrators"
-  title="Leave orchestration where it already lives."
-  description="Epistola exposes a guarded render surface that fits into Common Ground and bespoke platforms without forcing workflow rewrites."
+  monoTitle={features.forIntegrators.monoTitle}
+  title={features.forIntegrators.title}
+  description={features.forIntegrators.description}
   contentClass="grid grid-cols-1 gap-12 lg:grid-cols-6"
 >
   <div class="lg:col-start-2 lg:col-span-2">
     <ul class="space-y-4">
       {
-        integratorHighlights.map((item) => (
+        features.forIntegrators.highlights.map((item) => (
           <li class="flex items-start">
             <svg class="mr-3 h-6 w-6 text-[var(--color-peach-paper-accent)]" fill="currentColor" viewBox="0 0 20 20">
               <path
@@ -36,6 +34,6 @@ const integratorHighlights = [
   </div>
   <Card variant="default" padding="lg" shadow="none" class="text-center lg:col-span-2">
     <p class="text-5xl font-semibold text-[var(--color-peach-paper-accent)]">50-200 ms</p>
-    <p class="mt-2 text-sm uppercase tracking-[0.12em] text-[var(--color-peach-paper-chip-text)]">render window (iText)</p>
+    <p class="mt-2 text-sm uppercase tracking-[0.12em] text-[var(--color-peach-paper-chip-text)]">{features.forIntegrators.renderTime}</p>
   </Card>
 </Section>

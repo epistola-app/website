@@ -1,0 +1,84 @@
+{
+  "en": {
+    "page": {
+      "title": "Pricing · Epistola",
+      "description": "Open source document generation with support plans for managed hosting, SLAs, and dedicated guidance. Free self-hosting available."
+    },
+    "hero": {
+      "monoTitle": "/ Pricing",
+      "title": "Open source core, supported when you need it.",
+      "description": "Run Epistola yourself for free or choose a support plan for managed hosting, SLAs, and dedicated guidance."
+    },
+    "section": {
+      "monoTitle": "/ Pricing plans",
+      "title": "Choose the support level you need."
+    },
+    "tiers": [
+      {
+        "name": "Community",
+        "price": "Free",
+        "cadence": "open source",
+        "description": "Self-host Epistola under the AGPL license with community support.",
+        "features": ["Full editor + renderer", "Common Ground adapters", "Docker/Kubernetes images"],
+        "cta": "View on GitHub"
+      },
+      {
+        "name": "Support",
+        "price": "€1.2k",
+        "cadence": "per month",
+        "description": "Commercial support for teams running Epistola themselves.",
+        "features": ["Priority fixes", "Upgrade guidance", "Architecture reviews"],
+        "cta": "Talk to sales"
+      },
+      {
+        "name": "Managed",
+        "price": "Custom",
+        "cadence": "per month",
+        "description": "Hosted Epistola with SLAs, monitoring, and dedicated environments.",
+        "features": ["SLA-backed hosting", "Custom connectors", "Dedicated success engineer"],
+        "cta": "Talk to sales"
+      }
+    ]
+  },
+  "nl": {
+    "page": {
+      "title": "Prijzen · Epistola",
+      "description": "Open source documentgeneratie met support plannen voor managed hosting, SLAs, en dedicated guidance. Gratis self-hosting beschikbaar."
+    },
+    "hero": {
+      "monoTitle": "/ Prijzen",
+      "title": "Open source core, ondersteund wanneer je het nodig hebt.",
+      "description": "Draai Epistola zelf gratis of kies een support plan voor managed hosting, SLAs, en dedicated guidance."
+    },
+    "section": {
+      "monoTitle": "/ Prijsplannen",
+      "title": "Kies het support niveau dat je nodig hebt."
+    },
+    "tiers": [
+      {
+        "name": "Community",
+        "price": "Gratis",
+        "cadence": "open source",
+        "description": "Host Epistola zelf onder de AGPL licentie met community support.",
+        "features": ["Volledige editor + renderer", "Common Ground adapters", "Docker/Kubernetes images"],
+        "cta": "Bekijk op GitHub"
+      },
+      {
+        "name": "Support",
+        "price": "€1.2k",
+        "cadence": "per maand",
+        "description": "Commerciële support voor teams die Epistola zelf draaien.",
+        "features": ["Prioriteit fixes", "Upgrade guidance", "Architectuur reviews"],
+        "cta": "Neem contact op"
+      },
+      {
+        "name": "Managed",
+        "price": "Op maat",
+        "cadence": "per maand",
+        "description": "Gehoste Epistola met SLAs, monitoring, en dedicated omgevingen.",
+        "features": ["SLA-backed hosting", "Custom connectors", "Dedicated success engineer"],
+        "cta": "Neem contact op"
+      }
+    ]
+  }
+}

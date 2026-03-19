@@ -1,0 +1,25 @@
+---
+import Faqs from "../../components/faqs.astro";
+import Join from "../../components/join.astro";
+import Layout from "../../components/layout.astro";
+import PageHero from "../../components/page-hero.astro";
+import PriceTiers from "../../components/price-tiers.astro";
+import { useTranslations } from "../../i18n";
+
+const { t } = useTranslations(Astro);
+const pricing = t("pricing");
+---
+
+<Layout
+  title={pricing.page.title}
+  description={pricing.page.description}
+>
+  <PageHero
+    monoTitle={pricing.hero.monoTitle}
+    title={pricing.hero.title}
+    description={pricing.hero.description}
+  />
+  <PriceTiers />
+  <Faqs />
+  <Join />
+</Layout>

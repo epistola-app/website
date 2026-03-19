@@ -1,0 +1,50 @@
+{
+  "en": {
+    "monoTitle": "/ Frequently asked questions",
+    "title": "Everything you need to know",
+    "description": "Answers about launch timelines, integrations, compliance, and support.",
+    "answerLabel": "Answer",
+    "items": [
+      {
+        "question": "How fast can we launch?",
+        "answer": "Timelines mainly depend on how quickly your infrastructure lands. Epistola ships everything you need on day one, so once access is provisioned we can start templating immediately. Our optional AI-assisted authoring trims the time it takes to shape bespoke templates."
+      },
+      {
+        "question": "Can Epistola connect to our legacy systems?",
+        "answer": "We provide first-class integration with Common Ground and expose a REST API that any other system can call. Need something custom? We scope and deliver dedicated adapters on request."
+      },
+      {
+        "question": "How is compliance handled?",
+        "answer": "Every implementation is tracked against a client-specific compliance model inside a bespoke register. All Epistola operations are logged so auditors can retrace every change and delivery."
+      },
+      {
+        "question": "What support is included?",
+        "answer": "Scale and Enterprise plans include dedicated delivery managers, 24/7 support, and quarterly governance reviews."
+      }
+    ]
+  },
+  "nl": {
+    "monoTitle": "/ Veelgestelde vragen",
+    "title": "Alles wat je moet weten",
+    "description": "Antwoorden over lanceringstijdslijnen, integraties, compliance, en support.",
+    "answerLabel": "Antwoord",
+    "items": [
+      {
+        "question": "Hoe snel kunnen we lanceren?",
+        "answer": "Tijdslijnen hangen voornamelijk af van hoe snel je infrastructuur beschikbaar is. Epistola levert alles wat je nodig hebt op dag één, dus zodra toegang is ingericht kunnen we direct beginnen met templating. Onze optionele AI-assisted authoring verkort de tijd om maatwerk templates te maken."
+      },
+      {
+        "question": "Kan Epistola verbinden met onze legacy systemen?",
+        "answer": "We bieden first-class integratie met Common Ground en exposeren een REST API die elk ander systeem kan aanroepen. Iets op maat nodig? We scopen en leveren dedicated adapters op aanvraag."
+      },
+      {
+        "question": "Hoe wordt compliance afgehandeld?",
+        "answer": "Elke implementatie wordt getraceerd tegen een client-specifiek compliance model in een maatwerk register. Alle Epistola operaties worden gelogd zodat auditors elke wijziging en levering kunnen nagaan."
+      },
+      {
+        "question": "Welke support is inbegrepen?",
+        "answer": "Scale en Enterprise plannen bevatten dedicated delivery managers, 24/7 support, en kwartaal governance reviews."
+      }
+    ]
+  }
+}

@@ -1,26 +1,19 @@
 ---
 import Section from "./ui/section.astro";
+import { useTranslations } from "../i18n";
+
+const { t } = useTranslations(Astro);
+const introVideo = t("introVideo");
 ---
 
 <Section
-  monoTitle="/ See it in action"
-  title="From template to PDF in minutes."
+  monoTitle={introVideo.monoTitle}
+  title={introVideo.title}
   contentClass="mx-auto max-w-5xl"
 >
   <div
     class="relative aspect-video w-full overflow-hidden rounded-xl border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-surface)] shadow-lg shadow-black/10 dark:shadow-black/35"
   >
-    <!-- Replace this placeholder with a <video> element once the video is available:
-         <video
-           class="h-full w-full object-cover"
-           controls
-           playsinline
-           preload="metadata"
-           poster="/videos/intro-poster.webp"
-         >
-           <source src="/videos/intro.mp4" type="video/mp4" />
-         </video>
-    -->
     <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 text-center">
       <div
         class="flex h-16 w-16 items-center justify-center rounded-full border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-surface-soft)]"
@@ -34,7 +27,7 @@ import Section from "./ui/section.astro";
           <path d="M8 5v14l11-7z" />
         </svg>
       </div>
-      <p class="text-sm text-(--muted-text)">Introduction video coming soon</p>
+      <p class="text-sm text-(--muted-text)">{introVideo.comingSoon}</p>
     </div>
   </div>
 </Section>

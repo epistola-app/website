@@ -3,14 +3,20 @@ import Button from "./ui/button.astro";
 import Section from "./ui/section.astro";
 import SuiteDemoButton from "./buttons/suite-demo-button.astro";
 import { URLS } from "../lib/URL-helpers";
+import { useTranslations } from "../i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const { t, locale } = useTranslations(Astro);
+const transform = t("transformYourBusiness");
 ---
 
 <Section
-  monoTitle="/ Deploy Anywhere"
-  title="Keep orchestration elsewhere. Let Epistola handle the PDFs."
-  description="Self-host with Docker, run on Kubernetes, or consume the managed service. Either way, you stay in control of data, security, and release cadence."
+  monoTitle={transform.monoTitle}
+  title={transform.title}
+  description={transform.description}
   contentClass="flex flex-wrap justify-center gap-4"
 >
   <SuiteDemoButton />
-  <Button href="/integrations" variant="link" size="md">View integrations</Button>
+  <Button href={URLS.VALTIMO_DEMO} variant="secondary" size="md" external>{transform.valtimoDemo}</Button>
+  <Button href={getRelativeLocaleUrl(locale, "/integrations")} variant="link" size="md">{transform.viewIntegrations}</Button>
 </Section>

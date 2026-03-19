@@ -1,0 +1,44 @@
+{
+  "en": {
+    "monoTitle": "/ Connect everything",
+    "title": "Wire Epistola in through the APIs you already own.",
+    "description": "Common Ground support ships out of the box today; other orchestrators are delivered via custom adapters while we expand the integration catalog.",
+    "cards": [
+      {
+        "title": "Common Ground ready",
+        "body": "Built-in alignment with Common Ground APIs keeps municipalities compliant without reinventing orchestration."
+      },
+      {
+        "title": "Open REST API",
+        "body": "Every template, clause, and delivery endpoint is controllable via our documented REST interface, ready for any stack."
+      },
+      {
+        "title": "Custom adapters",
+        "body": "We co-design integrations for the orchestrators on your roadmap—no prebuilt connectors yet, but expert services on call."
+      }
+    ],
+    "roadmapTitle": "Integration roadmap",
+    "roadmapText": "We're actively validating packaged connectors for leading municipal orchestrators. Until those land, teams can move forward using REST endpoints, event hooks, and service engagements tailored to their environment."
+  },
+  "nl": {
+    "monoTitle": "/ Verbind alles",
+    "title": "Koppel Epistola via de API's die je al hebt.",
+    "description": "Common Ground support is out-of-the-box beschikbaar; andere orchestrators worden geleverd via custom adapters terwijl we de integratie catalogus uitbreiden.",
+    "cards": [
+      {
+        "title": "Common Ground ready",
+        "body": "Ingebouwde afstemming met Common Ground API's houdt gemeenten compliant zonder orkestratie opnieuw uit te vinden."
+      },
+      {
+        "title": "Open REST API",
+        "body": "Elke template, clausule, en delivery endpoint is controleerbaar via onze gedocumenteerde REST interface, klaar voor elke stack."
+      },
+      {
+        "title": "Custom adapters",
+        "body": "We ontwerpen integraties samen voor de orchestrators op je roadmap—nog geen prebuilt connectors, maar expert services beschikbaar."
+      }
+    ],
+    "roadmapTitle": "Integratie roadmap",
+    "roadmapText": "We valideren actief packaged connectors voor toonaangevende gemeentelijke orchestrators. Tot die tijd kunnen teams verder met REST endpoints, event hooks, en service engagements afgestemd op hun omgeving."
+  }
+}

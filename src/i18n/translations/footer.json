@@ -1,0 +1,30 @@
+{
+  "en": {
+    "product": "Product",
+    "features": "Features",
+    "integrations": "Integrations",
+    "pricing": "Pricing",
+    "company": "Company",
+    "about": "About",
+    "blog": "Blog",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "security": "Security",
+    "copyright": "© {year} Epistola. Open source under AGPL-3.0."
+  },
+  "nl": {
+    "product": "Product",
+    "features": "Functies",
+    "integrations": "Integraties",
+    "pricing": "Prijzen",
+    "company": "Bedrijf",
+    "about": "Over ons",
+    "blog": "Blog",
+    "legal": "Juridisch",
+    "privacy": "Privacybeleid",
+    "terms": "Gebruiksvoorwaarden",
+    "security": "Beveiliging",
+    "copyright": "© {year} Epistola. Open source onder AGPL-3.0."
+  }
+}

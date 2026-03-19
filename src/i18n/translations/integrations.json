@@ -1,0 +1,66 @@
+{
+  "en": {
+    "page": {
+      "title": "Integrations · Epistola",
+      "description": "Native adapters for GZAC, Valtimo, and ZGW APIs. Integrate Epistola into Common Ground platforms or any system over HTTPS."
+    },
+    "hero": {
+      "monoTitle": "/ Integrations",
+      "title": "Plug Epistola into Common Ground platforms in days.",
+      "description": "Use our adapters for GZAC, Valtimo, and ZGW APIs or integrate any product over HTTPS."
+    },
+    "process": {
+      "monoTitle": "/ Integration process",
+      "title": "From payload mapping to delivery in three steps.",
+      "steps": [
+        {
+          "number": "01",
+          "title": "Map your data",
+          "description": "Align your zaak, besluit, or custom payloads with template variables."
+        },
+        {
+          "number": "02",
+          "title": "Link orchestrator",
+          "description": "Call Epistola over HTTPS or message queue, send JSON, and await the PDF response."
+        },
+        {
+          "number": "03",
+          "title": "Deliver documents",
+          "description": "Push finished files into your DMS, send to citizens, or attach back to the case system."
+        }
+      ]
+    }
+  },
+  "nl": {
+    "page": {
+      "title": "Integraties · Epistola",
+      "description": "Native adapters voor GZAC, Valtimo, en ZGW APIs. Integreer Epistola in Common Ground platforms of elk systeem via HTTPS."
+    },
+    "hero": {
+      "monoTitle": "/ Integraties",
+      "title": "Plug Epistola in Common Ground platforms binnen dagen.",
+      "description": "Gebruik onze adapters voor GZAC, Valtimo, en ZGW APIs of integreer elk product via HTTPS."
+    },
+    "process": {
+      "monoTitle": "/ Integratie proces",
+      "title": "Van payload mapping naar levering in drie stappen.",
+      "steps": [
+        {
+          "number": "01",
+          "title": "Map je data",
+          "description": "Lijn je zaak, besluit, of custom payloads uit met template variabelen."
+        },
+        {
+          "number": "02",
+          "title": "Koppel orchestrator",
+          "description": "Roep Epistola aan via HTTPS of message queue, stuur JSON, en wacht op het PDF antwoord."
+        },
+        {
+          "number": "03",
+          "title": "Lever documenten",
+          "description": "Push voltooide bestanden naar je DMS, stuur naar burgers, of koppel terug aan het zaaksysteem."
+        }
+      ]
+    }
+  }
+}

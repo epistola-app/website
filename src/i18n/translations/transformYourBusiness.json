@@ -1,0 +1,16 @@
+{
+  "en": {
+    "monoTitle": "/ Deploy Anywhere",
+    "title": "Keep orchestration elsewhere. Let Epistola handle the PDFs.",
+    "description": "Self-host with Docker, run on Kubernetes, or consume the managed service. Either way, you stay in control of data, security, and release cadence.",
+    "valtimoDemo": "Valtimo plugin demo",
+    "viewIntegrations": "View integrations"
+  },
+  "nl": {
+    "monoTitle": "/ Deploy Overal",
+    "title": "Houd orkestratie elders. Laat Epistola de PDFs afhandelen.",
+    "description": "Self-host met Docker, draai op Kubernetes, of gebruik de managed service. In beide gevallen blijf jij in controle over data, beveiliging, en release cadence.",
+    "valtimoDemo": "Valtimo plugin demo",
+    "viewIntegrations": "Bekijk integraties"
+  }
+}

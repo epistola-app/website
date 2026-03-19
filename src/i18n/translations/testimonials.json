@@ -1,0 +1,46 @@
+{
+  "en": {
+    "monoTitle": "/ Testimonials",
+    "title": "Loved by document-heavy teams",
+    "description": "See how teams use Epistola to streamline document generation and compliance.",
+    "items": [
+      {
+        "quote": "Epistola cut our document processing time by 80%. The template versioning alone saved us weeks of coordination.",
+        "author": "Customer Name",
+        "role": "Role at Company"
+      },
+      {
+        "quote": "Finally, a document generator that doesn't try to be an AI platform. It just renders perfect PDFs, every time.",
+        "author": "Customer Name",
+        "role": "Role at Company"
+      },
+      {
+        "quote": "The Common Ground integration was seamless. We were generating municipal documents within days, not months.",
+        "author": "Customer Name",
+        "role": "Role at Company"
+      }
+    ]
+  },
+  "nl": {
+    "monoTitle": "/ Testimonials",
+    "title": "Gewaardeerd door document-intensieve teams",
+    "description": "Zie hoe teams Epistola gebruiken om documentgeneratie en compliance te stroomlijnen.",
+    "items": [
+      {
+        "quote": "Epistola heeft onze documentverwerkingstijd met 80% verminderd. Alleen de template versioning heeft ons weken aan coördinatie bespaard.",
+        "author": "Klant Naam",
+        "role": "Rol bij Bedrijf"
+      },
+      {
+        "quote": "Eindelijk een document generator die niet probeert een AI platform te zijn. Het rendert gewoon perfecte PDFs, elke keer.",
+        "author": "Klant Naam",
+        "role": "Rol bij Bedrijf"
+      },
+      {
+        "quote": "De Common Ground integratie was naadloos. We genereerden gemeentelijke documenten binnen dagen, niet maanden.",
+        "author": "Klant Naam",
+        "role": "Rol bij Bedrijf"
+      }
+    ]
+  }
+}

@@ -1,20 +1,17 @@
 ---
 import MonoTitle from "./ui/mono-title.astro";
+import { useTranslations } from "../i18n";
 
-const logos = [
-  { label: "Company A" },
-  { label: "Company B" },
-  { label: "Company C" },
-  { label: "Company D" },
-];
+const { t } = useTranslations(Astro);
+const trustedBy = t("trustedBy");
 ---
 
 <section class="py-12">
   <div class="container mx-auto flex w-full flex-col items-center gap-8 px-4 lg:flex-row lg:justify-between">
-    <MonoTitle>/ Trusted in regulated industries</MonoTitle>
+    <MonoTitle>{trustedBy.monoTitle}</MonoTitle>
     <div class="flex flex-wrap items-center justify-center gap-8 lg:justify-end">
       {
-        logos.map((logo) => (
+        trustedBy.logos.map((logo) => (
           <span class="flex h-7 w-auto opacity-50 items-center text-sm font-semibold uppercase tracking-[0.12em] text-[var(--color-peach-paper-heading)]" aria-label={logo.label} title={logo.label}>
             {logo.label}
           </span>

@@ -1,0 +1,30 @@
+---
+import { getLocaleUrl, useTranslations } from "../i18n";
+
+const currentPath = Astro.url.pathname;
+const currentLocale = Astro.currentLocale || "en";
+
+const locales = [
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "nl", label: "Nederlands", flag: "🇳🇱" },
+];
+
+const otherLocales = locales.filter((l) => l.code !== currentLocale);
+---
+
+<div class="relative">
+  <div class="flex items-center gap-2">
+    {
+      otherLocales.map((locale) => (
+        <a
+          href={getLocaleUrl(currentPath, locale.code)}
+          class="flex items-center gap-1.5 px-2 py-1 text-sm font-medium text-[var(--color-peach-paper-copy)] transition hover:text-[var(--color-peach-paper-heading)]"
+          aria-label={`Switch to ${locale.label}`}
+        >
+          <span>{locale.flag}</span>
+          <span class="hidden sm:inline">{locale.label}</span>
+        </a>
+      ))
+    }
+  </div>
+</div>

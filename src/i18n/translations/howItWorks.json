@@ -1,0 +1,38 @@
+{
+  "en": {
+    "monoTitle": "/ How it works",
+    "title": "A single path from template to PDF.",
+    "steps": [
+      {
+        "title": "Model + author",
+        "body": "Define input variables per template, manage variants, and drag blocks in the visual editor with live PDF preview."
+      },
+      {
+        "title": "Promote + govern",
+        "body": "Freeze versions, assign them to staging/production environments, and gate releases behind reviewer approvals per tenant."
+      },
+      {
+        "title": "Render + deliver",
+        "body": "Call the REST API or batch jobs, render PDFs in milliseconds, then push artifacts via storage adapters or webhooks."
+      }
+    ]
+  },
+  "nl": {
+    "monoTitle": "/ Hoe het werkt",
+    "title": "Een enkel pad van template naar PDF.",
+    "steps": [
+      {
+        "title": "Modelleer + ontwerp",
+        "body": "Definieer input variabelen per template, beheer varianten, en sleep blokken in de visuele editor met live PDF preview."
+      },
+      {
+        "title": "Promoveer + beheer",
+        "body": "Bevries versies, wijs ze toe aan staging/productie omgevingen, en bewaak releases met reviewer goedkeuringen per tenant."
+      },
+      {
+        "title": "Render + lever",
+        "body": "Roep de REST API of batch jobs aan, render PDF's in milliseconden, en push artifacts via storage adapters of webhooks."
+      }
+    ]
+  }
+}

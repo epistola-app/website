@@ -1,43 +1,26 @@
 ---
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
+import { useTranslations } from "../i18n";
 
-const cardVariants = ["subtle", "default", "brand"] as const;
-
-const testimonials = [
-  {
-    quote:
-      "Epistola is the simplest part of our case platform. We send JSON, we get flawless PDF/A output back. That focus is refreshing.",
-    name: "Customer Name",
-    role: "Product Owner",
-  },
-  {
-    quote: "Common Ground compliance was non‑negotiable. Epistola spoke the same language from day one.",
-    name: "Customer Name",
-    role: "Solution Architect",
-  },
-  {
-    quote:
-      "We keep workflows in our orchestrator and let Epistola handle rendering. Separation of concerns, just like it should be.",
-    name: "Customer Name",
-    role: "Lead Developer",
-  },
-];
+const { t } = useTranslations(Astro);
+const testimonialsData = t("testimonials");
 ---
 
 <Section
-  monoTitle="/ Customer impact"
-  title="Trusted with high-stakes documents."
+  monoTitle={testimonialsData.monoTitle}
+  title={testimonialsData.title}
+  description={testimonialsData.description}
   contentClass="grid gap-6 md:grid-cols-3"
 >
   {
-    testimonials.map((testimonial) => (
+    testimonialsData.items.map((item) => (
       <Card variant="subtle" shadow="none" class="flex flex-col text-left">
-        <p class="text-base text-[var(--color-peach-paper-heading)]">“{testimonial.quote}”</p>
+        <p class="text-base text-[var(--color-peach-paper-heading)]">"{item.quote}"</p>
         <div class="mt-6">
-          <p class="text-sm font-semibold text-[var(--color-peach-paper-heading)]">{testimonial.name}</p>
+          <p class="text-sm font-semibold text-[var(--color-peach-paper-heading)]">{item.author}</p>
           <p class="text-xs uppercase tracking-[0.12em] text-[var(--color-peach-paper-chip-text)]">
-            {testimonial.role}
+            {item.role}
           </p>
         </div>
       </Card>

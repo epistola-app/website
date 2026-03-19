@@ -25,9 +25,14 @@ const ogType = og.type || OG_TYPES.WEBSITE;
 const ogUrl = og.url || Astro.url.href;
 
 const absoluteImageUrl = ogImage.startsWith("http") ? ogImage : getAbsoluteURL(ogImage);
+
+// Get current locale from Astro
+const currentLocale = Astro.currentLocale || "en";
+const htmlLang = currentLocale === "nl" ? "nl" : "en";
+const ogLocale = currentLocale === "nl" ? "nl_NL" : "en_US";
 ---
 
-<html lang="en">
+<html lang={htmlLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -43,7 +48,7 @@ const absoluteImageUrl = ogImage.startsWith("http") ? ogImage : getAbsoluteURL(o
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={SITE.NAME} />
     <meta property="og:url" content={ogUrl} />
-    <meta property="og:locale" content={SITE.LOCALE} />
+    <meta property="og:locale" content={ogLocale} />
     <meta property="og:image" content={absoluteImageUrl} />
     
     <meta name="twitter:card" content="summary_large_image" />

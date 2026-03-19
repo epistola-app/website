@@ -4,16 +4,20 @@ import Join from "../components/join.astro";
 import Layout from "../components/layout.astro";
 import PageHero from "../components/page-hero.astro";
 import PriceTiers from "../components/price-tiers.astro";
+import { useTranslations } from "../i18n";
+
+const { t } = useTranslations(Astro);
+const pricing = t("pricing");
 ---
 
 <Layout
-  title="Pricing · Epistola"
-  description="Open source document generation with support plans for managed hosting, SLAs, and dedicated guidance. Free self-hosting available."
+  title={pricing.page.title}
+  description={pricing.page.description}
 >
   <PageHero
-    monoTitle="/ Pricing"
-    title="Open source core, supported when you need it."
-    description="Run Epistola yourself for free or choose a support plan for managed hosting, SLAs, and dedicated guidance."
+    monoTitle={pricing.hero.monoTitle}
+    title={pricing.hero.title}
+    description={pricing.hero.description}
   />
   <PriceTiers />
   <Faqs />
