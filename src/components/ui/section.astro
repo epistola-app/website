@@ -35,7 +35,7 @@ const contentClasses = cn("w-full", contentClass);
     <div class="mx-auto flex max-w-6xl flex-col items-center justify-center gap-12 text-center text-balance">
       <MonoTitle>{monoTitle}</MonoTitle>
       <Title level={titleLevel}>{title}</Title>
-      {description ? <p class="max-w-5xl text-lg text-(--muted-text) text-pretty">{description}</p> : null}
+      {description ? <p class="max-w-5xl text-lg text-(--muted-text) text-balance">{description}</p> : null}
     </div>
     <div class={contentClasses} {...contentProps}>
       <slot />

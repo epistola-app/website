@@ -1,6 +1,8 @@
 ---
 import Button from "./ui/button.astro";
 import Section from "./ui/section.astro";
+import SuiteDemoButton from "./buttons/suite-demo-button.astro";
+import { URLS } from "../lib/URL-helpers";
 ---
 
 <Section
@@ -9,11 +11,7 @@ import Section from "./ui/section.astro";
   description="Self-host with Docker, run on Kubernetes, or consume the managed service. Either way, you stay in control of data, security, and release cadence."
   contentClass="flex flex-wrap justify-center gap-4"
 >
-  <Button href="https://demo.epistola.app" variant="secondary" size="md" external>
-    Epistola Suite demo
-  </Button>
-  <Button href="https://valtimo-demo.epsitola.app" variant="secondary" size="md" external>
-    Valtimo plugin demo
-  </Button>
+  <SuiteDemoButton />
+  <Button href={URLS.VALTIMO_DEMO} variant="secondary" size="md" external> Valtimo plugin demo </Button>
   <Button href="/integrations" variant="link" size="md">View integrations</Button>
 </Section>

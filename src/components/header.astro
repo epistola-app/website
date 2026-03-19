@@ -2,12 +2,14 @@
 import Button from "./ui/button.astro";
 import HeaderNavLink from "./ui/header-nav-link.astro";
 import ThemeToggle from "./ui/theme-toggle.astro";
+import SuiteDemoButton from "./buttons/suite-demo-button.astro";
+import { URLS } from "../lib/URL-helpers";
 
 const navItems = [
   { label: "Platform", href: "/features" },
   { label: "Integrations", href: "/integrations" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Docs", href: "https://docs.epistola.app", external: true },
+  { label: "Docs", href: URLS.DOCS, external: true },
   { label: "Blog", href: "/blog" },
 ];
 
@@ -19,7 +21,7 @@ const currentPath = Astro.url.pathname;
   class="sticky inset-x-0 left-0 top-0 z-50 border-b border-[var(--color-peach-paper-nav-border)] backdrop-blur-xl"
 >
   <div class="absolute inset-0 [background-image:var(--gradient-peach-paper)] opacity-95"></div>
-  <nav class="relative z-10 mx-auto flex h-20 max-w-6xl items-center justify-between px-4">
+  <nav class="relative z-10 container mx-auto flex h-20 items-center justify-between px-4">
     <a href={logoHref} class="flex items-center gap-3">
       <img src="/logo.svg" alt="Epistola logo" class="h-10 w-10" />
       <div class="flex flex-col">
@@ -46,9 +48,7 @@ const currentPath = Astro.url.pathname;
     <div class="hidden items-center gap-3 lg:flex">
       <ThemeToggle />
       <Button href="/login" variant="secondary" size="md"> Sign in </Button>
-      <Button href="https://demo.epistola.app" variant="primary" size="md" external>
-        Open demo
-      </Button>
+      <SuiteDemoButton />
     </div>
     <dialog
       id="mobile-nav"
@@ -78,9 +78,7 @@ const currentPath = Astro.url.pathname;
         <Button href="/login" variant="secondary" size="md" class="w-full justify-center">
           Sign in
         </Button>
-        <Button href="https://demo.epistola.app" variant="primary" size="md" class="w-full justify-center" external>
-          Open demo
-        </Button>
+        <SuiteDemoButton />
       </div>
       <ThemeToggle mobile class="mt-8 p-4" />
     </dialog>

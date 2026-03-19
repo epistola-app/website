@@ -2,16 +2,29 @@
 import "../styles/global.css";
 import Header from "./header.astro";
 import Footer from "./footer.astro";
+import { SITE, OG_TYPES, URLS, type OpenGraphProps, getAbsoluteURL } from "../lib/URL-helpers";
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  og?: OpenGraphProps;
 }
 
 const {
-  title = "Epistola · Document Intelligence Platform",
-  description = "Epistola helps operations teams author, govern, and deliver complex documents across every channel.",
+  title = SITE.DEFAULT_TITLE,
+  description = SITE.DEFAULT_DESCRIPTION,
+  image,
+  og = {},
 } = Astro.props as Props;
+
+const ogTitle = og.title || title;
+const ogDescription = og.description || description;
+const ogImage = og.image || image || SITE.DEFAULT_IMAGE;
+const ogType = og.type || OG_TYPES.WEBSITE;
+const ogUrl = og.url || Astro.url.href;
+
+const absoluteImageUrl = ogImage.startsWith("http") ? ogImage : getAbsoluteURL(ogImage);
 ---
 
 <html lang="en">
@@ -21,11 +34,35 @@ const {
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Epistola" />
-    <meta name="theme-color" content="#2563eb" />
+    <link rel="icon" type="image/x-icon" href="/logo.svg" />
+    
+    <link rel="canonical" href={ogUrl} />
+    
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={SITE.NAME} />
+    <meta property="og:url" content={ogUrl} />
+    <meta property="og:locale" content={SITE.LOCALE} />
+    <meta property="og:image" content={absoluteImageUrl} />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={SITE.TWITTER_HANDLE} />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
+    <meta name="twitter:image" content={absoluteImageUrl} />
+    
+    {ogType === OG_TYPES.ARTICLE && og.article && (
+      <>
+        {og.article.author && <meta property="article:author" content={og.article.author} />}
+        {og.article.publishedTime && <meta property="article:published_time" content={og.article.publishedTime.toISOString()} />}
+        {og.article.modifiedTime && <meta property="article:modified_time" content={og.article.modifiedTime.toISOString()} />}
+        {og.article.section && <meta property="article:section" content={og.article.section} />}
+        {og.article.tags?.map(tag => <meta property="article:tag" content={tag} />)}
+      </>
+    )}
+    
+    <meta name="theme-color" content={SITE.THEME_COLOR} />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta
       http-equiv="Content-Security-Policy"
@@ -158,97 +195,9 @@ const {
   </head>
   <body class="font-sans antialiased flex flex-col min-h-screen overflow-x-hidden">
     <Header />
-    <main class="flex-1">
+    <main class="relative z-10 flex-1 bg-[var(--color-peach-paper-surface-soft)]">
       <slot />
     </main>
     <Footer />
-
-    <script>
-      // @ts-nocheck
-      import Lenis from "lenis";
-
-      const root = document.documentElement;
-      const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-      let lenis;
-      let rafId;
-
-      const stopRafLoop = () => {
-        if (!rafId) {
-          return;
-        }
-
-        window.cancelAnimationFrame(rafId);
-        rafId = undefined;
-      };
-
-      const startRafLoop = () => {
-        const raf = (time) => {
-          lenis?.raf(time);
-          rafId = window.requestAnimationFrame(raf);
-        };
-
-        rafId = window.requestAnimationFrame(raf);
-      };
-
-      const destroyLenis = () => {
-        stopRafLoop();
-        lenis?.destroy();
-        lenis = undefined;
-        delete window.__lenis;
-      };
-
-      const createLenis = () => {
-        lenis = new Lenis({
-          smoothWheel: true,
-          duration: 1.1,
-          anchors: true,
-        });
-
-        window.__lenis = lenis;
-        startRafLoop();
-      };
-
-      const syncLenisWithMotionPreference = () => {
-        if (reducedMotionQuery.matches) {
-          destroyLenis();
-          root.dataset.lenisState = "disabled-reduced-motion";
-          return;
-        }
-
-        if (lenis) {
-          root.dataset.lenisState = "ready";
-          lenis.resize();
-          return;
-        }
-
-        createLenis();
-        root.dataset.lenisState = "ready";
-      };
-
-      syncLenisWithMotionPreference();
-
-      const onMotionPreferenceChange = () => {
-        syncLenisWithMotionPreference();
-      };
-
-      if (typeof reducedMotionQuery.addEventListener === "function") {
-        reducedMotionQuery.addEventListener("change", onMotionPreferenceChange);
-      } else if (typeof reducedMotionQuery.addListener === "function") {
-        reducedMotionQuery.addListener(onMotionPreferenceChange);
-      }
-
-      document.addEventListener("astro:page-load", () => {
-        syncLenisWithMotionPreference();
-      });
-
-      window.addEventListener("beforeunload", () => {
-        destroyLenis();
-      });
-
-      // Future GSAP + ScrollTrigger integration:
-      // lenis.on("scroll", ScrollTrigger.update);
-      // gsap.ticker.add((time) => lenis.raf(time * 1000));
-      // gsap.ticker.lagSmoothing(0);
-    </script>
   </body>
 </html>

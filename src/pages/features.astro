@@ -1,70 +1,27 @@
 ---
 import EverythingYouNeed from "../components/everything-you-need.astro";
 import FeatureBreakdown from "../components/feature-breakdown.astro";
-import Card from "../components/ui/card.astro";
 import DocOpsArchitecture from "../components/docops-architecture.astro";
+import FeaturesIntegrators from "../components/features-integrators.astro";
 import Join from "../components/join.astro";
 import Layout from "../components/layout.astro";
+import PageHero from "../components/page-hero.astro";
 import TemplateDiagram from "../components/template-diagram.astro";
-import Title from "../components/ui/title.astro";
 ---
 
-<Layout>
-  <section class="pt-32 pb-16">
-    <div class="mx-auto max-w-3xl px-4 text-center">
-      <p class="eyebrow">Platform overview</p>
-      <Title level={1} class="mt-6"> Epistola renders PDFs. Your products handle everything else. </Title>
-      <p class="mt-4 text-lg text-[var(--muted-text)]">
-        Templates, data bindings, and a rendering engine that respects Common Ground standards — all open source.
-      </p>
-    </div>
-  </section>
+<Layout
+  title="Features · Epistola"
+  description="Complete document intelligence platform: templates, data bindings, rendering engine, and Common Ground standards compliance."
+>
+  <PageHero
+    monoTitle="/ Platform overview"
+    title="Epistola renders PDFs. Your products handle everything else."
+    description="Templates, data bindings, and a rendering engine that respects Common Ground standards — all open source."
+  />
   <EverythingYouNeed />
   <TemplateDiagram />
   <FeatureBreakdown />
   <DocOpsArchitecture />
-  <section class="py-20">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
-        <div>
-          <Title level={2}> Built for integrators </Title>
-          <p class="mt-4 text-lg text-[var(--muted-text)]">
-            Leave orchestration, queues, and authorisation where they live today. Epistola exposes a guarded render
-            surface that fits into any Common Ground or bespoke platform.
-          </p>
-          <ul class="space-y-4">
-            {
-              [
-                "JSON Schema Draft 2020-12 validation before render",
-                "Immutable template versions per environment and tenant",
-                "OpenAPI 3.1 endpoints + adaptive batch job webhooks",
-              ].map((item) => (
-                <li class="flex items-start">
-                  <svg
-                    class="mr-3 h-6 w-6 text-[var(--color-peach-paper-accent)]"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                  <span class="text-[var(--color-peach-paper-copy)]">{item}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-        <Card variant="default" radius="3xl" padding="lg" shadow="md" class="text-center">
-          <p class="text-5xl font-semibold text-[var(--color-peach-paper-accent)]">50–200 ms</p>
-          <p class="mt-2 text-sm uppercase tracking-[0.12em] text-[var(--color-peach-paper-chip-text)]">
-            render window (iText)
-          </p>
-        </Card>
-      </div>
-    </div>
-  </section>
+  <FeaturesIntegrators />
   <Join />
 </Layout>
