@@ -1,25 +1,55 @@
 ---
-import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
-import Title from "./ui/title.astro";
 import { useTranslations } from "../i18n";
 
 const { t } = useTranslations(Astro);
 const whyUs = t("whyUs");
+
+const illustrationPaths = [
+  "/illustrations/why-us/step1.svg",
+  "/illustrations/why-us/step2.svg",
+  "/illustrations/why-us/step3.svg",
+  "/illustrations/why-us/step4.svg",
+];
 ---
 
 <Section
   monoTitle={whyUs.monoTitle}
   title={whyUs.title}
   description={whyUs.description}
-  contentClass="mx-auto grid gap-8 md:grid-cols-2"
+  contentClass="mx-auto max-w-5xl"
 >
-  {
-    whyUs.reasons.map((reason) => (
-      <Card variant="subtle" padding="lg">
-        <Title level={3}>{reason.title}</Title>
-        <p class="mt-3 text-sm text-[var(--muted-text)]">{reason.copy}</p>
-      </Card>
-    ))
-  }
+  <div class="relative">
+    {/* Central line - hidden on mobile */}
+    <div class="absolute left-8 top-0 bottom-0 hidden w-px bg-[var(--color-peach-paper-border)] md:left-1/2 md:block md:-translate-x-1/2" />
+    
+    {whyUs.reasons.map((reason, index) => (
+      <div class:list={["relative flex flex-col gap-6 py-10 md:flex-row md:items-center md:gap-20 md:py-16", index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"]}>
+        {/* Timeline dot - hidden on mobile */}
+        <div class="absolute left-8 top-1/2 hidden h-3 w-3 -translate-y-1/2 rounded-full bg-[var(--color-peach-paper-accent)] ring-4 ring-[var(--color-peach-paper-surface-soft)] md:left-1/2 md:block md:-translate-x-1/2" />
+
+        {/* Content side */}
+        <div class:list={["md:w-1/2", index % 2 === 0 ? "md:text-right md:pr-20" : "md:text-left md:pl-20"]}>
+          <h3 class="text-2xl font-bold tracking-tight text-[var(--color-peach-paper-heading)] md:text-3xl lg:text-4xl">
+            {reason.title}
+          </h3>
+          <p class="mt-4 text-lg leading-relaxed text-[var(--muted-text)] md:text-xl">
+            {reason.copy}
+          </p>
+        </div>
+        
+        {/* Illustration side */}
+        <div class:list={["md:w-1/2", index % 2 === 0 ? "md:pl-20" : "md:pr-20"]}>
+          <div class="mx-auto aspect-square max-w-[200px] overflow-hidden rounded-2xl bg-[var(--color-peach-paper-surface-soft)] p-4 md:max-w-[280px] md:p-6">
+            <img
+              src={illustrationPaths[index]}
+              alt=""
+              class="h-full w-full object-contain opacity-90"
+              aria-hidden="true"
+            />
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
 </Section>
