@@ -4,16 +4,28 @@
     "title": "A single path from template to PDF.",
     "steps": [
       {
-        "title": "Model + author",
-        "body": "Define input variables per template, manage variants, and drag blocks in the visual editor with live PDF preview."
+        "title": "Model",
+        "body": "Define input variables per template and manage variants with JSON Schema validation."
       },
       {
-        "title": "Promote + govern",
-        "body": "Freeze versions, assign them to staging/production environments, and gate releases behind reviewer approvals per tenant."
+        "title": "Author",
+        "body": "Drag blocks in the visual editor with conditional logic, loops, and live PDF preview."
       },
       {
-        "title": "Render + deliver",
-        "body": "Call the REST API or batch jobs, render PDFs in milliseconds, then push artifacts via storage adapters or webhooks."
+        "title": "Promote",
+        "body": "Freeze immutable versions and assign them to staging or production environments."
+      },
+      {
+        "title": "Govern",
+        "body": "Gate releases behind reviewer approvals per tenant with full audit trails."
+      },
+      {
+        "title": "Render",
+        "body": "Call the REST API or batch jobs to render PDFs in milliseconds."
+      },
+      {
+        "title": "Deliver",
+        "body": "Push artifacts via storage adapters or webhooks to complete the pipeline."
       }
     ]
   },
@@ -22,16 +34,28 @@
     "title": "Een enkel pad van template naar PDF.",
     "steps": [
       {
-        "title": "Modelleer + ontwerp",
-        "body": "Definieer input variabelen per template, beheer varianten, en sleep blokken in de visuele editor met live PDF preview."
+        "title": "Modelleer",
+        "body": "Definieer input variabelen per template en beheer varianten met JSON Schema validatie."
       },
       {
-        "title": "Promoveer + beheer",
-        "body": "Bevries versies, wijs ze toe aan staging/productie omgevingen, en bewaak releases met reviewer goedkeuringen per tenant."
+        "title": "Ontwerp",
+        "body": "Sleep blokken in de visuele editor met conditionele logica, loops, en live PDF preview."
       },
       {
-        "title": "Render + lever",
-        "body": "Roep de REST API of batch jobs aan, render PDF's in milliseconden, en push artifacts via storage adapters of webhooks."
+        "title": "Promoveer",
+        "body": "Bevries onveranderlijke versies en wijs ze toe aan staging of productie omgevingen."
+      },
+      {
+        "title": "Beheer",
+        "body": "Bewaak releases met reviewer goedkeuringen per tenant met volledige audit trails."
+      },
+      {
+        "title": "Render",
+        "body": "Roep de REST API of batch jobs aan om PDF's in milliseconden te renderen."
+      },
+      {
+        "title": "Lever",
+        "body": "Push artifacts via storage adapters of webhooks om de pipeline te voltooien."
       }
     ]
   }
