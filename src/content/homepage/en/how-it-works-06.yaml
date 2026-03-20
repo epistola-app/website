@@ -1,0 +1,4 @@
+type: how-it-works
+sortOrder: 6
+title: "Deliver"
+body: "Push artifacts via storage adapters or webhooks to complete the pipeline."

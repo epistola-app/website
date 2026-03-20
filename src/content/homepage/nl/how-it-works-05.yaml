@@ -1,0 +1,4 @@
+type: how-it-works
+sortOrder: 5
+title: "Render"
+body: "Roep de REST API of batch jobs aan om PDF's in milliseconden te renderen."

@@ -1,4 +1,4 @@
 type: how-it-works
 sortOrder: 3
-title: "Render + deliver"
-body: "Call the REST API or batch jobs, render PDFs in milliseconds, then push artifacts via storage adapters or webhooks."
+title: "Promote"
+body: "Freeze immutable versions and assign them to staging or production environments."

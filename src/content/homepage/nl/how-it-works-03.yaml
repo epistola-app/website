@@ -1,4 +1,4 @@
 type: how-it-works
 sortOrder: 3
-title: "Render + lever"
-body: "Roep de REST API of batchjobs aan, render PDF's in milliseconden en push artefacten via opslagadapters of webhooks."
+title: "Promoveer"
+body: "Bevries onveranderlijke versies en wijs ze toe aan staging of productie omgevingen."
