@@ -9,7 +9,7 @@ const navItems = [
   { label: "Platform", href: "/features" },
   { label: "Integrations", href: "/integrations" },
   { label: "Pricing", href: "/pricing" },
-  { label: "Docs", href: URLS.DOCS, external: true },
+  { label: "Docs", href: "/docs" },
   { label: "Blog", href: "/blog" },
 ];
 
@@ -47,7 +47,6 @@ const currentPath = Astro.url.pathname;
     </div>
     <div class="hidden items-center gap-3 lg:flex">
       <ThemeToggle />
-      <Button href="/login" variant="secondary" size="md"> Sign in </Button>
       <SuiteDemoButton />
     </div>
     <dialog
@@ -75,9 +74,6 @@ const currentPath = Astro.url.pathname;
         {navItems.map((item) => <HeaderNavLink {...item} mobile currentPath={currentPath} />)}
       </div>
       <div class="mt-8 p-4 flex flex-col gap-3">
-        <Button href="/login" variant="secondary" size="md" class="w-full justify-center">
-          Sign in
-        </Button>
         <SuiteDemoButton />
       </div>
       <ThemeToggle mobile class="mt-8 p-4" />

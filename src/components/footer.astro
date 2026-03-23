@@ -15,11 +15,7 @@ const footerLinks = [
   {
     title: "Resources",
     links: [
-      {
-        href: URLS.DOCS,
-        text: "Documentation",
-        external: true,
-      },
+      { href: "/docs", text: "Documentation" },
       { href: "/blog", text: "Blog" },
       {
         href: URLS.GITHUB,
@@ -56,14 +52,6 @@ const footerLinks = [
         </p>
 
         <div class="mt-6 flex flex-col gap-2 text-sm">
-          <a
-            href={URLS.DOCS}
-            target="_blank"
-            rel="noreferrer"
-            class="transition hover:text-[var(--color-peach-paper-accent)]"
-          >
-            docs.epistola.app
-          </a>
           <a
             href={EMAILS.HELLO}
             class="transition hover:text-[var(--color-peach-paper-accent)]"
