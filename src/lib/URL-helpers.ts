@@ -32,7 +32,7 @@ export const SITE = {
     "Epistola helps operations teams author, govern, and deliver complex documents across every channel.",
   LOCALE: "en_US",
   THEME_COLOR: "#2563eb",
-  DEFAULT_IMAGE: "/opengraph-splash.png",
+  DEFAULT_IMAGE: "/opengraph-splash.webp",
   AUTHOR: "Epistola Team",
   TWITTER_HANDLE: "@epistolaapp",
 } as const;

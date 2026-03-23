@@ -68,19 +68,14 @@ const absoluteImageUrl = ogImage.startsWith("http") ? ogImage : getAbsoluteURL(o
       http-equiv="Content-Security-Policy"
       content="default-src 'none';
                      script-src 'self' 'unsafe-inline';
-                     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-                     font-src 'self' https://fonts.gstatic.com;
+                     style-src 'self' 'unsafe-inline';
+                     font-src 'self';
                      img-src 'self';
                      connect-src 'self';
                      form-action 'self';
                      base-uri 'self'"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@300..700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Fonts are self-hosted, loaded via @font-face in global.css -->
     <script is:inline>
       (() => {
         const storageKey = "epistola-theme";
