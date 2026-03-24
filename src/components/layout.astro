@@ -71,7 +71,8 @@ const absoluteImageUrl = ogImage.startsWith("http") ? ogImage : getAbsoluteURL(o
                      style-src 'self' 'unsafe-inline';
                      font-src 'self';
                      img-src 'self';
-                     connect-src 'self';
+                     worker-src 'self' blob:;
+                     connect-src 'self' https://automation.cs.epistola.io;
                      form-action 'self';
                      base-uri 'self'"
     />
