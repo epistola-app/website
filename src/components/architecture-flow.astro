@@ -1,0 +1,662 @@
+---
+import Section from "./ui/section.astro";
+
+const nodeLabels: Record<string, string> = {
+  user: "Caseworker",
+  dataSource: "Data Source",
+  gzac: "Zaakafhandelsysteem",
+  drc: "DRC",
+  epistola: "Epistola",
+  tmpStorage: "Temporary Storage",
+  notificaties: "Open Notificaties",
+};
+
+interface FlowStep {
+  from: string | null;
+  to: string | null;
+  label: string;
+  description: string;
+  method: string | null;
+  action: string | null;
+  payload: string | null;
+}
+
+const steps: FlowStep[] = [
+  {
+    from: "user", to: "gzac",
+    label: "Caseworker starts process",
+    description: "A caseworker initiates a case process in the zaakafhandelsysteem — for example handling an objection (\"bezwaar\").",
+    method: null, action: null, payload: null,
+  },
+  {
+    from: "gzac", to: "dataSource",
+    label: "Collect case data",
+    description: "The zaakafhandelsysteem gathers case data from the ZRC, ZTC, and other configured data sources.",
+    method: "GET", action: "/zaken/BZ-2024-001/eigenschappen",
+    payload: '{ "zaaktype": "bezwaar", "eigenschappen": [...] }',
+  },
+  {
+    from: "gzac", to: "epistola",
+    label: "Request document generation",
+    description: "Plugin sends a generation request to Epistola with the resolved template and all variable data.",
+    method: "POST", action: "/api/v1/documents/generate",
+    payload: '{ "templateId": "bezwaar-v2", "data": { "zaak": "BZ-2024-001", ... } }',
+  },
+  {
+    from: "epistola", to: "tmpStorage",
+    label: "Render and store document",
+    description: "Epistola renders the template with the provided data and stores the resulting PDF in temporary storage.",
+    method: "PUT", action: "/documents/gen-48291.pdf",
+    payload: '{ "contentType": "application/pdf", "size": "142KB" }',
+  },
+  {
+    from: "epistola", to: "notificaties",
+    label: "Publish completion event",
+    description: "Epistola publishes a notification via the Open Notificaties API to signal the document is ready for pickup.",
+    method: "POST", action: "/api/v1/notificaties",
+    payload: '{ "kanaal": "documenten", "hoofdObject": "...", "actie": "create" }',
+  },
+  {
+    from: "notificaties", to: "gzac",
+    label: "EpistolaDocumentGenerated",
+    description: "Open Notificaties delivers the event callback to the zaakafhandelsysteem — the document is ready for pickup.",
+    method: "EVENT", action: "EpistolaDocumentGenerated",
+    payload: '{ "resourceUrl": "/tmp-storage/gen-48291.pdf" }',
+  },
+  {
+    from: "gzac", to: "tmpStorage",
+    label: "Collect document",
+    description: "The zaakafhandelsysteem uses the resource URL from the event to download the generated PDF from temporary storage.",
+    method: "GET", action: "/tmp-storage/gen-48291.pdf",
+    payload: '{ "format": "application/pdf", "bytes": 145291 }',
+  },
+  {
+    from: "gzac", to: "drc",
+    label: "Register in Documenten API",
+    description: "The zaakafhandelsysteem stores the PDF in the Documenten API (DRC), linking it to the original case for archival.",
+    method: "POST", action: "/enkelvoudiginformatieobjecten",
+    payload: '{ "titel": "Besluit op bezwaar", "informatieobjecttype": "besluit" }',
+  },
+  {
+    from: "gzac", to: "user",
+    label: "Document available",
+    description: "The caseworker can now view and download the generated document from within the zaakafhandelsysteem.",
+    method: null, action: null, payload: null,
+  },
+];
+
+/* ── Diagram SVG data (hub-and-spoke, GZAC center) ── */
+/*
+  👤 Caseworker (65, 50)    Open Notificaties (380, 50)
+                    │
+  DRC (65,180) ── GZAC (250,180) ── Epistola (435,180)
+                    │                    │
+       Data Source (160,310)   📂 Temp Storage (380,310)
+*/
+const DG_VB = { w: 500, h: 360 };
+const DG_NODE = { w: 120, h: 36 };
+const dgHalfW = DG_NODE.w / 2;
+const dgHalfH = DG_NODE.h / 2;
+
+const dgNodes = [
+  { id: "user",          cx: 65,  cy: 50,  internal: false },
+  { id: "notificaties",  cx: 380, cy: 50,  internal: false },
+  { id: "drc",           cx: 65,  cy: 180, internal: false },
+  { id: "gzac",          cx: 250, cy: 180, internal: false },
+  { id: "epistola",      cx: 435, cy: 180, internal: true },
+  { id: "dataSource",    cx: 160, cy: 310, internal: false },
+  { id: "tmpStorage",    cx: 380, cy: 310, internal: true },
+];
+
+const dgEdge = (id: string, side: "top"|"bottom"|"left"|"right") => {
+  const n = dgNodes.find(n => n.id === id)!;
+  switch (side) {
+    case "top":    return { x: n.cx, y: n.cy - dgHalfH };
+    case "bottom": return { x: n.cx, y: n.cy + dgHalfH };
+    case "left":   return { x: n.cx - dgHalfW, y: n.cy };
+    case "right":  return { x: n.cx + dgHalfW, y: n.cy };
+  }
+};
+
+// Wobbly connection paths (slight curves instead of straight lines)
+const dgPaths = [
+  // user → gzac (top-left down to center)
+  { id: "user_gzac",            d: "M 85 68 C 120 105, 210 135, 235 162" },
+  // gzac ↓ dataSource (bottom-left)
+  { id: "gzac_dataSource",      d: "M 232 198 C 222 248, 178 258, 172 292" },
+  // gzac → epistola
+  { id: "gzac_epistola",        d: "M 310 180 C 342 177, 348 183, 375 180" },
+  // gzac ← drc
+  { id: "gzac_drc",             d: "M 190 180 C 162 183, 138 177, 125 180" },
+  // epistola → tmpStorage (bottom-right, curve down)
+  { id: "epistola_tmpStorage",  d: "M 425 198 C 418 248, 392 258, 387 292" },
+  // epistola → notificaties (top-right, curve up)
+  { id: "epistola_notificaties", d: "M 435 162 C 430 118, 392 82, 387 68" },
+  // notificaties → gzac (arc from top down to center)
+  { id: "notificaties_gzac",    d: "M 345 68 C 310 82, 268 118, 262 162" },
+  // gzac → tmpStorage (curve across to bottom-right)
+  { id: "gzac_tmpStorage",      d: "M 310 190 C 340 210, 360 260, 370 292" },
+  // gzac → user (center up to top-left)
+  { id: "gzac_user",            d: "M 215 162 C 185 125, 105 100, 80 68" },
+];
+
+// Wobble helper: generates a hand-drawn rectangle path
+const wobble = (x: number, y: number, w: number, h: number, seed: number): string => {
+  const o = (i: number) => Math.sin(seed * 7.3 + i * 13.7) * 1.6;
+  return `M ${x + o(0)} ${y + o(1)} L ${x + w + o(2)} ${y + o(3)} L ${x + w + o(4)} ${y + h + o(5)} L ${x + o(6)} ${y + h + o(7)} Z`;
+};
+
+// Folder icon SVG path (16x12 at position)
+const folderIconPath = (x: number, y: number): string =>
+  `M ${x} ${y + 3} L ${x} ${y + 0.5} L ${x + 5} ${y + 0.5} L ${x + 7} ${y + 3} L ${x + 16} ${y + 3} L ${x + 16} ${y + 12} L ${x} ${y + 12} Z`;
+
+const dgNodePositions = dgNodes.map((n, i) => ({
+  ...n,
+  x: n.cx - dgHalfW,
+  y: n.cy - dgHalfH,
+  rectPath: wobble(n.cx - dgHalfW, n.cy - dgHalfH, DG_NODE.w, DG_NODE.h, i),
+}));
+
+// Step number labels on diagram paths
+const stepPathLabels = [
+  // step 1: user → gzac
+  { pathId: "user_gzac", x: 155, y: 105 },
+  // step 2: gzac → dataSource
+  { pathId: "gzac_dataSource", x: 215, y: 248 },
+  // step 3: gzac → epistola
+  { pathId: "gzac_epistola", x: 342, y: 172 },
+  // step 4: epistola → tmpStorage
+  { pathId: "epistola_tmpStorage", x: 412, y: 248 },
+  // step 5: epistola → notificaties
+  { pathId: "epistola_notificaties", x: 435, y: 118 },
+  // step 6: notificaties → gzac
+  { pathId: "notificaties_gzac", x: 290, y: 118 },
+  // step 7: gzac → tmpStorage
+  { pathId: "gzac_tmpStorage", x: 345, y: 248 },
+  // step 8: gzac → drc
+  { pathId: "gzac_drc", x: 155, y: 172 },
+  // step 9: gzac → user
+  { pathId: "gzac_user", x: 120, y: 138 },
+];
+---
+
+<Section
+  monoTitle="/ How it works"
+  title="From template to document — watch the data flow."
+  description="Epistola generates documents on demand. Click through the steps or let the animation play to see how data flows between systems."
+  data-arch-flow
+>
+  <!-- Two-column layout: timeline left, diagram right -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+    <!-- Left: timeline -->
+    <div class="timeline" data-flow-timeline>
+      {steps.map((step, si) => {
+        const route = step.from && step.to
+          ? `${nodeLabels[step.from]} → ${nodeLabels[step.to]}`
+          : step.to
+            ? nodeLabels[step.to]
+            : "";
+        return (
+          <div
+            class="timeline-step"
+            data-step={si}
+            data-state={si === 0 ? "active" : "upcoming"}
+          >
+            <div class="timeline-marker-col">
+              <div class="timeline-marker">{si + 1}</div>
+            </div>
+            <div class="timeline-card">
+              <p class="text-sm font-semibold text-[var(--color-peach-paper-heading)]">
+                {step.label}
+              </p>
+              {route && (
+                <p class="mt-1 text-xs tracking-wide text-[var(--color-peach-paper-copy)]">
+                  {route}
+                </p>
+              )}
+              {step.method && (
+                <div class="mt-2 flex items-center gap-1.5 flex-wrap">
+                  <span class="method-badge">{step.method}</span>
+                  <code class="text-[11px] font-[family-name:var(--font-mono)] text-[var(--color-peach-paper-accent)]">
+                    {step.action}
+                  </code>
+                </div>
+              )}
+              {step.payload && (
+                <code class="mt-1.5 block text-[10px] font-[family-name:var(--font-mono)] leading-relaxed text-[var(--color-peach-paper-copy)] opacity-70">
+                  {step.payload}
+                </code>
+              )}
+              <p class="mt-2 text-xs leading-relaxed text-[var(--color-peach-paper-copy)]">
+                {step.description}
+              </p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    <!-- Right: diagram (desktop only, sticky) -->
+    <div class="hidden lg:block sticky top-28 self-start" data-flow-diagram>
+      <svg
+        viewBox={`0 0 ${DG_VB.w} ${DG_VB.h}`}
+        class="w-full h-auto"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <marker id="dg-arrow" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
+            <path d="M 0 0 L 7 2.5 L 0 5 Z" fill="var(--color-peach-paper-border-soft)" />
+          </marker>
+          <marker id="dg-arrow-active" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
+            <path d="M 0 0 L 7 2.5 L 0 5 Z" fill="var(--color-peach-paper-accent)" />
+          </marker>
+        </defs>
+
+        <!-- Paths (rendered before nodes so nodes overlay) -->
+        {dgPaths.map(p => (
+          <g data-dg-path-group={p.id}>
+            {/* Wide invisible hit area for easier clicking */}
+            <path
+              d={p.d}
+              stroke="transparent"
+              stroke-width="16"
+              fill="none"
+              style="cursor:pointer;"
+            />
+            {/* Visible path */}
+            <path
+              d={p.d}
+              data-dg-path={p.id}
+              stroke="var(--color-peach-paper-border-soft)"
+              stroke-width="1.5"
+              stroke-dasharray="4 3"
+              marker-end="url(#dg-arrow)"
+              class="dg-path"
+              style="pointer-events:none;"
+            />
+          </g>
+        ))}
+
+        <!-- Step number labels on paths -->
+        {stepPathLabels.map((label, si) => label && (
+          <g data-dg-step-label={si} class="dg-step-label">
+            <circle cx={label.x} cy={label.y} r="9" fill="var(--color-peach-paper-surface-soft)" stroke="var(--color-peach-paper-border)" stroke-width="1" />
+            <text x={label.x} y={label.y + 1} text-anchor="middle" dominant-baseline="central" fill="var(--color-peach-paper-copy)" font-size="9" font-weight="700" font-family="var(--font-mono)">{si + 1}</text>
+          </g>
+        ))}
+
+        <!-- Nodes -->
+        {dgNodePositions.map(n => (
+          <g data-dg-node={n.id}>
+            {n.id === "user" ? (
+              /* Person icon for caseworker */
+              <>
+                <circle cx={n.cx} cy={n.cy - 10} r="8" fill="var(--color-peach-paper-surface-soft)" stroke="var(--color-peach-paper-border)" stroke-width="1.2" class="dg-node-rect" />
+                <path d={`M ${n.cx - 12} ${n.cy + 14} C ${n.cx - 12} ${n.cy + 2}, ${n.cx + 12} ${n.cy + 2}, ${n.cx + 12} ${n.cy + 14}`} fill="var(--color-peach-paper-surface-soft)" stroke="var(--color-peach-paper-border)" stroke-width="1.2" class="dg-node-rect" />
+                <text x={n.cx} y={n.cy + 28} text-anchor="middle" fill="var(--color-peach-paper-copy)" font-size="10" font-weight="600" font-family="var(--font-body)" class="dg-node-text">{nodeLabels[n.id]}</text>
+              </>
+            ) : (
+              /* Wobbly rectangle for all other nodes */
+              <>
+                <path
+                  d={n.rectPath}
+                  fill="var(--color-peach-paper-surface-soft)"
+                  stroke="var(--color-peach-paper-border)"
+                  stroke-width="1.2"
+                  stroke-dasharray={n.internal ? "none" : "5 3"}
+                  stroke-linejoin="round"
+                  class="dg-node-rect"
+                />
+                {n.id === "tmpStorage" && (
+                  <path
+                    d={folderIconPath(n.cx - 56, n.cy - 6)}
+                    fill="var(--color-peach-paper-accent)"
+                    opacity="0.5"
+                    class="dg-folder-icon"
+                  />
+                )}
+                <text
+                  x={n.id === "tmpStorage" ? n.cx + 3 : n.cx}
+                  y={n.cy + 1}
+                  text-anchor="middle"
+                  dominant-baseline="central"
+                  fill="var(--color-peach-paper-copy)"
+                  font-size="10"
+                  font-weight="600"
+                  font-family="var(--font-body)"
+                  class="dg-node-text"
+                >
+                  {nodeLabels[n.id]}
+                </text>
+              </>
+            )}
+          </g>
+        ))}
+      </svg>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div class="flex items-center justify-center gap-4 mt-8">
+    <button type="button" data-flow-prev class="flex items-center justify-center w-9 h-9 border border-[var(--color-peach-paper-border)] text-[var(--color-peach-paper-copy)] transition-opacity hover:opacity-80 disabled:opacity-30" aria-label="Previous step">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <button type="button" data-flow-play class="flex items-center justify-center w-10 h-10 border border-[var(--color-peach-paper-accent)] text-[var(--color-peach-paper-accent)] transition-opacity hover:opacity-80" aria-label="Play animation">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" data-play-icon><path d="M8 5v14l11-7z"/></svg>
+      <svg class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="currentColor" data-pause-icon><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+    </button>
+    <button type="button" data-flow-next class="flex items-center justify-center w-9 h-9 border border-[var(--color-peach-paper-border)] text-[var(--color-peach-paper-copy)] transition-opacity hover:opacity-80 disabled:opacity-30" aria-label="Next step">
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+    <span data-flow-counter class="ml-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-peach-paper-copy)]">Step 1 / 2</span>
+  </div>
+</Section>
+
+<style>
+  /* ── Timeline ── */
+  .timeline { position: relative; }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 11px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: var(--color-peach-paper-border-soft);
+  }
+
+  .timeline-step {
+    display: flex;
+    gap: 1rem;
+    padding-bottom: 1.5rem;
+    transition: opacity 0.4s;
+    cursor: pointer;
+  }
+  .timeline-step:last-child { padding-bottom: 0; }
+
+  .timeline-marker-col {
+    flex-shrink: 0;
+    width: 24px;
+    display: flex;
+    justify-content: center;
+    padding-top: 2px;
+  }
+  .timeline-marker {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--color-peach-paper-border);
+    background: var(--color-peach-paper-surface-soft);
+    transition: all 0.4s;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--color-peach-paper-copy);
+    font-family: var(--font-mono);
+  }
+  .timeline-card {
+    flex: 1;
+    min-width: 0;
+    padding: 0.75rem 1rem;
+    border: 1px solid transparent;
+    transition: all 0.4s;
+  }
+
+  /* Timeline states */
+  .timeline-step[data-state="active"] .timeline-marker {
+    border-color: var(--color-peach-paper-accent);
+    background: var(--color-peach-paper-accent);
+    color: var(--color-peach-paper-surface-soft);
+    box-shadow:
+      0 0 0 4px color-mix(in srgb, var(--color-peach-paper-accent) 18%, transparent),
+      0 0 12px color-mix(in srgb, var(--color-peach-paper-accent) 25%, transparent);
+  }
+  .timeline-step[data-state="active"] .timeline-card {
+    border-color: var(--color-peach-paper-border);
+    background: var(--color-peach-paper-chip-bg);
+  }
+  .timeline-step[data-state="completed"] .timeline-marker {
+    border-color: var(--color-peach-paper-accent);
+    background: var(--color-peach-paper-accent);
+    color: var(--color-peach-paper-surface-soft);
+    opacity: 0.5;
+  }
+  .timeline-step[data-state="completed"] .timeline-card { opacity: 0.45; }
+  .timeline-step[data-state="upcoming"] { opacity: 0.4; }
+
+  .method-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    padding: 2px 6px;
+    color: var(--color-peach-paper-surface-soft);
+    background: var(--color-peach-paper-accent);
+  }
+
+  /* ── Diagram ── */
+  .dg-path {
+    opacity: 0.25;
+    transition: all 0.4s;
+  }
+  .dg-path[data-active="true"] {
+    opacity: 1;
+    stroke: var(--color-peach-paper-accent);
+    stroke-width: 2.5;
+    stroke-dasharray: none;
+    marker-end: url(#dg-arrow-active);
+  }
+  .dg-path[data-completed="true"] {
+    opacity: 0.5;
+    stroke: var(--color-peach-paper-accent);
+    stroke-dasharray: none;
+    marker-end: url(#dg-arrow-active);
+  }
+
+  .dg-node-rect { transition: all 0.4s; }
+  [data-dg-node][data-active="true"] .dg-node-rect {
+    stroke: var(--color-peach-paper-accent);
+    stroke-width: 2.2;
+    stroke-dasharray: none;
+    filter: drop-shadow(0 0 6px color-mix(in srgb, var(--color-peach-paper-accent) 30%, transparent));
+  }
+  [data-dg-node][data-active="true"] .dg-node-text {
+    fill: var(--color-peach-paper-heading);
+    font-weight: 700;
+  }
+  [data-dg-node][data-active="true"] .dg-folder-icon { opacity: 0.8; }
+  [data-dg-node][data-completed="true"] .dg-node-rect {
+    stroke: var(--color-peach-paper-accent);
+    stroke-dasharray: none;
+    opacity: 0.6;
+  }
+  [data-dg-node][data-dimmed="true"] .dg-node-rect { opacity: 0.3; }
+  [data-dg-node][data-dimmed="true"] .dg-node-text { opacity: 0.3; }
+  [data-dg-node][data-dimmed="true"] .dg-folder-icon { opacity: 0.15; }
+
+  .dg-step-label { opacity: 0.3; transition: all 0.4s; cursor: pointer; }
+  .dg-step-label[data-active="true"] {
+    opacity: 1;
+  }
+  .dg-step-label[data-active="true"] circle {
+    fill: var(--color-peach-paper-accent);
+    stroke: var(--color-peach-paper-accent);
+  }
+  .dg-step-label[data-active="true"] text {
+    fill: var(--color-peach-paper-surface-soft);
+  }
+  .dg-step-label[data-completed="true"] { opacity: 0.6; }
+  .dg-step-label[data-completed="true"] circle {
+    fill: var(--color-peach-paper-accent);
+    stroke: var(--color-peach-paper-accent);
+  }
+  .dg-step-label[data-completed="true"] text {
+    fill: var(--color-peach-paper-surface-soft);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .timeline-step, .timeline-marker, .timeline-card,
+    .dg-path, .dg-node-rect, .dg-step-label {
+      transition: none !important;
+    }
+  }
+</style>
+
+<script is:inline>
+(function () {
+  var STEP_DURATION = 2500;
+  var TOTAL_STEPS = 9;
+
+  var stepData = [
+    { from: "user", to: "gzac" },
+    { from: "gzac", to: "dataSource" },
+    { from: "gzac", to: "epistola" },
+    { from: "epistola", to: "tmpStorage" },
+    { from: "epistola", to: "notificaties" },
+    { from: "notificaties", to: "gzac" },
+    { from: "gzac", to: "tmpStorage" },
+    { from: "gzac", to: "drc" },
+    { from: "gzac", to: "user" },
+  ];
+
+  var container = document.querySelector("[data-arch-flow]");
+  if (!container) return;
+
+  var timeline = container.querySelector("[data-flow-timeline]");
+  var diagram = container.querySelector("[data-flow-diagram]");
+  var playBtn = container.querySelector("[data-flow-play]");
+  var prevBtn = container.querySelector("[data-flow-prev]");
+  var nextBtn = container.querySelector("[data-flow-next]");
+  var counter = container.querySelector("[data-flow-counter]");
+  var playIcon = container.querySelector("[data-play-icon]");
+  var pauseIcon = container.querySelector("[data-pause-icon]");
+
+  var currentStep = 0;
+  var isPlaying = false;
+  var stepTimerId = null;
+  var hasAutoStarted = false;
+
+  function updateDiagram(stepIndex) {
+    if (!diagram) return;
+    // Reset
+    diagram.querySelectorAll("[data-dg-node]").forEach(function (el) { el.removeAttribute("data-active"); el.removeAttribute("data-completed"); });
+    diagram.querySelectorAll("[data-dg-path]").forEach(function (el) { el.removeAttribute("data-active"); el.removeAttribute("data-completed"); });
+    diagram.querySelectorAll("[data-dg-step-label]").forEach(function (el) { el.removeAttribute("data-active"); el.removeAttribute("data-completed"); });
+
+    // Mark completed
+    for (var i = 0; i < stepIndex; i++) {
+      var prev = stepData[i];
+      if (prev.from) { var fn = diagram.querySelector('[data-dg-node="'+prev.from+'"]'); if(fn) fn.setAttribute("data-completed","true"); }
+      if (prev.to) { var tn = diagram.querySelector('[data-dg-node="'+prev.to+'"]'); if(tn) tn.setAttribute("data-completed","true"); }
+      if (prev.from && prev.to) { var pe = diagram.querySelector('[data-dg-path="'+prev.from+"_"+prev.to+'"]'); if(pe) pe.setAttribute("data-completed","true"); }
+      var sl = diagram.querySelector('[data-dg-step-label="'+i+'"]'); if(sl) sl.setAttribute("data-completed","true");
+    }
+
+    // Highlight active
+    var step = stepData[stepIndex];
+    if (step.from) { var f = diagram.querySelector('[data-dg-node="'+step.from+'"]'); if(f){f.removeAttribute("data-completed");f.setAttribute("data-active","true");} }
+    if (step.to) { var t = diagram.querySelector('[data-dg-node="'+step.to+'"]'); if(t){t.removeAttribute("data-completed");t.setAttribute("data-active","true");} }
+    if (step.from && step.to) { var ap = diagram.querySelector('[data-dg-path="'+step.from+"_"+step.to+'"]'); if(ap){ap.removeAttribute("data-completed");ap.setAttribute("data-active","true");} }
+    var al = diagram.querySelector('[data-dg-step-label="'+stepIndex+'"]'); if(al) al.setAttribute("data-active","true");
+  }
+
+  function showStep(index) {
+    if (!timeline) return;
+    if (index < 0 || index >= TOTAL_STEPS) return;
+    currentStep = index;
+
+    timeline.querySelectorAll("[data-step]").forEach(function (el) {
+      var i = Number(el.getAttribute("data-step"));
+      if (i < index) el.setAttribute("data-state", "completed");
+      else if (i === index) el.setAttribute("data-state", "active");
+      else el.setAttribute("data-state", "upcoming");
+    });
+
+    var activeEl = timeline.querySelector('[data-step="' + index + '"]');
+    if (activeEl) activeEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+
+    updateDiagram(index);
+    counter.textContent = "Step " + (index + 1) + " / " + TOTAL_STEPS;
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index === TOTAL_STEPS - 1;
+  }
+
+  function play() {
+    if (isPlaying) return;
+    isPlaying = true;
+    playIcon.classList.add("hidden");
+    pauseIcon.classList.remove("hidden");
+    playBtn.setAttribute("aria-label", "Pause animation");
+    advance();
+  }
+
+  function pause() {
+    isPlaying = false;
+    playIcon.classList.remove("hidden");
+    pauseIcon.classList.add("hidden");
+    playBtn.setAttribute("aria-label", "Play animation");
+    if (stepTimerId) { clearTimeout(stepTimerId); stepTimerId = null; }
+  }
+
+  function advance() {
+    if (!isPlaying) return;
+    showStep(currentStep);
+    stepTimerId = setTimeout(function () {
+      if (!isPlaying) return;
+      if (currentStep < TOTAL_STEPS - 1) { currentStep++; advance(); }
+      else { pause(); }
+    }, STEP_DURATION);
+  }
+
+  // Click on timeline steps
+  container.addEventListener("click", function (e) {
+    var stepEl = e.target.closest("[data-step]");
+    if (!stepEl) return;
+    var index = Number(stepEl.getAttribute("data-step"));
+    if (isNaN(index)) return;
+    pause();
+    showStep(index);
+  });
+
+  // Click on diagram paths or step labels to jump to step
+  if (diagram) {
+    diagram.addEventListener("click", function (e) {
+      // Click on path
+      var group = e.target.closest("[data-dg-path-group]");
+      if (group) {
+        var pathId = group.getAttribute("data-dg-path-group");
+        for (var i = 0; i < stepData.length; i++) {
+          if (stepData[i].from && stepData[i].to && (stepData[i].from + "_" + stepData[i].to) === pathId) {
+            pause(); showStep(i); return;
+          }
+        }
+      }
+      // Click on step label
+      var label = e.target.closest("[data-dg-step-label]");
+      if (label) {
+        var idx = Number(label.getAttribute("data-dg-step-label"));
+        if (!isNaN(idx)) { pause(); showStep(idx); }
+      }
+    });
+  }
+
+  playBtn.addEventListener("click", function () { isPlaying ? pause() : play(); });
+  prevBtn.addEventListener("click", function () { pause(); if (currentStep > 0) showStep(currentStep - 1); });
+  nextBtn.addEventListener("click", function () { pause(); if (currentStep < TOTAL_STEPS - 1) showStep(currentStep + 1); });
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting && !hasAutoStarted) { hasAutoStarted = true; play(); }
+    });
+  }, { threshold: 0.3 });
+  observer.observe(container);
+
+  showStep(0);
+})();
+</script>

@@ -6,6 +6,7 @@ All notable changes to this project will be documented here.
 
 ### Added
 
+- Interactive architecture flow visualization on homepage showing template configuration and document generation data flows with animated JSON packets, step-by-step controls, and auto-play on scroll.
 - New Epistola-branded marketing layout, hero, navigation, footer, and section components.
 - Shared design tokens for the marketing experience plus updated CTA button variants.
 - Renewed README describing the project + contribution workflow.
