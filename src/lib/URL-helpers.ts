@@ -19,7 +19,7 @@ function getSiteURL(): string {
 
 // Email addresses
 export const EMAILS = {
-  HELLO: "mailto:hello@epistola.app",
+  HELLO: "mailto:sander@epistola.app",
   SECURITY: "mailto:security@epistola.app",
   PRIVACY: "mailto:privacy@epistola.app",
 } as const;

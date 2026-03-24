@@ -36,7 +36,7 @@ When we ship new rendering engines, layout tooling, or collaboration features, t
 
 ## How to Participate
 
-- **Ask questions**: email hello@epistola.app or open issues in our repo
+- **Ask questions**: email sander@epistola.app or open issues in our repo
 - **Share examples**: we love showcasing creative automations and templates
 - **Request topics**: tell us which document challenges you're solving next
 

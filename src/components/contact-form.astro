@@ -1,0 +1,309 @@
+---
+import Button from "./ui/button.astro";
+import { Mail, Phone, Video } from "@lucide/astro";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+
+const inputClasses =
+  "w-full rounded-none border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-4 py-2.5 text-sm text-[var(--color-peach-paper-heading)] placeholder:text-[var(--color-peach-paper-chip-text)] focus:border-[var(--color-peach-paper-border-strong)] focus:outline-none";
+
+const labelClasses =
+  "text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-peach-paper-chip-text)]";
+
+const toggleClasses =
+  "contact-toggle flex items-center gap-2 border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-4 py-2.5 text-sm text-[var(--color-peach-paper-copy)] transition-colors cursor-pointer hover:border-[var(--color-peach-paper-border-strong)]";
+---
+
+<div class:list={["contact-form", className]}>
+  <form data-contact-form class="flex flex-col gap-5">
+    <div class="grid gap-4 sm:grid-cols-2">
+      <label class="flex flex-col gap-1.5">
+        <span class={labelClasses}>
+          Name <span class="text-[var(--color-peach-paper-accent)]">*</span>
+        </span>
+        <input
+          type="text"
+          name="name"
+          autocomplete="name"
+          required
+          placeholder="Your name"
+          class={inputClasses}
+        />
+      </label>
+      <label class="flex flex-col gap-1.5">
+        <span class={labelClasses}>
+          Email <span class="text-[var(--color-peach-paper-accent)]">*</span>
+        </span>
+        <input
+          type="email"
+          name="email"
+          autocomplete="email"
+          required
+          placeholder="you@company.com"
+          class={inputClasses}
+        />
+      </label>
+    </div>
+
+    <div class="flex flex-col gap-1.5">
+      <span class={labelClasses}>
+        How would you like to connect? <span class="text-[var(--color-peach-paper-accent)]">*</span>
+      </span>
+      <div class="flex flex-wrap gap-3">
+        <button type="button" data-contact-type="email" class={toggleClasses}>
+          <Mail class="w-4 h-4 pointer-events-none" />
+          <span class="pointer-events-none">Email</span>
+        </button>
+        <button type="button" data-contact-type="phone" class={toggleClasses}>
+          <Phone class="w-4 h-4 pointer-events-none" />
+          <span class="pointer-events-none">Phone call</span>
+        </button>
+        <button type="button" data-contact-type="video" class={toggleClasses}>
+          <Video class="w-4 h-4 pointer-events-none" />
+          <span class="pointer-events-none">Video call</span>
+        </button>
+      </div>
+      <input type="hidden" name="contactType" value="" />
+    </div>
+
+    <!-- Call details (shown when phone or video is selected) -->
+    <div data-call-details class="hidden flex flex-col gap-4">
+      <!-- Phone number (shown only for phone calls) -->
+      <label data-phone-field class="hidden flex flex-col gap-1.5">
+        <span class={labelClasses}>
+          Phone number <span class="text-[var(--color-peach-paper-accent)]">*</span>
+        </span>
+        <input
+          type="tel"
+          name="phone"
+          autocomplete="tel"
+          placeholder="+31 6 1234 5678"
+          class={inputClasses}
+        />
+      </label>
+
+      <!-- Time slot dropdowns (populated by JS) -->
+      <div class="grid gap-4 sm:grid-cols-2">
+        <label class="flex flex-col gap-1.5">
+          <span class={labelClasses}>
+            Preferred time <span class="text-[var(--color-peach-paper-accent)]">*</span>
+          </span>
+          <select name="preferredSlot" class={inputClasses + " slot-select"}>
+            <option value="">Select a time slot</option>
+          </select>
+        </label>
+        <label class="flex flex-col gap-1.5">
+          <span class={labelClasses}>
+            Backup time <span class="text-[var(--color-peach-paper-accent)]">*</span>
+          </span>
+          <select name="backupSlot" class={inputClasses + " slot-select"}>
+            <option value="">Select a time slot</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <!-- Message (always visible) -->
+    <label class="flex flex-col gap-1.5">
+      <span class={labelClasses}>
+        Message
+      </span>
+      <textarea
+        name="message"
+        rows="3"
+        placeholder="Tell us about your project or ask a question..."
+        class={inputClasses + " resize-y min-h-[80px]"}
+      ></textarea>
+    </label>
+
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+      <Button type="submit" variant="primary" size="md" class="w-full sm:w-auto">
+        Get in touch
+      </Button>
+      <p data-contact-error class="hidden text-sm text-[var(--color-danger-500)]"></p>
+    </div>
+  </form>
+
+  <div data-contact-success class="hidden text-center py-6">
+    <p class="text-lg font-semibold text-[var(--color-peach-paper-heading)]">
+      Thanks for reaching out!
+    </p>
+    <p class="mt-2 text-sm text-[var(--color-peach-paper-copy)]">
+      We'll get back to you within one business day.
+    </p>
+  </div>
+</div>
+
+<style>
+  .contact-toggle[data-selected="true"] {
+    border-color: var(--color-peach-paper-accent);
+    color: var(--color-peach-paper-accent);
+    background-color: var(--color-peach-paper-surface);
+  }
+</style>
+
+<script>
+  function generateSlots(): { value: string; label: string }[] {
+    const slots: { value: string; label: string }[] = [];
+    const locale = navigator.language || "en";
+    const dateFmt = new Intl.DateTimeFormat(locale, { weekday: "short", day: "numeric", month: "short" });
+    const timeFmt = new Intl.DateTimeFormat(locale, { hour: "2-digit", minute: "2-digit" });
+
+    const now = new Date();
+    const minTime = new Date(now.getTime() + 3 * 60 * 60 * 1000);
+    const maxTime = new Date(now.getTime() + 14 * 24 * 60 * 60 * 1000);
+
+    const cursor = new Date(minTime);
+    cursor.setMinutes(cursor.getMinutes() < 30 ? 30 : 0, 0, 0);
+    if (cursor.getMinutes() === 0) cursor.setHours(cursor.getHours() + 1);
+
+    while (cursor <= maxTime) {
+      const day = cursor.getDay();
+      const hour = cursor.getHours();
+      const mins = cursor.getMinutes();
+
+      if (day >= 1 && day <= 5 && hour >= 8 && (hour < 17 || (hour === 17 && mins <= 30))) {
+        const iso = cursor.toISOString();
+        const label = `${dateFmt.format(cursor)} — ${timeFmt.format(cursor)}`;
+        slots.push({ value: iso, label });
+      }
+
+      cursor.setMinutes(cursor.getMinutes() + 30);
+    }
+
+    return slots;
+  }
+
+  function populateSlotDropdowns(wrapper: HTMLElement) {
+    const slots = generateSlots();
+    wrapper.querySelectorAll<HTMLSelectElement>(".slot-select").forEach((select) => {
+      slots.forEach(({ value, label }) => {
+        const opt = document.createElement("option");
+        opt.value = value;
+        opt.textContent = label;
+        select.appendChild(opt);
+      });
+    });
+  }
+
+  function initContactForms() {
+    document.querySelectorAll<HTMLElement>(".contact-form").forEach((wrapper) => {
+      if (wrapper.dataset.initialized) return;
+      wrapper.dataset.initialized = "true";
+
+      const form = wrapper.querySelector<HTMLFormElement>("[data-contact-form]");
+      const successEl = wrapper.querySelector<HTMLElement>("[data-contact-success]");
+      const errorEl = wrapper.querySelector<HTMLElement>("[data-contact-error]");
+      if (!form || !successEl || !errorEl) return;
+
+      const contactTypeInput = form.querySelector<HTMLInputElement>('input[name="contactType"]')!;
+      const callDetails = form.querySelector<HTMLElement>("[data-call-details]")!;
+      const phoneField = form.querySelector<HTMLElement>("[data-phone-field]")!;
+      const phoneInput = form.querySelector<HTMLInputElement>('input[name="phone"]')!;
+      const toggles = wrapper.querySelectorAll<HTMLButtonElement>(".contact-toggle");
+
+      populateSlotDropdowns(wrapper);
+
+      function updateFields() {
+        const type = contactTypeInput.value;
+        const isCall = type === "phone" || type === "video";
+
+        if (isCall) {
+          callDetails.classList.remove("hidden");
+        } else {
+          callDetails.classList.add("hidden");
+          phoneInput.required = false;
+        }
+
+        if (type === "phone") {
+          phoneField.classList.remove("hidden");
+          phoneInput.required = true;
+        } else {
+          phoneField.classList.add("hidden");
+          phoneInput.required = false;
+          phoneInput.value = "";
+        }
+      }
+
+      toggles.forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          const type = btn.dataset.contactType || "";
+          const wasSelected = btn.dataset.selected === "true";
+
+          toggles.forEach((t) => (t.dataset.selected = "false"));
+
+          if (wasSelected) {
+            contactTypeInput.value = "";
+          } else {
+            btn.dataset.selected = "true";
+            contactTypeInput.value = type;
+          }
+
+          updateFields();
+        });
+      });
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        errorEl.classList.add("hidden");
+
+        if (!contactTypeInput.value) {
+          errorEl.textContent = "Please select how you'd like to connect.";
+          errorEl.classList.remove("hidden");
+          return;
+        }
+
+        if (contactTypeInput.value === "phone" || contactTypeInput.value === "video") {
+          const pref = (form.elements.namedItem("preferredSlot") as HTMLSelectElement).value;
+          const back = (form.elements.namedItem("backupSlot") as HTMLSelectElement).value;
+          if (!pref || !back) {
+            errorEl.textContent = "Please select both a preferred and backup time slot.";
+            errorEl.classList.remove("hidden");
+            return;
+          }
+        }
+
+        const data: Record<string, string | undefined> = {
+          name: (form.elements.namedItem("name") as HTMLInputElement).value,
+          email: (form.elements.namedItem("email") as HTMLInputElement).value,
+          contactType: contactTypeInput.value,
+          message: (form.elements.namedItem("message") as HTMLTextAreaElement).value || undefined,
+        };
+
+        if (contactTypeInput.value === "phone" || contactTypeInput.value === "video") {
+          data.preferredTime = (form.elements.namedItem("preferredSlot") as HTMLSelectElement).value;
+          data.backupTime = (form.elements.namedItem("backupSlot") as HTMLSelectElement).value;
+          if (contactTypeInput.value === "phone") {
+            data.phone = phoneInput.value;
+          }
+        }
+
+        try {
+          const res = await fetch("/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+          });
+
+          if (!res.ok) throw new Error("Request failed");
+
+          form.classList.add("hidden");
+          successEl.classList.remove("hidden");
+        } catch {
+          errorEl.textContent = "Something went wrong. Please try again or email us directly.";
+          errorEl.classList.remove("hidden");
+        }
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", initContactForms);
+  initContactForms();
+</script>
