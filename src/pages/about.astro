@@ -1,0 +1,75 @@
+---
+import Join from "../components/join.astro";
+import Layout from "../components/layout.astro";
+import PageHero from "../components/page-hero.astro";
+import Section from "../components/ui/section.astro";
+---
+
+<Layout
+  title="About · Epistola"
+  description="Mission-driven organization: we build the best possible document software for public institutions at reasonable prices."
+>
+  <PageHero
+    monoTitle="/ About"
+    title="Built to serve, not to maximize"
+    description="We're a small team that believes good software for municipalities shouldn't be held hostage by profit incentives."
+  />
+
+  <Section monoTitle="Who we are" title="A small team of founders running the company together">
+    <div class="max-w-2xl mx-auto flex flex-col gap-5 text-lg leading-relaxed text-[var(--color-peach-paper-copy)]">
+      <p>
+        Epistola is owned and operated by about five people who co-founded the organization. We're not a venture-backed
+        startup chasing growth at all costs—we're a group of founders building software we believe in, together.
+      </p>
+      <p>
+        We started Epistola because we saw municipalities struggling with document generation tools that were either
+        expensive, inflexible, or locked them into vendor relationships. We wanted to create something better: reliable,
+        open-source software that serves the public good.
+      </p>
+      <p>
+        Everyone here is a founder in spirit. We make decisions together, we're accountable to each other, and we move
+        forward as a unified team.
+      </p>
+    </div>
+  </Section>
+
+  <Section monoTitle="How we price" title="Budget-driven pricing, not profit maximization">
+    <div class="max-w-2xl mx-auto flex flex-col gap-5 text-lg leading-relaxed text-[var(--color-peach-paper-copy)]">
+      <p>
+        We set clear goals each year: what features we want to build, what infrastructure we need, what SLAs we
+        commit to, and what team we can afford. We budget for those goals. Then we price the software to cover that
+        budget—nothing more, nothing less.
+      </p>
+      <p>
+        Our revenue comes from three streams: feature development, SLA contracts, and donations. Not every organization
+        needs or wants an SLA, but we still maintain the software, ship security patches, and keep things running.
+        These donations—we call them <em>levensvatbaarheidsbijdragen</em> (viability contributions)—help keep the
+        project sustainable for everyone.
+      </p>
+      <p>
+        If revenue grows beyond our budget, we have two choices: reinvest the surplus into the product and team, or
+        reduce prices. Returns on investment are capped—we don't accumulate profit to maximize shareholder returns.
+      </p>
+    </div>
+  </Section>
+
+  <Section
+    monoTitle="The future"
+    title="Formalizing our mission with a foundation"
+  >
+    <div class="max-w-2xl mx-auto flex flex-col gap-5 text-lg leading-relaxed text-[var(--color-peach-paper-copy)]">
+      <p>
+        Today, our commitment to this mission rests on the values and promises of our founders. But we want to make it
+        permanent. We're working toward creating a foundation (stichting) that will legally guard this mission for the
+        long term.
+      </p>
+      <p>
+        The foundation will ensure that no future change of ownership or direction can override our core principles: fair
+        pricing, open development, and service to the public good. Until then, we operate by the same principles and
+        personally vouch for them.
+      </p>
+    </div>
+  </Section>
+
+  <Join />
+</Layout>
