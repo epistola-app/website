@@ -1,0 +1,68 @@
+{
+  "en": {
+    "page": {
+      "title": "Epistola · Terms",
+      "description": "Usage terms for the Epistola website, demo environment, and commercial support offerings."
+    },
+    "hero": {
+      "eyebrow": "Terms",
+      "title": "Terms of use",
+      "description": ""
+    },
+    "sections": [
+      {
+        "title": "Open-source usage",
+        "body": "Epistola's source code is licensed under the AGPL. You are free to self-host, modify, and redistribute the software under that license. Contributions are accepted via GitHub."
+      },
+      {
+        "title": "Demo environment",
+        "body": "The public demo is provided as is. We may reset, limit, or suspend access if the environment is misused. Do not store sensitive information in the demo instance."
+      },
+      {
+        "title": "Commercial support",
+        "body": "Support and managed hosting plans are governed by separate service agreements. Those agreements outline SLAs, pricing, and acceptable use."
+      },
+      {
+        "title": "Liability",
+        "body": "To the fullest extent permitted by law, Epistola and its contributors are not liable for any damages arising from the use of the open-source software, the demo environment, or third-party integrations."
+      }
+    ],
+    "contact": {
+      "title": "Contact",
+      "prefix": "For contractual questions, reach out to"
+    }
+  },
+  "nl": {
+    "page": {
+      "title": "Epistola · Voorwaarden",
+      "description": "Gebruiksvoorwaarden voor de Epistola-website, demo-omgeving, en commerciële supportaanbiedingen."
+    },
+    "hero": {
+      "eyebrow": "Voorwaarden",
+      "title": "Gebruiksvoorwaarden",
+      "description": ""
+    },
+    "sections": [
+      {
+        "title": "Gebruik van open source",
+        "body": "De broncode van Epistola valt onder de AGPL. Je mag de software zelf hosten, aanpassen, en herdistribueren onder die licentie. Bijdragen zijn welkom via GitHub."
+      },
+      {
+        "title": "Demo-omgeving",
+        "body": "De publieke demo wordt geleverd zoals die is. We kunnen toegang resetten, beperken, of opschorten als de omgeving verkeerd wordt gebruikt. Sla geen gevoelige informatie op in de demo-instance."
+      },
+      {
+        "title": "Commerciële support",
+        "body": "Support- en managed hostingplannen vallen onder aparte serviceovereenkomsten. Die overeenkomsten beschrijven SLA's, prijzen, en acceptabel gebruik."
+      },
+      {
+        "title": "Aansprakelijkheid",
+        "body": "Voor zover wettelijk toegestaan zijn Epistola en zijn contributors niet aansprakelijk voor schade die voortvloeit uit het gebruik van de open-source software, de demo-omgeving, of integraties met derden."
+      }
+    ],
+    "contact": {
+      "title": "Contact",
+      "prefix": "Voor contractuele vragen kun je terecht via"
+    }
+  }
+}

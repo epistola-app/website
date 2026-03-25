@@ -1,0 +1,104 @@
+---
+import { ArrowRight, KeyRound, LayoutTemplate, TriangleAlert, Workflow } from "@lucide/astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { useTranslations } from "../../i18n";
+import { URLS } from "../../lib/URL-helpers";
+import Layout from "../layout.astro";
+import Button from "../ui/button.astro";
+import Card from "../ui/card.astro";
+import Title from "../ui/title.astro";
+
+const { t, locale } = useTranslations(Astro);
+const demo = t("demo");
+---
+
+<Layout title={demo.page.title} description={demo.page.description}>
+  <section class="pt-32 pb-16">
+    <div class="mx-auto max-w-3xl px-4 text-center">
+      <p class="eyebrow">{demo.hero.eyebrow}</p>
+      <Title level={1} class="mt-6">{demo.hero.title}</Title>
+      <p class="mt-4 text-lg text-(--muted-text)">{demo.hero.description}</p>
+    </div>
+  </section>
+
+  <section class="pb-20">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <Card variant="brand" radius="3xl" shadow="md" padding="lg" class="mx-auto mb-12 max-w-3xl">
+        <div class="flex items-start gap-4">
+          <KeyRound class="mt-0.5 h-6 w-6 shrink-0 text-(--color-peach-paper-accent)" />
+          <div>
+            <p class="font-semibold text-(--color-peach-paper-heading)">{demo.gettingStarted.title}</p>
+            <p class="mt-1 text-(--color-peach-paper-copy)">{demo.gettingStarted.description}</p>
+          </div>
+        </div>
+      </Card>
+
+      <div class="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
+        <Card variant="default" radius="3xl" shadow="md" padding="lg" class="flex flex-col">
+          <div class="mb-4 flex items-center gap-3">
+            <div
+              class="flex h-10 w-10 items-center justify-center rounded-xl bg-(--color-peach-paper-accent) text-white"
+            >
+              <LayoutTemplate class="h-5 w-5" />
+            </div>
+            <div>
+              <p class="font-mono text-xs uppercase tracking-[0.14em] text-(--color-peach-paper-chip-text)">
+                {demo.suite.label}
+              </p>
+            </div>
+          </div>
+          <Title level={3} class="text-xl">{demo.suite.title}</Title>
+          <p class="mt-3 flex-1 leading-relaxed text-(--color-peach-paper-copy)">{demo.suite.description}</p>
+          <div class="mt-6">
+            <Button href={URLS.SUITE_DEMO} variant="primary" size="md" external class="group">
+              {demo.suite.cta}
+              <ArrowRight class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+            </Button>
+          </div>
+        </Card>
+
+        <Card variant="default" radius="3xl" shadow="md" padding="lg" class="flex flex-col">
+          <div class="mb-4 flex items-center gap-3">
+            <div
+              class="flex h-10 w-10 items-center justify-center rounded-xl bg-(--color-peach-paper-accent) text-white"
+            >
+              <Workflow class="h-5 w-5" />
+            </div>
+            <div>
+              <p class="font-mono text-xs uppercase tracking-[0.14em] text-(--color-peach-paper-chip-text)">
+                {demo.valtimo.label}
+              </p>
+            </div>
+          </div>
+          <Title level={3} class="text-xl">{demo.valtimo.title}</Title>
+          <p class="mt-3 flex-1 leading-relaxed text-(--color-peach-paper-copy)">{demo.valtimo.description}</p>
+          <div class="mt-6">
+            <Button href={URLS.VALTIMO_DEMO} variant="secondary" size="md" external class="group">
+              {demo.valtimo.cta}
+              <ArrowRight class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+            </Button>
+          </div>
+        </Card>
+      </div>
+
+      <div
+        class="mx-auto mt-12 flex max-w-3xl items-start gap-3 px-4 py-3 text-sm text-(--color-peach-paper-chip-text)"
+      >
+        <TriangleAlert class="mt-0.5 h-4 w-4 shrink-0" />
+        <p>{demo.disclaimer}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24">
+    <Card variant="brand" radius="4xl" shadow="lg" padding="none" class="mx-auto max-w-4xl px-6 py-16 text-center">
+      <Title level={2}>{demo.cta.title}</Title>
+      <p class="mt-4 text-lg text-(--muted-text)">{demo.cta.description}</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <Button href={getRelativeLocaleUrl(locale, "/contact")} variant="primary" size="md">{demo.cta.contact}</Button>
+        <Button href={getRelativeLocaleUrl(locale, "/pricing")} variant="secondary" size="md">{demo.cta.pricing}</Button
+        >
+      </div>
+    </Card>
+  </section>
+</Layout>

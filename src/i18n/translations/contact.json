@@ -1,0 +1,30 @@
+{
+  "en": {
+    "page": {
+      "title": "Contact · Epistola",
+      "description": "Get in touch with Epistola to discuss document generation, integrations, or support for your product."
+    },
+    "hero": {
+      "eyebrow": "Contact",
+      "title": "Get in touch",
+      "description": "Interested in what Epistola can do for your product? Schedule a call and ask us any of your questions."
+    },
+    "directEmail": {
+      "prefix": "Or email us directly at"
+    }
+  },
+  "nl": {
+    "page": {
+      "title": "Contact · Epistola",
+      "description": "Neem contact op met Epistola om documentgeneratie, integraties, of support voor je product te bespreken."
+    },
+    "hero": {
+      "eyebrow": "Contact",
+      "title": "Neem contact op",
+      "description": "Benieuwd wat Epistola voor jouw product kan betekenen? Plan een gesprek in en stel al je vragen."
+    },
+    "directEmail": {
+      "prefix": "Of mail ons direct via"
+    }
+  }
+}

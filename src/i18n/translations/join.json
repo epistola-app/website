@@ -1,20 +1,12 @@
 {
   "en": {
     "monoTitle": "/ Next step",
-    "title": "Ready to plug Epistola into your product?",
-    "description": "We'll review your templates, map the Common Ground payloads, and help you expose a render endpoint your orchestrator can call.",
-    "whatHappensNext": "What happens next",
-    "step1": "30-minute architecture review and template fit check.",
-    "step2": "Concrete rollout plan tailored to your orchestrator stack.",
-    "reviewPlans": "Review plans"
+    "title": "Interested in what Epistola can do for your product?",
+    "description": "Schedule a call and ask us any of your questions."
   },
   "nl": {
     "monoTitle": "/ Volgende stap",
     "title": "Klaar om Epistola in je product te integreren?",
-    "description": "We reviewen je templates, mappen de Common Ground payloads, en helpen je een render endpoint te exposen die je orchestrator kan aanroepen.",
-    "whatHappensNext": "Wat er vervolgens gebeurt",
-    "step1": "30-minuten architectuur review en template fit check.",
-    "step2": "Concreet uitrol plan afgestemd op je orchestrator stack.",
-    "reviewPlans": "Bekijk plannen"
+    "description": "We reviewen je templates, mappen de Common Ground payloads, en helpen je een render endpoint te exposen die je orchestrator kan aanroepen."
   }
 }

@@ -9,10 +9,10 @@
   },
   "nl": {
     "monoTitle": "/ Nieuwsbrief",
-    "title": "Operationele patronen van document-intensieve teams.",
-    "description": "Maandelijkse inzichten over governance, compliance, en automatisering. Geen ruis.",
+    "title": "Operationele patronen van teams met veel documentstromen.",
+    "description": "Maandelijkse inzichten over sturing, naleving, en automatisering. Geen ruis.",
     "emailPlaceholder": "jij@bedrijf.nl",
-    "subscribe": "Abonneren",
-    "privacyNote": "Door je te abonneren ga je akkoord met het ontvangen van Epistola updates. Je kunt je op elk moment uitschrijven."
+    "subscribe": "Inschrijven",
+    "privacyNote": "Door je in te schrijven ga je akkoord met het ontvangen van updates van Epistola. Je kunt je op elk moment uitschrijven."
   }
 }

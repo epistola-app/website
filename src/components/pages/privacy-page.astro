@@ -1,0 +1,23 @@
+---
+import { useTranslations } from "../../i18n";
+import { EMAILS } from "../../lib/URL-helpers";
+import PolicyPage from "./policy-page.astro";
+
+const { t } = useTranslations(Astro);
+const privacy = t("privacy");
+---
+
+<PolicyPage
+  pageTitle={privacy.page.title}
+  pageDescription={privacy.page.description}
+  eyebrow={privacy.hero.eyebrow}
+  title={privacy.hero.title}
+  description={privacy.hero.description}
+  sections={privacy.sections}
+  contact={{
+    title: privacy.contact.title,
+    prefix: privacy.contact.prefix,
+    email: "privacy@epistola.app",
+    emailHref: EMAILS.PRIVACY,
+  }}
+/>

@@ -1,8 +1,7 @@
 // External URLs used throughout the application
 export const URLS = {
-  DEMO: "https://demo.epistola.app",
+  SUITE_DEMO: "https://demo.epistola.app",
   VALTIMO_DEMO: "https://valtimo-demo.epistola.app",
-  DOCS: "https://docs.epistola.app",
   GITHUB: "https://github.com/epistola-app",
   API: "https://api.epistola.app/v1/renders",
 } as const;

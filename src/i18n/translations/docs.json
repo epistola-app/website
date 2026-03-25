@@ -1,0 +1,34 @@
+{
+  "en": {
+    "page": {
+      "title": "Docs · Epistola",
+      "description": "Documentation for Epistola is on the way, including guides, API references, and integration tutorials."
+    },
+    "hero": {
+      "monoTitle": "Documentation",
+      "title": "Documentation is coming",
+      "description": "We're working on comprehensive guides, API references, and integration tutorials for Epistola."
+    },
+    "card": {
+      "title": "Stay tuned",
+      "description": "In the meantime, explore the demo environment to get a feel for how Epistola works.",
+      "cta": "Try demo"
+    }
+  },
+  "nl": {
+    "page": {
+      "title": "Docs · Epistola",
+      "description": "Documentatie voor Epistola komt eraan, inclusief handleidingen, API-referenties, en integratietutorials."
+    },
+    "hero": {
+      "monoTitle": "Documentatie",
+      "title": "Documentatie komt eraan",
+      "description": "We werken aan uitgebreide handleidingen, API-referenties, en integratietutorials voor Epistola."
+    },
+    "card": {
+      "title": "Blijf op de hoogte",
+      "description": "Verken intussen de demo-omgeving om een gevoel te krijgen voor hoe Epistola werkt.",
+      "cta": "Probeer demo"
+    }
+  }
+}

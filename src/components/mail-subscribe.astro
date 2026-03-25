@@ -1,10 +1,11 @@
 ---
+import { useTranslations } from "../i18n";
 import Button from "./ui/button.astro";
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
-import { useTranslations } from "../i18n";
 
 const { t } = useTranslations(Astro);
+const common = t("common");
 const mailSubscribe = t("mailSubscribe");
 ---
 
@@ -17,18 +18,18 @@ const mailSubscribe = t("mailSubscribe");
   <Card variant="brand" padding="none" shadow="none" class="p-10 text-center lg:col-start-2 lg:col-span-4">
     <form class="mt-8 flex flex-col gap-4 sm:flex-row">
       <label class="relative flex-1">
-        <span class="sr-only">Email</span>
+        <span class="sr-only">{common.email}</span>
         <input
           type="email"
           autocomplete="email"
           required
           placeholder={mailSubscribe.emailPlaceholder}
-          class="w-full rounded-none border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-5 py-2 text-sm font-medium text-[var(--color-peach-paper-heading)] placeholder:text-[var(--color-peach-paper-chip-text)] focus:border-[var(--color-peach-paper-border-strong)] focus:outline-none"
+          class="w-full rounded-none border border-(--color-peach-paper-border) bg-(--color-peach-paper-chip-bg) px-5 py-2 text-sm font-medium text-(--color-peach-paper-heading) placeholder:text-(--color-peach-paper-chip-text) focus:border-(--color-peach-paper-border-strong) focus:outline-none"
         />
       </label>
       <Button type="submit" variant="primary" size="md" class="w-full sm:w-auto">{mailSubscribe.subscribe}</Button>
     </form>
-    <p class="mt-4 text-xs text-[var(--color-peach-paper-chip-text)]">
+    <p class="mt-4 text-xs text-(--color-peach-paper-chip-text)">
       {mailSubscribe.privacyNote}
     </p>
   </Card>

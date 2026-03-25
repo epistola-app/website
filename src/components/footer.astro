@@ -1,11 +1,13 @@
 ---
-import { prepareURL, URLS, EMAILS } from "../lib/URL-helpers";
-import { useTranslations } from "../i18n";
+import { getLocalizedPath, useTranslations } from "../i18n";
+import { EMAILS, prepareURL, URLS } from "../lib/URL-helpers";
 
-const { t } = useTranslations(Astro);
+const { t, locale } = useTranslations(Astro);
 const footer = t("footer");
+const copyright = footer.copyright.replace("{year}", String(new Date().getFullYear()));
 
-const logoHref = import.meta.env.BASE_URL;
+const logoHref = prepareURL(getLocalizedPath("/", locale));
+const getInternalHref = (path: string) => prepareURL(getLocalizedPath(path, locale));
 
 const footerLinks = [
   {
@@ -14,15 +16,16 @@ const footerLinks = [
       { href: "/features", text: footer.features },
       { href: "/integrations", text: footer.integrations },
       { href: "/pricing", text: footer.pricing },
+      { href: "/about", text: footer.about },
+      { href: "/contact", text: footer.contact },
     ],
   },
   {
-    title: "Resources",
+    title: footer.resources,
     links: [
       {
-        href: URLS.DOCS,
-        text: "Documentation",
-        external: true,
+        href: "/docs",
+        text: footer.documentation,
       },
       { href: "/blog", text: footer.blog },
       {
@@ -43,29 +46,26 @@ const footerLinks = [
 ];
 ---
 
-<footer class="footer-reveal mt-auto border-t border-[var(--color-peach-paper-nav-border)] text-[var(--color-peach-paper-copy)] lg:sticky lg:bottom-0">
-  <div class="footer-reveal__inner container mx-auto px-4 py-14 lg:py-16">
-    <div class="grid gap-10 border-b border-[var(--color-peach-paper-border)] pb-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+<footer class="mt-auto border-t border-(--color-peach-paper-nav-border) text-(--color-peach-paper-copy) lg:bottom-0">
+  <div class="container mx-auto px-4 py-14 lg:py-16">
+    <div class="grid gap-10 border-b border-(--color-peach-paper-border) pb-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
       <div>
         <a href={logoHref} class="inline-flex items-center gap-3">
-          <img src="/logo.svg" alt="Epistola logo" class="h-10 w-10" />
+          <img src="/logo.svg" alt="Epistola" class="h-10 w-10" />
           <div class="flex flex-col">
-            <span class="text-base font-semibold tracking-tight text-[var(--color-peach-paper-heading)]">Epistola</span>
-            <span class="text-[10px] uppercase tracking-[0.16em] text-[var(--color-peach-paper-copy)]">Documents</span>
+            <span class="text-base font-semibold tracking-tight text-(--color-peach-paper-heading)">Epistola</span>
+            <span class="text-[10px] uppercase tracking-[0.16em] text-(--color-peach-paper-copy)"
+              >{footer.brandTagline}</span
+            >
           </div>
         </a>
 
-        <p class="mt-4 max-w-sm text-sm leading-6 text-[var(--color-peach-paper-copy)]">
-          Open-source documentgeneratie voor Common Ground teams en integrators.
+        <p class="mt-4 max-w-sm text-sm leading-6 text-(--color-peach-paper-copy)">
+          {footer.description}
         </p>
 
         <div class="mt-6 flex flex-col gap-2 text-sm">
-          <a
-            href={EMAILS.HELLO}
-            class="transition hover:text-[var(--color-peach-paper-accent)]"
-          >
-            sander@epistola.app
-          </a>
+          <a href={EMAILS.HELLO} class="transition hover:text-(--color-peach-paper-accent)"> sander@epistola.app </a>
         </div>
       </div>
 
@@ -73,18 +73,16 @@ const footerLinks = [
         {
           footerLinks.map((section) => (
             <div>
-              <p class="text-sm font-semibold text-[var(--color-peach-paper-heading)]">
-                {section.title}
-              </p>
-              <ul class="mt-4 space-y-2 text-sm text-[var(--color-peach-paper-copy)]">
+              <p class="text-sm font-semibold text-(--color-peach-paper-heading)">{section.title}</p>
+              <ul class="mt-4 space-y-2 text-sm text-(--color-peach-paper-copy)">
                 {section.links.map((link) => {
-                  const href = link.external ? link.href : prepareURL(link.href);
+                  const href = link.external ? link.href : getInternalHref(link.href);
 
                   return (
                     <li>
                       <a
                         href={href}
-                        class="transition hover:text-[var(--color-peach-paper-heading)]"
+                        class="transition hover:text-(--color-peach-paper-heading)"
                         target={link.external ? "_blank" : undefined}
                         rel={link.external ? "noreferrer" : undefined}
                       >
@@ -100,12 +98,20 @@ const footerLinks = [
       </div>
     </div>
 
-    <div class="mt-6 flex flex-col gap-3 text-xs text-[var(--color-peach-paper-copy)] sm:flex-row sm:items-center sm:justify-between">
-      <p>© {new Date().getFullYear()} Epistola. All rights reserved.</p>
+    <div
+      class="mt-6 flex flex-col gap-3 text-xs text-(--color-peach-paper-copy) sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p>{copyright}</p>
       <div class="flex flex-wrap gap-4">
-        <a class="transition hover:text-[var(--color-peach-paper-heading)]" href={prepareURL("/privacy")}>Privacy</a>
-        <a class="transition hover:text-[var(--color-peach-paper-heading)]" href={prepareURL("/terms")}>Terms</a>
-        <a class="transition hover:text-[var(--color-peach-paper-heading)]" href={prepareURL("/security")}>Security</a>
+        <a class="transition hover:text-(--color-peach-paper-heading)" href={getInternalHref("/privacy")}
+          >{footer.privacy}</a
+        >
+        <a class="transition hover:text-(--color-peach-paper-heading)" href={getInternalHref("/terms")}
+          >{footer.terms}</a
+        >
+        <a class="transition hover:text-(--color-peach-paper-heading)" href={getInternalHref("/security")}
+          >{footer.security}</a
+        >
       </div>
     </div>
   </div>

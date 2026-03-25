@@ -5,6 +5,8 @@
     "pricing": "Pricing",
     "docs": "Docs",
     "blog": "Blog",
+    "contact": "Contact",
+    "about": "About",
     "signIn": "Sign in",
     "getDemo": "Get demo",
     "menu": "Menu"
@@ -15,6 +17,8 @@
     "pricing": "Prijzen",
     "docs": "Documentatie",
     "blog": "Blog",
+    "contact": "Contact",
+    "about": "Over ons",
     "signIn": "Inloggen",
     "getDemo": "Demo aanvragen",
     "menu": "Menu"

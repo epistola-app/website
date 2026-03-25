@@ -1,11 +1,11 @@
 ---
+import { useTranslations } from "../i18n";
+import { URLS } from "../lib/URL-helpers";
+import SuiteDemoButton from "./buttons/suite-demo-button.astro";
 import Button from "./ui/button.astro";
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
-import SuiteDemoButton from "./buttons/suite-demo-button.astro";
-import { URLS } from "../lib/URL-helpers";
-import { useTranslations } from "../i18n";
 
 const { t } = useTranslations(Astro);
 const pricing = t("pricing");
@@ -24,22 +24,22 @@ const tierConfigs = [
         variant={tierConfigs[index].cardVariant}
         padding="lg"
         shadow="none"
-        class={`flex flex-col ${tierConfigs[index].highlighted ? "ring-2 ring-[var(--color-peach-paper-accent)]" : ""}`}
+        class={`flex flex-col ${tierConfigs[index].highlighted ? "ring-2 ring-(--color-peach-paper-accent)" : ""}`}
       >
         <div class="flex items-start justify-between">
           <div>
-            <p class="text-sm font-semibold text-[var(--color-peach-paper-chip-text)]">{tier.cadence}</p>
+            <p class="text-sm font-semibold text-(--color-peach-paper-chip-text)">{tier.cadence}</p>
             <Title level={3} class="mt-2 text-3xl">
               {tier.name}
             </Title>
           </div>
-          <p class="text-3xl font-semibold text-[var(--color-peach-paper-accent)]">{tier.price}</p>
+          <p class="text-3xl font-semibold text-(--color-peach-paper-accent)">{tier.price}</p>
         </div>
-        <p class="mt-4 text-sm text-[var(--muted-text)]">{tier.description}</p>
-        <ul class="mt-6 space-y-3 text-sm text-[var(--color-peach-paper-copy)]">
+        <p class="mt-4 text-sm text-(--muted-text)">{tier.description}</p>
+        <ul class="mt-6 space-y-3 text-sm text-(--color-peach-paper-copy)">
           {tier.features.map((feature) => (
             <li class="flex items-center gap-2">
-              <span class="h-2 w-2 bg-[var(--color-peach-paper-accent)]" />
+              <span class="h-2 w-2 bg-(--color-peach-paper-accent)" />
               {feature}
             </li>
           ))}
@@ -49,7 +49,7 @@ const tierConfigs = [
             <SuiteDemoButton />
           ) : (
             <Button
-              href={index === 0 ? URLS.GITHUB : "/register"}
+              href={index === 0 ? URLS.GITHUB : "/contact"}
               variant={index === 0 ? "link" : "secondary"}
               size="md"
               class={index === 0 ? "w-full justify-start sm:justify-center" : "w-full justify-center"}

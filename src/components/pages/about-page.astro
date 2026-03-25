@@ -1,0 +1,39 @@
+---
+import { useTranslations } from "../../i18n";
+import Join from "../join.astro";
+import Layout from "../layout.astro";
+import PageHero from "../page-hero.astro";
+import Section from "../ui/section.astro";
+
+const { t } = useTranslations(Astro);
+const about = t("about");
+---
+
+<Layout title={about.page.title} description={about.page.description}>
+  <PageHero monoTitle={about.hero.monoTitle} title={about.hero.title} description={about.hero.description} />
+
+  <Section monoTitle={about.whoWeAre.monoTitle} title={about.whoWeAre.title}>
+    <div class="mx-auto flex max-w-2xl flex-col gap-5 text-lg leading-relaxed text-(--color-peach-paper-copy)">
+      <p>{about.whoWeAre.paragraphOne}</p>
+      <p>{about.whoWeAre.paragraphTwo}</p>
+      <p>{about.whoWeAre.paragraphThree}</p>
+    </div>
+  </Section>
+
+  <Section monoTitle={about.pricing.monoTitle} title={about.pricing.title}>
+    <div class="mx-auto flex max-w-2xl flex-col gap-5 text-lg leading-relaxed text-(--color-peach-paper-copy)">
+      <p>{about.pricing.paragraphOne}</p>
+      <p>{about.pricing.paragraphTwo}</p>
+      <p>{about.pricing.paragraphThree}</p>
+    </div>
+  </Section>
+
+  <Section monoTitle={about.future.monoTitle} title={about.future.title}>
+    <div class="mx-auto flex max-w-2xl flex-col gap-5 text-lg leading-relaxed text-(--color-peach-paper-copy)">
+      <p>{about.future.paragraphOne}</p>
+      <p>{about.future.paragraphTwo}</p>
+    </div>
+  </Section>
+
+  <Join />
+</Layout>

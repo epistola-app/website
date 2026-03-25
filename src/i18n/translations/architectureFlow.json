@@ -1,0 +1,124 @@
+{
+  "en": {
+    "section": {
+      "monoTitle": "/ How it works",
+      "title": "From template to document - watch the data flow.",
+      "description": "Epistola generates documents on demand. Click through the steps or let the animation play to see how data flows between systems."
+    },
+    "nodes": {
+      "user": "Caseworker",
+      "dataSource": "Data Source",
+      "gzac": "Zaakafhandelsysteem",
+      "drc": "DRC",
+      "epistola": "Epistola",
+      "tmpStorage": "Temporary Storage",
+      "notificaties": "Open Notificaties"
+    },
+    "controls": {
+      "previous": "Previous step",
+      "next": "Next step",
+      "play": "Play animation",
+      "pause": "Pause animation",
+      "stepCounter": "Step {current} / {total}"
+    },
+    "steps": [
+      {
+        "label": "Caseworker starts process",
+        "description": "A caseworker initiates a case process in the zaakafhandelsysteem - for example handling an objection (\"bezwaar\")."
+      },
+      {
+        "label": "Collect case data",
+        "description": "The zaakafhandelsysteem gathers case data from the ZRC, ZTC, and other configured data sources."
+      },
+      {
+        "label": "Request document generation",
+        "description": "The plugin sends a generation request to Epistola with the resolved template and all variable data."
+      },
+      {
+        "label": "Render and store document",
+        "description": "Epistola renders the template with the provided data and stores the resulting PDF in temporary storage."
+      },
+      {
+        "label": "Publish completion event",
+        "description": "Epistola publishes a notification via the Open Notificaties API to signal the document is ready for pickup."
+      },
+      {
+        "label": "EpistolaDocumentGenerated",
+        "description": "Open Notificaties delivers the event callback to the zaakafhandelsysteem - the document is ready for pickup."
+      },
+      {
+        "label": "Collect document",
+        "description": "The zaakafhandelsysteem uses the resource URL from the event to download the generated PDF from temporary storage."
+      },
+      {
+        "label": "Register in Documenten API",
+        "description": "The zaakafhandelsysteem stores the PDF in the Documenten API (DRC), linking it to the original case for archival."
+      },
+      {
+        "label": "Document available",
+        "description": "The caseworker can now view and download the generated document from within the zaakafhandelsysteem."
+      }
+    ]
+  },
+  "nl": {
+    "section": {
+      "monoTitle": "/ Hoe het werkt",
+      "title": "Van template naar document - volg de datastroom.",
+      "description": "Epistola genereert documenten op aanvraag. Klik door de stappen of laat de animatie afspelen om te zien hoe data tussen systemen stroomt."
+    },
+    "nodes": {
+      "user": "Zaakbehandelaar",
+      "dataSource": "Databron",
+      "gzac": "Zaakafhandelsysteem",
+      "drc": "DRC",
+      "epistola": "Epistola",
+      "tmpStorage": "Tijdelijke opslag",
+      "notificaties": "Open Notificaties"
+    },
+    "controls": {
+      "previous": "Vorige stap",
+      "next": "Volgende stap",
+      "play": "Speel animatie af",
+      "pause": "Pauzeer animatie",
+      "stepCounter": "Stap {current} / {total}"
+    },
+    "steps": [
+      {
+        "label": "Zaakbehandelaar start proces",
+        "description": "Een zaakbehandelaar start een proces in het zaakafhandelsysteem - bijvoorbeeld voor het behandelen van een bezwaar."
+      },
+      {
+        "label": "Verzamel zaakdata",
+        "description": "Het zaakafhandelsysteem verzamelt zaakdata uit de ZRC, ZTC, en andere geconfigureerde databronnen."
+      },
+      {
+        "label": "Vraag documentgeneratie aan",
+        "description": "De plugin stuurt een generatieverzoek naar Epistola met de gekozen template en alle variabele data."
+      },
+      {
+        "label": "Render en sla document op",
+        "description": "Epistola rendert de template met de aangeleverde data en slaat de resulterende PDF op in tijdelijke opslag."
+      },
+      {
+        "label": "Publiceer voltooiingsevent",
+        "description": "Epistola publiceert een notificatie via de Open Notificaties API om aan te geven dat het document klaarstaat om op te halen."
+      },
+      {
+        "label": "EpistolaDocumentGenerated",
+        "description": "Open Notificaties levert de event-callback af aan het zaakafhandelsysteem - het document staat klaar om op te halen."
+      },
+      {
+        "label": "Haal document op",
+        "description": "Het zaakafhandelsysteem gebruikt de resource-URL uit het event om de gegenereerde PDF uit de tijdelijke opslag te downloaden."
+      },
+      {
+        "label": "Registreer in de Documenten API",
+        "description": "Het zaakafhandelsysteem slaat de PDF op in de Documenten API (DRC) en koppelt die aan de oorspronkelijke zaak voor archivering."
+      },
+      {
+        "label": "Document beschikbaar",
+        "description": "De zaakbehandelaar kan het gegenereerde document nu bekijken en downloaden vanuit het zaakafhandelsysteem."
+      }
+    ]
+  }
+}

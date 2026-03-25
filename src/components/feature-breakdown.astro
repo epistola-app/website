@@ -1,77 +1,32 @@
 ---
+import { useTranslations } from "../i18n";
 import Card from "./ui/card.astro";
 import MonoTitle from "./ui/mono-title.astro";
 import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
 
-const detailSections = [
-  {
-    badge: "Lifecycle",
-    title: "Templates, variants, versions, environments",
-    body: [
-      "Each tenant owns template slugs with unlimited variants tagged by geography, brand, or audience.",
-      "Variants carry immutable version numbers with a draft → published → archived lifecycle and audit history.",
-      "Environments (staging, production, custom) activate specific versions so you can test or roll back safely.",
-      "Variant resolver inspects request attributes (e.g., language=nl) and picks the closest match automatically, falling back to the default when nothing fits.",
-    ],
-  },
-  {
-    badge: "Contracts",
-    title: "Data schemas and executable examples",
-    body: [
-      "Every template ships with a JSON Schema Draft 2020-12 data contract validated pre-render.",
-      "Named example payloads live beside the schema for instant previewing and regression fixtures.",
-      "Schema migrations keep draft versions in sync when fields change between releases.",
-    ],
-  },
-  {
-    badge: "Feedback",
-    title: "Built-in reviews with screenshots",
-    body: [
-      "Floating feedback button opens a modal that captures URL, user context, and console logs.",
-      "Drag in or paste screenshots—assets upload automatically and render in the feedback timeline.",
-      "Optional GitHub sync mirrors issues bi-directionally so engineers can triage where they work.",
-    ],
-  },
-  {
-    badge: "Themes",
-    title: "Tenant and variant theming",
-    body: [
-      "Reusable theme packages define typography, color tokens, and page settings (A4, Letter, margins).",
-      "Theme cascade respects tenant defaults, template overrides, then variant-specific tweaks for special cases.",
-      "Block-level presets make it easy to enforce branded tables, headers, and emphasis patterns.",
-    ],
-  },
-  {
-    badge: "Assets",
-    title: "Tenant asset manager",
-    body: [
-      "Upload PNG, JPG, SVG, or WebP up to 5 MB via drag-and-drop with automatic thumbnailing.",
-      "Assets live per tenant with search, delete, and direct references inside the template editor.",
-      "Raw endpoints serve optimized binaries to the renderer so logos stay crisp in every PDF.",
-    ],
-  },
-];
+const { t } = useTranslations(Astro);
+const detail = t("features").featureBreakdown;
 ---
 
 <Section
   id="feature-breakdown"
-  monoTitle="/ Feature deep dive"
-  title="The Epistola Suite in practice"
-  description="Straight from the reference implementation: how templates evolve, feedback gets routed, and assets stay governed."
+  monoTitle={detail.monoTitle}
+  title={detail.title}
+  description={detail.description}
   contentClass="space-y-8"
 >
   {
-    detailSections.map((section) => (
+    detail.sections.map((section) => (
       <Card variant="default" padding="lg">
         <MonoTitle>{section.badge}</MonoTitle>
         <Title level={3} class="mt-3">
           {section.title}
         </Title>
-        <ul class="mt-4 space-y-2 text-sm text-[var(--muted-text)]">
+        <ul class="mt-4 space-y-2 text-sm text-(--muted-text)">
           {section.body.map((item) => (
             <li class="flex gap-3">
-              <span class="mt-[6px] h-1.5 w-1.5 rounded-full bg-[var(--color-peach-paper-accent)]" aria-hidden="true" />
+              <span class="mt-1.5 h-1.5 w-1.5 rounded-full bg-(--color-peach-paper-accent)" aria-hidden="true" />
               <span class="flex-1">{item}</span>
             </li>
           ))}

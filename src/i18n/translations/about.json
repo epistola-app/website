@@ -1,0 +1,64 @@
+{
+  "en": {
+    "page": {
+      "title": "About · Epistola",
+      "description": "Mission-driven organization: we build the best possible document software for public institutions at reasonable prices."
+    },
+    "hero": {
+      "monoTitle": "/ About",
+      "title": "Built to serve, not to maximize",
+      "description": "We're a small team that believes good software for municipalities shouldn't be held hostage by profit incentives."
+    },
+    "whoWeAre": {
+      "monoTitle": "Who we are",
+      "title": "A small team of founders running the company together",
+      "paragraphOne": "Epistola is owned and operated by about five people who co-founded the organization. We're not a venture-backed startup chasing growth at all costs - we're a group of founders building software we believe in, together.",
+      "paragraphTwo": "We started Epistola because we saw municipalities struggling with document generation tools that were either expensive, inflexible, or locked them into vendor relationships. We wanted to create something better: reliable, open-source software that serves the public good.",
+      "paragraphThree": "Everyone here is a founder in spirit. We make decisions together, we're accountable to each other, and we move forward as a unified team."
+    },
+    "pricing": {
+      "monoTitle": "How we price",
+      "title": "Budget-driven pricing, not profit maximization",
+      "paragraphOne": "We set clear goals each year: what features we want to build, what infrastructure we need, what SLAs we commit to, and what team we can afford. We budget for those goals. Then we price the software to cover that budget - nothing more, nothing less.",
+      "paragraphTwo": "Our revenue comes from three streams: feature development, SLA contracts, and donations. Not every organization needs or wants an SLA, but we still maintain the software, ship security patches, and keep things running. These donations - we call them viability contributions - help keep the project sustainable for everyone.",
+      "paragraphThree": "If revenue grows beyond our budget, we have two choices: reinvest the surplus into the product and team, or reduce prices. Returns on investment are capped - we don't accumulate profit to maximize shareholder returns."
+    },
+    "future": {
+      "monoTitle": "The future",
+      "title": "Formalizing our mission with a foundation",
+      "paragraphOne": "Today, our commitment to this mission rests on the values and promises of our founders. But we want to make it permanent. We're working toward creating a foundation that will legally guard this mission for the long term.",
+      "paragraphTwo": "The foundation will ensure that no future change of ownership or direction can override our core principles: fair pricing, open development, and service to the public good. Until then, we operate by the same principles and personally vouch for them."
+    }
+  },
+  "nl": {
+    "page": {
+      "title": "Over ons · Epistola",
+      "description": "Missiegedreven organisatie: we bouwen de best mogelijke documentsoftware voor publieke instellingen tegen redelijke prijzen."
+    },
+    "hero": {
+      "monoTitle": "/ Over ons",
+      "title": "Gebouwd om te dienen, niet om te maximaliseren",
+      "description": "We zijn een klein team dat gelooft dat goede software voor gemeenten niet gegijzeld mag worden door winstprikkels."
+    },
+    "whoWeAre": {
+      "monoTitle": "Wie we zijn",
+      "title": "Een klein team van oprichters dat het bedrijf samen runt",
+      "paragraphOne": "Epistola is eigendom van en wordt gerund door ongeveer vijf mensen die de organisatie samen hebben opgericht. We zijn geen venture-backed startup die koste wat kost groei najaagt - we zijn een groep oprichters die samen software bouwt waar we in geloven.",
+      "paragraphTwo": "We zijn Epistola gestart omdat we zagen dat gemeenten worstelden met documentgeneratie-tools die duur, inflexibel of afhankelijk van leveranciers waren. We wilden iets beters maken: betrouwbare, open-source software die het publieke belang dient.",
+      "paragraphThree": "Iedereen hier denkt en handelt als oprichter. We nemen samen beslissingen, zijn aan elkaar verantwoordelijk, en bewegen als een hecht team vooruit."
+    },
+    "pricing": {
+      "monoTitle": "Hoe we prijzen",
+      "title": "Prijsstelling vanuit budget, niet vanuit winstmaximalisatie",
+      "paragraphOne": "We stellen elk jaar heldere doelen vast: welke functies we willen bouwen, welke infrastructuur we nodig hebben, welke SLA's we toezeggen, en welk team we kunnen betalen. Voor die doelen maken we een budget. Daarna prijzen we de software zo dat dat budget wordt gedekt - niets meer en niets minder.",
+      "paragraphTwo": "Onze inkomsten komen uit drie stromen: feature development, SLA-contracten, en donaties. Niet elke organisatie heeft een SLA nodig of wil er een, maar we onderhouden de software wel, leveren security patches, en houden alles draaiend. Die donaties - wij noemen ze levensvatbaarheidsbijdragen - helpen het project duurzaam te houden voor iedereen.",
+      "paragraphThree": "Als de omzet boven ons budget uitkomt, hebben we twee keuzes: het overschot herinvesteren in product en team, of de prijzen verlagen. Rendement op investering is begrensd - we stapelen geen winst op om aandeelhoudersrendement te maximaliseren."
+    },
+    "future": {
+      "monoTitle": "De toekomst",
+      "title": "Onze missie formaliseren met een stichting",
+      "paragraphOne": "Vandaag rust onze toewijding aan deze missie op de waarden en beloften van onze oprichters. Maar we willen dat blijvend maken. We werken toe naar een stichting die deze missie juridisch voor de lange termijn bewaakt.",
+      "paragraphTwo": "Die stichting moet ervoor zorgen dat geen toekomstige wijziging in eigenaarschap of koers onze kernprincipes kan overrulen: eerlijke prijzen, open ontwikkeling, en dienstbaarheid aan het publieke belang. Tot die tijd werken we volgens dezelfde principes en staan we er persoonlijk voor in."
+    }
+  }
+}

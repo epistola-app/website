@@ -1,8 +1,12 @@
 ---
+import { useTranslations } from "../i18n";
 import Card from "./ui/card.astro";
 import MonoTitle from "./ui/mono-title.astro";
 import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
+
+const { t } = useTranslations(Astro);
+const features = t("features");
 
 const schemaFields = [
   { name: "caseNumber", type: "string", note: "required" },
@@ -47,32 +51,32 @@ const themeCascade = [
 
 const resolverSteps = [
   {
-    title: "Describe intent",
-    description: "Callers send attributes with required vs optional flags.",
+    title: features.templateSystem.resolverSteps[0].title,
+    description: features.templateSystem.resolverSteps[0].description,
     chips: [
       { label: "language=nl", tone: "required" },
       { label: "brand=citizen", tone: "optional" },
     ],
   },
   {
-    title: "Filter on required",
-    description: "Any variant missing a required attribute drops out immediately.",
+    title: features.templateSystem.resolverSteps[1].title,
+    description: features.templateSystem.resolverSteps[1].description,
     chips: [
       { label: "nl-standard ✓", tone: "positive" },
       { label: "en-business ✗", tone: "negative" },
     ],
   },
   {
-    title: "Score optional matches",
-    description: "Optional matches + specificity award points.",
+    title: features.templateSystem.resolverSteps[2].title,
+    description: features.templateSystem.resolverSteps[2].description,
     chips: [
       { label: "nl-standard → score 12", tone: "positive" },
       { label: "default → score 0", tone: "neutral" },
     ],
   },
   {
-    title: "Select & fallback",
-    description: "Highest score wins; default variant stays as the safety net.",
+    title: features.templateSystem.resolverSteps[3].title,
+    description: features.templateSystem.resolverSteps[3].description,
     chips: [
       { label: "Chosen: nl-standard v7", tone: "positive" },
       { label: "Fallback: default variant", tone: "optional" },
@@ -83,44 +87,50 @@ const resolverSteps = [
 
 <Section
   id="template-system"
-  monoTitle="/ Template system"
-  title="How Epistola templates stay organized"
-  description="Variants, immutable versions, JSON Schemas, and environment activations all live inside the suite so integrations stay simple."
+  monoTitle={features.templateSystem.monoTitle}
+  title={features.templateSystem.title}
+  description={features.templateSystem.description}
   contentClass="space-y-12"
 >
   <div
-    class="relative rounded-[48px] border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-surface-soft)] px-6 py-8 shadow-2xl shadow-black/5 md:px-10 md:py-12"
+    class="relative rounded-[48px] border border-(--color-peach-paper-border) bg-(--color-peach-paper-surface-soft) px-6 py-8 shadow-2xl shadow-black/5 md:px-10 md:py-12"
   >
     <div class="pointer-events-none hidden md:block" aria-hidden="true">
-      <div class="absolute left-24 right-24 top-1/2 h-px bg-[var(--color-peach-paper-border-soft)]" />
-      <div class="absolute top-8 bottom-8 left-1/2 w-px bg-[var(--color-peach-paper-border-soft)]" />
+      <div class="absolute left-24 right-24 top-1/2 h-px bg-(--color-peach-paper-border-soft)"></div>
+      <div class="absolute top-8 bottom-8 left-1/2 w-px bg-(--color-peach-paper-border-soft)"></div>
     </div>
     <div class="relative grid gap-6 md:grid-cols-[1.05fr_1.3fr_1.05fr]">
       <Card variant="subtle" radius="3xl" padding="lg" class="space-y-6">
         <div>
           <MonoTitle>Schema</MonoTitle>
-          <Title level={3} class="mt-2">JSON Schema Draft 2020-12</Title>
+          <Title level={3} class="mt-2">{features.templateSystem.schema.title}</Title>
         </div>
-        <dl class="space-y-3 text-sm text-[var(--muted-text)]">
-          {schemaFields.map((field) => (
-            <div class="flex items-start justify-between gap-3">
-              <dt class="font-semibold text-[var(--color-peach-paper-copy)]">{field.name}</dt>
-              <dd class="text-right text-xs uppercase tracking-wide text-[var(--muted-text)]">
-                {field.type}
-                <span class="block text-[var(--color-peach-paper-chip-text)]">{field.note}</span>
-              </dd>
-            </div>
-          ))}
+        <dl class="space-y-3 text-sm text-(--muted-text)">
+          {
+            schemaFields.map((field) => (
+              <div class="flex items-start justify-between gap-3">
+                <dt class="font-semibold text-(--color-peach-paper-copy)">{field.name}</dt>
+                <dd class="text-right text-xs uppercase tracking-wide text-(--muted-text)">
+                  {field.type}
+                  <span class="block text-(--color-peach-paper-chip-text)">{field.note}</span>
+                </dd>
+              </div>
+            ))
+          }
         </dl>
         <div>
-          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--color-peach-paper-chip-text)]">Examples</p>
-          <ul class="mt-2 space-y-2 text-sm text-[var(--muted-text)]">
-            {examples.map((example) => (
-              <li class="flex items-center justify-between rounded-2xl bg-white/40 px-4 py-2 text-[var(--color-peach-paper-copy)]">
-                <span class="font-medium">{example.name}</span>
-                <span class="text-xs text-[var(--muted-text)]">{example.note}</span>
-              </li>
-            ))}
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-(--color-peach-paper-chip-text)">
+            {features.templateSystem.schema.examplesTitle}
+          </p>
+          <ul class="mt-2 space-y-2 text-sm text-(--muted-text)">
+            {
+              examples.map((example) => (
+                <li class="flex items-center justify-between rounded-2xl bg-white/40 px-4 py-2 text-(--color-peach-paper-copy)">
+                  <span class="font-medium">{example.name}</span>
+                  <span class="text-xs text-(--muted-text)">{example.note}</span>
+                </li>
+              ))
+            }
           </ul>
         </div>
       </Card>
@@ -132,132 +142,142 @@ const resolverSteps = [
         class="relative overflow-hidden text-white [background-image:var(--gradient-peach-paper-card-strong)]"
       >
         <MonoTitle>Template</MonoTitle>
-        <Title level={3} class="mt-2 text-white">Public Decision Letter</Title>
+        <Title level={3} class="mt-2 text-white">{features.templateSystem.template.title}</Title>
         <p class="mt-3 max-w-xl text-sm text-white/80">
-          Template slugs stay tenant-scoped. Variants inherit schema + theme but keep their own immutable version history.
+          {features.templateSystem.template.description}
         </p>
         <div class="mt-6 grid gap-4 md:grid-cols-2">
-          {variants.map((variant) => (
-            <div class="rounded-3xl border border-white/20 bg-white/5 p-4">
-              <p class="text-sm font-semibold uppercase tracking-wide text-white/70">{variant.name}</p>
-              <div class="mt-2 flex flex-wrap gap-1.5 text-xs">
-                {variant.tags.map((tag) => (
-                  <span class="rounded-full border border-white/40 px-2 py-0.5 text-white/80">{tag}</span>
-                ))}
+          {
+            variants.map((variant) => (
+              <div class="rounded-3xl border border-white/20 bg-white/5 p-4">
+                <p class="text-sm font-semibold uppercase tracking-wide text-white/70">{variant.name}</p>
+                <div class="mt-2 flex flex-wrap gap-1.5 text-xs">
+                  {variant.tags.map((tag) => (
+                    <span class="rounded-full border border-white/40 px-2 py-0.5 text-white/80">{tag}</span>
+                  ))}
+                </div>
+                <div class="mt-3 space-y-2 text-xs">
+                  {variant.versions.map((version) => (
+                    <div class="flex items-center justify-between rounded-2xl bg-black/30 px-3 py-1.5">
+                      <span class="font-semibold text-white">{version}</span>
+                      <span class="text-white/70">immutable</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div class="mt-3 space-y-2 text-xs">
-                {variant.versions.map((version) => (
-                  <div class="flex items-center justify-between rounded-2xl bg-black/30 px-3 py-1.5">
-                    <span class="font-semibold text-white">{version}</span>
-                    <span class="text-white/70">immutable</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+            ))
+          }
         </div>
         <p class="mt-4 text-sm text-white/85">
-          Generation requests can skip `variantId`. Provide attributes such as `language=nl` or `brand=business` and the resolver
-          scores every variant, picking the closest match and falling back to the default if nothing satisfies required
-          criteria.
+          {features.templateSystem.template.resolverDescription}
         </p>
-        <div class="mt-6 rounded-3xl border border-white/25 bg-black/20 p-5 text-sm text-white/85" aria-label="Variant resolver flow">
-          <p class="text-xs font-semibold uppercase tracking-[0.3em] text-white/60">Variant resolver</p>
-          <p class="mt-2 text-xs text-white/70">Attribute intent → required filter → optional scoring → fallback safety net</p>
+        <div
+          class="mt-6 rounded-3xl border border-white/25 bg-black/20 p-5 text-sm text-white/85"
+          aria-label={features.templateSystem.template.resolverTitle}
+        >
+          <p class="text-xs font-semibold uppercase tracking-[0.3em] text-white/60">
+            {features.templateSystem.template.resolverTitle}
+          </p>
+          <p class="mt-2 text-xs text-white/70">{features.templateSystem.template.resolverSubtitle}</p>
           <ol class="mt-6 space-y-5 border-l border-white/25 pl-6">
-            {resolverSteps.map((step, index) => (
-              <li class="relative rounded-2xl border border-white/20 bg-black/30 p-4">
-                <div class="absolute -left-[34px] top-5 flex h-9 w-9 items-center justify-center rounded-full border border-white/40 bg-black/70 font-semibold text-white">
-                  {index + 1}
-                </div>
-                <div class="flex flex-col gap-1">
-                  <p class="text-sm font-semibold text-white">{step.title}</p>
-                  <p class="text-xs text-white/70">{step.description}</p>
-                </div>
-                <ul class="mt-4 flex flex-wrap gap-2 text-xs">
-                  {step.chips.map((chip) => (
-                    <li
-                      class={`rounded-full border px-3 py-1 font-mono ${
-                        chip.tone === "required"
-                          ? "border-emerald-200/50 bg-emerald-400/10 text-emerald-100"
-                          : chip.tone === "positive"
-                            ? "border-white/80 bg-white/10 text-white"
-                            : chip.tone === "negative"
-                              ? "border-red-200/60 bg-red-500/10 text-red-100"
-                              : chip.tone === "neutral"
-                                ? "border-white/20 bg-white/5 text-white/70"
-                                : chip.tone === "optional"
-                                  ? "border-white/30 bg-white/5 text-white/60"
-                                  : "border-white/30 bg-white/5 text-white/75"
-                      }`}
-                    >
-                      {chip.label}
-                    </li>
-                  ))}
-                </ul>
-                {index < resolverSteps.length - 1 ? (
-                  <span class="absolute -left-[2px] bottom-[-24px] block h-6 w-px bg-white/25" aria-hidden="true" />
-                ) : null}
-              </li>
-            ))}
+            {
+              resolverSteps.map((step, index) => (
+                <li class="relative rounded-2xl border border-white/20 bg-black/30 p-4">
+                  <div class="absolute -left-8.5 top-5 flex h-9 w-9 items-center justify-center rounded-full border border-white/40 bg-black/70 font-semibold text-white">
+                    {index + 1}
+                  </div>
+                  <div class="flex flex-col gap-1">
+                    <p class="text-sm font-semibold text-white">{step.title}</p>
+                    <p class="text-xs text-white/70">{step.description}</p>
+                  </div>
+                  <ul class="mt-4 flex flex-wrap gap-2 text-xs">
+                    {step.chips.map((chip) => (
+                      <li
+                        class={`rounded-full border px-3 py-1 font-mono ${
+                          chip.tone === "required"
+                            ? "border-emerald-200/50 bg-emerald-400/10 text-emerald-100"
+                            : chip.tone === "positive"
+                              ? "border-white/80 bg-white/10 text-white"
+                              : chip.tone === "negative"
+                                ? "border-red-200/60 bg-red-500/10 text-red-100"
+                                : chip.tone === "neutral"
+                                  ? "border-white/20 bg-white/5 text-white/70"
+                                  : chip.tone === "optional"
+                                    ? "border-white/30 bg-white/5 text-white/60"
+                                    : "border-white/30 bg-white/5 text-white/75"
+                        }`}
+                      >
+                        {chip.label}
+                      </li>
+                    ))}
+                  </ul>
+                  {index < resolverSteps.length - 1 ? (
+                    <span class="absolute -left-0.5 -bottom-6 block h-6 w-px bg-white/25" aria-hidden="true" />
+                  ) : null}
+                </li>
+              ))
+            }
           </ol>
         </div>
         <div class="mt-6 rounded-3xl border border-white/25 bg-white/10 p-4">
-          <p class="text-xs uppercase tracking-[0.3em] text-white/60">Audit trail</p>
+          <p class="text-xs uppercase tracking-[0.3em] text-white/60">{features.templateSystem.template.auditTitle}</p>
           <p class="mt-2 text-sm text-white">
-            Publishing locks the theme snapshot + schema hash so every request can be reproduced years later.
+            {features.templateSystem.template.auditText}
           </p>
         </div>
       </Card>
       <Card variant="subtle" radius="3xl" padding="lg" class="space-y-6">
         <div>
           <MonoTitle>Environments</MonoTitle>
-          <Title level={3} class="mt-2">Activate per stage</Title>
+          <Title level={3} class="mt-2">{features.templateSystem.environments.title}</Title>
         </div>
-        <div class="space-y-4 text-sm text-[var(--muted-text)]">
-          {environments.map((environment) => (
-            <div class="rounded-3xl border border-[var(--color-peach-paper-border-soft)] bg-white/60 p-4">
-              <div class="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-[var(--color-peach-paper-chip-text)]">
-                <span>{environment.name}</span>
-                <span>immutable pointers</span>
+        <div class="space-y-4 text-sm text-(--muted-text)">
+          {
+            environments.map((environment) => (
+              <div class="rounded-3xl border border-(--color-peach-paper-border-soft) bg-white/60 p-4">
+                <div class="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-(--color-peach-paper-chip-text)">
+                  <span>{environment.name}</span>
+                  <span>{features.templateSystem.environments.subtitle}</span>
+                </div>
+                <ul class="mt-3 space-y-1 text-(--color-peach-paper-copy)">
+                  {environment.items.map((item) => (
+                    <li class="flex items-center justify-between text-sm">
+                      <span class="font-medium">{item.variant}</span>
+                      <span class="rounded-full bg-(--color-peach-paper-accent)/10 px-3 py-0.5 text-xs text-(--color-peach-paper-accent)">
+                        {item.version}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul class="mt-3 space-y-1 text-[var(--color-peach-paper-copy)]">
-                {environment.items.map((item) => (
-                  <li class="flex items-center justify-between text-sm">
-                    <span class="font-medium">{item.variant}</span>
-                    <span class="rounded-full bg-[var(--color-peach-paper-accent)]/10 px-3 py-0.5 text-xs text-[var(--color-peach-paper-accent)]">
-                      {item.version}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+            ))
+          }
         </div>
-        <p class="text-xs text-[var(--muted-text)]">
-          Promote by switching the active version pointer; rollbacks are instant because older versions stay archived.
+        <p class="text-xs text-(--muted-text)">
+          {features.templateSystem.environments.description}
         </p>
       </Card>
     </div>
     <div class="mt-8 grid gap-6 md:grid-cols-2">
       <Card variant="outline" radius="3xl" padding="lg" class="bg-white/70">
         <MonoTitle>Themes</MonoTitle>
-        <Title level={3} class="mt-2">Cascade across tenants → templates → variants</Title>
-        <ul class="mt-4 space-y-2 text-sm text-[var(--muted-text)]">
-          {themeCascade.map((item) => (
-            <li class="flex gap-3">
-              <span class="mt-2 h-1.5 w-1.5 rounded-full bg-[var(--color-peach-paper-accent)]" aria-hidden="true" />
-              <span>{item}</span>
-            </li>
-          ))}
+        <Title level={3} class="mt-2">{features.templateSystem.themes.title}</Title>
+        <ul class="mt-4 space-y-2 text-sm text-(--muted-text)">
+          {
+            themeCascade.map((item) => (
+              <li class="flex gap-3">
+                <span class="mt-2 h-1.5 w-1.5 rounded-full bg-(--color-peach-paper-accent)" aria-hidden="true" />
+                <span>{item}</span>
+              </li>
+            ))
+          }
         </ul>
       </Card>
       <Card variant="outline" radius="3xl" padding="lg" class="bg-white/70">
         <MonoTitle>Validation</MonoTitle>
-        <Title level={3} class="mt-2">Schema + example replay before render</Title>
-        <p class="mt-4 text-sm text-[var(--muted-text)]">
-          Render requests fail fast if the payload drifts from the JSON Schema. Named examples replay automatically in CI
-          to protect variant versions before they hit production environments.
+        <Title level={3} class="mt-2">{features.templateSystem.validation.title}</Title>
+        <p class="mt-4 text-sm text-(--muted-text)">
+          {features.templateSystem.validation.description}
         </p>
       </Card>
     </div>

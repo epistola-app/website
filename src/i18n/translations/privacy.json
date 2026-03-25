@@ -1,0 +1,60 @@
+{
+  "en": {
+    "page": {
+      "title": "Epistola · Privacy",
+      "description": "How Epistola handles data when you run the platform or engage with our website."
+    },
+    "hero": {
+      "eyebrow": "Privacy",
+      "title": "How we handle data",
+      "description": "Epistola is an open-source renderer. When you self-host it, your organization remains in full control of all data. The following details cover how we treat information for our public website, demo environment, and optional managed service."
+    },
+    "sections": [
+      {
+        "title": "Website analytics",
+        "body": "We only collect anonymous traffic statistics (page views, referrers, and device types) to understand how visitors discover Epistola. We do not use advertising cookies or share analytics data with third parties."
+      },
+      {
+        "title": "Demo environment",
+        "body": "The hosted demo runs sample templates and placeholder data. Documents generated in the demo are automatically purged within 24 hours. Do not upload personal or production datasets to the demo instance."
+      },
+      {
+        "title": "Managed service",
+        "body": "If you opt for Epistola's managed offering, a separate Data Processing Agreement (DPA) specifies responsibilities, retention, and regional hosting options. We only process the data required to provide the service and never reuse it for other purposes."
+      }
+    ],
+    "contact": {
+      "title": "Contact",
+      "prefix": "For privacy-related questions or DPA requests, email"
+    }
+  },
+  "nl": {
+    "page": {
+      "title": "Epistola · Privacy",
+      "description": "Hoe Epistola met data omgaat wanneer je het platform gebruikt of onze website bezoekt."
+    },
+    "hero": {
+      "eyebrow": "Privacy",
+      "title": "Hoe we met data omgaan",
+      "description": "Epistola is een open-source renderer. Wanneer je het zelf host, houdt jouw organisatie volledige controle over alle data. Hieronder staat hoe we omgaan met informatie op onze publieke website, demo-omgeving, en optionele managed service."
+    },
+    "sections": [
+      {
+        "title": "Website-analyse",
+        "body": "We verzamelen alleen anonieme verkeersstatistieken (paginaweergaven, verwijzers, en apparaattype) om te begrijpen hoe bezoekers Epistola vinden. We gebruiken geen advertentiecookies en delen analyticsdata niet met derden."
+      },
+      {
+        "title": "Demo-omgeving",
+        "body": "De gehoste demo draait met voorbeeldtemplates en placeholderdata. Documenten die in de demo worden gegenereerd, worden automatisch binnen 24 uur verwijderd. Upload geen persoonsgegevens of productiedatasets naar de demo-instance."
+      },
+      {
+        "title": "Managed service",
+        "body": "Als je kiest voor de managed offering van Epistola, legt een aparte verwerkersovereenkomst (DPA) verantwoordelijkheden, bewaartermijnen, en regionale hostingopties vast. We verwerken alleen de data die nodig is om de dienst te leveren en hergebruiken die nooit voor andere doeleinden."
+      }
+    ],
+    "contact": {
+      "title": "Contact",
+      "prefix": "Voor privacygerelateerde vragen of verzoeken rond een verwerkersovereenkomst, mail"
+    }
+  }
+}

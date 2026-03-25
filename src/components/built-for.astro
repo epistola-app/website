@@ -3,6 +3,7 @@ import Section from "./ui/section.astro";
 import { useTranslations } from "../i18n";
 
 const { t } = useTranslations(Astro);
+const common = t("common");
 const builtFor = t("builtFor");
 
 const workflowSteps = builtFor.steps.map((step, index) => ({
@@ -17,6 +18,7 @@ const workflowSteps = builtFor.steps.map((step, index) => ({
   description={builtFor.description}
   contentClass="grid gap-6 lg:grid-cols-2"
   data-built-for
+  data-active-label={common.active}
 >
   <div class="flex flex-col gap-4">
     {
@@ -36,9 +38,11 @@ const workflowSteps = builtFor.steps.map((step, index) => ({
           aria-pressed={step.isActive ? "true" : "false"}
         >
           <div class="flex items-center justify-between">
-            <span class="text-xs font-semibold uppercase tracking-[0.18em]">Step {index + 1}</span>
+            <span class="text-xs font-semibold uppercase tracking-[0.18em]">
+              {common.stepLabel} {index + 1}
+            </span>
             <span class="text-xs font-semibold uppercase tracking-[0.16em]" data-step-status>
-              {step.isActive ? "Active" : step.inactiveLabel}
+              {step.isActive ? common.active : step.inactiveLabel}
             </span>
           </div>
           <div>
@@ -109,6 +113,7 @@ const workflowSteps = builtFor.steps.map((step, index) => ({
         const isActive = index === activeIndex;
         const status = button.querySelector("[data-step-status]");
         const inactiveLabel = button.getAttribute("data-inactive-label") || "Next";
+        const activeLabel = section.getAttribute("data-active-label") || "Active";
 
         button.classList.toggle("bg-[var(--color-peach-paper-chip-bg)]", isActive);
         button.classList.toggle("opacity-70", !isActive);
@@ -116,7 +121,7 @@ const workflowSteps = builtFor.steps.map((step, index) => ({
         button.setAttribute("data-active", isActive ? "true" : "false");
 
         if (status) {
-          status.textContent = isActive ? "Active" : inactiveLabel;
+          status.textContent = isActive ? activeLabel : inactiveLabel;
         }
       });
 

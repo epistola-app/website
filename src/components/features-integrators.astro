@@ -1,8 +1,7 @@
 ---
+import { useTranslations } from "../i18n";
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
-import Title from "./ui/title.astro";
-import { useTranslations } from "../i18n";
 
 const { t } = useTranslations(Astro);
 const features = t("features");
@@ -19,21 +18,23 @@ const features = t("features");
       {
         features.forIntegrators.highlights.map((item) => (
           <li class="flex items-start">
-            <svg class="mr-3 h-6 w-6 text-[var(--color-peach-paper-accent)]" fill="currentColor" viewBox="0 0 20 20">
+            <svg class="mr-3 h-6 w-6 text-(--color-peach-paper-accent)" fill="currentColor" viewBox="0 0 20 20">
               <path
                 fill-rule="evenodd"
                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                 clip-rule="evenodd"
               />
             </svg>
-            <span class="text-[var(--color-peach-paper-copy)]">{item}</span>
+            <span class="text-(--color-peach-paper-copy)">{item}</span>
           </li>
         ))
       }
     </ul>
   </div>
   <Card variant="default" padding="lg" shadow="none" class="text-center lg:col-span-2">
-    <p class="text-5xl font-semibold text-[var(--color-peach-paper-accent)]">50-200 ms</p>
-    <p class="mt-2 text-sm uppercase tracking-[0.12em] text-[var(--color-peach-paper-chip-text)]">{features.forIntegrators.renderTime}</p>
+    <p class="text-5xl font-semibold text-(--color-peach-paper-accent)">50-200 ms</p>
+    <p class="mt-2 text-sm uppercase tracking-[0.12em] text-(--color-peach-paper-chip-text)">
+      {features.forIntegrators.renderTime}
+    </p>
   </Card>
 </Section>

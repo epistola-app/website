@@ -1,9 +1,12 @@
 {
   "en": {
     "product": "Product",
+    "resources": "Resources",
     "features": "Features",
     "integrations": "Integrations",
     "pricing": "Pricing",
+    "contact": "Contact",
+    "documentation": "Documentation",
     "company": "Company",
     "about": "About",
     "blog": "Blog",
@@ -11,13 +14,18 @@
     "privacy": "Privacy Policy",
     "terms": "Terms of Use",
     "security": "Security",
+    "brandTagline": "Documents",
+    "description": "Open-source document generation for Common Ground teams and integrators.",
     "copyright": "© {year} Epistola. Open source under AGPL-3.0."
   },
   "nl": {
     "product": "Product",
+    "resources": "Bronnen",
     "features": "Functies",
     "integrations": "Integraties",
     "pricing": "Prijzen",
+    "contact": "Contact",
+    "documentation": "Documentatie",
     "company": "Bedrijf",
     "about": "Over ons",
     "blog": "Blog",
@@ -25,6 +33,8 @@
     "privacy": "Privacybeleid",
     "terms": "Gebruiksvoorwaarden",
     "security": "Beveiliging",
+    "brandTagline": "Documenten",
+    "description": "Open-source documentgeneratie voor Common Ground-teams en integrators.",
     "copyright": "© {year} Epistola. Open source onder AGPL-3.0."
   }
 }

@@ -1,0 +1,62 @@
+{
+  "en": {
+    "page": {
+      "title": "Epistola · Security",
+      "description": "Security posture for the Epistola project, demo, and managed offering."
+    },
+    "hero": {
+      "eyebrow": "Security",
+      "title": "Security practices",
+      "description": ""
+    },
+    "sections": [
+      {
+        "title": "Code transparency",
+        "body": "Epistola is open source. All changes are reviewed via pull requests and undergo automated linting, tests, and dependency scanning before release."
+      },
+      {
+        "title": "Self-hosting",
+        "body": "When you run Epistola yourself, you control the infrastructure, networking, and access policies. We recommend isolating render nodes, enabling TLS everywhere, and monitoring outputs for unauthorized changes."
+      },
+      {
+        "title": "Managed service",
+        "body": "Managed environments are deployed in dedicated namespaces with network policies, encrypted storage, and 24/7 monitoring. We support EU-region hosting on request."
+      }
+    ],
+    "contact": {
+      "title": "Responsible disclosure",
+      "prefix": "Report vulnerabilities privately to",
+      "suffix": "We'll acknowledge receipt within two business days and coordinate remediation steps."
+    }
+  },
+  "nl": {
+    "page": {
+      "title": "Epistola · Beveiliging",
+      "description": "Beveiligingsaanpak voor het Epistola-project, de demo, en de managed offering."
+    },
+    "hero": {
+      "eyebrow": "Beveiliging",
+      "title": "Beveiligingspraktijken",
+      "description": ""
+    },
+    "sections": [
+      {
+        "title": "Transparante code",
+        "body": "Epistola is open source. Alle wijzigingen worden via pull requests gereviewd en doorlopen geautomatiseerde linting, tests, en dependency scanning voordat ze worden uitgebracht."
+      },
+      {
+        "title": "Self-hosting",
+        "body": "Wanneer je Epistola zelf draait, beheer je de infrastructuur, netwerken, en toegangsregels. We raden aan render nodes te isoleren, TLS overal in te schakelen, en output te monitoren op ongeautoriseerde wijzigingen."
+      },
+      {
+        "title": "Managed service",
+        "body": "Managed omgevingen draaien in dedicated namespaces met netwerkpolicies, versleutelde opslag, en 24/7 monitoring. Op verzoek ondersteunen we hosting binnen de EU-regio."
+      }
+    ],
+    "contact": {
+      "title": "Responsible disclosure",
+      "prefix": "Meld kwetsbaarheden vertrouwelijk via",
+      "suffix": "We bevestigen ontvangst binnen twee werkdagen en stemmen vervolgens de herstelstappen af."
+    }
+  }
+}

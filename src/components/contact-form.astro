@@ -1,87 +1,105 @@
 ---
-import Button from "./ui/button.astro";
 import { Mail, Phone, Video } from "@lucide/astro";
+import { useTranslations } from "../i18n";
+import Button from "./ui/button.astro";
 
 interface Props {
   class?: string;
 }
 
 const { class: className } = Astro.props;
+const { t } = useTranslations(Astro);
+const contactForm = t("contactForm");
 
 const inputClasses =
   "w-full rounded-none border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-4 py-2.5 text-sm text-[var(--color-peach-paper-heading)] placeholder:text-[var(--color-peach-paper-chip-text)] focus:border-[var(--color-peach-paper-border-strong)] focus:outline-none";
 
-const labelClasses =
-  "text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-peach-paper-chip-text)]";
+const labelClasses = "text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-peach-paper-chip-text)]";
 
 const toggleClasses =
-  "contact-toggle flex items-center gap-2 border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-4 py-2.5 text-sm text-[var(--color-peach-paper-copy)] transition-colors cursor-pointer hover:border-[var(--color-peach-paper-border-strong)]";
+  "contact-toggle flex cursor-pointer items-center gap-2 border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-4 py-2.5 text-sm text-[var(--color-peach-paper-copy)] transition-colors hover:border-[var(--color-peach-paper-border-strong)] has-checked:border-[var(--color-peach-paper-accent)] has-checked:bg-[var(--color-peach-paper-surface)] has-checked:text-[var(--color-peach-paper-accent)] has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-[var(--color-peach-paper-accent)]";
 ---
 
-<div class:list={["contact-form", className]}>
+<div
+  class:list={["contact-form", className]}
+  data-contact-type="email"
+  data-slot-placeholder={contactForm.slotPlaceholder}
+  data-error-select-contact-type={contactForm.errors.selectContactType}
+  data-error-select-time-slots={contactForm.errors.selectTimeSlots}
+  data-error-complete-verification={contactForm.errors.completeVerification}
+  data-error-generic-prefix={contactForm.errors.genericPrefix}
+  data-error-generic-link-text={contactForm.errors.genericLinkText}
+>
   <form data-contact-form class="flex flex-col gap-5">
     <div class="grid gap-4 sm:grid-cols-2">
       <label class="flex flex-col gap-1.5">
         <span class={labelClasses}>
-          Name <span class="text-[var(--color-peach-paper-accent)]">*</span>
+          {contactForm.nameLabel}
+          <span class="text-(--color-peach-paper-accent)">*</span>
         </span>
         <input
           type="text"
           name="name"
           autocomplete="name"
           required
-          placeholder="Your name"
+          placeholder={contactForm.namePlaceholder}
           class={inputClasses}
         />
       </label>
       <label class="flex flex-col gap-1.5">
         <span class={labelClasses}>
-          Email <span class="text-[var(--color-peach-paper-accent)]">*</span>
+          {contactForm.emailLabel}
+          <span class="text-(--color-peach-paper-accent)">*</span>
         </span>
         <input
           type="email"
           name="email"
           autocomplete="email"
           required
-          placeholder="you@company.com"
+          placeholder={contactForm.emailPlaceholder}
           class={inputClasses}
         />
       </label>
     </div>
 
-    <div class="flex flex-col gap-1.5">
-      <span class={labelClasses}>
-        How would you like to connect? <span class="text-[var(--color-peach-paper-accent)]">*</span>
-      </span>
+    <fieldset class="flex flex-col gap-1.5">
+      <legend class={labelClasses}>
+        {contactForm.contactTypeLabel}
+        <span class="text-(--color-peach-paper-accent)">*</span>
+      </legend>
       <div class="flex flex-wrap gap-3">
-        <button type="button" data-contact-type="email" class={toggleClasses}>
-          <Mail class="w-4 h-4 pointer-events-none" />
-          <span class="pointer-events-none">Email</span>
-        </button>
-        <button type="button" data-contact-type="phone" class={toggleClasses}>
-          <Phone class="w-4 h-4 pointer-events-none" />
-          <span class="pointer-events-none">Phone call</span>
-        </button>
-        <button type="button" data-contact-type="video" class={toggleClasses}>
-          <Video class="w-4 h-4 pointer-events-none" />
-          <span class="pointer-events-none">Video call</span>
-        </button>
+        <label class={toggleClasses}>
+          <input class="sr-only" type="radio" name="contactTypeChoice" value="email" checked />
+          <Mail class="h-4 w-4" />
+          <span>{contactForm.contactTypeEmail}</span>
+        </label>
+        <label class={toggleClasses}>
+          <input class="sr-only" type="radio" name="contactTypeChoice" value="phone" />
+          <Phone class="h-4 w-4" />
+          <span>{contactForm.contactTypePhone}</span>
+        </label>
+        <label class={toggleClasses}>
+          <input class="sr-only" type="radio" name="contactTypeChoice" value="video" />
+          <Video class="h-4 w-4" />
+          <span>{contactForm.contactTypeVideo}</span>
+        </label>
       </div>
-      <input type="hidden" name="contactType" value="" />
-    </div>
+      <input type="hidden" name="contactType" value="email" />
+    </fieldset>
 
     <!-- Call details (shown when phone or video is selected) -->
     <div data-call-details class="hidden flex flex-col gap-4">
       <!-- Phone number (shown only for phone calls) -->
-      <label data-phone-field class="hidden flex flex-col gap-1.5">
+      <label data-phone-field class="flex flex-col gap-1.5">
         <span class={labelClasses}>
-          Phone number <span class="text-[var(--color-peach-paper-accent)]">*</span>
+          {contactForm.phoneLabel}
+          <span class="text-(--color-peach-paper-accent)">*</span>
         </span>
         <input
           type="tel"
           name="phone"
           autocomplete="tel"
-          placeholder="+31 6 1234 5678"
+          placeholder={contactForm.phonePlaceholder}
           class={inputClasses}
         />
       </label>
@@ -90,18 +108,20 @@ const toggleClasses =
       <div class="grid gap-4 sm:grid-cols-2">
         <label class="flex flex-col gap-1.5">
           <span class={labelClasses}>
-            Preferred time <span class="text-[var(--color-peach-paper-accent)]">*</span>
+            {contactForm.preferredTimeLabel}
+            <span class="text-(--color-peach-paper-accent)">*</span>
           </span>
           <select name="preferredSlot" class={inputClasses + " slot-select"}>
-            <option value="">Select a time slot</option>
+            <option value="">{contactForm.slotPlaceholder}</option>
           </select>
         </label>
         <label class="flex flex-col gap-1.5">
           <span class={labelClasses}>
-            Backup time <span class="text-[var(--color-peach-paper-accent)]">*</span>
+            {contactForm.backupTimeLabel}
+            <span class="text-(--color-peach-paper-accent)">*</span>
           </span>
           <select name="backupSlot" class={inputClasses + " slot-select"}>
-            <option value="">Select a time slot</option>
+            <option value="">{contactForm.slotPlaceholder}</option>
           </select>
         </label>
       </div>
@@ -109,50 +129,36 @@ const toggleClasses =
 
     <!-- Message (always visible) -->
     <label class="flex flex-col gap-1.5">
-      <span class={labelClasses}>
-        Message
-      </span>
+      <span class={labelClasses}>{contactForm.messageLabel}</span>
       <textarea
         name="message"
         rows="3"
-        placeholder="Tell us about your project or ask a question..."
-        class={inputClasses + " resize-y min-h-[80px]"}
-      ></textarea>
+        placeholder={contactForm.messagePlaceholder}
+        class={inputClasses + " resize-y min-h-20 max-h-50"}></textarea>
     </label>
 
     <div>
-      <altcha-widget
-        challengeurl="https://automation.cs.epistola.io/api/r/captcha"
-        hidefooter
-        data-altcha
+      <altcha-widget challengeurl="https://automation.cs.epistola.io/api/r/captcha" hidefooter data-altcha
       ></altcha-widget>
     </div>
 
     <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
       <Button type="submit" variant="primary" size="md" class="w-full sm:w-auto">
-        Get in touch
+        {contactForm.submit}
       </Button>
-      <p data-contact-error class="hidden text-sm text-[var(--color-danger-500)]"></p>
+      <p data-contact-error class="hidden text-sm text-(--color-danger-500)"></p>
     </div>
   </form>
 
   <div data-contact-success class="hidden text-center py-6">
-    <p class="text-lg font-semibold text-[var(--color-peach-paper-heading)]">
-      Thanks for reaching out!
+    <p class="text-lg font-semibold text-(--color-peach-paper-heading)">
+      {contactForm.successTitle}
     </p>
-    <p class="mt-2 text-sm text-[var(--color-peach-paper-copy)]">
-      We'll get back to you within one business day.
+    <p class="mt-2 text-sm text-(--color-peach-paper-copy)">
+      {contactForm.successDescription}
     </p>
   </div>
 </div>
-
-<style>
-  .contact-toggle[data-selected="true"] {
-    border-color: var(--color-peach-paper-accent);
-    color: var(--color-peach-paper-accent);
-    background-color: var(--color-peach-paper-surface);
-  }
-</style>
 
 <script>
   import "altcha";
@@ -190,7 +196,14 @@ const toggleClasses =
 
   function populateSlotDropdowns(wrapper: HTMLElement) {
     const slots = generateSlots();
+    const slotPlaceholder = wrapper.dataset.slotPlaceholder || "Select a time slot";
+
     wrapper.querySelectorAll<HTMLSelectElement>(".slot-select").forEach((select) => {
+      const firstOption = select.querySelector("option");
+      if (firstOption) {
+        firstOption.textContent = slotPlaceholder;
+      }
+
       slots.forEach(({ value, label }) => {
         const opt = document.createElement("option");
         opt.value = value;
@@ -214,9 +227,30 @@ const toggleClasses =
       const callDetails = form.querySelector<HTMLElement>("[data-call-details]")!;
       const phoneField = form.querySelector<HTMLElement>("[data-phone-field]")!;
       const phoneInput = form.querySelector<HTMLInputElement>('input[name="phone"]')!;
-      const toggles = wrapper.querySelectorAll<HTMLButtonElement>(".contact-toggle");
+      const contactTypeRadios = form.querySelectorAll<HTMLInputElement>('input[name="contactTypeChoice"]');
+      const selectContactTypeError =
+        wrapper.dataset.errorSelectContactType || "Please select how you'd like to connect.";
+      const selectTimeSlotsError =
+        wrapper.dataset.errorSelectTimeSlots || "Please select both a preferred and backup time slot.";
+      const completeVerificationError =
+        wrapper.dataset.errorCompleteVerification || "Please complete the verification challenge.";
+      const genericErrorPrefix =
+        wrapper.dataset.errorGenericPrefix || "Something went wrong. Please try again or reach out to";
+      const genericErrorLinkText = wrapper.dataset.errorGenericLinkText || "sander@epistola.app";
 
       populateSlotDropdowns(wrapper);
+
+      function showGenericError() {
+        errorEl?.replaceChildren(document.createTextNode(`${genericErrorPrefix} `));
+
+        const link = document.createElement("a");
+        link.href = "mailto:sander@epistola.app";
+        link.className = "underline text-[var(--color-peach-paper-accent)]";
+        link.textContent = genericErrorLinkText;
+
+        errorEl?.append(link, document.createTextNode("."));
+        errorEl?.classList.remove("hidden");
+      }
 
       function updateFields() {
         const type = contactTypeInput.value;
@@ -239,24 +273,19 @@ const toggleClasses =
         }
       }
 
-      toggles.forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
+      function syncContactType(type: string) {
+        contactTypeInput.value = type;
+        wrapper.dataset.contactType = type;
+        updateFields();
+      }
 
-          const type = btn.dataset.contactType || "";
-          const wasSelected = btn.dataset.selected === "true";
+      const selectedContactType = Array.from(contactTypeRadios).find((radio) => radio.checked)?.value || "email";
+      syncContactType(selectedContactType);
 
-          toggles.forEach((t) => (t.dataset.selected = "false"));
-
-          if (wasSelected) {
-            contactTypeInput.value = "";
-          } else {
-            btn.dataset.selected = "true";
-            contactTypeInput.value = type;
-          }
-
-          updateFields();
+      contactTypeRadios.forEach((radio) => {
+        radio.addEventListener("change", () => {
+          if (!radio.checked) return;
+          syncContactType(radio.value);
         });
       });
 
@@ -265,7 +294,7 @@ const toggleClasses =
         errorEl.classList.add("hidden");
 
         if (!contactTypeInput.value) {
-          errorEl.textContent = "Please select how you'd like to connect.";
+          errorEl.textContent = selectContactTypeError;
           errorEl.classList.remove("hidden");
           return;
         }
@@ -274,7 +303,7 @@ const toggleClasses =
           const pref = (form.elements.namedItem("preferredSlot") as HTMLSelectElement).value;
           const back = (form.elements.namedItem("backupSlot") as HTMLSelectElement).value;
           if (!pref || !back) {
-            errorEl.textContent = "Please select both a preferred and backup time slot.";
+            errorEl.textContent = selectTimeSlotsError;
             errorEl.classList.remove("hidden");
             return;
           }
@@ -283,7 +312,7 @@ const toggleClasses =
         const altchaInput = wrapper.querySelector<HTMLInputElement>('[name="altcha"]');
         const altchaPayload = altchaInput?.value;
         if (!altchaPayload) {
-          errorEl.textContent = "Please complete the verification challenge.";
+          errorEl.textContent = completeVerificationError;
           errorEl.classList.remove("hidden");
           return;
         }
@@ -304,6 +333,9 @@ const toggleClasses =
           }
         }
 
+        console.log("Contact form payload", data);
+        return;
+
         try {
           const res = await fetch("https://automation.cs.epistola.io/api/r/contact", {
             method: "POST",
@@ -316,8 +348,7 @@ const toggleClasses =
           form.classList.add("hidden");
           successEl.classList.remove("hidden");
         } catch {
-          errorEl.innerHTML = 'Something went wrong. Please try again or reach out to <a href="mailto:sander@epistola.app" class="underline text-[var(--color-peach-paper-accent)]">sander@epistola.app</a>.';
-          errorEl.classList.remove("hidden");
+          showGenericError();
         }
       });
     });

@@ -1,7 +1,7 @@
 ---
+import { useTranslations } from "../i18n";
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
-import { useTranslations } from "../i18n";
 
 const { t } = useTranslations(Astro);
 const testimonialsData = t("testimonials");
@@ -15,13 +15,11 @@ const testimonialsData = t("testimonials");
 >
   {
     testimonialsData.items.map((item) => (
-      <Card variant="subtle" shadow="none" class="flex flex-col text-left">
-        <p class="text-base text-[var(--color-peach-paper-heading)]">"{item.quote}"</p>
-        <div class="mt-6">
-          <p class="text-sm font-semibold text-[var(--color-peach-paper-heading)]">{item.author}</p>
-          <p class="text-xs uppercase tracking-[0.12em] text-[var(--color-peach-paper-chip-text)]">
-            {item.role}
-          </p>
+      <Card variant="subtle" shadow="none" class="flex flex-col gap-4 text-left">
+        <p class="text-base text-(--color-peach-paper-heading)">"{item.quote}"</p>
+        <div class="mt-auto pt-6">
+          <p class="text-sm font-semibold text-(--color-peach-paper-heading)">{item.author}</p>
+          <p class="text-xs mt-auto uppercase tracking-[0.12em] text-(--color-peach-paper-chip-text)">{item.role}</p>
         </div>
       </Card>
     ))

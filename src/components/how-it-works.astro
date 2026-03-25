@@ -1,8 +1,9 @@
 ---
-import Section from "./ui/section.astro";
 import { useTranslations } from "../i18n";
+import Section from "./ui/section.astro";
 
 const { t } = useTranslations(Astro);
+const common = t("common");
 const howItWorks = t("howItWorks");
 
 const illustrationPaths = [
@@ -23,27 +24,30 @@ const illustrationPaths = [
   {
     howItWorks.steps.map((step, index) => (
       <div class="grid items-center gap-12 md:grid-cols-2 md:gap-16">
-        <div class:list={["order-2 flex flex-col justify-center", index % 2 === 0 ? "md:order-1 md:pr-8 md:items-end md:text-right" : "md:order-2 md:pl-8"]}>
+        <div
+          class:list={[
+            "order-2 flex flex-col justify-center",
+            index % 2 === 0 ? "md:order-1 md:pr-8 md:items-end md:text-right" : "md:order-2 md:pl-8",
+          ]}
+        >
           <div class="flex items-baseline gap-4">
-            <span class="text-7xl md:text-8xl font-bold text-[var(--color-peach-paper-accent)] opacity-20 leading-none">
+            <span class="text-7xl md:text-8xl font-bold text-(--color-peach-paper-accent) opacity-20 leading-none">
               {String(index + 1).padStart(2, "0")}
             </span>
-            <span class="text-sm font-semibold tracking-[0.2em] uppercase text-[var(--color-peach-paper-accent)]">
-              Step
+            <span class="text-sm font-semibold tracking-[0.2em] uppercase text-(--color-peach-paper-accent)">
+              {common.stepLabel}
             </span>
           </div>
-          <h3 class="mt-2 text-3xl md:text-4xl lg:text-5xl font-bold text-[var(--color-peach-paper-heading)] tracking-tight leading-tight">
+          <h3 class="mt-2 text-3xl md:text-4xl lg:text-5xl font-bold text-(--color-peach-paper-heading) tracking-tight leading-tight">
             {step.title}
           </h3>
-          <p class="mt-6 text-lg md:text-xl text-[var(--muted-text)] leading-relaxed max-w-lg">
-            {step.body}
-          </p>
+          <p class="mt-6 text-lg md:text-xl text-(--muted-text) leading-relaxed max-w-lg">{step.body}</p>
         </div>
         <div class:list={["order-1", index % 2 === 0 ? "md:order-2" : "md:order-1"]}>
-          <div class="relative aspect-[16/10] w-full overflow-hidden">
+          <div class="relative aspect-16/10 w-full overflow-hidden">
             <img
               src={illustrationPaths[index]}
-              alt={`Illustration for step ${index + 1}: ${step.title}`}
+              alt={`${common.stepLabel} ${index + 1}: ${step.title}`}
               class="h-full w-full object-contain p-4"
               loading="lazy"
             />

@@ -1,10 +1,9 @@
 ---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { useTranslations } from "../i18n";
+import SuiteDemoButton from "./buttons/suite-demo-button.astro";
 import Button from "./ui/button.astro";
 import Section from "./ui/section.astro";
-import SuiteDemoButton from "./buttons/suite-demo-button.astro";
-import { URLS } from "../lib/URL-helpers";
-import { useTranslations } from "../i18n";
-import { getRelativeLocaleUrl } from "astro:i18n";
 
 const { t, locale } = useTranslations(Astro);
 const transform = t("transformYourBusiness");
@@ -17,6 +16,7 @@ const transform = t("transformYourBusiness");
   contentClass="flex flex-wrap justify-center gap-4"
 >
   <SuiteDemoButton />
-  <Button href={URLS.VALTIMO_DEMO} variant="secondary" size="md" external>{transform.valtimoDemo}</Button>
-  <Button href={getRelativeLocaleUrl(locale, "/integrations")} variant="link" size="md">{transform.viewIntegrations}</Button>
+  <Button href={getRelativeLocaleUrl(locale, "/integrations")} variant="link" size="md"
+    >{transform.viewIntegrations}</Button
+  >
 </Section>

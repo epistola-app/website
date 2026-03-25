@@ -1,0 +1,70 @@
+{
+  "en": {
+    "page": {
+      "title": "Demo · Epistola",
+      "description": "Try Epistola through live demo environments for template management and workflow-based document generation."
+    },
+    "hero": {
+      "eyebrow": "Live demo",
+      "title": "Try Epistola",
+      "description": "Explore Epistola through two live demo environments. One account gives you access to both."
+    },
+    "gettingStarted": {
+      "title": "Getting started",
+      "description": "Sign in through SSO to create your account - any email address is accepted. A single registration gives you access to both demo applications."
+    },
+    "suite": {
+      "label": "Epistola Suite",
+      "title": "Template management",
+      "description": "Create, edit, version, and promote document templates. Define JSON Schema data bindings and preview rendered output - the full Epistola authoring experience.",
+      "cta": "Open Epistola Suite"
+    },
+    "valtimo": {
+      "label": "Valtimo Plugin",
+      "title": "Workflow-based document generation",
+      "description": "Start processes in Valtimo that trigger Epistola document generation as part of a workflow. Configure the Epistola plugin, connect templates, and map data from running cases.",
+      "cta": "Open Valtimo demo"
+    },
+    "disclaimer": "Both environments always run the latest version. They may occasionally be offline or contain pre-release issues.",
+    "cta": {
+      "title": "Interested in what Epistola can do for your product?",
+      "description": "Schedule a call and ask us any of your questions.",
+      "contact": "Get in touch",
+      "pricing": "Review plans"
+    }
+  },
+  "nl": {
+    "page": {
+      "title": "Demo · Epistola",
+      "description": "Probeer Epistola via live demo-omgevingen voor templatebeheer en workflowgedreven documentgeneratie."
+    },
+    "hero": {
+      "eyebrow": "Live demo",
+      "title": "Probeer Epistola",
+      "description": "Verken Epistola via twee live demo-omgevingen. Met een account krijg je toegang tot allebei."
+    },
+    "gettingStarted": {
+      "title": "Aan de slag",
+      "description": "Log in via SSO om je account aan te maken - elk e-mailadres wordt geaccepteerd. Met een registratie krijg je toegang tot beide demo-applicaties."
+    },
+    "suite": {
+      "label": "Epistola Suite",
+      "title": "Templatebeheer",
+      "description": "Maak, bewerk, versioneer, en promoveer documentsjablonen. Definieer JSON Schema data bindings en bekijk gerenderde output - de volledige authoring-ervaring van Epistola.",
+      "cta": "Open Epistola Suite"
+    },
+    "valtimo": {
+      "label": "Valtimo Plugin",
+      "title": "Workflowgedreven documentgeneratie",
+      "description": "Start processen in Valtimo die Epistola-documentgeneratie binnen een workflow triggeren. Configureer de Epistola-plugin, koppel templates, en map data uit lopende zaken.",
+      "cta": "Open Valtimo demo"
+    },
+    "disclaimer": "Beide omgevingen draaien altijd op de nieuwste versie. Ze kunnen af en toe offline zijn of pre-releaseproblemen bevatten.",
+    "cta": {
+      "title": "Benieuwd wat Epistola voor jouw product kan betekenen?",
+      "description": "Plan een gesprek in en stel al je vragen.",
+      "contact": "Neem contact op",
+      "pricing": "Bekijk prijzen"
+    }
+  }
+}

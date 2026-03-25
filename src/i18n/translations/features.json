@@ -67,6 +67,59 @@
         "OpenAPI 3.1 endpoints + adaptive batch job webhooks"
       ],
       "renderTime": "render window (iText)"
+    },
+    "featureBreakdown": {
+      "monoTitle": "/ Feature deep dive",
+      "title": "The Epistola Suite in practice",
+      "description": "Straight from the reference implementation: how templates evolve, feedback gets routed, and assets stay governed.",
+      "sections": [
+        {
+          "badge": "Lifecycle",
+          "title": "Templates, variants, versions, environments",
+          "body": [
+            "Each tenant owns template slugs with unlimited variants tagged by geography, brand, or audience.",
+            "Variants carry immutable version numbers with a draft -> published -> archived lifecycle and audit history.",
+            "Environments (staging, production, custom) activate specific versions so you can test or roll back safely.",
+            "Variant resolver inspects request attributes (e.g., language=nl) and picks the closest match automatically, falling back to the default when nothing fits."
+          ]
+        },
+        {
+          "badge": "Contracts",
+          "title": "Data schemas and executable examples",
+          "body": [
+            "Every template ships with a JSON Schema Draft 2020-12 data contract validated pre-render.",
+            "Named example payloads live beside the schema for instant previewing and regression fixtures.",
+            "Schema migrations keep draft versions in sync when fields change between releases."
+          ]
+        },
+        {
+          "badge": "Feedback",
+          "title": "Built-in reviews with screenshots",
+          "body": [
+            "Floating feedback button opens a modal that captures URL, user context, and console logs.",
+            "Drag in or paste screenshots-assets upload automatically and render in the feedback timeline.",
+            "Optional GitHub sync mirrors issues bi-directionally so engineers can triage where they work."
+          ]
+        },
+        {
+          "badge": "Themes",
+          "title": "Tenant and variant theming",
+          "body": [
+            "Reusable theme packages define typography, color tokens, and page settings (A4, Letter, margins).",
+            "Theme cascade respects tenant defaults, template overrides, then variant-specific tweaks for special cases.",
+            "Block-level presets make it easy to enforce branded tables, headers, and emphasis patterns."
+          ]
+        },
+        {
+          "badge": "Assets",
+          "title": "Tenant asset manager",
+          "body": [
+            "Upload PNG, JPG, SVG, or WebP up to 5 MB via drag-and-drop with automatic thumbnailing.",
+            "Assets live per tenant with search, delete, and direct references inside the template editor.",
+            "Raw endpoints serve optimized binaries to the renderer so logos stay crisp in every PDF."
+          ]
+        }
+      ]
     }
   },
   "nl": {
@@ -137,6 +190,59 @@
         "OpenAPI 3.1 endpoints + adaptive batch job webhooks"
       ],
       "renderTime": "render venster (iText)"
+    },
+    "featureBreakdown": {
+      "monoTitle": "/ Feature deep dive",
+      "title": "De Epistola Suite in de praktijk",
+      "description": "Recht uit de referentie-implementatie: hoe templates evolueren, feedback wordt afgehandeld, en assets beheerd blijven.",
+      "sections": [
+        {
+          "badge": "Levenscyclus",
+          "title": "Templates, varianten, versies, omgevingen",
+          "body": [
+            "Elke tenant beheert template slugs met onbeperkte varianten, getagd op geografie, merk, of doelgroep.",
+            "Varianten dragen onveranderlijke versienummers met een draft -> published -> archived levenscyclus en auditgeschiedenis.",
+            "Omgevingen (staging, productie, custom) activeren specifieke versies zodat je veilig kunt testen of terugrollen.",
+            "De variant resolver inspecteert request-attributen (bijvoorbeeld language=nl) en kiest automatisch de beste match, met een fallback naar de standaardvariant als niets past."
+          ]
+        },
+        {
+          "badge": "Contracten",
+          "title": "Dataschema's en uitvoerbare voorbeelden",
+          "body": [
+            "Elke template bevat een JSON Schema Draft 2020-12 datacontract dat voor het renderen wordt gevalideerd.",
+            "Voorbeeldpayloads met naam leven naast het schema voor directe previews en regressiefixtures.",
+            "Schema-migraties houden draft-versies synchroon wanneer velden tussen releases veranderen."
+          ]
+        },
+        {
+          "badge": "Feedback",
+          "title": "Ingebouwde reviews met screenshots",
+          "body": [
+            "Een zwevende feedbackknop opent een modal die URL, gebruikerscontext, en consolelogs vastlegt.",
+            "Sleep screenshots erin of plak ze direct-uploads gebeuren automatisch en verschijnen in de feedbacktijdlijn.",
+            "Optionele GitHub-sync spiegelt issues in twee richtingen zodat engineers kunnen triageren waar ze werken."
+          ]
+        },
+        {
+          "badge": "Thema's",
+          "title": "Tenant- en varianttheming",
+          "body": [
+            "Herbruikbare themapakketten definiëren typografie, kleurentokens, en pagina-instellingen (A4, Letter, marges).",
+            "De themacascade respecteert tenant-standaarden, template-overrides, en daarna variantspecifieke tweaks voor uitzonderingen.",
+            "Presets op blokniveau maken het eenvoudig om merkgebonden tabellen, headers, en nadrukspatronen af te dwingen."
+          ]
+        },
+        {
+          "badge": "Assets",
+          "title": "Tenant asset manager",
+          "body": [
+            "Upload PNG, JPG, SVG, of WebP tot 5 MB via drag-and-drop met automatische thumbnailing.",
+            "Assets leven per tenant met zoeken, verwijderen, en directe referenties binnen de template-editor.",
+            "Raw endpoints serveren geoptimaliseerde binaries aan de renderer zodat logo's scherp blijven in elke PDF."
+          ]
+        }
+      ]
     }
   }
 }

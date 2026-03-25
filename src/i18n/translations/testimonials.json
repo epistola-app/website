@@ -1,45 +1,45 @@
 {
   "en": {
-    "monoTitle": "/ Testimonials",
-    "title": "Loved by document-heavy teams",
+    "monoTitle": "/ Customer Impact",
+    "title": "Trusted with high-stakes documents.",
     "description": "See how teams use Epistola to streamline document generation and compliance.",
     "items": [
       {
-        "quote": "Epistola cut our document processing time by 80%. The template versioning alone saved us weeks of coordination.",
+        "quote": "Epistola is the simplest part of our case platform. We send JSON, we get flawless PDF/A output back. That focus is refreshing",
         "author": "Customer Name",
-        "role": "Role at Company"
+        "role": "Product Owner"
       },
       {
-        "quote": "Finally, a document generator that doesn't try to be an AI platform. It just renders perfect PDFs, every time.",
+        "quote": "Common Ground compliance was non‑negotiable. Epistola spoke the same language from day one.",
         "author": "Customer Name",
-        "role": "Role at Company"
+        "role": "Solution Architect"
       },
       {
         "quote": "The Common Ground integration was seamless. We were generating municipal documents within days, not months.",
         "author": "Customer Name",
-        "role": "Role at Company"
+        "role": "Lead Developer"
       }
     ]
   },
   "nl": {
-    "monoTitle": "/ Testimonials",
-    "title": "Gewaardeerd door document-intensieve teams",
+    "monoTitle": "/ Impact op de klant",
+    "title": "Vertrouwd met documenten van groot belang.",
     "description": "Zie hoe teams Epistola gebruiken om documentgeneratie en compliance te stroomlijnen.",
     "items": [
       {
-        "quote": "Epistola heeft onze documentverwerkingstijd met 80% verminderd. Alleen de template versioning heeft ons weken aan coördinatie bespaard.",
+        "quote": "Epistola is het eenvoudigste onderdeel van ons casusplatform. We versturen JSON en krijgen een foutloze PDF/A-output terug. Die focus is verfrissend.",
         "author": "Klant Naam",
-        "role": "Rol bij Bedrijf"
+        "role": "Producteigenaar"
       },
       {
-        "quote": "Eindelijk een document generator die niet probeert een AI platform te zijn. Het rendert gewoon perfecte PDFs, elke keer.",
+        "quote": "Naleving van Common Ground was niet onderhandelbaar. Epistola sprak vanaf dag één dezelfde taal.",
         "author": "Klant Naam",
-        "role": "Rol bij Bedrijf"
+        "role": "Oplossingsarchitect"
       },
       {
-        "quote": "De Common Ground integratie was naadloos. We genereerden gemeentelijke documenten binnen dagen, niet maanden.",
+        "quote": "De integratie met Common Ground verliep vlekkeloos. We konden binnen enkele dagen, in plaats van maanden, gemeentelijke documenten genereren.",
         "author": "Klant Naam",
-        "role": "Rol bij Bedrijf"
+        "role": "Hoofdontwikkelaar"
       }
     ]
   }

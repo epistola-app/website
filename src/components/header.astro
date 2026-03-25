@@ -1,74 +1,77 @@
 ---
+import { getLocalizedPath, useTranslations } from "../i18n";
+import { prepareURL } from "../lib/URL-helpers";
+import SuiteDemoButton from "./buttons/suite-demo-button.astro";
+import LanguageSwitcher from "./language-switcher.astro";
 import Button from "./ui/button.astro";
 import HeaderNavLink from "./ui/header-nav-link.astro";
 import ThemeToggle from "./ui/theme-toggle.astro";
-import SuiteDemoButton from "./buttons/suite-demo-button.astro";
-import LanguageSwitcher from "./language-switcher.astro";
-import { URLS } from "../lib/URL-helpers";
-import { useTranslations } from "../i18n";
 
-const { t } = useTranslations(Astro);
+const { t, locale } = useTranslations(Astro);
 const nav = t("nav");
+const footer = t("footer");
+const common = t("common");
 
 const navItems = [
   { label: nav.platform, href: "/features" },
   { label: nav.integrations, href: "/integrations" },
   { label: nav.pricing, href: "/pricing" },
-  { label: nav.docs, href: URLS.DOCS, external: true },
+  { label: nav.about, href: "/about" },
+  { label: nav.docs, href: "/docs" },
   { label: nav.blog, href: "/blog" },
+  { label: nav.contact, href: "/contact" },
 ];
 
-const logoHref = import.meta.env.BASE_URL;
+const logoHref = prepareURL(getLocalizedPath("/", locale));
 const currentPath = Astro.url.pathname;
 ---
 
-<header
-  class="sticky inset-x-0 left-0 top-0 z-50 border-b border-[var(--color-peach-paper-nav-border)] backdrop-blur-xl"
->
+<header class="sticky inset-x-0 left-0 top-0 z-50 border-b border-(--color-peach-paper-nav-border) backdrop-blur-xl">
   <div class="absolute inset-0 [background-image:var(--gradient-peach-paper)] opacity-95"></div>
   <nav class="relative z-10 container mx-auto flex h-20 items-center justify-between px-4">
     <a href={logoHref} class="flex items-center gap-3">
-      <img src="/logo.svg" alt="Epistola logo" class="h-10 w-10" />
+      <img src="/logo.svg" alt="Epistola" class="h-10 w-10" />
       <div class="flex flex-col">
-        <span class="text-base font-semibold tracking-tight text-[var(--color-peach-paper-heading)]"> Epistola </span>
-        <span class="text-[10px] uppercase tracking-[0.16em] text-[var(--color-peach-paper-copy)]">Documents</span>
+        <span class="text-base font-semibold tracking-tight text-(--color-peach-paper-heading)"> Epistola </span>
+        <span class="text-[10px] uppercase tracking-[0.16em] text-(--color-peach-paper-copy)"
+          >{footer.brandTagline}</span
+        >
       </div>
     </a>
     <button
       id="nav-toggle"
-      class="lg:hidden flex h-11 w-11 items-center justify-center rounded-none border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] text-[var(--color-peach-paper-heading)]"
+      class="lg:hidden flex h-11 w-11 items-center justify-center rounded-none border border-(--color-peach-paper-border) bg-(--color-peach-paper-chip-bg) text-(--color-peach-paper-heading)"
       aria-controls="mobile-nav"
       aria-expanded="false"
       command="show-modal"
       commandfor="mobile-nav"
     >
-      <span class="sr-only">{nav.openNavigation}</span>
+      <span class="sr-only">{common.openNavigation}</span>
       <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h12M4 17h16"></path>
       </svg>
     </button>
-    <div class="hidden items-center gap-8 text-sm font-medium text-[var(--color-peach-paper-copy)] lg:flex">
-      {navItems.map((item) => <HeaderNavLink {...item} currentPath={currentPath} />)}
+    <div class="hidden items-center gap-8 text-sm font-medium text-(--color-peach-paper-copy) lg:flex">
+      {navItems.map((item) => <HeaderNavLink {...item} currentPath={currentPath} locale={locale} />)}
     </div>
     <div class="hidden items-center gap-3 lg:flex">
       <LanguageSwitcher />
       <ThemeToggle />
-      <Button href="/login" variant="secondary" size="md">{nav.signIn}</Button>
       <SuiteDemoButton />
     </div>
     <dialog
       id="mobile-nav"
       class="mobile-drawer m-0 z-70 lg:hidden w-full max-w-screen h-full max-h-screen"
-      aria-label="Mobile navigation"
+      aria-label={nav.menu}
     >
       <div class="flex h-22 p-4 items-center justify-between">
-        <p class="text-sm font-semibold uppercase font-[family-name:var(--font-mono)] tracking-wider text-[var(--color-peach-paper-copy)]">
+        <p class="text-sm font-semibold uppercase font-mono tracking-wider text-(--color-peach-paper-copy)">
           {nav.menu}
         </p>
         <button
           id="nav-close"
-          class="flex h-10 w-10 items-center justify-center rounded-none border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] text-[var(--color-peach-paper-heading)]"
-          aria-label={nav.close}
+          class="flex h-10 w-10 items-center justify-center rounded-none border border-(--color-peach-paper-border) bg-(--color-peach-paper-chip-bg) text-(--color-peach-paper-heading)"
+          aria-label={common.closeNavigation}
           command="close"
           commandfor="mobile-nav"
         >
@@ -78,14 +81,15 @@ const currentPath = Astro.url.pathname;
         </button>
       </div>
       <div class="mt-8 flex p-4 flex-col gap-4">
-        {navItems.map((item) => <HeaderNavLink {...item} mobile currentPath={currentPath} />)}
+        {navItems.map((item) => <HeaderNavLink {...item} mobile currentPath={currentPath} locale={locale} />)}
       </div>
       <div class="mt-8 p-4 flex flex-col gap-3">
-        <Button href="/login" variant="secondary" size="md" class="w-full justify-center">
-          {nav.signIn}
-        </Button>
         <SuiteDemoButton />
+        <Button>
+          <LanguageSwitcher />
+        </Button>
       </div>
+
       <ThemeToggle mobile class="mt-8 p-4" />
     </dialog>
   </nav>

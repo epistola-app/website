@@ -11,12 +11,7 @@ interface Props {
   og?: OpenGraphProps;
 }
 
-const {
-  title = SITE.DEFAULT_TITLE,
-  description = SITE.DEFAULT_DESCRIPTION,
-  image,
-  og = {},
-} = Astro.props as Props;
+const { title = SITE.DEFAULT_TITLE, description = SITE.DEFAULT_DESCRIPTION, image, og = {} } = Astro.props as Props;
 
 const ogTitle = og.title || title;
 const ogDescription = og.description || description;
@@ -40,9 +35,9 @@ const ogLocale = currentLocale === "nl" ? "nl_NL" : "en_US";
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/x-icon" href="/logo.svg" />
-    
+
     <link rel="canonical" href={ogUrl} />
-    
+
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={ogDescription} />
     <meta property="og:type" content={ogType} />
@@ -50,23 +45,31 @@ const ogLocale = currentLocale === "nl" ? "nl_NL" : "en_US";
     <meta property="og:url" content={ogUrl} />
     <meta property="og:locale" content={ogLocale} />
     <meta property="og:image" content={absoluteImageUrl} />
-    
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content={SITE.TWITTER_HANDLE} />
     <meta name="twitter:title" content={ogTitle} />
     <meta name="twitter:description" content={ogDescription} />
     <meta name="twitter:image" content={absoluteImageUrl} />
-    
-    {ogType === OG_TYPES.ARTICLE && og.article && (
-      <>
-        {og.article.author && <meta property="article:author" content={og.article.author} />}
-        {og.article.publishedTime && <meta property="article:published_time" content={og.article.publishedTime.toISOString()} />}
-        {og.article.modifiedTime && <meta property="article:modified_time" content={og.article.modifiedTime.toISOString()} />}
-        {og.article.section && <meta property="article:section" content={og.article.section} />}
-        {og.article.tags?.map(tag => <meta property="article:tag" content={tag} />)}
-      </>
-    )}
-    
+
+    {
+      ogType === OG_TYPES.ARTICLE && og.article && (
+        <>
+          {og.article.author && <meta property="article:author" content={og.article.author} />}
+          {og.article.publishedTime && (
+            <meta property="article:published_time" content={og.article.publishedTime.toISOString()} />
+          )}
+          {og.article.modifiedTime && (
+            <meta property="article:modified_time" content={og.article.modifiedTime.toISOString()} />
+          )}
+          {og.article.section && <meta property="article:section" content={og.article.section} />}
+          {og.article.tags?.map((tag) => (
+            <meta property="article:tag" content={tag} />
+          ))}
+        </>
+      )
+    }
+
     <meta name="theme-color" content={SITE.THEME_COLOR} />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta
@@ -115,13 +118,17 @@ const ogLocale = currentLocale === "nl" ? "nl_NL" : "en_US";
           document.querySelectorAll("[data-theme-toggle]").forEach((toggle) => {
             toggle.setAttribute("aria-pressed", String(isDark));
             const srLabel = toggle.querySelector("[data-theme-toggle-label]");
+            const switchToLight = toggle.getAttribute("data-theme-switch-to-light") || "Switch to light theme";
+            const switchToDark = toggle.getAttribute("data-theme-switch-to-dark") || "Switch to dark theme";
             if (srLabel) {
-              srLabel.textContent = isDark ? "Switch to light theme" : "Switch to dark theme";
+              srLabel.textContent = isDark ? switchToLight : switchToDark;
             }
 
             const state = toggle.querySelector("[data-theme-toggle-state]");
+            const darkLabel = toggle.getAttribute("data-theme-dark-label") || "Dark";
+            const lightLabel = toggle.getAttribute("data-theme-light-label") || "Light";
             if (state) {
-              state.textContent = isDark ? "Dark" : "Light";
+              state.textContent = isDark ? darkLabel : lightLabel;
             }
           });
 
@@ -196,7 +203,7 @@ const ogLocale = currentLocale === "nl" ? "nl_NL" : "en_US";
   </head>
   <body class="font-sans antialiased flex flex-col min-h-screen overflow-x-hidden">
     <Header />
-    <main class="relative z-10 flex-1 bg-[var(--color-peach-paper-surface-soft)]">
+    <main class="relative z-10 flex-1 bg-(--color-peach-paper-surface-soft)">
       <slot />
     </main>
     <Footer />

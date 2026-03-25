@@ -1,0 +1,29 @@
+---
+import { BookOpen } from "@lucide/astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { useTranslations } from "../../i18n";
+import Layout from "../layout.astro";
+import Button from "../ui/button.astro";
+import Card from "../ui/card.astro";
+import Title from "../ui/title.astro";
+import PageHero from "../page-hero.astro";
+import SuiteDemoButton from "../buttons/suite-demo-button.astro";
+
+const { t, locale } = useTranslations(Astro);
+const docs = t("docs");
+---
+
+<Layout title={docs.page.title} description={docs.page.description}>
+  <PageHero monoTitle={docs.hero.monoTitle} title={docs.hero.title} description={docs.hero.description} />
+
+  <section class="py-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <Card variant="brand" radius="none" padding="lg" class="mx-auto max-w-2xl text-center">
+        <BookOpen class="mx-auto h-10 w-10 text-(--color-peach-paper-accent)" />
+        <Title level={2} class="mt-4 text-xl">{docs.card.title}</Title>
+        <p class="mt-2 mb-6 text-(--color-peach-paper-copy)">{docs.card.description}</p>
+        <SuiteDemoButton />
+      </Card>
+    </div>
+  </section>
+</Layout>

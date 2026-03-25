@@ -1,10 +1,13 @@
 ---
 import Button from "../ui/button.astro";
 import { ArrowRight } from "@lucide/astro";
-import { URLS } from "../../lib/URL-helpers";
+import { getLocalizedPath, useTranslations } from "../../i18n";
+
+const { t, locale } = useTranslations(Astro);
+const common = t("common");
 ---
 
-<Button href="/demo" variant="primary" size="md" class="group">
-  Try demo
+<Button href={getLocalizedPath("/demo", locale)} variant="primary" size="md" class="group">
+  {common.tryDemo}
   <ArrowRight class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
 </Button>

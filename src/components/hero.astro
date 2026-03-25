@@ -1,11 +1,9 @@
 ---
+import { useTranslations } from "../i18n";
+import SuiteDemoButton from "./buttons/suite-demo-button.astro";
 import HeroStats from "./hero-stats.astro";
 import Button from "./ui/button.astro";
 import Title from "./ui/title.astro";
-import SuiteDemoButton from "./buttons/suite-demo-button.astro";
-import { ArrowRight } from "@lucide/astro";
-import { URLS } from "../lib/URL-helpers";
-import { useTranslations } from "../i18n";
 
 const { t } = useTranslations(Astro);
 const hero = t("hero");
@@ -28,17 +26,13 @@ const common = t("common");
         <span class="lg:hidden">{hero.mobileTitle}</span>
       </Title>
     </div>
-    <div class="flex flex-col col-span-3 justify-center text-center lg:items-start lg:text-left gap-8">
+    <div class="flex flex-col col-span-4 max-lg:mt-8 lg:col-span-3 justify-center text-center lg:items-start lg:text-left gap-8">
       <p class="text-base lg:text-lg text-(--muted-text) leading-normal text-balance">
         {hero.subtitle}
       </p>
-      <div class="flex flex-col gap-3 w-full justify-center lg:flex-row lg:gap-4 lg:justify-start">
+      <div class="flex flex-col gap-3 justify-center lg:flex-row lg:gap-4 lg:justify-start">
         <SuiteDemoButton />
-        <Button href={URLS.VALTIMO_DEMO} variant="secondary" size="md" external class="group">
-          {common.valtimoDemo}
-          <ArrowRight class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-        </Button>
-        <Button href={URLS.DOCS} variant="secondary" size="md" external>{common.exploreDocs}</Button>
+        <Button href="/docs" variant="secondary" size="md">{common.exploreDocs}</Button>
       </div>
     </div>
   </div>

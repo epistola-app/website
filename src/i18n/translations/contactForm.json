@@ -1,0 +1,56 @@
+{
+  "en": {
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@company.com",
+    "contactTypeLabel": "How would you like to connect?",
+    "contactTypeEmail": "Email",
+    "contactTypePhone": "Phone call",
+    "contactTypeVideo": "Video call",
+    "phoneLabel": "Phone number",
+    "phonePlaceholder": "+31 6 1234 5678",
+    "preferredTimeLabel": "Preferred time",
+    "backupTimeLabel": "Backup time",
+    "slotPlaceholder": "Select a time slot",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Tell us about your project or ask a question...",
+    "submit": "Get in touch",
+    "successTitle": "Thanks for reaching out!",
+    "successDescription": "We'll get back to you within one business day.",
+    "errors": {
+      "selectContactType": "Please select how you'd like to connect.",
+      "selectTimeSlots": "Please select both a preferred and backup time slot.",
+      "completeVerification": "Please complete the verification challenge.",
+      "genericPrefix": "Something went wrong. Please try again or reach out to",
+      "genericLinkText": "sander@epistola.app"
+    }
+  },
+  "nl": {
+    "nameLabel": "Naam",
+    "namePlaceholder": "Je naam",
+    "emailLabel": "E-mail",
+    "emailPlaceholder": "jij@organisatie.nl",
+    "contactTypeLabel": "Hoe wil je contact opnemen?",
+    "contactTypeEmail": "E-mail",
+    "contactTypePhone": "Telefonisch",
+    "contactTypeVideo": "Videogesprek",
+    "phoneLabel": "Telefoonnummer",
+    "phonePlaceholder": "+31 6 1234 5678",
+    "preferredTimeLabel": "Gewenst tijdstip",
+    "backupTimeLabel": "Reserve tijdstip",
+    "slotPlaceholder": "Selecteer een tijdslot",
+    "messageLabel": "Bericht",
+    "messagePlaceholder": "Vertel ons over je project of stel een vraag...",
+    "submit": "Neem contact op",
+    "successTitle": "Bedankt voor je bericht!",
+    "successDescription": "We reageren binnen een werkdag.",
+    "errors": {
+      "selectContactType": "Selecteer hoe je contact wilt opnemen.",
+      "selectTimeSlots": "Selecteer zowel een gewenst als een reserve tijdslot.",
+      "completeVerification": "Voltooi eerst de verificatie-uitdaging.",
+      "genericPrefix": "Er ging iets mis. Probeer het opnieuw of neem contact op via",
+      "genericLinkText": "sander@epistola.app"
+    }
+  }
+}

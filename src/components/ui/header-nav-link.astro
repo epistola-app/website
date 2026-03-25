@@ -1,4 +1,5 @@
 ---
+import { getLocalizedPath, type Locale } from "../../i18n";
 import { cn } from "../../lib/cn";
 import { prepareURL } from "../../lib/URL-helpers";
 
@@ -8,6 +9,7 @@ interface Props {
   external?: boolean;
   mobile?: boolean;
   currentPath?: string;
+  locale?: Locale;
   class?: string;
 }
 
@@ -17,10 +19,11 @@ const {
   external = false,
   mobile = false,
   currentPath = Astro.url.pathname,
+  locale = "en",
   class: className = "",
 } = Astro.props as Props;
 
-const resolvedHref = external ? href : prepareURL(href);
+const resolvedHref = external ? href : prepareURL(getLocalizedPath(href, locale));
 
 const normalizePath = (value: string): string => {
   const path = value.split(/[?#]/)[0] || "/";
@@ -59,7 +62,7 @@ const classes = cn(
     !mobile && (
       <span
         class={cn(
-          "absolute inset-x-0 bottom-0 h-0.5 origin-left bg-[var(--color-peach-paper-accent)] transition",
+          "absolute inset-x-0 bottom-0 h-0.5 origin-left bg-(--color-peach-paper-accent) transition",
           isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100",
         )}
       />

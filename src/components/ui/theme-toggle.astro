@@ -1,4 +1,5 @@
 ---
+import { useTranslations } from "../../i18n";
 import { cn } from "../../lib/cn";
 
 interface Props {
@@ -8,6 +9,8 @@ interface Props {
 }
 
 const { mobile = false, class: className = "", id } = Astro.props as Props;
+const { t } = useTranslations(Astro);
+const common = t("common");
 ---
 
 {
@@ -16,21 +19,22 @@ const { mobile = false, class: className = "", id } = Astro.props as Props;
       id={id}
       type="button"
       data-theme-toggle
-      aria-label="Toggle theme"
+      aria-label={common.toggleTheme}
       aria-pressed="false"
-      class={cn("inline-flex items-center gap-3 text-sm font-semibold text-[var(--color-peach-paper-copy)]", className)}
+      data-theme-light-label={common.light}
+      data-theme-dark-label={common.dark}
+      data-theme-switch-to-light={common.switchToLightTheme}
+      data-theme-switch-to-dark={common.switchToDarkTheme}
+      class={cn("inline-flex items-center gap-3 text-sm font-semibold text-(--color-peach-paper-copy)", className)}
     >
-      <span>Theme</span>
-      <span
-        data-theme-toggle-state
-        class="text-[10px] uppercase tracking-[0.14em] text-[var(--color-peach-paper-copy)]"
-      >
-        Light
+      <span>{common.theme}</span>
+      <span data-theme-toggle-state class="text-[10px] uppercase tracking-[0.14em] text-(--color-peach-paper-copy)">
+        {common.light}
       </span>
-      <span class="relative h-6 w-12 rounded-none border border-[var(--color-peach-paper-border)] p-0.5">
+      <span class="relative h-6 w-12 rounded-none border border-(--color-peach-paper-border) p-0.5">
         <span
           data-theme-toggle-pill
-          class="block h-5 w-5 rounded-none bg-[var(--color-peach-paper-accent)] transition-transform"
+          class="block h-5 w-5 rounded-none bg-(--color-peach-paper-accent) transition-transform"
         />
       </span>
     </button>
@@ -39,15 +43,19 @@ const { mobile = false, class: className = "", id } = Astro.props as Props;
       id={id}
       type="button"
       data-theme-toggle
-      aria-label="Switch to dark theme"
+      aria-label={common.switchToDarkTheme}
       aria-pressed="false"
+      data-theme-light-label={common.light}
+      data-theme-dark-label={common.dark}
+      data-theme-switch-to-light={common.switchToLightTheme}
+      data-theme-switch-to-dark={common.switchToDarkTheme}
       class={cn(
-        "flex h-10 w-10 items-center justify-center rounded-none border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] text-[var(--color-peach-paper-heading)] transition hover:border-[var(--color-peach-paper-border-strong)] hover:text-[var(--color-peach-paper-accent)]",
+        "flex h-10 w-10 items-center justify-center rounded-none border border-(--color-peach-paper-border) bg-(--color-peach-paper-chip-bg) text-(--color-peach-paper-heading) transition hover:border-(--color-peach-paper-border-strong) hover:text-(--color-peach-paper-accent)",
         className,
       )}
     >
       <span class="sr-only" data-theme-toggle-label>
-        Switch to dark theme
+        {common.switchToDarkTheme}
       </span>
       <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <path

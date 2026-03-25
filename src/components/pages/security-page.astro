@@ -1,0 +1,23 @@
+---
+import { useTranslations } from "../../i18n";
+import { EMAILS } from "../../lib/URL-helpers";
+import PolicyPage from "./policy-page.astro";
+
+const { t } = useTranslations(Astro);
+const security = t("security");
+---
+
+<PolicyPage
+  pageTitle={security.page.title}
+  pageDescription={security.page.description}
+  eyebrow={security.hero.eyebrow}
+  title={security.hero.title}
+  sections={security.sections}
+  contact={{
+    title: security.contact.title,
+    prefix: security.contact.prefix,
+    suffix: security.contact.suffix,
+    email: "security@epistola.app",
+    emailHref: EMAILS.SECURITY,
+  }}
+/>
