@@ -85,7 +85,7 @@ const tiers = [
         </ul>
         <div class="mt-8">
           {tier.highlighted ? (
-            <SuiteDemoButton />
+            <SuiteDemoButton lang={lang} />
           ) : (
             <Button
               href={tier.name === t(lang, "pricing.tier.0.name") ? URLS.GITHUB : localePath(lang, "/contact")}

@@ -18,6 +18,6 @@ const { lang = DEFAULT_LOCALE } = Astro.props;
   description={t(lang, "deploy.description")}
   contentClass="flex flex-wrap justify-center gap-4"
 >
-  <SuiteDemoButton />
+  <SuiteDemoButton lang={lang} />
   <Button href={localePath(lang, "/integrations")} variant="link" size="md">{t(lang, "deploy.cta.viewIntegrations")}</Button>
 </Section>

@@ -66,7 +66,7 @@ const langSwitchHref = localePath(altLang, currentPathWithoutLang);
         {t(lang, "header.langSwitch")}
       </a>
       <ThemeToggle />
-      <SuiteDemoButton />
+      <SuiteDemoButton lang={lang} />
     </div>
     <dialog
       id="mobile-nav"
@@ -101,7 +101,7 @@ const langSwitchHref = localePath(altLang, currentPathWithoutLang);
         </a>
       </div>
       <div class="mt-8 p-4 flex flex-col gap-3">
-        <SuiteDemoButton />
+        <SuiteDemoButton lang={lang} />
       </div>
       <ThemeToggle mobile class="mt-8 p-4" />
     </dialog>
