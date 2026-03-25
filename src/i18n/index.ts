@@ -1,5 +1,5 @@
-import nl from "./locales/nl.json";
-import en from "./locales/en.json";
+import en, { type TranslationKey } from "./locales/en";
+import nl from "./locales/nl";
 
 export const LOCALES = ["nl", "en"] as const;
 export type Locale = (typeof LOCALES)[number];
@@ -7,9 +7,11 @@ export const DEFAULT_LOCALE: Locale = "nl";
 
 const translations: Record<Locale, Record<string, string>> = { nl, en };
 
+export type { TranslationKey };
+
 export function t(
   locale: Locale,
-  key: string,
+  key: TranslationKey,
   params?: Record<string, string>,
 ): string {
   let value =

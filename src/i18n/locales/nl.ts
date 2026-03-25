@@ -1,4 +1,6 @@
-{
+import type { TranslationKey } from "./en";
+
+const nl: Record<TranslationKey, string> = {
   "site.title": "Epistola · Documentgeneratieplatform",
   "site.description": "Epistola helpt operationele teams bij het opstellen, beheren en leveren van complexe documenten via elk kanaal.",
 
@@ -512,4 +514,6 @@
   "blog.subtitle": "Laatste nieuws, updates en inzichten",
   "blog.readMore": "Lees meer",
   "blog.backToBlog": "← Terug naar blog"
-}
+};
+
+export default nl;

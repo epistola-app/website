@@ -1,4 +1,4 @@
-{
+const en = {
   "site.title": "Epistola · Document Intelligence Platform",
   "site.description": "Epistola helps operations teams author, govern, and deliver complex documents across every channel.",
 
@@ -512,4 +512,8 @@
   "blog.subtitle": "Latest news, updates, and insights",
   "blog.readMore": "Read more",
   "blog.backToBlog": "← Back to Blog"
-}
+} as const;
+
+export default en;
+
+export type TranslationKey = keyof typeof en;
