@@ -333,9 +333,6 @@ const toggleClasses =
           }
         }
 
-        console.log("Contact form payload", data);
-        return;
-
         try {
           const res = await fetch("https://automation.cs.epistola.io/api/r/contact", {
             method: "POST",
