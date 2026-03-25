@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@astrojs/check':
-        specifier: ^0.9.8
-        version: 0.9.8(prettier-plugin-astro@0.14.1)(prettier@3.8.1)(typescript@6.0.2)
       '@lucide/astro':
         specifier: ^0.576.0
         version: 0.576.0(astro@5.16.8(@types/node@24.7.1)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.52.4)(typescript@6.0.2)(yaml@2.8.3))
@@ -35,10 +32,10 @@ importers:
       tailwindcss:
         specifier: ^4.1.18
         version: 4.1.18
-      typescript:
-        specifier: ^6.0.2
-        version: 6.0.2
     devDependencies:
+      '@astrojs/check':
+        specifier: ^0.9.8
+        version: 0.9.8(prettier-plugin-astro@0.14.1)(prettier@3.8.1)(typescript@6.0.2)
       '@tailwindcss/typography':
         specifier: ^0.5.19
         version: 0.5.19(tailwindcss@4.1.18)
@@ -48,6 +45,9 @@ importers:
       prettier-plugin-astro:
         specifier: ^0.14.1
         version: 0.14.1
+      typescript:
+        specifier: ^6.0.2
+        version: 6.0.2
 
 packages:
 

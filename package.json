@@ -12,7 +12,6 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.8",
     "@lucide/astro": "^0.576.0",
     "@tailwindcss/vite": "^4.1.18",
     "altcha": "^2.3.0",
@@ -20,8 +19,7 @@
     "clsx": "^2.1.1",
     "sharp": "^0.34.2",
     "tailwind-merge": "^3.5.0",
-    "tailwindcss": "^4.1.18",
-    "typescript": "^6.0.2"
+    "tailwindcss": "^4.1.18"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -30,8 +28,10 @@
     ]
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.8",
     "@tailwindcss/typography": "^0.5.19",
     "prettier": "^3.8.1",
-    "prettier-plugin-astro": "^0.14.1"
+    "prettier-plugin-astro": "^0.14.1",
+    "typescript": "^6.0.2"
   }
 }

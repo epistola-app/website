@@ -1,3 +1,20 @@
 ---
-return Astro.redirect("/nl/");
+// Client-side language detection redirect (no server-side headers on GitHub Pages)
 ---
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <link rel="alternate" hreflang="nl" href="/nl/" />
+    <link rel="alternate" hreflang="en" href="/en/" />
+    <script is:inline>
+      const lang = navigator.language || navigator.userLanguage || "";
+      const dest = lang.startsWith("en") ? "/en/" : "/nl/";
+      window.location.replace(dest);
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="0;url=/nl/" />
+    </noscript>
+  </head>
+</html>
