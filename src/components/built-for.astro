@@ -1,91 +1,101 @@
 ---
 import Section from "./ui/section.astro";
+import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
 
 const workflowSteps = [
   {
-    title: "Submit payload",
-    description: "Orchestrator sends signed JSON + tenant slug and registers a render batch.",
-    inactiveLabel: "Next",
+    title: t(lang, "builtFor.step.0.title"),
+    description: t(lang, "builtFor.step.0.description"),
+    inactiveLabel: t(lang, "builtFor.step.0.inactiveLabel"),
     isActive: true,
     card: {
-      eyebrow: "Current render job",
-      title: "Payload intake · Besluit",
-      badge: "Queued",
+      eyebrow: t(lang, "builtFor.step.0.card.eyebrow"),
+      title: t(lang, "builtFor.step.0.card.title"),
+      badge: t(lang, "builtFor.step.0.card.badge"),
       stages: [
         {
-          label: "Orchestrator",
-          detail: "Emit signed JSON + tenant slug; webhooks register batch IDs.",
+          label: t(lang, "builtFor.step.0.stage.0.label"),
+          detail: t(lang, "builtFor.step.0.stage.0.detail"),
         },
         {
-          label: "Validation",
-          detail: "Verify schema version, tenant access, and required fields.",
+          label: t(lang, "builtFor.step.0.stage.1.label"),
+          detail: t(lang, "builtFor.step.0.stage.1.detail"),
         },
         {
-          label: "Queue",
-          detail: "Assign job ID and enqueue render on the tenant pool.",
+          label: t(lang, "builtFor.step.0.stage.2.label"),
+          detail: t(lang, "builtFor.step.0.stage.2.detail"),
         },
       ],
     },
   },
   {
-    title: "Render job",
-    description: "Epistola resolves schema, selects template version, and renders output.",
-    inactiveLabel: "Next",
+    title: t(lang, "builtFor.step.1.title"),
+    description: t(lang, "builtFor.step.1.description"),
+    inactiveLabel: t(lang, "builtFor.step.1.inactiveLabel"),
     isActive: false,
     card: {
-      eyebrow: "Current render job",
-      title: "Render job · Besluit",
-      badge: "Rendering",
+      eyebrow: t(lang, "builtFor.step.1.card.eyebrow"),
+      title: t(lang, "builtFor.step.1.card.title"),
+      badge: t(lang, "builtFor.step.1.card.badge"),
       stages: [
         {
-          label: "Template",
-          detail: "Resolve schema, pick active version, and lock template assets.",
+          label: t(lang, "builtFor.step.1.stage.0.label"),
+          detail: t(lang, "builtFor.step.1.stage.0.detail"),
         },
         {
-          label: "Renderer",
-          detail: "Render with audit logging and checksum hashing.",
+          label: t(lang, "builtFor.step.1.stage.1.label"),
+          detail: t(lang, "builtFor.step.1.stage.1.detail"),
         },
         {
-          label: "Artifacts",
-          detail: "Persist PDF/DOCX/HTML outputs and register storage refs.",
+          label: t(lang, "builtFor.step.1.stage.2.label"),
+          detail: t(lang, "builtFor.step.1.stage.2.detail"),
         },
       ],
     },
   },
   {
-    title: "Deliver outputs",
-    description: "Webhooks and storage callbacks provide URLs, metadata, and audit refs.",
-    inactiveLabel: "Last",
+    title: t(lang, "builtFor.step.2.title"),
+    description: t(lang, "builtFor.step.2.description"),
+    inactiveLabel: t(lang, "builtFor.step.2.inactiveLabel"),
     isActive: false,
     card: {
-      eyebrow: "Current render job",
-      title: "Delivery · Besluit",
-      badge: "Delivered",
+      eyebrow: t(lang, "builtFor.step.2.card.eyebrow"),
+      title: t(lang, "builtFor.step.2.card.title"),
+      badge: t(lang, "builtFor.step.2.card.badge"),
       stages: [
         {
-          label: "Callbacks",
-          detail: "Send webhook with URLs, metadata, and audit references.",
+          label: t(lang, "builtFor.step.2.stage.0.label"),
+          detail: t(lang, "builtFor.step.2.stage.0.detail"),
         },
         {
-          label: "Storage",
-          detail: "Write outputs to tenant storage adapters and retain logs.",
+          label: t(lang, "builtFor.step.2.stage.1.label"),
+          detail: t(lang, "builtFor.step.2.stage.1.detail"),
         },
         {
-          label: "Archive",
-          detail: "Seal job metadata and surface history to orchestrators.",
+          label: t(lang, "builtFor.step.2.stage.2.label"),
+          detail: t(lang, "builtFor.step.2.stage.2.detail"),
         },
       ],
     },
   },
 ];
+
+const activeLabel = t(lang, "builtFor.stepStatus.active");
 ---
 
 <Section
-  monoTitle="/ Built for orchestrators"
-  title="Drop into ZGW, Valtimo, or bespoke stacks without touching workflows."
-  description="Epistola exposes a narrow surface: JSON in, PDF/DOCX/HTML out. Multi-tenant auth via Keycloak, Helm charts, and health probes make it feel like any other platform service in your cluster."
+  monoTitle={t(lang, "builtFor.monoTitle")}
+  title={t(lang, "builtFor.title")}
+  description={t(lang, "builtFor.description")}
   contentClass="grid gap-6 lg:grid-cols-2"
   data-built-for
+  data-active-label={activeLabel}
 >
   <div class="flex flex-col gap-4">
     {
@@ -107,7 +117,7 @@ const workflowSteps = [
           <div class="flex items-center justify-between">
             <span class="text-xs font-semibold uppercase tracking-[0.18em]">Step {index + 1}</span>
             <span class="text-xs font-semibold uppercase tracking-[0.16em]" data-step-status>
-              {step.isActive ? "Active" : step.inactiveLabel}
+              {step.isActive ? activeLabel : step.inactiveLabel}
             </span>
           </div>
           <div>
@@ -170,6 +180,7 @@ const workflowSteps = [
   const initSection = (section) => {
     const buttons = Array.from(section.querySelectorAll("[data-step-button]"));
     const panels = Array.from(section.querySelectorAll("[data-step-panel]"));
+    const activeLabel = section.getAttribute("data-active-label") || "Active";
 
     if (!buttons.length || !panels.length) return;
 
@@ -185,7 +196,7 @@ const workflowSteps = [
         button.setAttribute("data-active", isActive ? "true" : "false");
 
         if (status) {
-          status.textContent = isActive ? "Active" : inactiveLabel;
+          status.textContent = isActive ? activeLabel : inactiveLabel;
         }
       });
 

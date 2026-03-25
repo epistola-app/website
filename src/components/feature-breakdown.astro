@@ -3,52 +3,59 @@ import Card from "./ui/card.astro";
 import MonoTitle from "./ui/mono-title.astro";
 import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
+import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
 
 const detailSections = [
   {
-    badge: "Lifecycle",
-    title: "Templates, variants, versions, environments",
+    badge: t(lang, "features.section.0.badge"),
+    title: t(lang, "features.section.0.title"),
     body: [
-      "Each tenant owns template slugs with unlimited variants tagged by geography, brand, or audience.",
-      "Variants carry immutable version numbers with a draft → published → archived lifecycle and audit history.",
-      "Environments (staging, production, custom) activate specific versions so you can test or roll back safely.",
-      "Variant resolver inspects request attributes (e.g., language=nl) and picks the closest match automatically, falling back to the default when nothing fits.",
+      t(lang, "features.section.0.body.0"),
+      t(lang, "features.section.0.body.1"),
+      t(lang, "features.section.0.body.2"),
+      t(lang, "features.section.0.body.3"),
     ],
   },
   {
-    badge: "Contracts",
-    title: "Data schemas and executable examples",
+    badge: t(lang, "features.section.1.badge"),
+    title: t(lang, "features.section.1.title"),
     body: [
-      "Every template ships with a JSON Schema Draft 2020-12 data contract validated pre-render.",
-      "Named example payloads live beside the schema for instant previewing and regression fixtures.",
-      "Schema migrations keep draft versions in sync when fields change between releases.",
+      t(lang, "features.section.1.body.0"),
+      t(lang, "features.section.1.body.1"),
+      t(lang, "features.section.1.body.2"),
     ],
   },
   {
-    badge: "Feedback",
-    title: "Built-in reviews with screenshots",
+    badge: t(lang, "features.section.2.badge"),
+    title: t(lang, "features.section.2.title"),
     body: [
-      "Floating feedback button opens a modal that captures URL, user context, and console logs.",
-      "Drag in or paste screenshots—assets upload automatically and render in the feedback timeline.",
-      "Optional GitHub sync mirrors issues bi-directionally so engineers can triage where they work.",
+      t(lang, "features.section.2.body.0"),
+      t(lang, "features.section.2.body.1"),
+      t(lang, "features.section.2.body.2"),
     ],
   },
   {
-    badge: "Themes",
-    title: "Tenant and variant theming",
+    badge: t(lang, "features.section.3.badge"),
+    title: t(lang, "features.section.3.title"),
     body: [
-      "Reusable theme packages define typography, color tokens, and page settings (A4, Letter, margins).",
-      "Theme cascade respects tenant defaults, template overrides, then variant-specific tweaks for special cases.",
-      "Block-level presets make it easy to enforce branded tables, headers, and emphasis patterns.",
+      t(lang, "features.section.3.body.0"),
+      t(lang, "features.section.3.body.1"),
+      t(lang, "features.section.3.body.2"),
     ],
   },
   {
-    badge: "Assets",
-    title: "Tenant asset manager",
+    badge: t(lang, "features.section.4.badge"),
+    title: t(lang, "features.section.4.title"),
     body: [
-      "Upload PNG, JPG, SVG, or WebP up to 5 MB via drag-and-drop with automatic thumbnailing.",
-      "Assets live per tenant with search, delete, and direct references inside the template editor.",
-      "Raw endpoints serve optimized binaries to the renderer so logos stay crisp in every PDF.",
+      t(lang, "features.section.4.body.0"),
+      t(lang, "features.section.4.body.1"),
+      t(lang, "features.section.4.body.2"),
     ],
   },
 ];
@@ -56,9 +63,9 @@ const detailSections = [
 
 <Section
   id="feature-breakdown"
-  monoTitle="/ Feature deep dive"
-  title="The Epistola Suite in practice"
-  description="Straight from the reference implementation: how templates evolve, feedback gets routed, and assets stay governed."
+  monoTitle={t(lang, "features.monoTitle")}
+  title={t(lang, "features.title")}
+  description={t(lang, "features.description")}
   contentClass="space-y-8"
 >
   {

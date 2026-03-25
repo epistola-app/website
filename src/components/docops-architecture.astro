@@ -2,57 +2,49 @@
 import Card from "./ui/card.astro";
 import MonoTitle from "./ui/mono-title.astro";
 import Section from "./ui/section.astro";
+import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
 
 const lanes = [
   {
-    title: "Business authors",
-    body: "Drag/drop blocks, manage schema examples, and preview PDFs with inline expression evaluation.",
+    title: t(lang, "docops.lane.0.title"),
+    body: t(lang, "docops.lane.0.body"),
     bullets: [
-      "Block library: text, tables, columns, clauses, headers, footers",
-      "Undo/redo + autosave stacks",
-      "Inline expression tester",
+      t(lang, "docops.lane.0.bullet.0"),
+      t(lang, "docops.lane.0.bullet.1"),
+      t(lang, "docops.lane.0.bullet.2"),
     ],
   },
   {
-    title: "Developers",
-    body: "Version templates in Git, run Testcontainers suites, and invoke the OpenAPI-render API from orchestrators.",
+    title: t(lang, "docops.lane.1.title"),
+    body: t(lang, "docops.lane.1.body"),
     bullets: [
-      "API commands for template + theme automation",
-      "Adaptive batch jobs with job states and metrics",
-      "Webhooks + storage adapters (S3, Azure, DMS)",
+      t(lang, "docops.lane.1.bullet.0"),
+      t(lang, "docops.lane.1.bullet.1"),
+      t(lang, "docops.lane.1.bullet.2"),
     ],
   },
   {
-    title: "Platform ops",
-    body: "Deploy Helm charts with Keycloak/OIDC, monitor renders, and promote versions across environments.",
+    title: t(lang, "docops.lane.2.title"),
+    body: t(lang, "docops.lane.2.body"),
     bullets: [
-      "Multi-tenant isolation + RBAC memberships",
-      "Environments per tenant (staging/production)",
-      "Prometheus/OTel metrics + health probes",
+      t(lang, "docops.lane.2.bullet.0"),
+      t(lang, "docops.lane.2.bullet.1"),
+      t(lang, "docops.lane.2.bullet.2"),
     ],
-  },
-];
-
-const pipeline = [
-  {
-    title: "Template service",
-    note: "Variants · versions · JSON Schema · theming",
-  },
-  {
-    title: "Generation engine",
-    note: "10k+ docs/min · expression sandbox · token cascade",
-  },
-  {
-    title: "Delivery",
-    note: "Jobs API · storage bridges · problem+json errors",
   },
 ];
 ---
 
 <Section
-  monoTitle="/ DocOps architecture"
-  title="Editor → template service → renderer: a single document generation lane."
-  description="Epistola Suite is unapologetically about generation, not analytics or AI insights. Authors design templates, developers automate the render API, and platform teams run the Helm stack — all centered on getting compliant PDFs out the door."
+  monoTitle={t(lang, "docops.monoTitle")}
+  title={t(lang, "docops.title")}
+  description={t(lang, "docops.description")}
   contentClass="grid grid-cols-1 gap-8 lg:grid-cols-3"
 >
   {

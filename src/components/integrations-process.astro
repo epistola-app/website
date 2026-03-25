@@ -1,27 +1,34 @@
 ---
 import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
+import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
 
 const steps = [
   {
     number: "01",
-    title: "Map your data",
-    description: "Align your zaak, besluit, or custom payloads with template variables.",
+    title: t(lang, "process.step.0.title"),
+    description: t(lang, "process.step.0.description"),
   },
   {
     number: "02",
-    title: "Link orchestrator",
-    description: "Call Epistola over HTTPS or message queue, send JSON, and await the PDF response.",
+    title: t(lang, "process.step.1.title"),
+    description: t(lang, "process.step.1.description"),
   },
   {
     number: "03",
-    title: "Deliver documents",
-    description: "Push finished files into your DMS, send to citizens, or attach back to the case system.",
+    title: t(lang, "process.step.2.title"),
+    description: t(lang, "process.step.2.description"),
   },
 ];
 ---
 
-<Section monoTitle="/ Integration process" title="From payload mapping to delivery in three steps." contentClass="grid gap-8 md:grid-cols-3">
+<Section monoTitle={t(lang, "process.monoTitle")} title={t(lang, "process.title")} contentClass="grid gap-8 md:grid-cols-3">
   {
     steps.map((step) => (
       <div class="text-center">

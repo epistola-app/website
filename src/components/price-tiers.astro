@@ -5,37 +5,58 @@ import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
 import SuiteDemoButton from "./buttons/suite-demo-button.astro";
 import { URLS } from "../lib/URL-helpers";
+import { t, localePath, type Locale, DEFAULT_LOCALE } from "../i18n";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
 
 const tiers = [
   {
-    name: "Community",
-    price: "Free",
-    cadence: "open source",
-    description: "Self-host Epistola under the AGPL license with community support.",
-    features: ["Full editor + renderer", "Common Ground adapters", "Docker/Kubernetes images"],
+    name: t(lang, "pricing.tier.0.name"),
+    price: t(lang, "pricing.tier.0.price"),
+    cadence: t(lang, "pricing.tier.0.cadence"),
+    description: t(lang, "pricing.tier.0.description"),
+    features: [
+      t(lang, "pricing.tier.0.feature.0"),
+      t(lang, "pricing.tier.0.feature.1"),
+      t(lang, "pricing.tier.0.feature.2"),
+    ],
+    cta: t(lang, "pricing.tier.0.cta"),
     cardVariant: "subtle",
   },
   {
-    name: "Support",
-    price: "€1.2k",
-    cadence: "per month",
-    description: "Commercial support for teams running Epistola themselves.",
-    features: ["Priority fixes", "Upgrade guidance", "Architecture reviews"],
+    name: t(lang, "pricing.tier.1.name"),
+    price: t(lang, "pricing.tier.1.price"),
+    cadence: t(lang, "pricing.tier.1.cadence"),
+    description: t(lang, "pricing.tier.1.description"),
+    features: [
+      t(lang, "pricing.tier.1.feature.0"),
+      t(lang, "pricing.tier.1.feature.1"),
+      t(lang, "pricing.tier.1.feature.2"),
+    ],
     highlighted: true,
     cardVariant: "brand",
   },
   {
-    name: "Managed",
-    price: "Custom",
-    cadence: "per month",
-    description: "Hosted Epistola with SLAs, monitoring, and dedicated environments.",
-    features: ["SLA-backed hosting", "Custom connectors", "Dedicated success engineer"],
+    name: t(lang, "pricing.tier.2.name"),
+    price: t(lang, "pricing.tier.2.price"),
+    cadence: t(lang, "pricing.tier.2.cadence"),
+    description: t(lang, "pricing.tier.2.description"),
+    features: [
+      t(lang, "pricing.tier.2.feature.0"),
+      t(lang, "pricing.tier.2.feature.1"),
+      t(lang, "pricing.tier.2.feature.2"),
+    ],
+    cta: t(lang, "pricing.tier.2.cta"),
     cardVariant: "default",
   },
 ];
 ---
 
-<Section monoTitle="/ Pricing plans" title="Choose the support level you need." contentClass="grid gap-6 md:grid-cols-3">
+<Section monoTitle={t(lang, "pricing.monoTitle")} title={t(lang, "pricing.title")} contentClass="grid gap-6 md:grid-cols-3">
   {
     tiers.map((tier) => (
       <Card
@@ -67,13 +88,13 @@ const tiers = [
             <SuiteDemoButton />
           ) : (
             <Button
-              href={tier.name === "Community" ? URLS.GITHUB : "/contact"}
-              variant={tier.name === "Community" ? "link" : "secondary"}
+              href={tier.name === t(lang, "pricing.tier.0.name") ? URLS.GITHUB : localePath(lang, "/contact")}
+              variant={tier.name === t(lang, "pricing.tier.0.name") ? "link" : "secondary"}
               size="md"
-              class={tier.name === "Community" ? "w-full justify-start sm:justify-center" : "w-full justify-center"}
-              external={tier.name === "Community"}
+              class={tier.name === t(lang, "pricing.tier.0.name") ? "w-full justify-start sm:justify-center" : "w-full justify-center"}
+              external={tier.name === t(lang, "pricing.tier.0.name")}
             >
-              {tier.name === "Community" ? "View on GitHub" : "Talk to sales"}
+              {tier.cta}
             </Button>
           )}
         </div>

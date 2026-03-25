@@ -2,14 +2,16 @@
 import type { HTMLAttributes } from "astro/types";
 import MonoTitle from "./ui/mono-title.astro";
 import Title from "./ui/title.astro";
+import { type Locale, DEFAULT_LOCALE } from "../i18n";
 
 interface Props extends Omit<HTMLAttributes<"section">, "class" | "style"> {
   monoTitle: string;
   title: string;
   description: string;
+  lang?: Locale;
 }
 
-const { monoTitle, title, description, ...restProps } = Astro.props as Props;
+const { monoTitle, title, description, lang = DEFAULT_LOCALE, ...restProps } = Astro.props as Props;
 ---
 
 <section class="relative flex min-h-[60vh] items-center overflow-hidden pt-32 pb-16 lg:min-h-[70vh]" {...restProps}>

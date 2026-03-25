@@ -4,6 +4,14 @@ All notable changes to this project will be documented here.
 
 ## [Unreleased]
 
+### Changed
+
+- Added i18n support to 13 content components: everything-you-need, built-for, docops-architecture, architecture-flow, integrations-overview, integrations-process, features-integrators, feature-breakdown, template-diagram, price-tiers, contact-form, mail-subscribe, and page-hero. All hardcoded English strings now use translation keys via `t(lang, key)` and internal links use `localePath(lang, path)`.
+- Contact form JS validation messages are now passed via data attributes from server-rendered translated strings, keeping client-side JS behavior intact.
+- Built-for component passes the translated "Active" label via a data attribute so the inline script uses the correct locale string.
+- Architecture-flow component passes translated pause/play labels via data attributes for the inline animation script.
+- Added `templateSystem.environments.immutablePointers` translation key to both en.json and nl.json.
+
 ### Added
 
 - Interactive architecture flow visualization on homepage showing template configuration and document generation data flows with animated JSON packets, step-by-step controls, and auto-play on scroll.
