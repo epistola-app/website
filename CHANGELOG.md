@@ -4,6 +4,15 @@ All notable changes to this project will be documented here.
 
 ## [Unreleased]
 
+### Added
+
+- Client-side browser language detection on root page (redirects to `/en/` or `/nl/` based on `navigator.language`).
+- `@astrojs/sitemap` integration for automatic sitemap generation.
+- `robots.txt` with sitemap reference.
+- JSON-LD structured data: Organization and WebSite schemas on homepage, BlogPosting schema on blog posts.
+- `apple-touch-icon` link for iOS.
+- `preconnect` hint for `automation.cs.epistola.io`.
+
 ### Changed
 
 - Migrated 12 homepage/product components from `t()` calls to Astro content collections:

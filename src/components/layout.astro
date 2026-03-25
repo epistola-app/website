@@ -2,7 +2,7 @@
 import "../styles/global.css";
 import Header from "./header.astro";
 import Footer from "./footer.astro";
-import { SITE, OG_TYPES, type OpenGraphProps, getAbsoluteURL } from "../lib/URL-helpers";
+import { SITE, OG_TYPES, URLS, type OpenGraphProps, getAbsoluteURL } from "../lib/URL-helpers";
 import { t, localeToOgLocale, getAlternateLocale, localePath, type Locale, DEFAULT_LOCALE } from "../i18n";
 
 interface Props {
@@ -39,6 +39,51 @@ const altOgLocale = localeToOgLocale(altLang);
 const currentPathWithoutLang = Astro.url.pathname.replace(`/${lang}`, "") || "/";
 const nlUrl = getAbsoluteURL(localePath("nl", currentPathWithoutLang));
 const enUrl = getAbsoluteURL(localePath("en", currentPathWithoutLang));
+
+const isHomePage = currentPathWithoutLang === "/" || currentPathWithoutLang === "";
+const isArticle = ogType === OG_TYPES.ARTICLE && og.article;
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: SITE.NAME,
+  url: getAbsoluteURL("/"),
+  logo: getAbsoluteURL("/logo.svg"),
+  sameAs: [
+    `https://twitter.com/${SITE.TWITTER_HANDLE.replace("@", "")}`,
+    URLS.GITHUB,
+  ],
+};
+
+const webSiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE.NAME,
+  url: getAbsoluteURL("/"),
+  inLanguage: [lang],
+};
+
+const articleSchema = isArticle ? {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  headline: ogTitle,
+  description: ogDescription,
+  image: absoluteImageUrl,
+  url: ogUrl,
+  datePublished: og.article!.publishedTime?.toISOString(),
+  dateModified: og.article!.modifiedTime?.toISOString() || og.article!.publishedTime?.toISOString(),
+  author: {
+    "@type": "Person",
+    name: og.article!.author,
+  },
+  publisher: {
+    "@type": "Organization",
+    name: SITE.NAME,
+    logo: { "@type": "ImageObject", url: getAbsoluteURL("/logo.svg") },
+  },
+  inLanguage: lang,
+  keywords: og.article!.tags?.join(", "),
+} : null;
 ---
 
 <html lang={lang}>
@@ -48,7 +93,9 @@ const enUrl = getAbsoluteURL(localePath("en", currentPathWithoutLang));
     <meta name="generator" content={Astro.generator} />
     <title>{resolvedTitle}</title>
     <meta name="description" content={resolvedDescription} />
-    <link rel="icon" type="image/x-icon" href="/logo.svg" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="apple-touch-icon" href="/logo.svg" />
+    <link rel="preconnect" href="https://automation.cs.epistola.io" />
 
     <link rel="canonical" href={ogUrl} />
     <link rel="alternate" hreflang="nl" href={nlUrl} />
@@ -94,6 +141,16 @@ const enUrl = getAbsoluteURL(localePath("en", currentPathWithoutLang));
                      form-action 'self';
                      base-uri 'self'"
     />
+    {isHomePage && (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    )}
+    {isHomePage && (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(webSiteSchema)} />
+    )}
+    {articleSchema && (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+    )}
+
     <!-- Fonts are self-hosted, loaded via @font-face in global.css -->
     <script is:inline>
       (() => {

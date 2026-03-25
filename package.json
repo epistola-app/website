@@ -12,6 +12,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@astrojs/sitemap": "^3.7.1",
     "@lucide/astro": "^0.576.0",
     "@tailwindcss/vite": "^4.1.18",
     "altcha": "^2.3.0",
