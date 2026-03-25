@@ -1,0 +1,6 @@
+type: feature-card
+sortOrder: 3
+badge: Logic
+title: Expression engine
+body: "Use flexible expressions to calculate totals, format values, and apply conditional logic. Define input variables per template."
+cta: Learn more

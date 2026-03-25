@@ -1,0 +1,4 @@
+type: integration-card
+sortOrder: 2
+title: "Open REST API"
+description: "Elk template-, clausule- en leverings-eindpunt is bestuurbaar via onze gedocumenteerde REST-interface, klaar voor elke stack."

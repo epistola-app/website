@@ -1,0 +1,8 @@
+type: docops-lane
+sortOrder: 3
+title: "Platform ops"
+body: "Deploy Helm charts with Keycloak/OIDC, monitor renders, and promote versions across environments."
+bullets:
+  - "Multi-tenant isolation + RBAC memberships"
+  - "Environments per tenant (staging/production)"
+  - "Prometheus/OTel metrics + health probes"

@@ -1,0 +1,4 @@
+type: architecture-step
+sortOrder: 4
+label: "Render and store document"
+description: "Epistola renders the template with the provided data and stores the resulting PDF in temporary storage."

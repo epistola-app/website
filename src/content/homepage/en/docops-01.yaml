@@ -1,0 +1,8 @@
+type: docops-lane
+sortOrder: 1
+title: "Business authors"
+body: "Drag/drop blocks, manage schema examples, and preview PDFs with inline expression evaluation."
+bullets:
+  - "Block library: text, tables, columns, clauses, headers, footers"
+  - "Undo/redo + autosave stacks"
+  - "Inline expression tester"

@@ -1,0 +1,12 @@
+type: pricing
+sortOrder: 3
+name: Managed
+price: Op maat
+cadence: per maand
+description: "Gehoste Epistola met SLA's, monitoring en dedicated omgevingen."
+features:
+  - "SLA-gebackte hosting"
+  - "Maatwerk-connectors"
+  - "Dedicated success engineer"
+cta: Neem contact op
+highlighted: false

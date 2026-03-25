@@ -1,0 +1,4 @@
+type: architecture-step
+sortOrder: 2
+label: "Zaakdata verzamelen"
+description: "Het zaakafhandelsysteem verzamelt zaakdata uit het ZRC, ZTC en andere geconfigureerde databronnen."

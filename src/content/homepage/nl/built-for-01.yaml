@@ -1,0 +1,16 @@
+type: built-for
+sortOrder: 1
+title: "Payload indienen"
+description: "Orkestrator stuurt ondertekende JSON + tenantslug en registreert een renderbatch."
+inactiveLabel: "Volgende"
+card:
+  eyebrow: "Huidige renderjob"
+  title: "Payload-intake · Besluit"
+  badge: "In wachtrij"
+stages:
+  - label: "Orkestrator"
+    detail: "Verstuur ondertekende JSON + tenantslug; webhooks registreren batch-ID's."
+  - label: "Validatie"
+    detail: "Verifieer schemaversie, tenanttoegang en verplichte velden."
+  - label: "Wachtrij"
+    detail: "Wijs job-ID toe en zet render in de wachtrij van de tenantpool."

@@ -1,0 +1,6 @@
+type: feature-card
+sortOrder: 6
+badge: Levering
+title: API + jobs
+body: "OpenAPI 3.1 REST-eindpunten voor enkele of batchrenders met adaptieve jobgrootte, webhooks en opslagadapters."
+cta: Meer informatie

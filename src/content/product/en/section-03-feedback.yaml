@@ -1,0 +1,8 @@
+type: feature-section
+sortOrder: 3
+badge: Feedback
+title: "Built-in reviews with screenshots"
+body:
+  - "Floating feedback button opens a modal that captures URL, user context, and console logs."
+  - "Drag in or paste screenshots—assets upload automatically and render in the feedback timeline."
+  - "Optional GitHub sync mirrors issues bi-directionally so engineers can triage where they work."

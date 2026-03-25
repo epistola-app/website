@@ -1,0 +1,4 @@
+type: stats
+sortOrder: 2
+value: "140k"
+label: "render jobs / day"

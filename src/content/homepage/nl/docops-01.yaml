@@ -1,0 +1,8 @@
+type: docops-lane
+sortOrder: 1
+title: "Zakelijke auteurs"
+body: "Sleep blokken, beheer schema-voorbeelden en bekijk PDF's met inline expressie-evaluatie."
+bullets:
+  - "Blokbibliotheek: tekst, tabellen, kolommen, clausules, kop- en voetteksten"
+  - "Ongedaan maken/opnieuw + autosave-stacks"
+  - "Inline expressietester"

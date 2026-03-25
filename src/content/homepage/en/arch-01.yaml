@@ -1,0 +1,4 @@
+type: architecture-step
+sortOrder: 1
+label: "Caseworker starts process"
+description: "A caseworker initiates a case process in the zaakafhandelsysteem — for example handling an objection (\"bezwaar\")."

@@ -1,0 +1,4 @@
+type: architecture-step
+sortOrder: 3
+label: "Request document generation"
+description: "Plugin sends a generation request to Epistola with the resolved template and all variable data."

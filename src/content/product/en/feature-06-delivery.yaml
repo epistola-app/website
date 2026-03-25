@@ -1,0 +1,6 @@
+type: feature-card
+sortOrder: 6
+badge: Delivery
+title: API + jobs
+body: "OpenAPI 3.1 REST endpoints for single or batch renders with adaptive job sizing, webhooks, and storage adapters."
+cta: Learn more

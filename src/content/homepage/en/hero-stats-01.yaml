@@ -1,0 +1,4 @@
+type: hero-stats
+sortOrder: 1
+value: "200+"
+label: "Template versions per variant"

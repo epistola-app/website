@@ -1,0 +1,12 @@
+type: pricing
+sortOrder: 1
+name: Community
+price: Free
+cadence: open source
+description: "Self-host Epistola under the AGPL license with community support."
+features:
+  - "Full editor + renderer"
+  - "Common Ground adapters"
+  - "Docker/Kubernetes images"
+cta: View on GitHub
+highlighted: true

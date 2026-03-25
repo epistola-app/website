@@ -1,0 +1,16 @@
+type: built-for
+sortOrder: 1
+title: "Submit payload"
+description: "Orchestrator sends signed JSON + tenant slug and registers a render batch."
+inactiveLabel: "Next"
+card:
+  eyebrow: "Current render job"
+  title: "Payload intake · Besluit"
+  badge: "Queued"
+stages:
+  - label: "Orchestrator"
+    detail: "Emit signed JSON + tenant slug; webhooks register batch IDs."
+  - label: "Validation"
+    detail: "Verify schema version, tenant access, and required fields."
+  - label: "Queue"
+    detail: "Assign job ID and enqueue render on the tenant pool."

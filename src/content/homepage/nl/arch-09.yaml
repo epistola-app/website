@@ -1,0 +1,4 @@
+type: architecture-step
+sortOrder: 9
+label: "Document beschikbaar"
+description: "De medewerker kan het gegenereerde document nu bekijken en downloaden vanuit het zaakafhandelsysteem."

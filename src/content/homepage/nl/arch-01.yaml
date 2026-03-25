@@ -1,0 +1,4 @@
+type: architecture-step
+sortOrder: 1
+label: "Medewerker start proces"
+description: "Een medewerker start een zaakproces in het zaakafhandelsysteem — bijvoorbeeld het behandelen van een bezwaar."

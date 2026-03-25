@@ -6,6 +6,11 @@ All notable changes to this project will be documented here.
 
 ### Added
 
+- Content collection files for i18n migration: 144 files across `src/content/pages/`, `src/content/product/`, and `src/content/homepage/` for both `en` and `nl` locales.
+  - Pages (content/markdown): FAQs (4), testimonials (3), about sections (3), privacy (4), security (4), terms (5) per locale.
+  - Product (data/YAML): feature cards (6), feature sections (5), pricing tiers (3) per locale.
+  - Homepage (data/YAML): how-it-works (3), why-us (4), stats (4), hero-stats (3), docops lanes (3), built-for steps (3), architecture steps (9), integration cards (3), process steps (3) per locale.
+
 - Full internationalization (i18n) support with Dutch (primary) and English (secondary) languages.
 - Astro built-in i18n routing with `/nl/` and `/en/` URL prefixes; root `/` redirects to `/nl/`.
 - Translation infrastructure: `src/i18n/` module with `t()`, `localePath()`, locale utilities, and JSON translation files (`nl.json`, `en.json`) containing ~400 translation keys.

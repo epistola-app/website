@@ -1,0 +1,4 @@
+type: hero-stats
+sortOrder: 3
+value: "Multi-tenant"
+label: "Rol- & omgevingsisolatie"

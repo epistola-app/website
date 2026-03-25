@@ -1,0 +1,4 @@
+type: process-step
+sortOrder: 3
+title: "Deliver documents"
+description: "Push finished files into your DMS, send to citizens, or attach back to the case system."

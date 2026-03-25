@@ -1,0 +1,16 @@
+type: built-for
+sortOrder: 2
+title: "Renderjob"
+description: "Epistola lost het schema op, selecteert de templateversie en rendert de output."
+inactiveLabel: "Volgende"
+card:
+  eyebrow: "Huidige renderjob"
+  title: "Renderjob · Besluit"
+  badge: "Renderen"
+stages:
+  - label: "Template"
+    detail: "Los schema op, kies actieve versie en vergrendel template-assets."
+  - label: "Renderer"
+    detail: "Render met auditlogging en checksumhashing."
+  - label: "Artefacten"
+    detail: "Bewaar PDF/HTML-outputs en registreer opslagreferenties."

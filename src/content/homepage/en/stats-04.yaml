@@ -1,0 +1,4 @@
+type: stats
+sortOrder: 4
+value: "4.1k"
+label: "docker pull / month"

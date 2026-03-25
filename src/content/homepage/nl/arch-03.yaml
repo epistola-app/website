@@ -1,0 +1,4 @@
+type: architecture-step
+sortOrder: 3
+label: "Documentgeneratie aanvragen"
+description: "De plugin stuurt een generatieverzoek naar Epistola met het opgeloste template en alle variabelendata."

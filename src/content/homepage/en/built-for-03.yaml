@@ -1,0 +1,16 @@
+type: built-for
+sortOrder: 3
+title: "Deliver outputs"
+description: "Webhooks and storage callbacks provide URLs, metadata, and audit refs."
+inactiveLabel: "Last"
+card:
+  eyebrow: "Current render job"
+  title: "Delivery · Besluit"
+  badge: "Delivered"
+stages:
+  - label: "Callbacks"
+    detail: "Send webhook with URLs, metadata, and audit references."
+  - label: "Storage"
+    detail: "Write outputs to tenant storage adapters and retain logs."
+  - label: "Archive"
+    detail: "Seal job metadata and surface history to orchestrators."

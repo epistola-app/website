@@ -1,0 +1,8 @@
+type: docops-lane
+sortOrder: 2
+title: "Developers"
+body: "Version templates in Git, run Testcontainers suites, and invoke the OpenAPI-render API from orchestrators."
+bullets:
+  - "API commands for template + theme automation"
+  - "Adaptive batch jobs with job states and metrics"
+  - "Webhooks + storage adapters (S3, Azure, DMS)"

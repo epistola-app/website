@@ -1,0 +1,4 @@
+type: architecture-step
+sortOrder: 5
+label: "Publish completion event"
+description: "Epistola publishes a notification via the Open Notificaties API to signal the document is ready for pickup."

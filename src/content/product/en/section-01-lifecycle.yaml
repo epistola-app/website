@@ -1,0 +1,9 @@
+type: feature-section
+sortOrder: 1
+badge: Lifecycle
+title: "Templates, variants, versions, environments"
+body:
+  - "Each tenant owns template slugs with unlimited variants tagged by geography, brand, or audience."
+  - "Variants carry immutable version numbers with a draft → published → archived lifecycle and audit history."
+  - "Environments (staging, production, custom) activate specific versions so you can test or roll back safely."
+  - "Variant resolver inspects request attributes (e.g., language=nl) and picks the closest match automatically, falling back to the default when nothing fits."

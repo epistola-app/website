@@ -1,0 +1,16 @@
+type: built-for
+sortOrder: 3
+title: "Outputs leveren"
+description: "Webhooks en opslagcallbacks bieden URL's, metadata en auditreferenties."
+inactiveLabel: "Laatste"
+card:
+  eyebrow: "Huidige renderjob"
+  title: "Levering · Besluit"
+  badge: "Geleverd"
+stages:
+  - label: "Callbacks"
+    detail: "Verstuur webhook met URL's, metadata en auditreferenties."
+  - label: "Opslag"
+    detail: "Schrijf outputs naar tenantopslagadapters en bewaar logs."
+  - label: "Archief"
+    detail: "Sluit jobmetadata af en maak geschiedenis beschikbaar voor orkestratoren."

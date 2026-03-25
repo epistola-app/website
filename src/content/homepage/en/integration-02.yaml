@@ -1,0 +1,4 @@
+type: integration-card
+sortOrder: 2
+title: "Open REST API"
+description: "Every template, clause, and delivery endpoint is controllable via our documented REST interface, ready for any stack."

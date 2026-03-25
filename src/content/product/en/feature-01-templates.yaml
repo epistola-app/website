@@ -1,0 +1,6 @@
+type: feature-card
+sortOrder: 1
+badge: Templates
+title: Template lifecycle
+body: "Variants, immutable versions, and draft/publish/archived states per tenant with audit trails and schema migrations."
+cta: Learn more

@@ -1,0 +1,8 @@
+type: feature-section
+sortOrder: 4
+badge: Themes
+title: "Tenant and variant theming"
+body:
+  - "Reusable theme packages define typography, color tokens, and page settings (A4, Letter, margins)."
+  - "Theme cascade respects tenant defaults, template overrides, then variant-specific tweaks for special cases."
+  - "Block-level presets make it easy to enforce branded tables, headers, and emphasis patterns."

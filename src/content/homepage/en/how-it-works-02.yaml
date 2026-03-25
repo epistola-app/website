@@ -1,0 +1,4 @@
+type: how-it-works
+sortOrder: 2
+title: "Promote + govern"
+body: "Freeze versions, assign them to staging/production environments, and gate releases behind reviewer approvals per tenant."
