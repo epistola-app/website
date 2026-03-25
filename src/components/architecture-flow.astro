@@ -121,7 +121,7 @@ const dgEdge = (id: string, side: "top"|"bottom"|"left"|"right") => {
 // Wobbly connection paths (slight curves instead of straight lines)
 const dgPaths = [
   // user → gzac (top-left down to center)
-  { id: "user_gzac",            d: "M 85 68 C 120 105, 210 135, 235 162" },
+  { id: "user_gzac",            d: "M 85 68 C 135 85, 220 110, 235 162" },
   // gzac ↓ dataSource (bottom-left)
   { id: "gzac_dataSource",      d: "M 232 198 C 222 248, 178 258, 172 292" },
   // gzac → epistola
@@ -137,7 +137,7 @@ const dgPaths = [
   // gzac → tmpStorage (curve across to bottom-right)
   { id: "gzac_tmpStorage",      d: "M 310 190 C 340 210, 360 260, 370 292" },
   // gzac → user (center up to top-left)
-  { id: "gzac_user",            d: "M 215 162 C 185 125, 105 100, 80 68" },
+  { id: "gzac_user",            d: "M 215 162 C 170 140, 80 120, 70 68" },
 ];
 
 // Wobble helper: generates a hand-drawn rectangle path
@@ -160,7 +160,7 @@ const dgNodePositions = dgNodes.map((n, i) => ({
 // Step number labels on diagram paths
 const stepPathLabels = [
   // step 1: user → gzac
-  { pathId: "user_gzac", x: 155, y: 105 },
+  { pathId: "user_gzac", x: 175, y: 95 },
   // step 2: gzac → dataSource
   { pathId: "gzac_dataSource", x: 215, y: 248 },
   // step 3: gzac → epistola
@@ -176,7 +176,7 @@ const stepPathLabels = [
   // step 8: gzac → drc
   { pathId: "gzac_drc", x: 155, y: 172 },
   // step 9: gzac → user
-  { pathId: "gzac_user", x: 120, y: 138 },
+  { pathId: "gzac_user", x: 115, y: 135 },
 ];
 ---
 
@@ -236,8 +236,22 @@ const stepPathLabels = [
       })}
     </div>
 
-    <!-- Right: diagram (desktop only, sticky) -->
+    <!-- Right: diagram + controls (desktop only, sticky) -->
     <div class="hidden lg:block sticky top-28 self-start" data-flow-diagram>
+      <!-- Controls -->
+      <div class="flex items-center justify-center gap-4 mb-4">
+        <button type="button" data-flow-prev class="flex items-center justify-center w-9 h-9 border border-[var(--color-peach-paper-border)] text-[var(--color-peach-paper-copy)] transition-opacity hover:opacity-80 disabled:opacity-30" aria-label="Previous step">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button type="button" data-flow-play class="flex items-center justify-center w-10 h-10 border border-[var(--color-peach-paper-accent)] text-[var(--color-peach-paper-accent)] transition-opacity hover:opacity-80" aria-label="Play animation">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" data-play-icon><path d="M8 5v14l11-7z"/></svg>
+          <svg class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="currentColor" data-pause-icon><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
+        </button>
+        <button type="button" data-flow-next class="flex items-center justify-center w-9 h-9 border border-[var(--color-peach-paper-border)] text-[var(--color-peach-paper-copy)] transition-opacity hover:opacity-80 disabled:opacity-30" aria-label="Next step">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+        <span data-flow-counter class="ml-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-peach-paper-copy)]">Step 1 / 9</span>
+      </div>
       <svg
         viewBox={`0 0 ${DG_VB.w} ${DG_VB.h}`}
         class="w-full h-auto"
@@ -337,8 +351,8 @@ const stepPathLabels = [
     </div>
   </div>
 
-  <!-- Controls -->
-  <div class="flex items-center justify-center gap-4 mt-8">
+  <!-- Controls (mobile only) -->
+  <div class="flex lg:hidden items-center justify-center gap-4 mt-8">
     <button type="button" data-flow-prev class="flex items-center justify-center w-9 h-9 border border-[var(--color-peach-paper-border)] text-[var(--color-peach-paper-copy)] transition-opacity hover:opacity-80 disabled:opacity-30" aria-label="Previous step">
       <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
     </button>
@@ -349,7 +363,7 @@ const stepPathLabels = [
     <button type="button" data-flow-next class="flex items-center justify-center w-9 h-9 border border-[var(--color-peach-paper-border)] text-[var(--color-peach-paper-copy)] transition-opacity hover:opacity-80 disabled:opacity-30" aria-label="Next step">
       <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
     </button>
-    <span data-flow-counter class="ml-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-peach-paper-copy)]">Step 1 / 2</span>
+    <span data-flow-counter class="ml-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--color-peach-paper-copy)]">Step 1 / 9</span>
   </div>
 </Section>
 
@@ -530,17 +544,16 @@ const stepPathLabels = [
 
   var timeline = container.querySelector("[data-flow-timeline]");
   var diagram = container.querySelector("[data-flow-diagram]");
-  var playBtn = container.querySelector("[data-flow-play]");
-  var prevBtn = container.querySelector("[data-flow-prev]");
-  var nextBtn = container.querySelector("[data-flow-next]");
-  var counter = container.querySelector("[data-flow-counter]");
-  var playIcon = container.querySelector("[data-play-icon]");
-  var pauseIcon = container.querySelector("[data-pause-icon]");
+  var playBtns = container.querySelectorAll("[data-flow-play]");
+  var prevBtns = container.querySelectorAll("[data-flow-prev]");
+  var nextBtns = container.querySelectorAll("[data-flow-next]");
+  var counters = container.querySelectorAll("[data-flow-counter]");
+  var playIcons = container.querySelectorAll("[data-play-icon]");
+  var pauseIcons = container.querySelectorAll("[data-pause-icon]");
 
   var currentStep = 0;
   var isPlaying = false;
   var stepTimerId = null;
-  var hasAutoStarted = false;
 
   function updateDiagram(stepIndex) {
     if (!diagram) return;
@@ -579,28 +592,28 @@ const stepPathLabels = [
     });
 
     var activeEl = timeline.querySelector('[data-step="' + index + '"]');
-    if (activeEl) activeEl.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    if (activeEl) activeEl.scrollIntoView({ behavior: "smooth", block: "center" });
 
     updateDiagram(index);
-    counter.textContent = "Step " + (index + 1) + " / " + TOTAL_STEPS;
-    prevBtn.disabled = index === 0;
-    nextBtn.disabled = index === TOTAL_STEPS - 1;
+    counters.forEach(function (c) { c.textContent = "Step " + (index + 1) + " / " + TOTAL_STEPS; });
+    prevBtns.forEach(function (b) { b.disabled = index === 0; });
+    nextBtns.forEach(function (b) { b.disabled = index === TOTAL_STEPS - 1; });
   }
 
   function play() {
     if (isPlaying) return;
     isPlaying = true;
-    playIcon.classList.add("hidden");
-    pauseIcon.classList.remove("hidden");
-    playBtn.setAttribute("aria-label", "Pause animation");
+    playIcons.forEach(function (el) { el.classList.add("hidden"); });
+    pauseIcons.forEach(function (el) { el.classList.remove("hidden"); });
+    playBtns.forEach(function (el) { el.setAttribute("aria-label", "Pause animation"); });
     advance();
   }
 
   function pause() {
     isPlaying = false;
-    playIcon.classList.remove("hidden");
-    pauseIcon.classList.add("hidden");
-    playBtn.setAttribute("aria-label", "Play animation");
+    playIcons.forEach(function (el) { el.classList.remove("hidden"); });
+    pauseIcons.forEach(function (el) { el.classList.add("hidden"); });
+    playBtns.forEach(function (el) { el.setAttribute("aria-label", "Play animation"); });
     if (stepTimerId) { clearTimeout(stepTimerId); stepTimerId = null; }
   }
 
@@ -646,16 +659,9 @@ const stepPathLabels = [
     });
   }
 
-  playBtn.addEventListener("click", function () { isPlaying ? pause() : play(); });
-  prevBtn.addEventListener("click", function () { pause(); if (currentStep > 0) showStep(currentStep - 1); });
-  nextBtn.addEventListener("click", function () { pause(); if (currentStep < TOTAL_STEPS - 1) showStep(currentStep + 1); });
-
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting && !hasAutoStarted) { hasAutoStarted = true; play(); }
-    });
-  }, { threshold: 0.3 });
-  observer.observe(container);
+  playBtns.forEach(function (btn) { btn.addEventListener("click", function () { isPlaying ? pause() : play(); }); });
+  prevBtns.forEach(function (btn) { btn.addEventListener("click", function () { pause(); if (currentStep > 0) showStep(currentStep - 1); }); });
+  nextBtns.forEach(function (btn) { btn.addEventListener("click", function () { pause(); if (currentStep < TOTAL_STEPS - 1) showStep(currentStep + 1); }); });
 
   showStep(0);
 })();
