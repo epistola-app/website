@@ -1,6 +1,7 @@
 ---
+import { getCollection } from "astro:content";
 import Section from "./ui/section.astro";
-import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+import { t, filterDataByLocale, type Locale, DEFAULT_LOCALE } from "../i18n";
 
 interface Props {
   lang?: Locale;
@@ -28,69 +29,26 @@ interface FlowStep {
   payload: string | null;
 }
 
-const steps: FlowStep[] = [
-  {
-    from: "user", to: "gzac",
-    label: t(lang, "architectureFlow.step.0.label"),
-    description: t(lang, "architectureFlow.step.0.description"),
-    method: null, action: null, payload: null,
-  },
-  {
-    from: "gzac", to: "dataSource",
-    label: t(lang, "architectureFlow.step.1.label"),
-    description: t(lang, "architectureFlow.step.1.description"),
-    method: "GET", action: "/zaken/BZ-2024-001/eigenschappen",
-    payload: '{ "zaaktype": "bezwaar", "eigenschappen": [...] }',
-  },
-  {
-    from: "gzac", to: "epistola",
-    label: t(lang, "architectureFlow.step.2.label"),
-    description: t(lang, "architectureFlow.step.2.description"),
-    method: "POST", action: "/api/v1/documents/generate",
-    payload: '{ "templateId": "bezwaar-v2", "data": { "zaak": "BZ-2024-001", ... } }',
-  },
-  {
-    from: "epistola", to: "tmpStorage",
-    label: t(lang, "architectureFlow.step.3.label"),
-    description: t(lang, "architectureFlow.step.3.description"),
-    method: "PUT", action: "/documents/gen-48291.pdf",
-    payload: '{ "contentType": "application/pdf", "size": "142KB" }',
-  },
-  {
-    from: "epistola", to: "notificaties",
-    label: t(lang, "architectureFlow.step.4.label"),
-    description: t(lang, "architectureFlow.step.4.description"),
-    method: "POST", action: "/api/v1/notificaties",
-    payload: '{ "kanaal": "documenten", "hoofdObject": "...", "actie": "create" }',
-  },
-  {
-    from: "notificaties", to: "gzac",
-    label: t(lang, "architectureFlow.step.5.label"),
-    description: t(lang, "architectureFlow.step.5.description"),
-    method: "EVENT", action: "EpistolaDocumentGenerated",
-    payload: '{ "resourceUrl": "/tmp-storage/gen-48291.pdf" }',
-  },
-  {
-    from: "gzac", to: "tmpStorage",
-    label: t(lang, "architectureFlow.step.6.label"),
-    description: t(lang, "architectureFlow.step.6.description"),
-    method: "GET", action: "/tmp-storage/gen-48291.pdf",
-    payload: '{ "format": "application/pdf", "bytes": 145291 }',
-  },
-  {
-    from: "gzac", to: "drc",
-    label: t(lang, "architectureFlow.step.7.label"),
-    description: t(lang, "architectureFlow.step.7.description"),
-    method: "POST", action: "/enkelvoudiginformatieobjecten",
-    payload: '{ "titel": "Besluit op bezwaar", "informatieobjecttype": "besluit" }',
-  },
-  {
-    from: "gzac", to: "user",
-    label: t(lang, "architectureFlow.step.8.label"),
-    description: t(lang, "architectureFlow.step.8.description"),
-    method: null, action: null, payload: null,
-  },
+const homepageItems = await getCollection("homepage");
+const archSteps = filterDataByLocale(homepageItems, lang, "architecture-step");
+
+const stepMeta: Omit<FlowStep, "label" | "description">[] = [
+  { from: "user", to: "gzac", method: null, action: null, payload: null },
+  { from: "gzac", to: "dataSource", method: "GET", action: "/zaken/BZ-2024-001/eigenschappen", payload: '{ "zaaktype": "bezwaar", "eigenschappen": [...] }' },
+  { from: "gzac", to: "epistola", method: "POST", action: "/api/v1/documents/generate", payload: '{ "templateId": "bezwaar-v2", "data": { "zaak": "BZ-2024-001", ... } }' },
+  { from: "epistola", to: "tmpStorage", method: "PUT", action: "/documents/gen-48291.pdf", payload: '{ "contentType": "application/pdf", "size": "142KB" }' },
+  { from: "epistola", to: "notificaties", method: "POST", action: "/api/v1/notificaties", payload: '{ "kanaal": "documenten", "hoofdObject": "...", "actie": "create" }' },
+  { from: "notificaties", to: "gzac", method: "EVENT", action: "EpistolaDocumentGenerated", payload: '{ "resourceUrl": "/tmp-storage/gen-48291.pdf" }' },
+  { from: "gzac", to: "tmpStorage", method: "GET", action: "/tmp-storage/gen-48291.pdf", payload: '{ "format": "application/pdf", "bytes": 145291 }' },
+  { from: "gzac", to: "drc", method: "POST", action: "/enkelvoudiginformatieobjecten", payload: '{ "titel": "Besluit op bezwaar", "informatieobjecttype": "besluit" }' },
+  { from: "gzac", to: "user", method: null, action: null, payload: null },
 ];
+
+const steps: FlowStep[] = stepMeta.map((meta, i) => ({
+  ...meta,
+  label: archSteps[i]?.data.label ?? "",
+  description: archSteps[i]?.data.description ?? "",
+}));
 
 const pauseLabel = t(lang, "architectureFlow.controls.pause");
 const playLabel = t(lang, "architectureFlow.controls.play");

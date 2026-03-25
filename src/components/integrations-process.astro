@@ -1,7 +1,8 @@
 ---
+import { getCollection } from "astro:content";
 import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
-import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+import { t, filterDataByLocale, type Locale, DEFAULT_LOCALE } from "../i18n";
 
 interface Props {
   lang?: Locale;
@@ -9,36 +10,21 @@ interface Props {
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
 
-const steps = [
-  {
-    number: "01",
-    title: t(lang, "process.step.0.title"),
-    description: t(lang, "process.step.0.description"),
-  },
-  {
-    number: "02",
-    title: t(lang, "process.step.1.title"),
-    description: t(lang, "process.step.1.description"),
-  },
-  {
-    number: "03",
-    title: t(lang, "process.step.2.title"),
-    description: t(lang, "process.step.2.description"),
-  },
-];
+const items = await getCollection("homepage");
+const steps = filterDataByLocale(items, lang, "process-step");
 ---
 
 <Section monoTitle={t(lang, "process.monoTitle")} title={t(lang, "process.title")} contentClass="grid gap-8 md:grid-cols-3">
   {
-    steps.map((step) => (
+    steps.map((step, index) => (
       <div class="text-center">
         <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)]">
-          <div class="text-2xl font-black text-[var(--color-peach-paper-accent)]">{step.number}</div>
+          <div class="text-2xl font-black text-[var(--color-peach-paper-accent)]">{String(index + 1).padStart(2, "0")}</div>
         </div>
         <Title level={3} class="mb-2">
-          {step.title}
+          {step.data.title}
         </Title>
-        <p class="text-[var(--muted-text)]">{step.description}</p>
+        <p class="text-[var(--muted-text)]">{step.data.description}</p>
       </div>
     ))
   }

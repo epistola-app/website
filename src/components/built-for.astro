@@ -1,6 +1,7 @@
 ---
+import { getCollection } from "astro:content";
 import Section from "./ui/section.astro";
-import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+import { t, filterDataByLocale, type Locale, DEFAULT_LOCALE } from "../i18n";
 
 interface Props {
   lang?: Locale;
@@ -8,83 +9,17 @@ interface Props {
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
 
-const workflowSteps = [
-  {
-    title: t(lang, "builtFor.step.0.title"),
-    description: t(lang, "builtFor.step.0.description"),
-    inactiveLabel: t(lang, "builtFor.step.0.inactiveLabel"),
-    isActive: true,
-    card: {
-      eyebrow: t(lang, "builtFor.step.0.card.eyebrow"),
-      title: t(lang, "builtFor.step.0.card.title"),
-      badge: t(lang, "builtFor.step.0.card.badge"),
-      stages: [
-        {
-          label: t(lang, "builtFor.step.0.stage.0.label"),
-          detail: t(lang, "builtFor.step.0.stage.0.detail"),
-        },
-        {
-          label: t(lang, "builtFor.step.0.stage.1.label"),
-          detail: t(lang, "builtFor.step.0.stage.1.detail"),
-        },
-        {
-          label: t(lang, "builtFor.step.0.stage.2.label"),
-          detail: t(lang, "builtFor.step.0.stage.2.detail"),
-        },
-      ],
-    },
-  },
-  {
-    title: t(lang, "builtFor.step.1.title"),
-    description: t(lang, "builtFor.step.1.description"),
-    inactiveLabel: t(lang, "builtFor.step.1.inactiveLabel"),
-    isActive: false,
-    card: {
-      eyebrow: t(lang, "builtFor.step.1.card.eyebrow"),
-      title: t(lang, "builtFor.step.1.card.title"),
-      badge: t(lang, "builtFor.step.1.card.badge"),
-      stages: [
-        {
-          label: t(lang, "builtFor.step.1.stage.0.label"),
-          detail: t(lang, "builtFor.step.1.stage.0.detail"),
-        },
-        {
-          label: t(lang, "builtFor.step.1.stage.1.label"),
-          detail: t(lang, "builtFor.step.1.stage.1.detail"),
-        },
-        {
-          label: t(lang, "builtFor.step.1.stage.2.label"),
-          detail: t(lang, "builtFor.step.1.stage.2.detail"),
-        },
-      ],
-    },
-  },
-  {
-    title: t(lang, "builtFor.step.2.title"),
-    description: t(lang, "builtFor.step.2.description"),
-    inactiveLabel: t(lang, "builtFor.step.2.inactiveLabel"),
-    isActive: false,
-    card: {
-      eyebrow: t(lang, "builtFor.step.2.card.eyebrow"),
-      title: t(lang, "builtFor.step.2.card.title"),
-      badge: t(lang, "builtFor.step.2.card.badge"),
-      stages: [
-        {
-          label: t(lang, "builtFor.step.2.stage.0.label"),
-          detail: t(lang, "builtFor.step.2.stage.0.detail"),
-        },
-        {
-          label: t(lang, "builtFor.step.2.stage.1.label"),
-          detail: t(lang, "builtFor.step.2.stage.1.detail"),
-        },
-        {
-          label: t(lang, "builtFor.step.2.stage.2.label"),
-          detail: t(lang, "builtFor.step.2.stage.2.detail"),
-        },
-      ],
-    },
-  },
-];
+const items = await getCollection("homepage");
+const builtForItems = filterDataByLocale(items, lang, "built-for");
+
+const workflowSteps = builtForItems.map((item, index) => ({
+  title: item.data.title,
+  description: item.data.description,
+  inactiveLabel: item.data.inactiveLabel,
+  isActive: index === 0,
+  card: item.data.card,
+  stages: item.data.stages,
+}));
 
 const activeLabel = t(lang, "builtFor.stepStatus.active");
 ---
@@ -152,7 +87,7 @@ const activeLabel = t(lang, "builtFor.stepStatus.active");
             </span>
           </div>
           <ol class="flex flex-col grow justify-between">
-            {step.card.stages.map((stage, stageIndex) => (
+            {step.stages.map((stage, stageIndex) => (
               <li
                 class="flex items-start gap-4 transition-opacity duration-300"
                 data-step-item

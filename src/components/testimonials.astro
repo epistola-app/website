@@ -1,7 +1,8 @@
 ---
+import { getCollection } from "astro:content";
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
-import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+import { t, filterByLocale, type Locale, DEFAULT_LOCALE } from "../i18n";
 
 interface Props {
   lang?: Locale;
@@ -9,25 +10,8 @@ interface Props {
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
 
-const cardVariants = ["subtle", "default", "brand"] as const;
-
-const testimonials = [
-  {
-    quote: t(lang, "testimonials.0.quote"),
-    name: t(lang, "testimonials.0.name"),
-    role: t(lang, "testimonials.0.role"),
-  },
-  {
-    quote: t(lang, "testimonials.1.quote"),
-    name: t(lang, "testimonials.1.name"),
-    role: t(lang, "testimonials.1.role"),
-  },
-  {
-    quote: t(lang, "testimonials.2.quote"),
-    name: t(lang, "testimonials.2.name"),
-    role: t(lang, "testimonials.2.role"),
-  },
-];
+const items = await getCollection("pages");
+const testimonials = filterByLocale(items, lang, "testimonial");
 ---
 
 <Section
@@ -38,11 +22,11 @@ const testimonials = [
   {
     testimonials.map((testimonial) => (
       <Card variant="subtle" shadow="none" class="flex flex-col text-left">
-        <p class="text-base text-[var(--color-peach-paper-heading)]">"{testimonial.quote}"</p>
+        <p class="text-base text-[var(--color-peach-paper-heading)]">"{testimonial.data.quote}"</p>
         <div class="mt-6">
-          <p class="text-sm font-semibold text-[var(--color-peach-paper-heading)]">{testimonial.name}</p>
+          <p class="text-sm font-semibold text-[var(--color-peach-paper-heading)]">{testimonial.data.name}</p>
           <p class="text-xs uppercase tracking-[0.12em] text-[var(--color-peach-paper-chip-text)]">
-            {testimonial.role}
+            {testimonial.data.role}
           </p>
         </div>
       </Card>

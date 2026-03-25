@@ -1,8 +1,9 @@
 ---
+import { getCollection } from "astro:content";
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
-import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+import { t, filterDataByLocale, type Locale, DEFAULT_LOCALE } from "../i18n";
 
 interface Props {
   lang?: Locale;
@@ -10,20 +11,8 @@ interface Props {
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
 
-const steps = [
-  {
-    title: t(lang, "howItWorks.step.0.title"),
-    body: t(lang, "howItWorks.step.0.body"),
-  },
-  {
-    title: t(lang, "howItWorks.step.1.title"),
-    body: t(lang, "howItWorks.step.1.body"),
-  },
-  {
-    title: t(lang, "howItWorks.step.2.title"),
-    body: t(lang, "howItWorks.step.2.body"),
-  },
-];
+const items = await getCollection("homepage");
+const steps = filterDataByLocale(items, lang, "how-it-works");
 ---
 
 <Section
@@ -36,9 +25,9 @@ const steps = [
       <Card variant="subtle" class="relative">
         <span class="text-sm font-semibold text-[var(--color-peach-paper-accent)]">0{index + 1}</span>
         <Title level={3} class="mt-4">
-          {step.title}
+          {step.data.title}
         </Title>
-        <p class="mt-3 text-sm text-[var(--muted-text)]">{step.body}</p>
+        <p class="mt-3 text-sm text-[var(--muted-text)]">{step.data.body}</p>
       </Card>
     ))
   }

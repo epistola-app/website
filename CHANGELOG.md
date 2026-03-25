@@ -6,6 +6,11 @@ All notable changes to this project will be documented here.
 
 ### Changed
 
+- Migrated 12 homepage/product components from `t()` calls to Astro content collections:
+  - `hero-stats`, `how-it-works`, `why-us`, `stats`, `docops-architecture`, `built-for`, `architecture-flow`, `integrations-overview`, `integrations-process` (homepage collection via `filterDataByLocale`)
+  - `everything-you-need` (product collection via `filterDataByLocale`)
+  - `testimonials` (pages content collection via `filterByLocale`)
+  - `faqs` (pages content collection via `filterByLocale` with `.render()` for markdown answers)
 - Migrated `feature-breakdown` and `price-tiers` components from `t()` calls to content collections (`product` data collection via `filterDataByLocale`).
 - Migrated `about`, `privacy`, `security`, and `terms` pages from `t()` calls to content collections (`pages` content collection via `filterByLocale` with `.render()` for markdown bodies).
 

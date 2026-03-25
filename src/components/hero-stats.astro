@@ -1,6 +1,7 @@
 ---
+import { getCollection } from "astro:content";
 import Card from "./ui/card.astro";
-import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+import { filterDataByLocale, type Locale, DEFAULT_LOCALE } from "../i18n";
 
 interface Props {
   lang?: Locale;
@@ -8,20 +9,8 @@ interface Props {
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
 
-const stats = [
-  {
-    value: t(lang, "heroStats.0.value"),
-    label: t(lang, "heroStats.0.label"),
-  },
-  {
-    value: t(lang, "heroStats.1.value"),
-    label: t(lang, "heroStats.1.label"),
-  },
-  {
-    value: t(lang, "heroStats.2.value"),
-    label: t(lang, "heroStats.2.label"),
-  },
-];
+const items = await getCollection("homepage");
+const stats = filterDataByLocale(items, lang, "hero-stats");
 ---
 
 <section class="py-20 row-span-2">
@@ -29,8 +18,8 @@ const stats = [
     {
       stats.map((stat) => (
         <Card class="text-center w-full" variant="subtle" padding="md" shadow="none">
-          <p class="text-2xl font-heading md:text-3xl font-semibold text-(--color-peach-paper-accent)">{stat.value}</p>
-          <p class="mt-1 text-sm text-(--muted-text)">{stat.label}</p>
+          <p class="text-2xl font-heading md:text-3xl font-semibold text-(--color-peach-paper-accent)">{stat.data.value}</p>
+          <p class="mt-1 text-sm text-(--muted-text)">{stat.data.label}</p>
         </Card>
       ))
     }

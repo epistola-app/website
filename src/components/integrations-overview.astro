@@ -1,13 +1,17 @@
 ---
+import { getCollection } from "astro:content";
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
-import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+import { t, filterDataByLocale, type Locale, DEFAULT_LOCALE } from "../i18n";
 
 interface Props {
   lang?: Locale;
 }
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
+
+const items = await getCollection("homepage");
+const cards = filterDataByLocale(items, lang, "integration-card");
 ---
 
 <Section
@@ -17,24 +21,16 @@ const { lang = DEFAULT_LOCALE } = Astro.props;
   contentClass="space-y-10"
 >
   <div class="grid gap-6 md:grid-cols-3">
-    <Card variant="subtle">
-      <p class="text-sm font-semibold">{t(lang, "integrations.card.0.title")}</p>
-      <p class="mt-2 text-sm text-[var(--muted-text)]">
-        {t(lang, "integrations.card.0.description")}
-      </p>
-    </Card>
-    <Card variant="subtle">
-      <p class="text-sm font-semibold">{t(lang, "integrations.card.1.title")}</p>
-      <p class="mt-2 text-sm text-[var(--muted-text)]">
-        {t(lang, "integrations.card.1.description")}
-      </p>
-    </Card>
-    <Card variant="subtle">
-      <p class="text-sm font-semibold">{t(lang, "integrations.card.2.title")}</p>
-      <p class="mt-2 text-sm text-[var(--muted-text)]">
-        {t(lang, "integrations.card.2.description")}
-      </p>
-    </Card>
+    {
+      cards.map((card) => (
+        <Card variant="subtle">
+          <p class="text-sm font-semibold">{card.data.title}</p>
+          <p class="mt-2 text-sm text-[var(--muted-text)]">
+            {card.data.description}
+          </p>
+        </Card>
+      ))
+    }
   </div>
   <Card variant="outline" class="text-sm text-[var(--muted-text)]">
     <p class="font-semibold text-[var(--color-peach-paper-heading)]">{t(lang, "integrations.roadmap.title")}</p>

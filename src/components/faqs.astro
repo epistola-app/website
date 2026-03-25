@@ -1,6 +1,7 @@
 ---
+import { getCollection } from "astro:content";
 import Section from "./ui/section.astro";
-import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+import { t, filterByLocale, type Locale, DEFAULT_LOCALE } from "../i18n";
 
 interface Props {
   lang?: Locale;
@@ -8,28 +9,19 @@ interface Props {
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
 
-const faqItems = [
-  {
-    question: t(lang, "faq.0.question"),
-    answer: t(lang, "faq.0.answer"),
-    isActive: true,
-  },
-  {
-    question: t(lang, "faq.1.question"),
-    answer: t(lang, "faq.1.answer"),
-    isActive: false,
-  },
-  {
-    question: t(lang, "faq.2.question"),
-    answer: t(lang, "faq.2.answer"),
-    isActive: false,
-  },
-  {
-    question: t(lang, "faq.3.question"),
-    answer: t(lang, "faq.3.answer"),
-    isActive: false,
-  },
-];
+const items = await getCollection("pages");
+const faqEntries = filterByLocale(items, lang, "faq");
+
+const faqItems = await Promise.all(
+  faqEntries.map(async (entry, index) => {
+    const { Content } = await entry.render();
+    return {
+      question: entry.data.question,
+      Content,
+      isActive: index === 0,
+    };
+  }),
+);
 ---
 
 <Section
@@ -82,9 +74,9 @@ const faqItems = [
           <p class="mt-3 text-lg font-semibold text-(--color-peach-paper-heading)" data-faq-title>
             {item.question}
           </p>
-          <p class="mt-4 text-base leading-relaxed text-(--color-peach-paper-copy)" data-faq-copy>
-            {item.answer}
-          </p>
+          <div class="mt-4 text-base leading-relaxed text-(--color-peach-paper-copy)" data-faq-copy>
+            <item.Content />
+          </div>
         </article>
       ))
     }
