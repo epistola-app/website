@@ -4,13 +4,25 @@ All notable changes to this project will be documented here.
 
 ## [Unreleased]
 
+### Added
+
+- Full internationalization (i18n) support with Dutch (primary) and English (secondary) languages.
+- Astro built-in i18n routing with `/nl/` and `/en/` URL prefixes; root `/` redirects to `/nl/`.
+- Translation infrastructure: `src/i18n/` module with `t()`, `localePath()`, locale utilities, and JSON translation files (`nl.json`, `en.json`) containing ~400 translation keys.
+- Language switcher in header (desktop and mobile) linking to the same page in the alternate language.
+- `hreflang` alternate link tags and `og:locale` / `og:locale:alternate` meta tags for SEO.
+- Dutch translations for all 3 blog posts.
+
 ### Changed
 
-- Added i18n support to 13 content components: everything-you-need, built-for, docops-architecture, architecture-flow, integrations-overview, integrations-process, features-integrators, feature-breakdown, template-diagram, price-tiers, contact-form, mail-subscribe, and page-hero. All hardcoded English strings now use translation keys via `t(lang, key)` and internal links use `localePath(lang, path)`.
-- Contact form JS validation messages are now passed via data attributes from server-rendered translated strings, keeping client-side JS behavior intact.
-- Built-for component passes the translated "Active" label via a data attribute so the inline script uses the correct locale string.
-- Architecture-flow component passes translated pause/play labels via data attributes for the inline animation script.
-- Added `templateSystem.environments.immutablePointers` translation key to both en.json and nl.json.
+- All pages moved under `src/pages/[lang]/` with `getStaticPaths` generating both locales.
+- Layout now accepts `lang` prop, sets `<html lang>`, dynamic `og:locale`, and passes locale to header/footer.
+- Header and footer use translated navigation labels and locale-prefixed links.
+- All ~25 content components updated to accept `lang` prop and use `t(lang, key)` for all user-facing text.
+- Blog content restructured into `src/content/blog/nl/` and `src/content/blog/en/` subfolders.
+- Blog listing and post pages filter by locale and use locale-aware date formatting.
+- Contact form JS validation messages passed via data attributes for locale support.
+- Removed hardcoded `LOCALE` and `DEFAULT_TITLE`/`DEFAULT_DESCRIPTION` from `URL-helpers.ts` (now driven by translation keys).
 
 ### Added
 

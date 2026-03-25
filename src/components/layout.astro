@@ -2,9 +2,11 @@
 import "../styles/global.css";
 import Header from "./header.astro";
 import Footer from "./footer.astro";
-import { SITE, OG_TYPES, URLS, type OpenGraphProps, getAbsoluteURL } from "../lib/URL-helpers";
+import { SITE, OG_TYPES, type OpenGraphProps, getAbsoluteURL } from "../lib/URL-helpers";
+import { t, localeToOgLocale, getAlternateLocale, localePath, type Locale, DEFAULT_LOCALE } from "../i18n";
 
 interface Props {
+  lang?: Locale;
   title?: string;
   description?: string;
   image?: string;
@@ -12,46 +14,62 @@ interface Props {
 }
 
 const {
-  title = SITE.DEFAULT_TITLE,
-  description = SITE.DEFAULT_DESCRIPTION,
+  lang = DEFAULT_LOCALE,
+  title,
+  description,
   image,
   og = {},
 } = Astro.props as Props;
 
-const ogTitle = og.title || title;
-const ogDescription = og.description || description;
+const resolvedTitle = title || t(lang, "site.title");
+const resolvedDescription = description || t(lang, "site.description");
+
+const ogTitle = og.title || resolvedTitle;
+const ogDescription = og.description || resolvedDescription;
 const ogImage = og.image || image || SITE.DEFAULT_IMAGE;
 const ogType = og.type || OG_TYPES.WEBSITE;
 const ogUrl = og.url || Astro.url.href;
 
 const absoluteImageUrl = ogImage.startsWith("http") ? ogImage : getAbsoluteURL(ogImage);
+
+const ogLocale = localeToOgLocale(lang);
+const altLang = getAlternateLocale(lang);
+const altOgLocale = localeToOgLocale(altLang);
+
+const currentPathWithoutLang = Astro.url.pathname.replace(`/${lang}`, "") || "/";
+const nlUrl = getAbsoluteURL(localePath("nl", currentPathWithoutLang));
+const enUrl = getAbsoluteURL(localePath("en", currentPathWithoutLang));
 ---
 
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title>{resolvedTitle}</title>
+    <meta name="description" content={resolvedDescription} />
     <link rel="icon" type="image/x-icon" href="/logo.svg" />
-    
+
     <link rel="canonical" href={ogUrl} />
-    
+    <link rel="alternate" hreflang="nl" href={nlUrl} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="x-default" href={nlUrl} />
+
     <meta property="og:title" content={ogTitle} />
     <meta property="og:description" content={ogDescription} />
     <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={SITE.NAME} />
     <meta property="og:url" content={ogUrl} />
-    <meta property="og:locale" content={SITE.LOCALE} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={altOgLocale} />
     <meta property="og:image" content={absoluteImageUrl} />
-    
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content={SITE.TWITTER_HANDLE} />
     <meta name="twitter:title" content={ogTitle} />
     <meta name="twitter:description" content={ogDescription} />
     <meta name="twitter:image" content={absoluteImageUrl} />
-    
+
     {ogType === OG_TYPES.ARTICLE && og.article && (
       <>
         {og.article.author && <meta property="article:author" content={og.article.author} />}
@@ -61,7 +79,7 @@ const absoluteImageUrl = ogImage.startsWith("http") ? ogImage : getAbsoluteURL(o
         {og.article.tags?.map(tag => <meta property="article:tag" content={tag} />)}
       </>
     )}
-    
+
     <meta name="theme-color" content={SITE.THEME_COLOR} />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta
@@ -190,10 +208,10 @@ const absoluteImageUrl = ogImage.startsWith("http") ? ogImage : getAbsoluteURL(o
     </script>
   </head>
   <body class="font-sans antialiased flex flex-col min-h-screen overflow-x-hidden">
-    <Header />
+    <Header lang={lang} />
     <main class="relative z-10 flex-1 bg-[var(--color-peach-paper-surface-soft)]">
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
   </body>
 </html>

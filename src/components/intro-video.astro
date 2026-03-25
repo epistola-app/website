@@ -1,10 +1,17 @@
 ---
 import Section from "./ui/section.astro";
+import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
 ---
 
 <Section
-  monoTitle="/ See it in action"
-  title="From template to PDF in minutes."
+  monoTitle={t(lang, "video.monoTitle")}
+  title={t(lang, "video.title")}
   contentClass="mx-auto max-w-5xl"
 >
   <div
@@ -34,7 +41,7 @@ import Section from "./ui/section.astro";
           <path d="M8 5v14l11-7z" />
         </svg>
       </div>
-      <p class="text-sm text-(--muted-text)">Introduction video coming soon</p>
+      <p class="text-sm text-(--muted-text)">{t(lang, "video.placeholder")}</p>
     </div>
   </div>
 </Section>

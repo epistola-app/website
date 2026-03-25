@@ -2,26 +2,33 @@
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
+import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
 
 const steps = [
   {
-    title: "Model + author",
-    body: "Define input variables per template, manage variants, and drag blocks in the visual editor with live PDF preview.",
+    title: t(lang, "howItWorks.step.0.title"),
+    body: t(lang, "howItWorks.step.0.body"),
   },
   {
-    title: "Promote + govern",
-    body: "Freeze versions, assign them to staging/production environments, and gate releases behind reviewer approvals per tenant.",
+    title: t(lang, "howItWorks.step.1.title"),
+    body: t(lang, "howItWorks.step.1.body"),
   },
   {
-    title: "Render + deliver",
-    body: "Call the REST API or batch jobs, render PDFs in milliseconds, then push artifacts via storage adapters or webhooks.",
+    title: t(lang, "howItWorks.step.2.title"),
+    body: t(lang, "howItWorks.step.2.body"),
   },
 ];
 ---
 
 <Section
-  monoTitle="/ How it works"
-  title="A single path from template to PDF."
+  monoTitle={t(lang, "howItWorks.monoTitle")}
+  title={t(lang, "howItWorks.title")}
   contentClass="mx-auto grid gap-8 md:grid-cols-3"
 >
   {

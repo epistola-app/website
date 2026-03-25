@@ -4,19 +4,30 @@ import HeaderNavLink from "./ui/header-nav-link.astro";
 import ThemeToggle from "./ui/theme-toggle.astro";
 import SuiteDemoButton from "./buttons/suite-demo-button.astro";
 import { URLS } from "../lib/URL-helpers";
+import { t, localePath, getAlternateLocale, type Locale, DEFAULT_LOCALE } from "../i18n";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
 
 const navItems = [
-  { label: "Platform", href: "/features" },
-  { label: "Integrations", href: "/integrations" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "About", href: "/about" },
-  { label: "Docs", href: "/docs" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
+  { label: t(lang, "nav.platform"), href: localePath(lang, "/features") },
+  { label: t(lang, "nav.integrations"), href: localePath(lang, "/integrations") },
+  { label: t(lang, "nav.pricing"), href: localePath(lang, "/pricing") },
+  { label: t(lang, "nav.about"), href: localePath(lang, "/about") },
+  { label: t(lang, "nav.docs"), href: localePath(lang, "/docs") },
+  { label: t(lang, "nav.blog"), href: localePath(lang, "/blog") },
+  { label: t(lang, "nav.contact"), href: localePath(lang, "/contact") },
 ];
 
-const logoHref = import.meta.env.BASE_URL;
+const logoHref = localePath(lang, "/");
 const currentPath = Astro.url.pathname;
+
+const altLang = getAlternateLocale(lang);
+const currentPathWithoutLang = Astro.url.pathname.replace(`/${lang}`, "") || "/";
+const langSwitchHref = localePath(altLang, currentPathWithoutLang);
 ---
 
 <header
@@ -25,10 +36,10 @@ const currentPath = Astro.url.pathname;
   <div class="absolute inset-0 [background-image:var(--gradient-peach-paper)] opacity-95"></div>
   <nav class="relative z-10 container mx-auto flex h-20 items-center justify-between px-4">
     <a href={logoHref} class="flex items-center gap-3">
-      <img src="/logo.svg" alt="Epistola logo" class="h-10 w-10" />
+      <img src="/logo.svg" alt={t(lang, "header.logo.alt")} class="h-10 w-10" />
       <div class="flex flex-col">
         <span class="text-base font-semibold tracking-tight text-[var(--color-peach-paper-heading)]"> Epistola </span>
-        <span class="text-[10px] uppercase tracking-[0.16em] text-[var(--color-peach-paper-copy)]">Documents</span>
+        <span class="text-[10px] uppercase tracking-[0.16em] text-[var(--color-peach-paper-copy)]">{t(lang, "header.logo.subtitle")}</span>
       </div>
     </a>
     <button
@@ -39,7 +50,7 @@ const currentPath = Astro.url.pathname;
       command="show-modal"
       commandfor="mobile-nav"
     >
-      <span class="sr-only">Open navigation</span>
+      <span class="sr-only">{t(lang, "header.mobile.openNav")}</span>
       <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h12M4 17h16"></path>
       </svg>
@@ -48,6 +59,12 @@ const currentPath = Astro.url.pathname;
       {navItems.map((item) => <HeaderNavLink {...item} currentPath={currentPath} />)}
     </div>
     <div class="hidden items-center gap-3 lg:flex">
+      <a
+        href={langSwitchHref}
+        class="text-sm font-medium text-[var(--color-peach-paper-copy)] transition hover:text-[var(--color-peach-paper-heading)]"
+      >
+        {t(lang, "header.langSwitch")}
+      </a>
       <ThemeToggle />
       <SuiteDemoButton />
     </div>
@@ -58,12 +75,12 @@ const currentPath = Astro.url.pathname;
     >
       <div class="flex h-22 p-4 items-center justify-between">
         <p class="text-sm font-semibold uppercase font-[family-name:var(--font-mono)] tracking-wider text-[var(--color-peach-paper-copy)]">
-          Menu
+          {t(lang, "header.mobile.menu")}
         </p>
         <button
           id="nav-close"
           class="flex h-10 w-10 items-center justify-center rounded-none border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] text-[var(--color-peach-paper-heading)]"
-          aria-label="Close navigation"
+          aria-label={t(lang, "header.mobile.closeNav")}
           command="close"
           commandfor="mobile-nav"
         >
@@ -74,6 +91,14 @@ const currentPath = Astro.url.pathname;
       </div>
       <div class="mt-8 flex p-4 flex-col gap-4">
         {navItems.map((item) => <HeaderNavLink {...item} mobile currentPath={currentPath} />)}
+      </div>
+      <div class="mt-4 px-4">
+        <a
+          href={langSwitchHref}
+          class="text-sm font-medium text-[var(--color-peach-paper-copy)] transition hover:text-[var(--color-peach-paper-heading)]"
+        >
+          {t(lang, "header.langSwitch")}
+        </a>
       </div>
       <div class="mt-8 p-4 flex flex-col gap-3">
         <SuiteDemoButton />

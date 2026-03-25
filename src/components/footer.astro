@@ -1,37 +1,44 @@
 ---
-import { prepareURL, URLS, EMAILS } from "../lib/URL-helpers";
+import { URLS, EMAILS } from "../lib/URL-helpers";
+import { t, localePath, type Locale, DEFAULT_LOCALE } from "../i18n";
 
-const logoHref = import.meta.env.BASE_URL;
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+
+const logoHref = localePath(lang, "/");
 
 const footerLinks = [
   {
-    title: "Product",
+    title: t(lang, "footer.section.product"),
     links: [
-      { href: "/features", text: "Platform" },
-      { href: "/integrations", text: "Integrations" },
-      { href: "/pricing", text: "Pricing" },
-      { href: "/about", text: "About" },
-      { href: "/contact", text: "Contact" },
+      { href: localePath(lang, "/features"), text: t(lang, "footer.link.platform") },
+      { href: localePath(lang, "/integrations"), text: t(lang, "footer.link.integrations") },
+      { href: localePath(lang, "/pricing"), text: t(lang, "footer.link.pricing") },
+      { href: localePath(lang, "/about"), text: t(lang, "footer.link.about") },
+      { href: localePath(lang, "/contact"), text: t(lang, "footer.link.contact") },
     ],
   },
   {
-    title: "Resources",
+    title: t(lang, "footer.section.resources"),
     links: [
-      { href: "/docs", text: "Documentation" },
-      { href: "/blog", text: "Blog" },
+      { href: localePath(lang, "/docs"), text: t(lang, "footer.link.documentation") },
+      { href: localePath(lang, "/blog"), text: t(lang, "footer.link.blog") },
       {
         href: URLS.GITHUB,
-        text: "GitHub",
+        text: t(lang, "footer.link.github"),
         external: true,
       },
     ],
   },
   {
-    title: "Trust",
+    title: t(lang, "footer.section.trust"),
     links: [
-      { href: "/security", text: "Security" },
-      { href: "/privacy", text: "Privacy" },
-      { href: "/terms", text: "Terms" },
+      { href: localePath(lang, "/security"), text: t(lang, "footer.link.security") },
+      { href: localePath(lang, "/privacy"), text: t(lang, "footer.link.privacy") },
+      { href: localePath(lang, "/terms"), text: t(lang, "footer.link.terms") },
     ],
   },
 ];
@@ -42,15 +49,15 @@ const footerLinks = [
     <div class="grid gap-10 border-b border-[var(--color-peach-paper-border)] pb-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
       <div>
         <a href={logoHref} class="inline-flex items-center gap-3">
-          <img src="/logo.svg" alt="Epistola logo" class="h-10 w-10" />
+          <img src="/logo.svg" alt={t(lang, "footer.logo.alt")} class="h-10 w-10" />
           <div class="flex flex-col">
             <span class="text-base font-semibold tracking-tight text-[var(--color-peach-paper-heading)]">Epistola</span>
-            <span class="text-[10px] uppercase tracking-[0.16em] text-[var(--color-peach-paper-copy)]">Documents</span>
+            <span class="text-[10px] uppercase tracking-[0.16em] text-[var(--color-peach-paper-copy)]">{t(lang, "footer.logo.subtitle")}</span>
           </div>
         </a>
 
         <p class="mt-4 max-w-sm text-sm leading-6 text-[var(--color-peach-paper-copy)]">
-          Open-source document generation for Common Ground teams and integrators.
+          {t(lang, "footer.description")}
         </p>
 
         <div class="mt-6 flex flex-col gap-2 text-sm">
@@ -71,22 +78,18 @@ const footerLinks = [
                 {section.title}
               </p>
               <ul class="mt-4 space-y-2 text-sm text-[var(--color-peach-paper-copy)]">
-                {section.links.map((link) => {
-                  const href = link.external ? link.href : prepareURL(link.href);
-
-                  return (
-                    <li>
-                      <a
-                        href={href}
-                        class="transition hover:text-[var(--color-peach-paper-heading)]"
-                        target={link.external ? "_blank" : undefined}
-                        rel={link.external ? "noreferrer" : undefined}
-                      >
-                        {link.text}
-                      </a>
-                    </li>
-                  );
-                })}
+                {section.links.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      class="transition hover:text-[var(--color-peach-paper-heading)]"
+                      target={link.external ? "_blank" : undefined}
+                      rel={link.external ? "noreferrer" : undefined}
+                    >
+                      {link.text}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           ))
@@ -95,11 +98,11 @@ const footerLinks = [
     </div>
 
     <div class="mt-6 flex flex-col gap-3 text-xs text-[var(--color-peach-paper-copy)] sm:flex-row sm:items-center sm:justify-between">
-      <p>© {new Date().getFullYear()} Epistola. All rights reserved.</p>
+      <p>{t(lang, "footer.copyright", { year: String(new Date().getFullYear()) })}</p>
       <div class="flex flex-wrap gap-4">
-        <a class="transition hover:text-[var(--color-peach-paper-heading)]" href={prepareURL("/privacy")}>Privacy</a>
-        <a class="transition hover:text-[var(--color-peach-paper-heading)]" href={prepareURL("/terms")}>Terms</a>
-        <a class="transition hover:text-[var(--color-peach-paper-heading)]" href={prepareURL("/security")}>Security</a>
+        <a class="transition hover:text-[var(--color-peach-paper-heading)]" href={localePath(lang, "/privacy")}>{t(lang, "footer.bottomLink.privacy")}</a>
+        <a class="transition hover:text-[var(--color-peach-paper-heading)]" href={localePath(lang, "/terms")}>{t(lang, "footer.bottomLink.terms")}</a>
+        <a class="transition hover:text-[var(--color-peach-paper-heading)]" href={localePath(lang, "/security")}>{t(lang, "footer.bottomLink.security")}</a>
       </div>
     </div>
   </div>

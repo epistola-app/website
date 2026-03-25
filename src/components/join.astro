@@ -2,12 +2,19 @@
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
 import ContactForm from "./contact-form.astro";
+import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
 ---
 
 <Section
-  monoTitle="/ Next step"
-  title="Interested in what Epistola can do for your product?"
-  description="Schedule a call and ask us any of your questions."
+  monoTitle={t(lang, "join.monoTitle")}
+  title={t(lang, "join.title")}
+  description={t(lang, "join.description")}
   contentClass="grid grid-cols-1 lg:grid-cols-6"
 >
   <Card variant="brand" shadow="none" padding="none" class="p-8 md:p-10 lg:col-start-2 lg:col-span-4">

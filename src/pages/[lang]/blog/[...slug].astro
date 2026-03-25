@@ -1,34 +1,49 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../../components/layout.astro";
-import Title from "../../components/ui/title.astro";
-import { prepareURL, OG_TYPES } from "../../lib/URL-helpers";
+import Layout from "../../../components/layout.astro";
+import Title from "../../../components/ui/title.astro";
+import { OG_TYPES } from "../../../lib/URL-helpers";
+import { LOCALES, t, localePath, type Locale } from "../../../i18n";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+  return LOCALES.flatMap((lang) =>
+    posts
+      .filter((post) => post.slug.startsWith(`${lang}/`))
+      .map((post) => ({
+        params: { lang, slug: post.slug.replace(`${lang}/`, "") },
+        props: { post },
+      }))
+  );
 }
 
+const lang = Astro.params.lang as Locale;
 const { post } = Astro.props;
 const { Content, headings } = await post.render();
 
 const allPosts = await getCollection("blog");
-const sortedPosts = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
-const relatedPosts = sortedPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
+const localePosts = allPosts
+  .filter((p) => p.slug.startsWith(`${lang}/`) && p.slug !== post.slug)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const relatedPosts = localePosts.slice(0, 3);
 
+const dateLocale = lang === "nl" ? "nl-NL" : "en-US";
 function formatDate(date: Date): string {
-  return date.toLocaleDateString("en-US", {
+  return date.toLocaleDateString(dateLocale, {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 }
+
+function postHref(slug: string): string {
+  const localSlug = slug.replace(`${lang}/`, "");
+  return localePath(lang, `/blog/${localSlug}`);
+}
 ---
 
 <Layout
+  lang={lang}
   title={post.data.title}
   description={post.data.description}
   image={post.data.cover}
@@ -102,11 +117,10 @@ function formatDate(date: Date): string {
 
             <div class="mt-16 border-t border-[var(--color-peach-paper-border)] pt-16">
               <a
-                href={prepareURL("/blog")}
+                href={localePath(lang, "/blog")}
                 class="inline-flex items-center gap-2 font-semibold text-[var(--color-peach-paper-accent)] hover:underline"
               >
-                <span>←</span>
-                Back to Blog
+                {t(lang, "blog.backToBlog")}
               </a>
             </div>
 
@@ -118,7 +132,7 @@ function formatDate(date: Date): string {
                   </Title>
                   <div class="grid md:grid-cols-3 gap-6">
                     {relatedPosts.map((relatedPost) => (
-                      <a href={prepareURL("/blog/" + relatedPost.slug)} class="group">
+                      <a href={postHref(relatedPost.slug)} class="group">
                         <article class="h-full overflow-hidden rounded-xl border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-surface)] shadow-lg transition-all hover:shadow-xl">
                           {relatedPost.data.cover && (
                             <img

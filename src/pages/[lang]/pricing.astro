@@ -1,0 +1,26 @@
+---
+import Faqs from "../../components/faqs.astro";
+import Join from "../../components/join.astro";
+import Layout from "../../components/layout.astro";
+import PageHero from "../../components/page-hero.astro";
+import PriceTiers from "../../components/price-tiers.astro";
+import { getStaticLocalePaths, t, type Locale } from "../../i18n";
+
+export const getStaticPaths = getStaticLocalePaths;
+const lang = Astro.params.lang as Locale;
+---
+
+<Layout
+  lang={lang}
+  title={t(lang, "pages.pricing.title")}
+  description={t(lang, "pages.pricing.description")}
+>
+  <PageHero
+    monoTitle={t(lang, "pricing.hero.monoTitle")}
+    title={t(lang, "pricing.hero.title")}
+    description={t(lang, "pricing.hero.description")}
+  />
+  <PriceTiers lang={lang} />
+  <Faqs lang={lang} />
+  <Join lang={lang} />
+</Layout>

@@ -5,6 +5,13 @@ import Title from "./ui/title.astro";
 import SuiteDemoButton from "./buttons/suite-demo-button.astro";
 import { ArrowRight } from "@lucide/astro";
 import { URLS } from "../lib/URL-helpers";
+import { t, localePath, type Locale, DEFAULT_LOCALE } from "../i18n";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
 ---
 
 <section
@@ -18,24 +25,22 @@ import { URLS } from "../lib/URL-helpers";
         class="text-4xl lg:text-[3.5rem] leading-tight lg:leading-snug text-center lg:text-left text-balance"
       >
         <span class="hidden lg:block">
-          The open-source document generation engine<br />for enterprise teams.
+          {t(lang, "hero.title.line1")}<br />{t(lang, "hero.title.line2")}
         </span>
-        <span class="lg:hidden"> The open-source document generation engine for enterprise teams. </span>
+        <span class="lg:hidden"> {t(lang, "hero.title.line1")} {t(lang, "hero.title.line2")} </span>
       </Title>
     </div>
     <div class="flex flex-col col-span-3 justify-center text-center lg:items-start lg:text-left gap-8">
       <p class="text-base lg:text-lg text-(--muted-text) leading-normal text-balance">
-        Epistola only does one job: turn structured data into perfect PDFs. Model templates, validate JSON Schema
-        inputs, and promote render-ready versions across environments without dragging workflows or AI “intelligence”
-        along for the ride.
+        {t(lang, "hero.description")}
       </p>
       <div class="flex flex-col gap-3 w-full justify-center lg:flex-row lg:gap-4 lg:justify-start">
         <SuiteDemoButton />
-        <Button href="/docs" variant="secondary" size="md"> Explore docs </Button>
+        <Button href={localePath(lang, "/docs")} variant="secondary" size="md"> {t(lang, "hero.cta.exploreDocs")} </Button>
       </div>
     </div>
   </div>
-  <HeroStats />
+  <HeroStats lang={lang} />
   <svg
     xmlns="http://www.w3.org/2000/svg"
     version="1.1"

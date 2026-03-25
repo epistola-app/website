@@ -1,0 +1,50 @@
+---
+import Join from "../../components/join.astro";
+import Layout from "../../components/layout.astro";
+import PageHero from "../../components/page-hero.astro";
+import Section from "../../components/ui/section.astro";
+import { getStaticLocalePaths, t, type Locale } from "../../i18n";
+
+export const getStaticPaths = getStaticLocalePaths;
+const lang = Astro.params.lang as Locale;
+---
+
+<Layout
+  lang={lang}
+  title={t(lang, "pages.about.title")}
+  description={t(lang, "pages.about.description")}
+>
+  <PageHero
+    monoTitle={t(lang, "about.hero.monoTitle")}
+    title={t(lang, "about.hero.title")}
+    description={t(lang, "about.hero.description")}
+  />
+
+  <Section monoTitle={t(lang, "about.section.0.monoTitle")} title={t(lang, "about.section.0.title")}>
+    <div class="max-w-2xl mx-auto flex flex-col gap-5 text-lg leading-relaxed text-[var(--color-peach-paper-copy)]">
+      <p>{t(lang, "about.section.0.text.0")}</p>
+      <p>{t(lang, "about.section.0.text.1")}</p>
+      <p>{t(lang, "about.section.0.text.2")}</p>
+    </div>
+  </Section>
+
+  <Section monoTitle={t(lang, "about.section.1.monoTitle")} title={t(lang, "about.section.1.title")}>
+    <div class="max-w-2xl mx-auto flex flex-col gap-5 text-lg leading-relaxed text-[var(--color-peach-paper-copy)]">
+      <p>{t(lang, "about.section.1.text.0")}</p>
+      <p set:html={t(lang, "about.section.1.text.1")} />
+      <p>{t(lang, "about.section.1.text.2")}</p>
+    </div>
+  </Section>
+
+  <Section
+    monoTitle={t(lang, "about.section.2.monoTitle")}
+    title={t(lang, "about.section.2.title")}
+  >
+    <div class="max-w-2xl mx-auto flex flex-col gap-5 text-lg leading-relaxed text-[var(--color-peach-paper-copy)]">
+      <p>{t(lang, "about.section.2.text.0")}</p>
+      <p>{t(lang, "about.section.2.text.1")}</p>
+    </div>
+  </Section>
+
+  <Join lang={lang} />
+</Layout>

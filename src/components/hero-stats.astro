@@ -1,18 +1,25 @@
 ---
 import Card from "./ui/card.astro";
+import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
 
 const stats = [
   {
-    value: "200+",
-    label: "Template versions per variant",
+    value: t(lang, "heroStats.0.value"),
+    label: t(lang, "heroStats.0.label"),
   },
   {
-    value: "50–200ms",
-    label: "Render latency",
+    value: t(lang, "heroStats.1.value"),
+    label: t(lang, "heroStats.1.label"),
   },
   {
-    value: "Multi-tenant",
-    label: "Role & environment isolation",
+    value: t(lang, "heroStats.2.value"),
+    label: t(lang, "heroStats.2.label"),
   },
 ];
 ---

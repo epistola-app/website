@@ -1,38 +1,41 @@
 ---
 import Section from "./ui/section.astro";
+import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
 
 const faqItems = [
   {
-    question: "How fast can we launch?",
-    answer:
-      "Timelines mainly depend on how quickly your infrastructure lands. Epistola ships everything you need on day one, so once access is provisioned we can start templating immediately. Our optional AI-assisted authoring trims the time it takes to shape bespoke templates.",
+    question: t(lang, "faq.0.question"),
+    answer: t(lang, "faq.0.answer"),
     isActive: true,
   },
   {
-    question: "Can Epistola connect to our legacy systems?",
-    answer:
-      "We provide first-class integration with Common Ground and expose a REST API that any other system can call. Need something custom? We scope and deliver dedicated adapters on request.",
+    question: t(lang, "faq.1.question"),
+    answer: t(lang, "faq.1.answer"),
     isActive: false,
   },
   {
-    question: "How is compliance handled?",
-    answer:
-      "Every implementation is tracked against a client-specific compliance model inside a bespoke register. All Epistola operations are logged so auditors can retrace every change and delivery.",
+    question: t(lang, "faq.2.question"),
+    answer: t(lang, "faq.2.answer"),
     isActive: false,
   },
   {
-    question: "What support is included?",
-    answer:
-      "Scale and Enterprise plans include dedicated delivery managers, 24/7 support, and quarterly governance reviews.",
+    question: t(lang, "faq.3.question"),
+    answer: t(lang, "faq.3.answer"),
     isActive: false,
   },
 ];
 ---
 
 <Section
-  monoTitle="/ Frequently asked questions"
-  title="Everything you need to know"
-  description="Answers about launch timelines, integrations, compliance, and support."
+  monoTitle={t(lang, "faq.monoTitle")}
+  title={t(lang, "faq.title")}
+  description={t(lang, "faq.description")}
   contentClass="grid gap-6 lg:grid-cols-2 h-full"
   data-faq-switcher
 >
@@ -74,7 +77,7 @@ const faqItems = [
           aria-hidden={item.isActive ? "false" : "true"}
         >
           <p class="text-xs font-semibold uppercase tracking-[0.16em] text-(--color-peach-paper-chip-text)">
-            Answer
+            {t(lang, "faq.panel.answerLabel")}
           </p>
           <p class="mt-3 text-lg font-semibold text-(--color-peach-paper-heading)" data-faq-title>
             {item.question}

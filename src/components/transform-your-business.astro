@@ -3,14 +3,21 @@ import Button from "./ui/button.astro";
 import Section from "./ui/section.astro";
 import SuiteDemoButton from "./buttons/suite-demo-button.astro";
 import { URLS } from "../lib/URL-helpers";
+import { t, localePath, type Locale, DEFAULT_LOCALE } from "../i18n";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
 ---
 
 <Section
-  monoTitle="/ Deploy Anywhere"
-  title="Keep orchestration elsewhere. Let Epistola handle the PDFs."
-  description="Self-host with Docker, run on Kubernetes, or consume the managed service. Either way, you stay in control of data, security, and release cadence."
+  monoTitle={t(lang, "deploy.monoTitle")}
+  title={t(lang, "deploy.title")}
+  description={t(lang, "deploy.description")}
   contentClass="flex flex-wrap justify-center gap-4"
 >
   <SuiteDemoButton />
-  <Button href="/integrations" variant="link" size="md">View integrations</Button>
+  <Button href={localePath(lang, "/integrations")} variant="link" size="md">{t(lang, "deploy.cta.viewIntegrations")}</Button>
 </Section>

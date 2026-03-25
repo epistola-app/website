@@ -27,10 +27,6 @@ export const EMAILS = {
 // Site metadata and OpenGraph configuration
 export const SITE = {
   NAME: "Epistola",
-  DEFAULT_TITLE: "Epistola · Document Intelligence Platform",
-  DEFAULT_DESCRIPTION:
-    "Epistola helps operations teams author, govern, and deliver complex documents across every channel.",
-  LOCALE: "en_US",
   THEME_COLOR: "#2563eb",
   DEFAULT_IMAGE: "/opengraph-splash.webp",
   AUTHOR: "Epistola Team",

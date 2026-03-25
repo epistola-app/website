@@ -1,35 +1,47 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../../components/layout.astro";
-import Title from "../../components/ui/title.astro";
-import { prepareURL } from "../../lib/URL-helpers";
-const posts = await getCollection("blog");
-const sortedPosts = posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+import Layout from "../../../components/layout.astro";
+import Title from "../../../components/ui/title.astro";
+import { getStaticLocalePaths, t, localePath, type Locale } from "../../../i18n";
 
+export const getStaticPaths = getStaticLocalePaths;
+const lang = Astro.params.lang as Locale;
+
+const posts = await getCollection("blog");
+const localePosts = posts.filter((post) => post.slug.startsWith(`${lang}/`));
+const sortedPosts = localePosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const dateLocale = lang === "nl" ? "nl-NL" : "en-US";
 function formatDate(date: Date): string {
-  return date.toLocaleDateString("en-US", {
+  return date.toLocaleDateString(dateLocale, {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 }
+
+function postHref(slug: string): string {
+  const localSlug = slug.replace(`${lang}/`, "");
+  return localePath(lang, `/blog/${localSlug}`);
+}
 ---
 
 <Layout
-  title="Blog · Epistola"
-  description="Latest news, updates, and insights from the Epistola team about document intelligence, DocOps, and enterprise document generation."
+  lang={lang}
+  title={t(lang, "pages.blog.title")}
+  description={t(lang, "pages.blog.description")}
 >
   <section class="pt-32 pb-20 [background-image:var(--gradient-peach-paper-soft)]">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <Title level={1} class="mb-6 text-5xl font-bold md:text-6xl"> Our Blog </Title>
-        <p class="text-xl text-[var(--muted-text)]">Latest news, updates, and insights</p>
+        <Title level={1} class="mb-6 text-5xl font-bold md:text-6xl">{t(lang, "blog.title")}</Title>
+        <p class="text-xl text-[var(--muted-text)]">{t(lang, "blog.subtitle")}</p>
       </div>
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         {
           sortedPosts.map((post) => (
             <article class="overflow-hidden rounded-xl border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-surface)] shadow-lg transition-shadow hover:shadow-xl">
-              <a href={`${prepareURL("/blog/" + post.slug)}`}>
+              <a href={postHref(post.slug)}>
                 {post.data.cover && (
                   <img src={post.data.cover} alt={post.data.title} class="h-48 w-full object-cover" loading="lazy" />
                 )}
@@ -38,7 +50,7 @@ function formatDate(date: Date): string {
                 <div class="mb-2 text-sm text-[var(--color-peach-paper-chip-text)]">{formatDate(post.data.date)}</div>
                 <Title level={2} class="mb-3 text-xl font-bold">
                   <a
-                    href={`${prepareURL("/blog/" + post.slug)}`}
+                    href={postHref(post.slug)}
                     class="transition-colors hover:text-[var(--color-peach-paper-accent)]"
                   >
                     {post.data.title}
@@ -55,10 +67,10 @@ function formatDate(date: Date): string {
                   </div>
                 )}
                 <a
-                  href={`${prepareURL("/blog/" + post.slug)}`}
+                  href={postHref(post.slug)}
                   class="inline-flex items-center gap-1 font-semibold text-[var(--color-peach-paper-accent)] hover:underline"
                 >
-                  Read more
+                  {t(lang, "blog.readMore")}
                   <span>→</span>
                 </a>
               </div>

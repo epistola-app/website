@@ -1,0 +1,32 @@
+---
+import EverythingYouNeed from "../../components/everything-you-need.astro";
+import FeatureBreakdown from "../../components/feature-breakdown.astro";
+import DocOpsArchitecture from "../../components/docops-architecture.astro";
+import FeaturesIntegrators from "../../components/features-integrators.astro";
+import Join from "../../components/join.astro";
+import Layout from "../../components/layout.astro";
+import PageHero from "../../components/page-hero.astro";
+import TemplateDiagram from "../../components/template-diagram.astro";
+import { getStaticLocalePaths, t, type Locale } from "../../i18n";
+
+export const getStaticPaths = getStaticLocalePaths;
+const lang = Astro.params.lang as Locale;
+---
+
+<Layout
+  lang={lang}
+  title={t(lang, "pages.features.title")}
+  description={t(lang, "pages.features.description")}
+>
+  <PageHero
+    monoTitle={t(lang, "features.hero.monoTitle")}
+    title={t(lang, "features.hero.title")}
+    description={t(lang, "features.hero.description")}
+  />
+  <EverythingYouNeed lang={lang} />
+  <TemplateDiagram lang={lang} />
+  <FeatureBreakdown lang={lang} />
+  <DocOpsArchitecture lang={lang} />
+  <FeaturesIntegrators lang={lang} />
+  <Join lang={lang} />
+</Layout>
