@@ -567,6 +567,7 @@ const stepPathLabels = [
   var pauseIcons = container.querySelectorAll("[data-pause-icon]");
 
   var currentStep = 0;
+  var userInteracted = false;
   var isPlaying = false;
   var stepTimerId = null;
 
@@ -607,7 +608,7 @@ const stepPathLabels = [
     });
 
     var activeEl = timeline.querySelector('[data-step="' + index + '"]');
-    if (activeEl) activeEl.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (activeEl && userInteracted) activeEl.scrollIntoView({ behavior: "smooth", block: "center" });
 
     updateDiagram(index);
     counters.forEach(function (c) { c.textContent = "Step " + (index + 1) + " / " + TOTAL_STEPS; });
@@ -674,9 +675,9 @@ const stepPathLabels = [
     });
   }
 
-  playBtns.forEach(function (btn) { btn.addEventListener("click", function () { isPlaying ? pause() : play(); }); });
-  prevBtns.forEach(function (btn) { btn.addEventListener("click", function () { pause(); if (currentStep > 0) showStep(currentStep - 1); }); });
-  nextBtns.forEach(function (btn) { btn.addEventListener("click", function () { pause(); if (currentStep < TOTAL_STEPS - 1) showStep(currentStep + 1); }); });
+  playBtns.forEach(function (btn) { btn.addEventListener("click", function () { userInteracted = true; isPlaying ? pause() : play(); }); });
+  prevBtns.forEach(function (btn) { btn.addEventListener("click", function () { userInteracted = true; pause(); if (currentStep > 0) showStep(currentStep - 1); }); });
+  nextBtns.forEach(function (btn) { btn.addEventListener("click", function () { userInteracted = true; pause(); if (currentStep < TOTAL_STEPS - 1) showStep(currentStep + 1); }); });
 
   showStep(0);
 })();
