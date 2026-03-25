@@ -95,7 +95,7 @@
 
   "builtFor.monoTitle": "/ Built for orchestrators",
   "builtFor.title": "Drop into ZGW, Valtimo, or bespoke stacks without touching workflows.",
-  "builtFor.description": "Epistola exposes a narrow surface: JSON in, PDF/DOCX/HTML out. Multi-tenant auth via Keycloak, Helm charts, and health probes make it feel like any other platform service in your cluster.",
+  "builtFor.description": "Epistola exposes a narrow surface: JSON in, PDF/HTML out. Multi-tenant auth via Keycloak, Helm charts, and health probes make it feel like any other platform service in your cluster.",
   "builtFor.step.0.title": "Submit payload",
   "builtFor.step.0.description": "Orchestrator sends signed JSON + tenant slug and registers a render batch.",
   "builtFor.step.0.inactiveLabel": "Next",
@@ -119,7 +119,7 @@
   "builtFor.step.1.stage.1.label": "Renderer",
   "builtFor.step.1.stage.1.detail": "Render with audit logging and checksum hashing.",
   "builtFor.step.1.stage.2.label": "Artifacts",
-  "builtFor.step.1.stage.2.detail": "Persist PDF/DOCX/HTML outputs and register storage refs.",
+  "builtFor.step.1.stage.2.detail": "Persist PDF/HTML outputs and register storage refs.",
   "builtFor.step.2.title": "Deliver outputs",
   "builtFor.step.2.description": "Webhooks and storage callbacks provide URLs, metadata, and audit refs.",
   "builtFor.step.2.inactiveLabel": "Last",
