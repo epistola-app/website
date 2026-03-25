@@ -1,9 +1,10 @@
 ---
+import { getCollection } from "astro:content";
 import Card from "./ui/card.astro";
 import MonoTitle from "./ui/mono-title.astro";
 import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
-import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+import { t, filterDataByLocale, type Locale, DEFAULT_LOCALE } from "../i18n";
 
 interface Props {
   lang?: Locale;
@@ -11,54 +12,8 @@ interface Props {
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
 
-const detailSections = [
-  {
-    badge: t(lang, "features.section.0.badge"),
-    title: t(lang, "features.section.0.title"),
-    body: [
-      t(lang, "features.section.0.body.0"),
-      t(lang, "features.section.0.body.1"),
-      t(lang, "features.section.0.body.2"),
-      t(lang, "features.section.0.body.3"),
-    ],
-  },
-  {
-    badge: t(lang, "features.section.1.badge"),
-    title: t(lang, "features.section.1.title"),
-    body: [
-      t(lang, "features.section.1.body.0"),
-      t(lang, "features.section.1.body.1"),
-      t(lang, "features.section.1.body.2"),
-    ],
-  },
-  {
-    badge: t(lang, "features.section.2.badge"),
-    title: t(lang, "features.section.2.title"),
-    body: [
-      t(lang, "features.section.2.body.0"),
-      t(lang, "features.section.2.body.1"),
-      t(lang, "features.section.2.body.2"),
-    ],
-  },
-  {
-    badge: t(lang, "features.section.3.badge"),
-    title: t(lang, "features.section.3.title"),
-    body: [
-      t(lang, "features.section.3.body.0"),
-      t(lang, "features.section.3.body.1"),
-      t(lang, "features.section.3.body.2"),
-    ],
-  },
-  {
-    badge: t(lang, "features.section.4.badge"),
-    title: t(lang, "features.section.4.title"),
-    body: [
-      t(lang, "features.section.4.body.0"),
-      t(lang, "features.section.4.body.1"),
-      t(lang, "features.section.4.body.2"),
-    ],
-  },
-];
+const allProduct = await getCollection("product");
+const detailSections = filterDataByLocale(allProduct, lang, "feature-section");
 ---
 
 <Section
@@ -71,12 +26,12 @@ const detailSections = [
   {
     detailSections.map((section) => (
       <Card variant="default" padding="lg">
-        <MonoTitle>{section.badge}</MonoTitle>
+        <MonoTitle>{section.data.badge}</MonoTitle>
         <Title level={3} class="mt-3">
-          {section.title}
+          {section.data.title}
         </Title>
         <ul class="mt-4 space-y-2 text-sm text-[var(--muted-text)]">
-          {section.body.map((item) => (
+          {section.data.body.map((item: string) => (
             <li class="flex gap-3">
               <span class="mt-[6px] h-1.5 w-1.5 rounded-full bg-[var(--color-peach-paper-accent)]" aria-hidden="true" />
               <span class="flex-1">{item}</span>

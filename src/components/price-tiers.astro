@@ -1,11 +1,12 @@
 ---
+import { getCollection } from "astro:content";
 import Button from "./ui/button.astro";
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
 import SuiteDemoButton from "./buttons/suite-demo-button.astro";
 import { URLS } from "../lib/URL-helpers";
-import { t, localePath, type Locale, DEFAULT_LOCALE } from "../i18n";
+import { t, localePath, filterDataByLocale, type Locale, DEFAULT_LOCALE } from "../i18n";
 
 interface Props {
   lang?: Locale;
@@ -13,92 +14,58 @@ interface Props {
 
 const { lang = DEFAULT_LOCALE } = Astro.props;
 
-const tiers = [
-  {
-    name: t(lang, "pricing.tier.0.name"),
-    price: t(lang, "pricing.tier.0.price"),
-    cadence: t(lang, "pricing.tier.0.cadence"),
-    description: t(lang, "pricing.tier.0.description"),
-    features: [
-      t(lang, "pricing.tier.0.feature.0"),
-      t(lang, "pricing.tier.0.feature.1"),
-      t(lang, "pricing.tier.0.feature.2"),
-    ],
-    cta: t(lang, "pricing.tier.0.cta"),
-    cardVariant: "subtle",
-  },
-  {
-    name: t(lang, "pricing.tier.1.name"),
-    price: t(lang, "pricing.tier.1.price"),
-    cadence: t(lang, "pricing.tier.1.cadence"),
-    description: t(lang, "pricing.tier.1.description"),
-    features: [
-      t(lang, "pricing.tier.1.feature.0"),
-      t(lang, "pricing.tier.1.feature.1"),
-      t(lang, "pricing.tier.1.feature.2"),
-    ],
-    highlighted: true,
-    cardVariant: "brand",
-  },
-  {
-    name: t(lang, "pricing.tier.2.name"),
-    price: t(lang, "pricing.tier.2.price"),
-    cadence: t(lang, "pricing.tier.2.cadence"),
-    description: t(lang, "pricing.tier.2.description"),
-    features: [
-      t(lang, "pricing.tier.2.feature.0"),
-      t(lang, "pricing.tier.2.feature.1"),
-      t(lang, "pricing.tier.2.feature.2"),
-    ],
-    cta: t(lang, "pricing.tier.2.cta"),
-    cardVariant: "default",
-  },
-];
+const allProduct = await getCollection("product");
+const tiers = filterDataByLocale(allProduct, lang, "pricing");
 ---
 
 <Section monoTitle={t(lang, "pricing.monoTitle")} title={t(lang, "pricing.title")} contentClass="grid gap-6 md:grid-cols-3">
   {
-    tiers.map((tier) => (
-      <Card
-        variant={tier.cardVariant}
-        padding="lg"
-        shadow="none"
-        class={`flex flex-col ${tier.highlighted ? "ring-2 ring-[var(--color-peach-paper-accent)]" : ""}`}
-      >
-        <div class="flex items-start justify-between">
-          <div>
-            <p class="text-sm font-semibold text-[var(--color-peach-paper-chip-text)]">{tier.cadence}</p>
-            <Title level={3} class="mt-2 text-3xl">
-              {tier.name}
-            </Title>
+    tiers.map((tier) => {
+      const isGithubCta = tier.data.cta?.toLowerCase().includes("github");
+      const cardVariant = tier.data.highlighted ? "brand" : isGithubCta ? "subtle" : "default";
+
+      return (
+        <Card
+          variant={cardVariant}
+          padding="lg"
+          shadow="none"
+          class={`flex flex-col ${tier.data.highlighted ? "ring-2 ring-[var(--color-peach-paper-accent)]" : ""}`}
+        >
+          <div class="flex items-start justify-between">
+            <div>
+              <p class="text-sm font-semibold text-[var(--color-peach-paper-chip-text)]">{tier.data.cadence}</p>
+              <Title level={3} class="mt-2 text-3xl">
+                {tier.data.name}
+              </Title>
+            </div>
+            <p class="text-3xl font-semibold text-[var(--color-peach-paper-accent)]">{tier.data.price}</p>
           </div>
-          <p class="text-3xl font-semibold text-[var(--color-peach-paper-accent)]">{tier.price}</p>
-        </div>
-        <p class="mt-4 text-sm text-[var(--muted-text)]">{tier.description}</p>
-        <ul class="mt-6 space-y-3 text-sm text-[var(--color-peach-paper-copy)]">
-          {tier.features.map((feature) => (
-            <li class="flex items-center gap-2">
-              <span class="h-2 w-2 bg-[var(--color-peach-paper-accent)]" />
-              {feature}
-            </li>
-          ))}
-        </ul>
-        <div class="mt-8">
-          {tier.highlighted ? (
-            <SuiteDemoButton lang={lang} />
-          ) : (
-            <Button
-              href={tier.name === t(lang, "pricing.tier.0.name") ? URLS.GITHUB : localePath(lang, "/contact")}
-              variant={tier.name === t(lang, "pricing.tier.0.name") ? "link" : "secondary"}
-              size="md"
-              class={tier.name === t(lang, "pricing.tier.0.name") ? "w-full justify-start sm:justify-center" : "w-full justify-center"}
-              external={tier.name === t(lang, "pricing.tier.0.name")}
-            >
-              {tier.cta}
-            </Button>
-          )}
-        </div>
-      </Card>
-    ))
+          <p class="mt-4 text-sm text-[var(--muted-text)]">{tier.data.description}</p>
+          <ul class="mt-6 space-y-3 text-sm text-[var(--color-peach-paper-copy)]">
+            {tier.data.features.map((feature: string) => (
+              <li class="flex items-center gap-2">
+                <span class="h-2 w-2 bg-[var(--color-peach-paper-accent)]" />
+                {feature}
+              </li>
+            ))}
+          </ul>
+          <div class="mt-8">
+            {tier.data.highlighted && !tier.data.cta ? (
+              <SuiteDemoButton lang={lang} />
+            ) : (
+              <Button
+                href={isGithubCta ? URLS.GITHUB : localePath(lang, "/contact")}
+                variant={isGithubCta ? "link" : "secondary"}
+                size="md"
+                class={isGithubCta ? "w-full justify-start sm:justify-center" : "w-full justify-center"}
+                external={isGithubCta}
+              >
+                {tier.data.cta}
+              </Button>
+            )}
+          </div>
+        </Card>
+      );
+    })
   }
 </Section>

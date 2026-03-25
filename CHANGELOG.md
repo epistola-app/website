@@ -4,6 +4,11 @@ All notable changes to this project will be documented here.
 
 ## [Unreleased]
 
+### Changed
+
+- Migrated `feature-breakdown` and `price-tiers` components from `t()` calls to content collections (`product` data collection via `filterDataByLocale`).
+- Migrated `about`, `privacy`, `security`, and `terms` pages from `t()` calls to content collections (`pages` content collection via `filterByLocale` with `.render()` for markdown bodies).
+
 ### Added
 
 - Content collection files for i18n migration: 144 files across `src/content/pages/`, `src/content/product/`, and `src/content/homepage/` for both `en` and `nl` locales.
