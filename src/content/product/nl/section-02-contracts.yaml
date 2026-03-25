@@ -1,0 +1,8 @@
+type: feature-section
+sortOrder: 2
+badge: Contracten
+title: "Dataschema's en uitvoerbare voorbeelden"
+body:
+  - "Elk template wordt geleverd met een JSON Schema Draft 2020-12 datacontract dat vóór rendering wordt gevalideerd."
+  - "Benoemde voorbeeldpayloads staan naast het schema voor directe preview en regressiefixtures."
+  - "Schemamigraties houden conceptversies gesynchroniseerd wanneer velden wijzigen tussen releases."

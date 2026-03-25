@@ -1,0 +1,4 @@
+type: process-step
+sortOrder: 2
+title: "Orkestrator koppelen"
+description: "Roep Epistola aan via HTTPS of berichtenwachtrij, verstuur JSON en wacht op de PDF-respons."

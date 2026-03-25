@@ -1,0 +1,4 @@
+type: architecture-step
+sortOrder: 4
+label: "Document renderen en opslaan"
+description: "Epistola rendert het template met de aangeleverde data en slaat de resulterende PDF op in tijdelijke opslag."

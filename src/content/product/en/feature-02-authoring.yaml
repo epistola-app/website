@@ -1,0 +1,6 @@
+type: feature-card
+sortOrder: 2
+badge: Authoring
+title: Visual editor
+body: "Drag-and-drop blocks with conditional logic, loops, live PDF preview, and inline expression chips."
+cta: Learn more

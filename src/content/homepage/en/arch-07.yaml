@@ -1,0 +1,4 @@
+type: architecture-step
+sortOrder: 7
+label: "Collect document"
+description: "The zaakafhandelsysteem uses the resource URL from the event to download the generated PDF from temporary storage."

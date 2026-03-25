@@ -1,0 +1,4 @@
+type: architecture-step
+sortOrder: 7
+label: "Document ophalen"
+description: "Het zaakafhandelsysteem gebruikt de resource-URL uit het event om de gegenereerde PDF te downloaden uit de tijdelijke opslag."

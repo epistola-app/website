@@ -1,0 +1,9 @@
+type: feature-section
+sortOrder: 1
+badge: Levenscyclus
+title: "Templates, varianten, versies, omgevingen"
+body:
+  - "Elke tenant bezit templateslugs met onbeperkte varianten getagd op geografie, merk of doelgroep."
+  - "Varianten hebben onveranderlijke versienummers met een concept → gepubliceerd → gearchiveerd levenscyclus en auditgeschiedenis."
+  - "Omgevingen (staging, productie, aangepast) activeren specifieke versies zodat u veilig kunt testen of terugdraaien."
+  - "De variantresolver inspecteert verzoekattributen (bijv. language=nl) en kiest automatisch de beste match, met terugval naar de standaard als niets past."

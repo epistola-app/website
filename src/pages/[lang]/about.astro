@@ -1,0 +1,42 @@
+---
+import { getCollection } from "astro:content";
+import Join from "../../components/join.astro";
+import Layout from "../../components/layout.astro";
+import PageHero from "../../components/page-hero.astro";
+import Section from "../../components/ui/section.astro";
+import { getStaticLocalePaths, t, filterByLocale, type Locale } from "../../i18n";
+
+export const getStaticPaths = getStaticLocalePaths;
+const lang = Astro.params.lang as Locale;
+
+const allPages = await getCollection("pages");
+const items = filterByLocale(allPages, lang, "about");
+const rendered = await Promise.all(
+  items.map(async (item) => ({
+    data: item.data,
+    Content: (await item.render()).Content,
+  }))
+);
+---
+
+<Layout
+  lang={lang}
+  title={t(lang, "pages.about.title")}
+  description={t(lang, "pages.about.description")}
+>
+  <PageHero
+    monoTitle={t(lang, "about.hero.monoTitle")}
+    title={t(lang, "about.hero.title")}
+    description={t(lang, "about.hero.description")}
+  />
+
+  {rendered.map(({ data, Content }) => (
+    <Section monoTitle={data.monoTitle} title={data.title}>
+      <div class="max-w-2xl mx-auto flex flex-col gap-5 text-lg leading-relaxed text-[var(--color-peach-paper-copy)]">
+        <Content />
+      </div>
+    </Section>
+  ))}
+
+  <Join lang={lang} />
+</Layout>

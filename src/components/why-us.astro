@@ -1,39 +1,31 @@
 ---
+import { getCollection } from "astro:content";
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
+import { t, filterDataByLocale, type Locale, DEFAULT_LOCALE } from "../i18n";
 
-const reasons = [
-  {
-    title: "Open-source first",
-    copy: "Inspect every line of code, contribute renderers, and self-host on your own infrastructure.",
-  },
-  {
-    title: "Common Ground native",
-    copy: "Epistola speaks ZGW APIs and aligns with Dutch municipal standards out of the box.",
-  },
-  {
-    title: "Integrates anywhere",
-    copy: "Expose a simple HTTP API so workflow engines like GZAC or Valtimo stay in control.",
-  },
-  {
-    title: "Quality output",
-    copy: "PDF/A, PDF/X, web-ready bundles, and template testing pipelines keep every document consistent.",
-  },
-];
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+
+const items = await getCollection("homepage");
+const reasons = filterDataByLocale(items, lang, "why-us");
 ---
 
 <Section
-  monoTitle="/ Why Epistola"
-  title="A single-purpose document generator you can trust."
-  description="Keep your processes simple: orchestrate elsewhere, render here, and never worry about PDF fidelity again."
+  monoTitle={t(lang, "whyUs.monoTitle")}
+  title={t(lang, "whyUs.title")}
+  description={t(lang, "whyUs.description")}
   contentClass="mx-auto grid gap-8 md:grid-cols-2"
 >
   {
     reasons.map((reason) => (
       <Card variant="subtle" padding="lg">
-        <Title level={3}>{reason.title}</Title>
-        <p class="mt-3 text-sm text-[var(--muted-text)]">{reason.copy}</p>
+        <Title level={3}>{reason.data.title}</Title>
+        <p class="mt-3 text-sm text-[var(--muted-text)]">{reason.data.copy}</p>
       </Card>
     ))
   }

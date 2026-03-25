@@ -1,0 +1,8 @@
+type: feature-section
+sortOrder: 3
+badge: Feedback
+title: "Ingebouwde reviews met screenshots"
+body:
+  - "De zwevende feedbackknop opent een modal die URL, gebruikerscontext en consolelogs vastlegt."
+  - "Sleep of plak screenshots — assets worden automatisch geüpload en gerenderd in de feedbacktijdlijn."
+  - "Optionele GitHub-sync spiegelt issues bidirectioneel zodat engineers kunnen triagen waar ze werken."

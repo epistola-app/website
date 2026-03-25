@@ -1,0 +1,8 @@
+type: docops-lane
+sortOrder: 2
+title: "Ontwikkelaars"
+body: "Versiebeheer van templates in Git, Testcontainers-suites draaien en de OpenAPI-render-API aanroepen vanuit orkestratoren."
+bullets:
+  - "API-commando's voor template- + thema-automatisering"
+  - "Adaptieve batchjobs met jobstatussen en metrics"
+  - "Webhooks + opslagadapters (S3, Azure, DMS)"

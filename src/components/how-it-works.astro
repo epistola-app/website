@@ -1,27 +1,23 @@
 ---
+import { getCollection } from "astro:content";
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
+import { t, filterDataByLocale, type Locale, DEFAULT_LOCALE } from "../i18n";
 
-const steps = [
-  {
-    title: "Model + author",
-    body: "Define input variables per template, manage variants, and drag blocks in the visual editor with live PDF preview.",
-  },
-  {
-    title: "Promote + govern",
-    body: "Freeze versions, assign them to staging/production environments, and gate releases behind reviewer approvals per tenant.",
-  },
-  {
-    title: "Render + deliver",
-    body: "Call the REST API or batch jobs, render PDFs in milliseconds, then push artifacts via storage adapters or webhooks.",
-  },
-];
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+
+const items = await getCollection("homepage");
+const steps = filterDataByLocale(items, lang, "how-it-works");
 ---
 
 <Section
-  monoTitle="/ How it works"
-  title="A single path from template to PDF."
+  monoTitle={t(lang, "howItWorks.monoTitle")}
+  title={t(lang, "howItWorks.title")}
   contentClass="mx-auto grid gap-8 md:grid-cols-3"
 >
   {
@@ -29,9 +25,9 @@ const steps = [
       <Card variant="subtle" class="relative">
         <span class="text-sm font-semibold text-[var(--color-peach-paper-accent)]">0{index + 1}</span>
         <Title level={3} class="mt-4">
-          {step.title}
+          {step.data.title}
         </Title>
-        <p class="mt-3 text-sm text-[var(--muted-text)]">{step.body}</p>
+        <p class="mt-3 text-sm text-[var(--muted-text)]">{step.data.body}</p>
       </Card>
     ))
   }

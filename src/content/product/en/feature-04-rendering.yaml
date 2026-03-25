@@ -1,0 +1,6 @@
+type: feature-card
+sortOrder: 4
+badge: Rendering
+title: Direct PDF renderer
+body: "Render PDF/A and PDF/X outputs directly — no HTML conversion step. Handles 10,000+ documents per minute on simple hardware."
+cta: Learn more

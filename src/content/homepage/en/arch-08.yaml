@@ -1,0 +1,4 @@
+type: architecture-step
+sortOrder: 8
+label: "Register in Documenten API"
+description: "The zaakafhandelsysteem stores the PDF in the Documenten API (DRC), linking it to the original case for archival."

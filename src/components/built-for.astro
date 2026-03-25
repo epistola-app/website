@@ -1,91 +1,36 @@
 ---
+import { getCollection } from "astro:content";
 import Section from "./ui/section.astro";
+import { t, filterDataByLocale, type Locale, DEFAULT_LOCALE } from "../i18n";
 
-const workflowSteps = [
-  {
-    title: "Submit payload",
-    description: "Orchestrator sends signed JSON + tenant slug and registers a render batch.",
-    inactiveLabel: "Next",
-    isActive: true,
-    card: {
-      eyebrow: "Current render job",
-      title: "Payload intake · Besluit",
-      badge: "Queued",
-      stages: [
-        {
-          label: "Orchestrator",
-          detail: "Emit signed JSON + tenant slug; webhooks register batch IDs.",
-        },
-        {
-          label: "Validation",
-          detail: "Verify schema version, tenant access, and required fields.",
-        },
-        {
-          label: "Queue",
-          detail: "Assign job ID and enqueue render on the tenant pool.",
-        },
-      ],
-    },
-  },
-  {
-    title: "Render job",
-    description: "Epistola resolves schema, selects template version, and renders output.",
-    inactiveLabel: "Next",
-    isActive: false,
-    card: {
-      eyebrow: "Current render job",
-      title: "Render job · Besluit",
-      badge: "Rendering",
-      stages: [
-        {
-          label: "Template",
-          detail: "Resolve schema, pick active version, and lock template assets.",
-        },
-        {
-          label: "Renderer",
-          detail: "Render with audit logging and checksum hashing.",
-        },
-        {
-          label: "Artifacts",
-          detail: "Persist PDF/DOCX/HTML outputs and register storage refs.",
-        },
-      ],
-    },
-  },
-  {
-    title: "Deliver outputs",
-    description: "Webhooks and storage callbacks provide URLs, metadata, and audit refs.",
-    inactiveLabel: "Last",
-    isActive: false,
-    card: {
-      eyebrow: "Current render job",
-      title: "Delivery · Besluit",
-      badge: "Delivered",
-      stages: [
-        {
-          label: "Callbacks",
-          detail: "Send webhook with URLs, metadata, and audit references.",
-        },
-        {
-          label: "Storage",
-          detail: "Write outputs to tenant storage adapters and retain logs.",
-        },
-        {
-          label: "Archive",
-          detail: "Seal job metadata and surface history to orchestrators.",
-        },
-      ],
-    },
-  },
-];
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+
+const items = await getCollection("homepage");
+const builtForItems = filterDataByLocale(items, lang, "built-for");
+
+const workflowSteps = builtForItems.map((item, index) => ({
+  title: item.data.title,
+  description: item.data.description,
+  inactiveLabel: item.data.inactiveLabel,
+  isActive: index === 0,
+  card: item.data.card,
+  stages: item.data.stages,
+}));
+
+const activeLabel = t(lang, "builtFor.stepStatus.active");
 ---
 
 <Section
-  monoTitle="/ Built for orchestrators"
-  title="Drop into ZGW, Valtimo, or bespoke stacks without touching workflows."
-  description="Epistola exposes a narrow surface: JSON in, PDF/DOCX/HTML out. Multi-tenant auth via Keycloak, Helm charts, and health probes make it feel like any other platform service in your cluster."
+  monoTitle={t(lang, "builtFor.monoTitle")}
+  title={t(lang, "builtFor.title")}
+  description={t(lang, "builtFor.description")}
   contentClass="grid gap-6 lg:grid-cols-2"
   data-built-for
+  data-active-label={activeLabel}
 >
   <div class="flex flex-col gap-4">
     {
@@ -107,7 +52,7 @@ const workflowSteps = [
           <div class="flex items-center justify-between">
             <span class="text-xs font-semibold uppercase tracking-[0.18em]">Step {index + 1}</span>
             <span class="text-xs font-semibold uppercase tracking-[0.16em]" data-step-status>
-              {step.isActive ? "Active" : step.inactiveLabel}
+              {step.isActive ? activeLabel : step.inactiveLabel}
             </span>
           </div>
           <div>
@@ -142,7 +87,7 @@ const workflowSteps = [
             </span>
           </div>
           <ol class="flex flex-col grow justify-between">
-            {step.card.stages.map((stage, stageIndex) => (
+            {step.stages.map((stage, stageIndex) => (
               <li
                 class="flex items-start gap-4 transition-opacity duration-300"
                 data-step-item
@@ -170,6 +115,7 @@ const workflowSteps = [
   const initSection = (section) => {
     const buttons = Array.from(section.querySelectorAll("[data-step-button]"));
     const panels = Array.from(section.querySelectorAll("[data-step-panel]"));
+    const activeLabel = section.getAttribute("data-active-label") || "Active";
 
     if (!buttons.length || !panels.length) return;
 
@@ -185,7 +131,7 @@ const workflowSteps = [
         button.setAttribute("data-active", isActive ? "true" : "false");
 
         if (status) {
-          status.textContent = isActive ? "Active" : inactiveLabel;
+          status.textContent = isActive ? activeLabel : inactiveLabel;
         }
       });
 

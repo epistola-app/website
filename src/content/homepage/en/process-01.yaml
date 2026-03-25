@@ -1,0 +1,4 @@
+type: process-step
+sortOrder: 1
+title: "Map your data"
+description: "Align your zaak, besluit, or custom payloads with template variables."

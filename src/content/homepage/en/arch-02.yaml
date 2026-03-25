@@ -1,0 +1,4 @@
+type: architecture-step
+sortOrder: 2
+label: "Collect case data"
+description: "The zaakafhandelsysteem gathers case data from the ZRC, ZTC, and other configured data sources."

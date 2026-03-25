@@ -1,20 +1,26 @@
 ---
+import { getCollection } from "astro:content";
 import Card from "./ui/card.astro";
+import { filterDataByLocale, type Locale, DEFAULT_LOCALE } from "../i18n";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+
+const items = await getCollection("homepage");
+const stats = filterDataByLocale(items, lang, "stats");
 ---
 
 <section class="py-20">
   <div class="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-4 md:grid-cols-4">
     {
-      [
-        { label: "templates in git", value: "8.2k" },
-        { label: "render jobs / day", value: "140k" },
-        { label: "pdf/a compliance", value: "100%" },
-        { label: "docker pull / month", value: "4.1k" },
-      ].map((item, index) => (
+      stats.map((item, index) => (
         <Card variant={index % 2 === 0 ? "subtle" : "default"} class="text-center">
-          <p class="text-4xl font-semibold text-[var(--color-peach-paper-accent)]">{item.value}</p>
+          <p class="text-4xl font-semibold text-[var(--color-peach-paper-accent)]">{item.data.value}</p>
           <p class="mt-2 text-sm font-medium uppercase tracking-[0.12em] text-[var(--color-peach-paper-chip-text)]">
-            {item.label}
+            {item.data.label}
           </p>
         </Card>
       ))

@@ -1,0 +1,4 @@
+type: process-step
+sortOrder: 1
+title: "Data mappen"
+description: "Lijn uw zaak-, besluit- of maatwerkpayloads uit met templatevariabelen."

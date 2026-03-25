@@ -1,0 +1,6 @@
+type: feature-card
+sortOrder: 5
+badge: Operations
+title: Multi-tenant governance
+body: "Role-based access, environment promotions (staging/production), and per-tenant default themes keep teams isolated."
+cta: Learn more

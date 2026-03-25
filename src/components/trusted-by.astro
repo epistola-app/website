@@ -1,17 +1,24 @@
 ---
 import MonoTitle from "./ui/mono-title.astro";
+import { t, type Locale, DEFAULT_LOCALE } from "../i18n";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
 
 const logos = [
-  { label: "Company A" },
-  { label: "Company B" },
-  { label: "Company C" },
-  { label: "Company D" },
+  { label: t(lang, "trustedBy.logo.0.label") },
+  { label: t(lang, "trustedBy.logo.1.label") },
+  { label: t(lang, "trustedBy.logo.2.label") },
+  { label: t(lang, "trustedBy.logo.3.label") },
 ];
 ---
 
 <section class="py-12">
   <div class="container mx-auto flex w-full flex-col items-center gap-8 px-4 lg:flex-row lg:justify-between">
-    <MonoTitle>/ Trusted in regulated industries</MonoTitle>
+    <MonoTitle>{t(lang, "trustedBy.monoTitle")}</MonoTitle>
     <div class="flex flex-wrap items-center justify-center gap-8 lg:justify-end">
       {
         logos.map((logo) => (

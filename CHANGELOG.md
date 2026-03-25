@@ -4,6 +4,41 @@ All notable changes to this project will be documented here.
 
 ## [Unreleased]
 
+### Changed
+
+- Migrated 12 homepage/product components from `t()` calls to Astro content collections:
+  - `hero-stats`, `how-it-works`, `why-us`, `stats`, `docops-architecture`, `built-for`, `architecture-flow`, `integrations-overview`, `integrations-process` (homepage collection via `filterDataByLocale`)
+  - `everything-you-need` (product collection via `filterDataByLocale`)
+  - `testimonials` (pages content collection via `filterByLocale`)
+  - `faqs` (pages content collection via `filterByLocale` with `.render()` for markdown answers)
+- Migrated `feature-breakdown` and `price-tiers` components from `t()` calls to content collections (`product` data collection via `filterDataByLocale`).
+- Migrated `about`, `privacy`, `security`, and `terms` pages from `t()` calls to content collections (`pages` content collection via `filterByLocale` with `.render()` for markdown bodies).
+
+### Added
+
+- Content collection files for i18n migration: 144 files across `src/content/pages/`, `src/content/product/`, and `src/content/homepage/` for both `en` and `nl` locales.
+  - Pages (content/markdown): FAQs (4), testimonials (3), about sections (3), privacy (4), security (4), terms (5) per locale.
+  - Product (data/YAML): feature cards (6), feature sections (5), pricing tiers (3) per locale.
+  - Homepage (data/YAML): how-it-works (3), why-us (4), stats (4), hero-stats (3), docops lanes (3), built-for steps (3), architecture steps (9), integration cards (3), process steps (3) per locale.
+
+- Full internationalization (i18n) support with Dutch (primary) and English (secondary) languages.
+- Astro built-in i18n routing with `/nl/` and `/en/` URL prefixes; root `/` redirects to `/nl/`.
+- Translation infrastructure: `src/i18n/` module with `t()`, `localePath()`, locale utilities, and JSON translation files (`nl.json`, `en.json`) containing ~400 translation keys.
+- Language switcher in header (desktop and mobile) linking to the same page in the alternate language.
+- `hreflang` alternate link tags and `og:locale` / `og:locale:alternate` meta tags for SEO.
+- Dutch translations for all 3 blog posts.
+
+### Changed
+
+- All pages moved under `src/pages/[lang]/` with `getStaticPaths` generating both locales.
+- Layout now accepts `lang` prop, sets `<html lang>`, dynamic `og:locale`, and passes locale to header/footer.
+- Header and footer use translated navigation labels and locale-prefixed links.
+- All ~25 content components updated to accept `lang` prop and use `t(lang, key)` for all user-facing text.
+- Blog content restructured into `src/content/blog/nl/` and `src/content/blog/en/` subfolders.
+- Blog listing and post pages filter by locale and use locale-aware date formatting.
+- Contact form JS validation messages passed via data attributes for locale support.
+- Removed hardcoded `LOCALE` and `DEFAULT_TITLE`/`DEFAULT_DESCRIPTION` from `URL-helpers.ts` (now driven by translation keys).
+
 ### Added
 
 - Interactive architecture flow visualization on homepage showing template configuration and document generation data flows with animated JSON packets, step-by-step controls, and auto-play on scroll.

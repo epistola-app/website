@@ -1,0 +1,4 @@
+type: architecture-step
+sortOrder: 9
+label: "Document available"
+description: "The caseworker can now view and download the generated document from within the zaakafhandelsysteem."

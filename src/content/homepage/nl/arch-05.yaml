@@ -1,0 +1,4 @@
+type: architecture-step
+sortOrder: 5
+label: "Gereedmelding publiceren"
+description: "Epistola publiceert een notificatie via de Open Notificaties API om aan te geven dat het document klaar is om op te halen."

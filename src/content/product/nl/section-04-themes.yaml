@@ -1,0 +1,8 @@
+type: feature-section
+sortOrder: 4
+badge: Thema's
+title: "Tenant- en varianttheming"
+body:
+  - "Herbruikbare themapakketten definiëren typografie, kleurtokens en pagina-instellingen (A4, Letter, marges)."
+  - "De themacascade respecteert tenantstandaarden, templateoverschrijvingen en dan variantspecifieke aanpassingen voor speciale gevallen."
+  - "Blokniveau-presets maken het eenvoudig om branded tabellen, headers en nadrukpatronen af te dwingen."

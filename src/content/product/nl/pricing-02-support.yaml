@@ -1,0 +1,11 @@
+type: pricing
+sortOrder: 2
+name: Support
+price: "€1.2k"
+cadence: per maand
+description: "Commerciële ondersteuning voor teams die Epistola zelf draaien."
+features:
+  - "Prioriteitsfixes"
+  - "Upgradebegeleiding"
+  - "Architectuurreviews"
+highlighted: false

@@ -1,0 +1,6 @@
+type: feature-card
+sortOrder: 5
+badge: Operaties
+title: Multi-tenant governance
+body: "Rolgebaseerde toegang, omgevingspromoties (staging/productie) en standaardthema's per tenant houden teams geïsoleerd."
+cta: Meer informatie

@@ -1,83 +1,71 @@
 ---
+import { getCollection } from "astro:content";
 import Button from "./ui/button.astro";
 import Card from "./ui/card.astro";
 import Section from "./ui/section.astro";
 import Title from "./ui/title.astro";
 import SuiteDemoButton from "./buttons/suite-demo-button.astro";
 import { URLS } from "../lib/URL-helpers";
+import { t, localePath, filterDataByLocale, type Locale, DEFAULT_LOCALE } from "../i18n";
 
-const tiers = [
-  {
-    name: "Community",
-    price: "Free",
-    cadence: "open source",
-    description: "Self-host Epistola under the AGPL license with community support.",
-    features: ["Full editor + renderer", "Common Ground adapters", "Docker/Kubernetes images"],
-    cardVariant: "subtle",
-  },
-  {
-    name: "Support",
-    price: "€1.2k",
-    cadence: "per month",
-    description: "Commercial support for teams running Epistola themselves.",
-    features: ["Priority fixes", "Upgrade guidance", "Architecture reviews"],
-    highlighted: true,
-    cardVariant: "brand",
-  },
-  {
-    name: "Managed",
-    price: "Custom",
-    cadence: "per month",
-    description: "Hosted Epistola with SLAs, monitoring, and dedicated environments.",
-    features: ["SLA-backed hosting", "Custom connectors", "Dedicated success engineer"],
-    cardVariant: "default",
-  },
-];
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
+
+const allProduct = await getCollection("product");
+const tiers = filterDataByLocale(allProduct, lang, "pricing");
 ---
 
-<Section monoTitle="/ Pricing plans" title="Choose the support level you need." contentClass="grid gap-6 md:grid-cols-3">
+<Section monoTitle={t(lang, "pricing.monoTitle")} title={t(lang, "pricing.title")} contentClass="grid gap-6 md:grid-cols-3">
   {
-    tiers.map((tier) => (
-      <Card
-        variant={tier.cardVariant}
-        padding="lg"
-        shadow="none"
-        class={`flex flex-col ${tier.highlighted ? "ring-2 ring-[var(--color-peach-paper-accent)]" : ""}`}
-      >
-        <div class="flex items-start justify-between">
-          <div>
-            <p class="text-sm font-semibold text-[var(--color-peach-paper-chip-text)]">{tier.cadence}</p>
-            <Title level={3} class="mt-2 text-3xl">
-              {tier.name}
-            </Title>
+    tiers.map((tier) => {
+      const isGithubCta = tier.data.cta?.toLowerCase().includes("github");
+      const cardVariant = tier.data.highlighted ? "brand" : isGithubCta ? "subtle" : "default";
+
+      return (
+        <Card
+          variant={cardVariant}
+          padding="lg"
+          shadow="none"
+          class={`flex flex-col ${tier.data.highlighted ? "ring-2 ring-[var(--color-peach-paper-accent)]" : ""}`}
+        >
+          <div class="flex items-start justify-between">
+            <div>
+              <p class="text-sm font-semibold text-[var(--color-peach-paper-chip-text)]">{tier.data.cadence}</p>
+              <Title level={3} class="mt-2 text-3xl">
+                {tier.data.name}
+              </Title>
+            </div>
+            <p class="text-3xl font-semibold text-[var(--color-peach-paper-accent)]">{tier.data.price}</p>
           </div>
-          <p class="text-3xl font-semibold text-[var(--color-peach-paper-accent)]">{tier.price}</p>
-        </div>
-        <p class="mt-4 text-sm text-[var(--muted-text)]">{tier.description}</p>
-        <ul class="mt-6 space-y-3 text-sm text-[var(--color-peach-paper-copy)]">
-          {tier.features.map((feature) => (
-            <li class="flex items-center gap-2">
-              <span class="h-2 w-2 bg-[var(--color-peach-paper-accent)]" />
-              {feature}
-            </li>
-          ))}
-        </ul>
-        <div class="mt-8">
-          {tier.highlighted ? (
-            <SuiteDemoButton />
-          ) : (
-            <Button
-              href={tier.name === "Community" ? URLS.GITHUB : "/contact"}
-              variant={tier.name === "Community" ? "link" : "secondary"}
-              size="md"
-              class={tier.name === "Community" ? "w-full justify-start sm:justify-center" : "w-full justify-center"}
-              external={tier.name === "Community"}
-            >
-              {tier.name === "Community" ? "View on GitHub" : "Talk to sales"}
-            </Button>
-          )}
-        </div>
-      </Card>
-    ))
+          <p class="mt-4 text-sm text-[var(--muted-text)]">{tier.data.description}</p>
+          <ul class="mt-6 space-y-3 text-sm text-[var(--color-peach-paper-copy)]">
+            {tier.data.features.map((feature: string) => (
+              <li class="flex items-center gap-2">
+                <span class="h-2 w-2 bg-[var(--color-peach-paper-accent)]" />
+                {feature}
+              </li>
+            ))}
+          </ul>
+          <div class="mt-8">
+            {tier.data.highlighted && !tier.data.cta ? (
+              <SuiteDemoButton lang={lang} />
+            ) : (
+              <Button
+                href={isGithubCta ? URLS.GITHUB : localePath(lang, "/contact")}
+                variant={isGithubCta ? "link" : "secondary"}
+                size="md"
+                class={isGithubCta ? "w-full justify-start sm:justify-center" : "w-full justify-center"}
+                external={isGithubCta}
+              >
+                {tier.data.cta}
+              </Button>
+            )}
+          </div>
+        </Card>
+      );
+    })
   }
 </Section>

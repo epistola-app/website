@@ -1,0 +1,12 @@
+type: pricing
+sortOrder: 3
+name: Managed
+price: Custom
+cadence: per month
+description: "Hosted Epistola with SLAs, monitoring, and dedicated environments."
+features:
+  - "SLA-backed hosting"
+  - "Custom connectors"
+  - "Dedicated success engineer"
+cta: Talk to sales
+highlighted: false

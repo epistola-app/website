@@ -1,5 +1,13 @@
 ---
+import { getCollection } from "astro:content";
 import Section from "./ui/section.astro";
+import { t, filterDataByLocale, type Locale, DEFAULT_LOCALE } from "../i18n";
+
+interface Props {
+  lang?: Locale;
+}
+
+const { lang = DEFAULT_LOCALE } = Astro.props;
 
 const nodeLabels: Record<string, string> = {
   user: "Caseworker",
@@ -21,77 +29,37 @@ interface FlowStep {
   payload: string | null;
 }
 
-const steps: FlowStep[] = [
-  {
-    from: "user", to: "gzac",
-    label: "Caseworker starts process",
-    description: "A caseworker initiates a case process in the zaakafhandelsysteem — for example handling an objection (\"bezwaar\").",
-    method: null, action: null, payload: null,
-  },
-  {
-    from: "gzac", to: "dataSource",
-    label: "Collect case data",
-    description: "The zaakafhandelsysteem gathers case data from the ZRC, ZTC, and other configured data sources.",
-    method: "GET", action: "/zaken/BZ-2024-001/eigenschappen",
-    payload: '{ "zaaktype": "bezwaar", "eigenschappen": [...] }',
-  },
-  {
-    from: "gzac", to: "epistola",
-    label: "Request document generation",
-    description: "Plugin sends a generation request to Epistola with the resolved template and all variable data.",
-    method: "POST", action: "/api/v1/documents/generate",
-    payload: '{ "templateId": "bezwaar-v2", "data": { "zaak": "BZ-2024-001", ... } }',
-  },
-  {
-    from: "epistola", to: "tmpStorage",
-    label: "Render and store document",
-    description: "Epistola renders the template with the provided data and stores the resulting PDF in temporary storage.",
-    method: "PUT", action: "/documents/gen-48291.pdf",
-    payload: '{ "contentType": "application/pdf", "size": "142KB" }',
-  },
-  {
-    from: "epistola", to: "notificaties",
-    label: "Publish completion event",
-    description: "Epistola publishes a notification via the Open Notificaties API to signal the document is ready for pickup.",
-    method: "POST", action: "/api/v1/notificaties",
-    payload: '{ "kanaal": "documenten", "hoofdObject": "...", "actie": "create" }',
-  },
-  {
-    from: "notificaties", to: "gzac",
-    label: "EpistolaDocumentGenerated",
-    description: "Open Notificaties delivers the event callback to the zaakafhandelsysteem — the document is ready for pickup.",
-    method: "EVENT", action: "EpistolaDocumentGenerated",
-    payload: '{ "resourceUrl": "/tmp-storage/gen-48291.pdf" }',
-  },
-  {
-    from: "gzac", to: "tmpStorage",
-    label: "Collect document",
-    description: "The zaakafhandelsysteem uses the resource URL from the event to download the generated PDF from temporary storage.",
-    method: "GET", action: "/tmp-storage/gen-48291.pdf",
-    payload: '{ "format": "application/pdf", "bytes": 145291 }',
-  },
-  {
-    from: "gzac", to: "drc",
-    label: "Register in Documenten API",
-    description: "The zaakafhandelsysteem stores the PDF in the Documenten API (DRC), linking it to the original case for archival.",
-    method: "POST", action: "/enkelvoudiginformatieobjecten",
-    payload: '{ "titel": "Besluit op bezwaar", "informatieobjecttype": "besluit" }',
-  },
-  {
-    from: "gzac", to: "user",
-    label: "Document available",
-    description: "The caseworker can now view and download the generated document from within the zaakafhandelsysteem.",
-    method: null, action: null, payload: null,
-  },
+const homepageItems = await getCollection("homepage");
+const archSteps = filterDataByLocale(homepageItems, lang, "architecture-step");
+
+const stepMeta: Omit<FlowStep, "label" | "description">[] = [
+  { from: "user", to: "gzac", method: null, action: null, payload: null },
+  { from: "gzac", to: "dataSource", method: "GET", action: "/zaken/BZ-2024-001/eigenschappen", payload: '{ "zaaktype": "bezwaar", "eigenschappen": [...] }' },
+  { from: "gzac", to: "epistola", method: "POST", action: "/api/v1/documents/generate", payload: '{ "templateId": "bezwaar-v2", "data": { "zaak": "BZ-2024-001", ... } }' },
+  { from: "epistola", to: "tmpStorage", method: "PUT", action: "/documents/gen-48291.pdf", payload: '{ "contentType": "application/pdf", "size": "142KB" }' },
+  { from: "epistola", to: "notificaties", method: "POST", action: "/api/v1/notificaties", payload: '{ "kanaal": "documenten", "hoofdObject": "...", "actie": "create" }' },
+  { from: "notificaties", to: "gzac", method: "EVENT", action: "EpistolaDocumentGenerated", payload: '{ "resourceUrl": "/tmp-storage/gen-48291.pdf" }' },
+  { from: "gzac", to: "tmpStorage", method: "GET", action: "/tmp-storage/gen-48291.pdf", payload: '{ "format": "application/pdf", "bytes": 145291 }' },
+  { from: "gzac", to: "drc", method: "POST", action: "/enkelvoudiginformatieobjecten", payload: '{ "titel": "Besluit op bezwaar", "informatieobjecttype": "besluit" }' },
+  { from: "gzac", to: "user", method: null, action: null, payload: null },
 ];
+
+const steps: FlowStep[] = stepMeta.map((meta, i) => ({
+  ...meta,
+  label: archSteps[i]?.data.label ?? "",
+  description: archSteps[i]?.data.description ?? "",
+}));
+
+const pauseLabel = t(lang, "architectureFlow.controls.pause");
+const playLabel = t(lang, "architectureFlow.controls.play");
 
 /* ── Diagram SVG data (hub-and-spoke, GZAC center) ── */
 /*
-  👤 Caseworker (65, 50)    Open Notificaties (380, 50)
-                    │
-  DRC (65,180) ── GZAC (250,180) ── Epistola (435,180)
-                    │                    │
-       Data Source (160,310)   📂 Temp Storage (380,310)
+  Caseworker (65, 50)    Open Notificaties (380, 50)
+                    |
+  DRC (65,180) -- GZAC (250,180) -- Epistola (435,180)
+                    |                    |
+       Data Source (160,310)   Temp Storage (380,310)
 */
 const DG_VB = { w: 500, h: 360 };
 const DG_NODE = { w: 120, h: 36 };
@@ -120,23 +88,23 @@ const dgEdge = (id: string, side: "top"|"bottom"|"left"|"right") => {
 
 // Wobbly connection paths (slight curves instead of straight lines)
 const dgPaths = [
-  // user → gzac (top-left down to center)
+  // user -> gzac (top-left down to center)
   { id: "user_gzac",            d: "M 85 68 C 135 85, 220 110, 235 162" },
-  // gzac ↓ dataSource (bottom-left)
+  // gzac -> dataSource (bottom-left)
   { id: "gzac_dataSource",      d: "M 232 198 C 222 248, 178 258, 172 292" },
-  // gzac → epistola
+  // gzac -> epistola
   { id: "gzac_epistola",        d: "M 310 180 C 342 177, 348 183, 375 180" },
-  // gzac ← drc
+  // gzac <- drc
   { id: "gzac_drc",             d: "M 190 180 C 162 183, 138 177, 125 180" },
-  // epistola → tmpStorage (bottom-right, curve down)
+  // epistola -> tmpStorage (bottom-right, curve down)
   { id: "epistola_tmpStorage",  d: "M 425 198 C 418 248, 392 258, 387 292" },
-  // epistola → notificaties (top-right, curve up)
+  // epistola -> notificaties (top-right, curve up)
   { id: "epistola_notificaties", d: "M 435 162 C 430 118, 392 82, 387 68" },
-  // notificaties → gzac (arc from top down to center)
+  // notificaties -> gzac (arc from top down to center)
   { id: "notificaties_gzac",    d: "M 345 68 C 310 82, 268 118, 262 162" },
-  // gzac → tmpStorage (curve across to bottom-right)
+  // gzac -> tmpStorage (curve across to bottom-right)
   { id: "gzac_tmpStorage",      d: "M 310 190 C 340 210, 360 260, 370 292" },
-  // gzac → user (center up to top-left)
+  // gzac -> user (center up to top-left)
   { id: "gzac_user",            d: "M 215 162 C 170 140, 80 120, 70 68" },
 ];
 
@@ -159,32 +127,34 @@ const dgNodePositions = dgNodes.map((n, i) => ({
 
 // Step number labels on diagram paths
 const stepPathLabels = [
-  // step 1: user → gzac
+  // step 1: user -> gzac
   { pathId: "user_gzac", x: 175, y: 95 },
-  // step 2: gzac → dataSource
+  // step 2: gzac -> dataSource
   { pathId: "gzac_dataSource", x: 215, y: 248 },
-  // step 3: gzac → epistola
+  // step 3: gzac -> epistola
   { pathId: "gzac_epistola", x: 342, y: 172 },
-  // step 4: epistola → tmpStorage
+  // step 4: epistola -> tmpStorage
   { pathId: "epistola_tmpStorage", x: 412, y: 248 },
-  // step 5: epistola → notificaties
+  // step 5: epistola -> notificaties
   { pathId: "epistola_notificaties", x: 435, y: 118 },
-  // step 6: notificaties → gzac
+  // step 6: notificaties -> gzac
   { pathId: "notificaties_gzac", x: 290, y: 118 },
-  // step 7: gzac → tmpStorage
+  // step 7: gzac -> tmpStorage
   { pathId: "gzac_tmpStorage", x: 345, y: 248 },
-  // step 8: gzac → drc
+  // step 8: gzac -> drc
   { pathId: "gzac_drc", x: 155, y: 172 },
-  // step 9: gzac → user
+  // step 9: gzac -> user
   { pathId: "gzac_user", x: 115, y: 135 },
 ];
 ---
 
 <Section
-  monoTitle="/ How it works"
+  monoTitle={t(lang, "architectureFlow.monoTitle")}
   title="From template to document — watch the data flow."
-  description="Epistola generates documents on demand. Click through the steps or let the animation play to see how data flows between systems."
+  description={t(lang, "architectureFlow.description")}
   data-arch-flow
+  data-pause-label={pauseLabel}
+  data-play-label={playLabel}
 >
   <!-- Two-column layout: timeline left, diagram right -->
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
@@ -243,7 +213,7 @@ const stepPathLabels = [
         <button type="button" data-flow-prev class="flex items-center justify-center w-9 h-9 border border-[var(--color-peach-paper-border)] text-[var(--color-peach-paper-copy)] transition-opacity hover:opacity-80 disabled:opacity-30" aria-label="Previous step">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
-        <button type="button" data-flow-play class="flex items-center justify-center w-10 h-10 border border-[var(--color-peach-paper-accent)] text-[var(--color-peach-paper-accent)] transition-opacity hover:opacity-80" aria-label="Play animation">
+        <button type="button" data-flow-play class="flex items-center justify-center w-10 h-10 border border-[var(--color-peach-paper-accent)] text-[var(--color-peach-paper-accent)] transition-opacity hover:opacity-80" aria-label={playLabel}>
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" data-play-icon><path d="M8 5v14l11-7z"/></svg>
           <svg class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="currentColor" data-pause-icon><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
         </button>
@@ -356,7 +326,7 @@ const stepPathLabels = [
     <button type="button" data-flow-prev class="flex items-center justify-center w-9 h-9 border border-[var(--color-peach-paper-border)] text-[var(--color-peach-paper-copy)] transition-opacity hover:opacity-80 disabled:opacity-30" aria-label="Previous step">
       <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
     </button>
-    <button type="button" data-flow-play class="flex items-center justify-center w-10 h-10 border border-[var(--color-peach-paper-accent)] text-[var(--color-peach-paper-accent)] transition-opacity hover:opacity-80" aria-label="Play animation">
+    <button type="button" data-flow-play class="flex items-center justify-center w-10 h-10 border border-[var(--color-peach-paper-accent)] text-[var(--color-peach-paper-accent)] transition-opacity hover:opacity-80" aria-label={playLabel}>
       <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" data-play-icon><path d="M8 5v14l11-7z"/></svg>
       <svg class="w-4 h-4 hidden" viewBox="0 0 24 24" fill="currentColor" data-pause-icon><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>
     </button>
@@ -542,6 +512,9 @@ const stepPathLabels = [
   var container = document.querySelector("[data-arch-flow]");
   if (!container) return;
 
+  var pauseLabel = container.getAttribute("data-pause-label") || "Pause animation";
+  var playLabel = container.getAttribute("data-play-label") || "Play animation";
+
   var timeline = container.querySelector("[data-flow-timeline]");
   var diagram = container.querySelector("[data-flow-diagram]");
   var playBtns = container.querySelectorAll("[data-flow-play]");
@@ -552,6 +525,7 @@ const stepPathLabels = [
   var pauseIcons = container.querySelectorAll("[data-pause-icon]");
 
   var currentStep = 0;
+  var userInteracted = false;
   var isPlaying = false;
   var stepTimerId = null;
 
@@ -592,7 +566,7 @@ const stepPathLabels = [
     });
 
     var activeEl = timeline.querySelector('[data-step="' + index + '"]');
-    if (activeEl) activeEl.scrollIntoView({ behavior: "smooth", block: "center" });
+    if (activeEl && userInteracted) activeEl.scrollIntoView({ behavior: "smooth", block: "center" });
 
     updateDiagram(index);
     counters.forEach(function (c) { c.textContent = "Step " + (index + 1) + " / " + TOTAL_STEPS; });
@@ -605,7 +579,7 @@ const stepPathLabels = [
     isPlaying = true;
     playIcons.forEach(function (el) { el.classList.add("hidden"); });
     pauseIcons.forEach(function (el) { el.classList.remove("hidden"); });
-    playBtns.forEach(function (el) { el.setAttribute("aria-label", "Pause animation"); });
+    playBtns.forEach(function (el) { el.setAttribute("aria-label", pauseLabel); });
     advance();
   }
 
@@ -613,7 +587,7 @@ const stepPathLabels = [
     isPlaying = false;
     playIcons.forEach(function (el) { el.classList.remove("hidden"); });
     pauseIcons.forEach(function (el) { el.classList.add("hidden"); });
-    playBtns.forEach(function (el) { el.setAttribute("aria-label", "Play animation"); });
+    playBtns.forEach(function (el) { el.setAttribute("aria-label", playLabel); });
     if (stepTimerId) { clearTimeout(stepTimerId); stepTimerId = null; }
   }
 
@@ -659,9 +633,9 @@ const stepPathLabels = [
     });
   }
 
-  playBtns.forEach(function (btn) { btn.addEventListener("click", function () { isPlaying ? pause() : play(); }); });
-  prevBtns.forEach(function (btn) { btn.addEventListener("click", function () { pause(); if (currentStep > 0) showStep(currentStep - 1); }); });
-  nextBtns.forEach(function (btn) { btn.addEventListener("click", function () { pause(); if (currentStep < TOTAL_STEPS - 1) showStep(currentStep + 1); }); });
+  playBtns.forEach(function (btn) { btn.addEventListener("click", function () { userInteracted = true; isPlaying ? pause() : play(); }); });
+  prevBtns.forEach(function (btn) { btn.addEventListener("click", function () { userInteracted = true; pause(); if (currentStep > 0) showStep(currentStep - 1); }); });
+  nextBtns.forEach(function (btn) { btn.addEventListener("click", function () { userInteracted = true; pause(); if (currentStep < TOTAL_STEPS - 1) showStep(currentStep + 1); }); });
 
   showStep(0);
 })();

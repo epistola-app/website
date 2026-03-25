@@ -1,0 +1,8 @@
+type: feature-section
+sortOrder: 5
+badge: Assets
+title: "Tenant-assetbeheer"
+body:
+  - "Upload PNG, JPG, SVG of WebP tot 5 MB via drag-and-drop met automatische thumbnailing."
+  - "Assets leven per tenant met zoek-, verwijder- en directe referenties in de template-editor."
+  - "Raw eindpunten serveren geoptimaliseerde binaries aan de renderer zodat logo's scherp blijven in elke PDF."

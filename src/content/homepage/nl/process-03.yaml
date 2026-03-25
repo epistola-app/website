@@ -1,0 +1,4 @@
+type: process-step
+sortOrder: 3
+title: "Documenten leveren"
+description: "Push afgeronde bestanden naar uw DMS, verstuur naar burgers of koppel terug aan het zaaksysteem."

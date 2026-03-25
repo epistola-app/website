@@ -1,0 +1,16 @@
+type: built-for
+sortOrder: 2
+title: "Render job"
+description: "Epistola resolves schema, selects template version, and renders output."
+inactiveLabel: "Next"
+card:
+  eyebrow: "Current render job"
+  title: "Render job · Besluit"
+  badge: "Rendering"
+stages:
+  - label: "Template"
+    detail: "Resolve schema, pick active version, and lock template assets."
+  - label: "Renderer"
+    detail: "Render with audit logging and checksum hashing."
+  - label: "Artifacts"
+    detail: "Persist PDF/HTML outputs and register storage refs."

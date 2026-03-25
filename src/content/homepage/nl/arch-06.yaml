@@ -1,0 +1,4 @@
+type: architecture-step
+sortOrder: 6
+label: "EpistolaDocumentGenerated"
+description: "Open Notificaties levert de event-callback aan het zaakafhandelsysteem — het document is klaar om op te halen."

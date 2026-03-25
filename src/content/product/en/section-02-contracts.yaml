@@ -1,0 +1,8 @@
+type: feature-section
+sortOrder: 2
+badge: Contracts
+title: "Data schemas and executable examples"
+body:
+  - "Every template ships with a JSON Schema Draft 2020-12 data contract validated pre-render."
+  - "Named example payloads live beside the schema for instant previewing and regression fixtures."
+  - "Schema migrations keep draft versions in sync when fields change between releases."

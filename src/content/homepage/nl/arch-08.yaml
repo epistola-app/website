@@ -1,0 +1,4 @@
+type: architecture-step
+sortOrder: 8
+label: "Registreren in Documenten API"
+description: "Het zaakafhandelsysteem slaat de PDF op in de Documenten API (DRC) en koppelt deze aan de oorspronkelijke zaak voor archivering."

@@ -1,0 +1,4 @@
+type: hero-stats
+sortOrder: 2
+value: "50–200ms"
+label: "Render latency"
