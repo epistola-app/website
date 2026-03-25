@@ -579,7 +579,7 @@ const stepPathLabels = [
     var al = diagram.querySelector('[data-dg-step-label="'+stepIndex+'"]'); if(al) al.setAttribute("data-active","true");
   }
 
-  function showStep(index) {
+  function showStep(index, shouldScroll) {
     if (!timeline) return;
     if (index < 0 || index >= TOTAL_STEPS) return;
     currentStep = index;
@@ -619,7 +619,7 @@ const stepPathLabels = [
 
   function advance() {
     if (!isPlaying) return;
-    showStep(currentStep);
+    showStep(currentStep, true);
     stepTimerId = setTimeout(function () {
       if (!isPlaying) return;
       if (currentStep < TOTAL_STEPS - 1) { currentStep++; advance(); }
@@ -634,7 +634,7 @@ const stepPathLabels = [
     var index = Number(stepEl.getAttribute("data-step"));
     if (isNaN(index)) return;
     pause();
-    showStep(index);
+    showStep(index, true);
   });
 
   // Click on diagram paths or step labels to jump to step
@@ -646,7 +646,7 @@ const stepPathLabels = [
         var pathId = group.getAttribute("data-dg-path-group");
         for (var i = 0; i < stepData.length; i++) {
           if (stepData[i].from && stepData[i].to && (stepData[i].from + "_" + stepData[i].to) === pathId) {
-            pause(); showStep(i); return;
+            pause(); showStep(i, true); return;
           }
         }
       }
@@ -654,7 +654,7 @@ const stepPathLabels = [
       var label = e.target.closest("[data-dg-step-label]");
       if (label) {
         var idx = Number(label.getAttribute("data-dg-step-label"));
-        if (!isNaN(idx)) { pause(); showStep(idx); }
+        if (!isNaN(idx)) { pause(); showStep(idx, true); }
       }
     });
   }
