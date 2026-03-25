@@ -46,3 +46,23 @@ export function localeToOgLocale(locale: Locale): string {
 export function getStaticLocalePaths() {
   return LOCALES.map((lang) => ({ params: { lang } }));
 }
+
+export function filterByLocale<T extends { slug: string; data: { type?: string; sortOrder?: number } }>(
+  items: T[],
+  locale: Locale,
+  type?: string,
+): T[] {
+  return items
+    .filter((item) => item.slug.startsWith(`${locale}/`) && (!type || item.data.type === type))
+    .sort((a, b) => (a.data.sortOrder ?? 0) - (b.data.sortOrder ?? 0));
+}
+
+export function filterDataByLocale<T extends { id: string; data: { type?: string; sortOrder?: number } }>(
+  items: T[],
+  locale: Locale,
+  type?: string,
+): T[] {
+  return items
+    .filter((item) => item.id.startsWith(`${locale}/`) && (!type || item.data.type === type))
+    .sort((a, b) => (a.data.sortOrder ?? 0) - (b.data.sortOrder ?? 0));
+}
