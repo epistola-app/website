@@ -6,11 +6,13 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "check": "astro check",
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@astrojs/check": "^0.9.8",
     "@lucide/astro": "^0.576.0",
     "@tailwindcss/vite": "^4.1.18",
     "altcha": "^2.3.0",
@@ -18,7 +20,8 @@
     "clsx": "^2.1.1",
     "sharp": "^0.34.2",
     "tailwind-merge": "^3.5.0",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "typescript": "^6.0.2"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
