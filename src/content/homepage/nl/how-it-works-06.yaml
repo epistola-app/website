@@ -2,3 +2,4 @@ type: how-it-works
 sortOrder: 6
 title: "Lever"
 body: "Push artifacts via storage adapters of webhooks om de pipeline te voltooien."
+illustration: "/illustrations/how-it-works/step6.svg"

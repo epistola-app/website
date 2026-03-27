@@ -89,6 +89,7 @@ export const collections = {
         sortOrder: z.number(),
         title: z.string(),
         body: z.string(),
+        illustration: z.string(),
       }),
       z.object({
         type: z.literal("why-us"),

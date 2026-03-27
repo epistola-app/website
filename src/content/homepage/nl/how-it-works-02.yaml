@@ -2,3 +2,4 @@ type: how-it-works
 sortOrder: 2
 title: "Ontwerp"
 body: "Sleep blokken in de visuele editor met conditionele logica, loops, en live PDF preview."
+illustration: "/illustrations/how-it-works/step2.svg"

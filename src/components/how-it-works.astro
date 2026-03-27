@@ -12,15 +12,6 @@ const { lang = DEFAULT_LOCALE } = Astro.props;
 
 const items = await getCollection("homepage");
 const steps = filterDataByLocale(items, lang, "how-it-works");
-
-const illustrationPaths = [
-  "/illustrations/how-it-works/step1.svg",
-  "/illustrations/how-it-works/step2.svg",
-  "/illustrations/how-it-works/step3.svg",
-  "/illustrations/how-it-works/step4.svg",
-  "/illustrations/how-it-works/step5.svg",
-  "/illustrations/how-it-works/step6.svg",
-];
 ---
 
 <Section
@@ -50,7 +41,7 @@ const illustrationPaths = [
         <div class:list={["order-1", index % 2 === 0 ? "md:order-2" : "md:order-1"]}>
           <div class="relative aspect-[16/10] w-full overflow-hidden">
             <img
-              src={illustrationPaths[index]}
+              src={step.data.illustration}
               alt={`Illustration for step ${index + 1}: ${step.data.title}`}
               class="h-full w-full object-contain p-4"
               loading="lazy"

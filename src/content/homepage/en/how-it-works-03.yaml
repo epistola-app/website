@@ -2,3 +2,4 @@ type: how-it-works
 sortOrder: 3
 title: "Promote"
 body: "Freeze immutable versions and assign them to staging or production environments."
+illustration: "/illustrations/how-it-works/step3.svg"

@@ -2,3 +2,4 @@ type: how-it-works
 sortOrder: 1
 title: "Model"
 body: "Define input variables per template and manage variants with JSON Schema validation."
+illustration: "/illustrations/how-it-works/step1.svg"
