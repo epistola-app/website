@@ -2,3 +2,4 @@ type: why-us
 sortOrder: 3
 title: "Integrates anywhere"
 copy: "Expose a simple HTTP API so workflow engines like GZAC or Valtimo stay in control."
+illustration: "/illustrations/why-us/step3.svg"
