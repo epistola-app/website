@@ -1,0 +1,5 @@
+type: how-it-works
+sortOrder: 5
+title: "Render"
+body: "Call the REST API or batch jobs to render PDFs in milliseconds."
+illustration: "/illustrations/how-it-works/step5.svg"
