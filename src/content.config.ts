@@ -1,4 +1,5 @@
 import { defineCollection, z } from "astro:content";
+import { DOCS_SECTIONS } from "./config/docs-sections";
 
 const stageSchema = z.object({
   label: z.string(),
@@ -15,15 +16,19 @@ const deepLinkSchema = z.object({
   url: z.string(),
 });
 
+const videoSchema = z.object({
+  videoUrl: z.string().optional(),
+  videoBrief: z.string().optional(),
+  videoCaptions: z.string().optional(),
+});
+
 export const collections = {
   learn: defineCollection({
     type: "content",
     schema: z.object({
       title: z.string(),
-      summary: z.string(),
-      videoUrl: z.string().optional(),
-      videoBrief: z.string().optional(),
-      videoCaptions: z.string().optional(),
+      description: z.string(),
+      ...videoSchema.shape,
       posterImage: z.string().optional(),
       sandboxCheckpointId: z.string().optional(),
       nextUnits: z.array(nextUnitSchema).default([]),
@@ -38,10 +43,8 @@ export const collections = {
     schema: z.object({
       title: z.string(),
       description: z.string(),
-      section: z.enum(["core-concepts", "editor", "generation", "platform"]),
-      videoUrl: z.string().optional(),
-      videoBrief: z.string().optional(),
-      videoCaptions: z.string().optional(),
+      section: z.enum(DOCS_SECTIONS),
+      ...videoSchema.shape,
       sortOrder: z.number(),
     }),
   }),
@@ -51,9 +54,7 @@ export const collections = {
     schema: z.object({
       title: z.string(),
       description: z.string(),
-      videoUrl: z.string().optional(),
-      videoBrief: z.string().optional(),
-      videoCaptions: z.string().optional(),
+      ...videoSchema.shape,
       plugin: z.string(),
       sortOrder: z.number(),
     }),

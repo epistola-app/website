@@ -317,6 +317,9 @@ const nl: Record<TranslationKey, string> = {
 
   "sandbox.cta.tryIt": "Zelf proberen",
 
+  "video.planned": "Video gepland",
+  "video.subtitleLabel": "Nederlands",
+
   "pages.learn.title": "Leren · Epistola",
   "pages.learn.description": "Ontdek Epistola via begeleide inhoud — van eerste template tot productie-deployment.",
   "pages.tour.title": "Interactieve Tour · Epistola",

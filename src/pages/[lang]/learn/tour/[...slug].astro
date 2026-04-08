@@ -4,7 +4,7 @@ import Layout from "../../../../components/layout.astro";
 import ContentUnit from "../../../../components/learn/content-unit.astro";
 import TourNav from "../../../../components/learn/tour-nav.astro";
 import Title from "../../../../components/ui/title.astro";
-import { LOCALES, t, localePath, type Locale } from "../../../../i18n";
+import { LOCALES, stripLocalePrefix, t, localePath, type Locale } from "../../../../i18n";
 
 export async function getStaticPaths() {
   const units = await getCollection("learn");
@@ -12,7 +12,7 @@ export async function getStaticPaths() {
     units
       .filter((unit) => unit.slug.startsWith(`${lang}/`))
       .map((unit) => ({
-        params: { lang, slug: unit.slug.replace(`${lang}/`, "") },
+        params: { lang, slug: stripLocalePrefix(unit.slug, lang) },
         props: { unit },
       }))
   );
@@ -28,7 +28,7 @@ const isExploreMode = Astro.url.searchParams.get("mode") === "explore";
 <Layout
   lang={lang}
   title={`${unit.data.title} · ${t(lang, "learn.title")}`}
-  description={unit.data.summary}
+  description={unit.data.description}
 >
   <div class="pt-32 pb-20">
     <div class="container mx-auto px-4">
@@ -43,7 +43,7 @@ const isExploreMode = Astro.url.searchParams.get("mode") === "explore";
           <Title level={1} class="mb-4 font-black leading-tight">
             {unit.data.title}
           </Title>
-          <p class="text-lg text-[var(--muted-text)]">{unit.data.summary}</p>
+          <p class="text-lg text-[var(--muted-text)]">{unit.data.description}</p>
           {
             unit.data.tags.length > 0 && (
               <div class="mt-4 flex flex-wrap gap-2">

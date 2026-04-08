@@ -4,7 +4,7 @@ import SandboxCta from "./sandbox-cta.astro";
 import ContentUnitCard from "./content-unit-card.astro";
 import Title from "../ui/title.astro";
 import { getCollection } from "astro:content";
-import { filterByLocale, t, type Locale, DEFAULT_LOCALE } from "../../i18n";
+import { filterByLocale, stripLocalePrefix, t, type Locale, DEFAULT_LOCALE } from "../../i18n";
 
 interface NextUnit {
   slug: string;
@@ -34,7 +34,7 @@ const allUnits = await getCollection("learn");
 const localeUnits = filterByLocale(allUnits, lang);
 
 function findUnit(slug: string) {
-  return localeUnits.find((u) => u.slug.replace(`${lang}/`, "") === slug);
+  return localeUnits.find((u) => stripLocalePrefix(u.slug, lang) === slug);
 }
 ---
 
@@ -80,12 +80,12 @@ function findUnit(slug: string) {
               <ContentUnitCard
                 slug={next.slug}
                 title={unit.data.title}
-                summary={unit.data.summary}
+                description={unit.data.description}
                 tags={unit.data.tags}
                 lang={lang}
               />
             ) : (
-              <ContentUnitCard slug={next.slug} title={next.label} summary="" lang={lang} />
+              <ContentUnitCard slug={next.slug} title={next.label} description="" lang={lang} />
             );
           })}
         </div>

@@ -1,6 +1,6 @@
 ---
 title: "Documenten gebruiken in een zaak"
-summary: "Bekijk, download en beheer gegenereerde documenten binnen een Valtimo-zaak met ingebouwde UI-componenten."
+description: "Bekijk, download en beheer gegenereerde documenten binnen een Valtimo-zaak met ingebouwde UI-componenten."
 videoUrl: ""
 videoBrief: "25-second screen recording: open a case in Valtimo, show the documents tab with generated documents listed. Click preview to see the PDF inline. Click download to save it. Show how documents appear alongside case data — the complete case view with generated output."
 posterImage: ""

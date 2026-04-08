@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import { filterByLocale, t, localePath, type Locale, type TranslationKey, DEFAULT_LOCALE } from "../../i18n";
+import { filterByLocale, stripLocalePrefix, t, localePath, type Locale, type TranslationKey, DEFAULT_LOCALE } from "../../i18n";
 
 interface Props {
   lang?: Locale;
@@ -36,7 +36,7 @@ const plugins = [...pluginMap.entries()]
       </h3>
       <ul class="flex flex-col gap-1">
         {plugin.docs.map((doc) => {
-          const slug = doc.slug.replace(`${lang}/`, "");
+          const slug = stripLocalePrefix(doc.slug, lang);
           const isActive = slug === currentSlug;
           return (
             <li>

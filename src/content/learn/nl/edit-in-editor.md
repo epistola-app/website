@@ -1,6 +1,6 @@
 ---
 title: "Bewerk in de visuele editor"
-summary: "Ontwerp uw template met de WYSIWYG-editor — blokken, expressies, live preview en automatisch opslaan."
+description: "Ontwerp uw template met de WYSIWYG-editor — blokken, expressies, live preview en automatisch opslaan."
 videoUrl: ""
 videoBrief: "40-second screen recording: open the visual editor showing the split view. Add a text block with an expression chip (e.g. {{customer.name}}), drag a block to reorder, switch to a different data example to see the preview update live. Show the PDF preview panel rendering in real time."
 posterImage: ""

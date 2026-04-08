@@ -6,7 +6,7 @@ import { t, type Locale, DEFAULT_LOCALE } from "../../i18n";
 interface UnitData {
   slug: string;
   title: string;
-  summary: string;
+  description: string;
   tags: string[];
 }
 
@@ -54,7 +54,7 @@ const allTags = [...new Set(units.flatMap((u) => u.tags))].sort();
             <ContentUnitCard
               slug={unit.slug}
               title={unit.title}
-              summary={unit.summary}
+              description={unit.description}
               tags={unit.tags}
               lang={lang}
             />

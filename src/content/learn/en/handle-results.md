@@ -1,6 +1,6 @@
 ---
 title: "Handle results and errors"
-summary: "How the workflow handles completed documents, failed generations, and fallback behavior."
+description: "How the workflow handles completed documents, failed generations, and fallback behavior."
 videoUrl: ""
 videoBrief: "25-second screen recording: show a running process in Valtimo waiting at the message catch event. The document completes, the process moves forward to the download step. Then show a second scenario where generation fails — the process takes the error boundary path."
 posterImage: ""

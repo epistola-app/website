@@ -1,6 +1,6 @@
 ---
 title: "Maak je eerste template"
-summary: "Doorloop het aanmaken van een documenttemplate, de detailpagina begrijpen en varianten instellen."
+description: "Doorloop het aanmaken van een documenttemplate, de detailpagina begrijpen en varianten instellen."
 videoUrl: ""
 videoBrief: "20-second screen recording: click 'New Template' from the templates list, enter a name, see the template detail page appear with its four tabs (Variants, Deployments, Data Contract, Settings). End on the variant cards view."
 posterImage: ""

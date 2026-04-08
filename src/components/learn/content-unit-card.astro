@@ -7,12 +7,12 @@ import { ArrowRight } from "@lucide/astro";
 interface Props {
   slug: string;
   title: string;
-  summary: string;
+  description: string;
   tags?: string[];
   lang?: Locale;
 }
 
-const { slug, title, summary, tags = [], lang = DEFAULT_LOCALE } = Astro.props;
+const { slug, title, description, tags = [], lang = DEFAULT_LOCALE } = Astro.props;
 const href = localePath(lang, `/learn/tour/${slug}`);
 ---
 
@@ -39,7 +39,7 @@ const href = localePath(lang, `/learn/tour/${slug}`);
       <Title level={3} class="text-lg font-bold transition-colors group-hover:text-[var(--color-peach-paper-accent)]">
         {title}
       </Title>
-      <p class="text-sm text-[var(--muted-text)] line-clamp-2">{summary}</p>
+      <p class="text-sm text-[var(--muted-text)] line-clamp-2">{description}</p>
       <span class="inline-flex items-center gap-1 text-sm font-semibold text-[var(--color-peach-paper-accent)]">
         {t(lang, "learn.readMore")}
         <ArrowRight class="h-4 w-4 transition-transform group-hover:translate-x-0.5" />

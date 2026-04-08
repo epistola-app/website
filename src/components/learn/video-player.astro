@@ -1,7 +1,7 @@
 ---
 import { Play } from "@lucide/astro";
 
-import type { Locale } from "../../i18n";
+import { t, type Locale } from "../../i18n";
 
 interface Props {
   videoUrl?: string;
@@ -31,7 +31,7 @@ const hasBrief = videoBrief && videoBrief.length > 0;
         aria-label={title}
       >
         <source src={videoUrl} type="video/mp4" />
-        {hasCaptions && <track kind="subtitles" src={videoCaptions} srclang={lang} label={lang === "nl" ? "Nederlands" : "English"} default />}
+        {hasCaptions && <track kind="subtitles" src={videoCaptions} srclang={lang} label={t(lang, "video.subtitleLabel")} default />}
       </video>
     </div>
   ) : hasBrief ? (
@@ -42,7 +42,7 @@ const hasBrief = videoBrief && videoBrief.length > 0;
         </div>
         <div class="max-w-md">
           <p class="text-xs font-bold uppercase tracking-wider text-[var(--color-peach-paper-accent)] font-[family-name:var(--font-mono)]">
-            Video planned
+            {t(lang, "video.planned")}
           </p>
           <p class="mt-2 text-sm text-[var(--muted-text)]">{videoBrief}</p>
         </div>

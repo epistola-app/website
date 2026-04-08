@@ -1,6 +1,6 @@
 ---
 title: "What is Epistola?"
-summary: "Discover Epistola — the open-source document generation engine for enterprise teams."
+description: "Discover Epistola — the open-source document generation engine for enterprise teams."
 videoUrl: ""
 videoBrief: "30-second overview: show the Epistola dashboard, a template being opened, a quick edit in the visual editor, and a PDF being generated — conveying the full create-to-output cycle at a glance."
 posterImage: ""

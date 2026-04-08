@@ -1,6 +1,6 @@
 ---
 title: "Van begin tot eind"
-summary: "Een complete doorloop: van een vergunningaanvraag van een burger tot het gegenereerde document in de inbox."
+description: "Een complete doorloop: van een vergunningaanvraag van een burger tot het gegenereerde document in de inbox."
 videoUrl: ""
 videoBrief: "45-second screen recording showing the full flow: a permit application arrives in GZAC, a case worker opens it, reviews the data, the process triggers document generation via Epistola, the PDF appears in the case documents tab, the worker previews it and sends it. End with the citizen receiving the document."
 posterImage: ""

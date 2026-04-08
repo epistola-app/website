@@ -1,6 +1,6 @@
 ---
 title: "Publiceren en deployen"
-summary: "Publiceer een conceptversie, deploy naar omgevingen via de deploymentmatrix en beheer de versielevenscyclus."
+description: "Publiceer een conceptversie, deploy naar omgevingen via de deploymentmatrix en beheer de versielevenscyclus."
 videoUrl: ""
 videoBrief: "25-second screen recording: open the version history, publish a draft version, then switch to the Deployments tab showing the deployment matrix. Select the newly published version in a cell to deploy it to an environment. Show the status updating."
 posterImage: ""

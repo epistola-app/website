@@ -1,6 +1,6 @@
 ---
 title: "Edit in the visual editor"
-summary: "Design your template with the WYSIWYG editor — blocks, expressions, live preview, and autosave."
+description: "Design your template with the WYSIWYG editor — blocks, expressions, live preview, and autosave."
 videoUrl: ""
 videoBrief: "40-second screen recording: open the visual editor showing the split view. Add a text block with an expression chip (e.g. {{customer.name}}), drag a block to reorder, switch to a different data example to see the preview update live. Show the PDF preview panel rendering in real time."
 posterImage: ""

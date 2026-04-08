@@ -315,6 +315,9 @@ const en = {
 
   "sandbox.cta.tryIt": "Try it yourself",
 
+  "video.planned": "Video planned",
+  "video.subtitleLabel": "English",
+
   "pages.learn.title": "Learn · Epistola",
   "pages.learn.description": "Explore Epistola through guided content — from first template to production deployment.",
   "pages.tour.title": "Interactive Tour · Epistola",

@@ -1,6 +1,6 @@
 ---
 title: "Koppelen aan een werkproces"
-summary: "Koppel je Epistola-template aan een GZAC/Valtimo-proces — selecteer een template, map zaakgegevens en configureer variantselectie."
+description: "Koppel je Epistola-template aan een GZAC/Valtimo-proces — selecteer een template, map zaakgegevens en configureer variantselectie."
 videoUrl: ""
 videoBrief: "30-second screen recording: in Valtimo, open a BPMN process, add a service task with the Epistola generate-document action. Select a template, configure variant selection (e.g. attribute-based with language=nl), and map case fields to template data fields using the mapping UI."
 posterImage: ""

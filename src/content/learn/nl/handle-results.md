@@ -1,6 +1,6 @@
 ---
 title: "Resultaten en fouten afhandelen"
-summary: "Hoe het werkproces omgaat met voltooide documenten, mislukte generaties en terugvalgedrag."
+description: "Hoe het werkproces omgaat met voltooide documenten, mislukte generaties en terugvalgedrag."
 videoUrl: ""
 videoBrief: "25-second screen recording: show a running process in Valtimo waiting at the message catch event. The document completes, the process moves forward to the download step. Then show a second scenario where generation fails — the process takes the error boundary path."
 posterImage: ""

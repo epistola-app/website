@@ -1,6 +1,6 @@
 ---
 title: "Connect to a workflow"
-summary: "Link your Epistola template to a GZAC/Valtimo process — select a template, map case data, and configure variant selection."
+description: "Link your Epistola template to a GZAC/Valtimo process — select a template, map case data, and configure variant selection."
 videoUrl: ""
 videoBrief: "30-second screen recording: in Valtimo, open a BPMN process, add a service task with the Epistola generate-document action. Select a template, configure variant selection (e.g. attribute-based with language=nl), and map case fields to template data fields using the mapping UI."
 posterImage: ""

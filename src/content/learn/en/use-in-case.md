@@ -1,6 +1,6 @@
 ---
 title: "Use documents in a case"
-summary: "Preview, download, and manage generated documents within a Valtimo case using built-in UI components."
+description: "Preview, download, and manage generated documents within a Valtimo case using built-in UI components."
 videoUrl: ""
 videoBrief: "25-second screen recording: open a case in Valtimo, show the documents tab with generated documents listed. Click preview to see the PDF inline. Click download to save it. Show how documents appear alongside case data — the complete case view with generated output."
 posterImage: ""

@@ -1,6 +1,6 @@
 ---
 title: "End-to-end scenario"
-summary: "A complete walkthrough: from a citizen's permit application to the generated document arriving in their inbox."
+description: "A complete walkthrough: from a citizen's permit application to the generated document arriving in their inbox."
 videoUrl: ""
 videoBrief: "45-second screen recording showing the full flow: a permit application arrives in GZAC, a case worker opens it, reviews the data, the process triggers document generation via Epistola, the PDF appears in the case documents tab, the worker previews it and sends it. End with the citizen receiving the document."
 posterImage: ""

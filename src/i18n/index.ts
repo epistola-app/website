@@ -24,6 +24,10 @@ export function localePath(locale: Locale, path: string): string {
   return `/${locale}${clean}`;
 }
 
+export function stripLocalePrefix(slug: string, locale: Locale): string {
+  return slug.replace(`${locale}/`, "");
+}
+
 export function getAlternateLocale(locale: Locale): Locale {
   return locale === "nl" ? "en" : "nl";
 }
