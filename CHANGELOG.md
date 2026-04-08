@@ -4,46 +4,30 @@ All notable changes to this project will be documented here.
 
 ## [Unreleased]
 
-### Changed
-
-- Rewrote all 18 documentation pages with accurate, UI-based content describing actual Epistola Suite features.
-- Revised tour flow from 5 to 6 units following the natural user journey: welcome → create template → edit in editor → publish and deploy → explore technical → generate document.
-- Updated sandbox checkpoint configuration with new editor and publish states.
-
 ### Added
 
-- 4 new documentation pages: Data Contracts, Deployment Matrix, Version Comparison, Import & Export (EN + NL).
-- 2 new tour units: "Edit in the visual editor" and "Publish and deploy" (EN + NL).
-- New "Generate a document" tour unit covering API-based document generation (EN + NL).
+- **Learn hub** (`/learn/`) — unified entry point for all educational content with three paths:
+  - **Interactive tour** (`/learn/tour/`) — 8-step guided product walkthrough covering the full story from template design to citizen document delivery
+  - **Suite documentation** (`/learn/suite/`) — 22 reference pages across Core Concepts, Editor, Generation & Output, and Platform sections
+  - **Integration guides** (`/learn/integrations/`) — per-plugin documentation, starting with Valtimo (5 pages)
+- Content collections: `learn` (tour units), `docs` (suite reference), `integrations` (plugin guides) — all bilingual EN + NL
+- Video placeholder system with `videoBrief` field describing what each video should show, rendered as dashed cards until real video URLs are added
+- Subtitle/caption support via `videoCaptions` field (WebVTT) with locale-aware `srclang`
+- Sandbox CTA component resolving checkpoint IDs to demo launch URLs
+- Automatic reverse linking: docs pages show "See this in action" links to tour units that reference them
+- Work-in-progress banner at top of site
+- Reusable components: `VideoPlayer`, `SandboxCta`, `ContentUnitCard`, `ContentUnit`, `TourNav`, `LearnIndex`, `DocsNav`, `DocsPage`, `IntegrationsNav`, `IntegrationsPage`
+
+### Changed
+
+- Site navigation reordered: Platform → Integrations → Learn → Pricing → Company → Blog → Contact
+- "About" renamed to "Company" in navigation
+- Marketing integrations page (`/integrations/`) now links to integration guides under `/learn/integrations/`
+- Homepage hero CTAs updated to link to Learn hub and tour
 
 ### Removed
 
-- "Add a workflow" tour unit (replaced by "Edit in the visual editor").
-
-### Previously added
-
-- Documentation system with 18 reference pages across 4 sections (Core Concepts, Editor, Generation & Output, Platform) in both English and Dutch.
-  - New `docs` content collection with schema (title, description, section, sortOrder).
-  - `DocsNav` sidebar navigation component grouped by section.
-  - `DocsPage` layout wrapper with sticky sidebar and content area.
-  - Docs index page (`/[lang]/docs/`) with section-grouped card grid.
-  - Individual docs pages (`/[lang]/docs/[slug]`) with sidebar navigation.
-  - i18n translation keys for docs section names and navigation labels.
-- `deepLinks` field on learn content collection, linking tour units to related docs pages.
-  - All 5 learn units updated with deep links to relevant documentation.
-  - "Learn more" section rendered at the bottom of each learn unit.
-
-- Interactive product introduction system with guided tour and learn pages.
-  - New `learn` content collection with schema for content units (title, summary, video, sandbox checkpoint, next-unit branching, tags).
-  - 5 placeholder content units in English and Dutch: welcome, create-template, add-workflow, generate-document, explore-technical.
-  - Sandbox checkpoint config mapping checkpoint IDs to demo launch URLs.
-  - 6 new components: `VideoPlayer`, `SandboxCta`, `ContentUnitCard`, `ContentUnit`, `TourNav`, `LearnIndex`.
-  - Learn index page (`/[lang]/learn/`) with tag-based filtering.
-  - Learn detail page (`/[lang]/learn/[slug]`) with docs mode and explore mode (`?mode=explore`).
-  - Tour entry page (`/[lang]/tour/`) that redirects to the first content unit in explore mode.
-  - "Start interactive tour" CTA button added to the homepage hero.
-  - "Learn" link added to the header navigation.
-  - i18n translation keys for learn/tour UI strings in both English and Dutch.
+- Separate `/docs/` and `/tour/` top-level routes (consolidated under `/learn/`)
 
 - Client-side browser language detection on root page (redirects to `/en/` or `/nl/` based on `navigator.language`).
 - `@astrojs/sitemap` integration for automatic sitemap generation.
