@@ -262,6 +262,7 @@ const nl: Record<TranslationKey, string> = {
   "docs.nav.title": "Documentatie",
   "docs.learnMore": "Meer lezen",
   "docs.backToDocs": "← Terug naar Documentatie",
+  "docs.seeInAction": "Bekijk dit in actie",
 
   "privacy.eyebrow": "Privacy",
   "privacy.title": "Hoe wij met data omgaan",

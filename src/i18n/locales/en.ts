@@ -260,6 +260,7 @@ const en = {
   "docs.nav.title": "Documentation",
   "docs.learnMore": "Learn more",
   "docs.backToDocs": "← Back to Documentation",
+  "docs.seeInAction": "See this in action",
 
   "privacy.eyebrow": "Privacy",
   "privacy.title": "How we handle data",
