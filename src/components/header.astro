@@ -107,3 +107,17 @@ const langSwitchHref = localePath(altLang, currentPathWithoutLang);
     </dialog>
   </nav>
 </header>
+
+<script>
+  const toggle = document.getElementById("nav-toggle");
+  const close = document.getElementById("nav-close");
+  const dialog = document.getElementById("mobile-nav") as HTMLDialogElement | null;
+
+  if (toggle && dialog && !("CommandEvent" in window)) {
+    toggle.addEventListener("click", () => dialog.showModal());
+    close?.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+  }
+</script>
