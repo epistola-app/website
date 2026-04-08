@@ -8,6 +8,13 @@ nextUnits:
     label: "Back to start"
   - slug: "create-template"
     label: "Create a template"
+deepLinks:
+  - label: "API Overview"
+    url: "/en/docs/api-overview"
+  - label: "Multi-tenancy"
+    url: "/en/docs/multi-tenancy"
+  - label: "Rendering"
+    url: "/en/docs/rendering"
 tags:
   - technical
 sortOrder: 5

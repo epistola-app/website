@@ -9,6 +9,15 @@ nextUnits:
     label: "Add a workflow"
   - slug: "generate-document"
     label: "Generate a document"
+deepLinks:
+  - label: "Templates"
+    url: "/en/docs/templates"
+  - label: "Variants"
+    url: "/en/docs/variants"
+  - label: "Editor Overview"
+    url: "/en/docs/editor-overview"
+  - label: "Block Types"
+    url: "/en/docs/block-types"
 tags:
   - getting-started
 sortOrder: 2

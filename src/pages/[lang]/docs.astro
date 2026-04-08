@@ -1,13 +1,21 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../../components/layout.astro";
-import Button from "../../components/ui/button.astro";
-import Card from "../../components/ui/card.astro";
 import Title from "../../components/ui/title.astro";
-import { BookOpen } from "@lucide/astro";
-import { getStaticLocalePaths, t, localePath, type Locale } from "../../i18n";
+import { getStaticLocalePaths, t, localePath, filterByLocale, type Locale } from "../../i18n";
 
 export const getStaticPaths = getStaticLocalePaths;
 const lang = Astro.params.lang as Locale;
+
+const allDocs = await getCollection("docs");
+const localeDocs = filterByLocale(allDocs, lang);
+
+const sections = [
+  { key: "core-concepts" as const, docs: localeDocs.filter((d) => d.data.section === "core-concepts") },
+  { key: "editor" as const, docs: localeDocs.filter((d) => d.data.section === "editor") },
+  { key: "generation" as const, docs: localeDocs.filter((d) => d.data.section === "generation") },
+  { key: "platform" as const, docs: localeDocs.filter((d) => d.data.section === "platform") },
+];
 ---
 
 <Layout
@@ -27,16 +35,33 @@ const lang = Astro.params.lang as Locale;
 
   <section class="pb-24">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <Card variant="brand" radius="3xl" shadow="md" padding="lg" class="mx-auto max-w-2xl text-center">
-        <BookOpen class="w-10 h-10 mx-auto text-[var(--color-peach-paper-accent)]" />
-        <Title level={2} class="mt-4 text-xl">{t(lang, "docs.card.title")}</Title>
-        <p class="mt-2 text-[var(--color-peach-paper-copy)]">
-          {t(lang, "docs.card.description")}
-        </p>
-        <div class="mt-6">
-          <Button href={localePath(lang, "/demo")} variant="primary" size="md">{t(lang, "docs.card.cta")}</Button>
-        </div>
-      </Card>
+      <div class="mx-auto max-w-4xl space-y-12">
+        {sections.map((section) => (
+          <div>
+            <h2 class="mb-4 text-xs font-bold uppercase tracking-wider text-[var(--muted-text)] font-[family-name:var(--font-mono)]">
+              {t(lang, `docs.section.${section.key}`)}
+            </h2>
+            <div class="grid gap-4 sm:grid-cols-2">
+              {section.docs.map((doc) => {
+                const slug = doc.slug.replace(`${lang}/`, "");
+                return (
+                  <a
+                    href={localePath(lang, `/docs/${slug}`)}
+                    class="group block rounded-xl border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-surface)] p-5 transition-colors hover:border-[var(--color-peach-paper-border-strong)] hover:bg-[var(--color-peach-paper-surface-soft)]"
+                  >
+                    <h3 class="font-semibold text-[var(--color-peach-paper-heading)] group-hover:text-[var(--color-peach-paper-accent)]">
+                      {doc.data.title}
+                    </h3>
+                    <p class="mt-1 text-sm text-[var(--muted-text)]">
+                      {doc.data.description}
+                    </p>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 </Layout>

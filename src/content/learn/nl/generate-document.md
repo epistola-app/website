@@ -9,6 +9,13 @@ nextUnits:
     label: "Technische architectuur"
   - slug: "welcome"
     label: "Terug naar start"
+deepLinks:
+  - label: "Documentgeneratie"
+    url: "/nl/docs/document-generation"
+  - label: "Jobs"
+    url: "/nl/docs/jobs"
+  - label: "Rendering"
+    url: "/nl/docs/rendering"
 tags:
   - getting-started
 sortOrder: 4

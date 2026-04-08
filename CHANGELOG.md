@@ -6,6 +6,17 @@ All notable changes to this project will be documented here.
 
 ### Added
 
+- Documentation system with 18 reference pages across 4 sections (Core Concepts, Editor, Generation & Output, Platform) in both English and Dutch.
+  - New `docs` content collection with schema (title, description, section, sortOrder).
+  - `DocsNav` sidebar navigation component grouped by section.
+  - `DocsPage` layout wrapper with sticky sidebar and content area.
+  - Docs index page (`/[lang]/docs/`) with section-grouped card grid.
+  - Individual docs pages (`/[lang]/docs/[slug]`) with sidebar navigation.
+  - i18n translation keys for docs section names and navigation labels.
+- `deepLinks` field on learn content collection, linking tour units to related docs pages.
+  - All 5 learn units updated with deep links to relevant documentation.
+  - "Learn more" section rendered at the bottom of each learn unit.
+
 - Interactive product introduction system with guided tour and learn pages.
   - New `learn` content collection with schema for content units (title, summary, video, sandbox checkpoint, next-unit branching, tags).
   - 5 placeholder content units in English and Dutch: welcome, create-template, add-workflow, generate-document, explore-technical.

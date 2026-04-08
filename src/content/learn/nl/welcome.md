@@ -9,6 +9,13 @@ nextUnits:
     label: "Maak je eerste template"
   - slug: "explore-technical"
     label: "Technisch overzicht"
+deepLinks:
+  - label: "Templates"
+    url: "/nl/docs/templates"
+  - label: "Versies"
+    url: "/nl/docs/versions"
+  - label: "Multi-tenancy"
+    url: "/nl/docs/multi-tenancy"
 tags:
   - getting-started
   - business

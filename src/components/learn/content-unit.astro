@@ -11,16 +11,22 @@ interface NextUnit {
   label: string;
 }
 
+interface DeepLink {
+  label: string;
+  url: string;
+}
+
 interface Props {
   title: string;
   videoUrl?: string;
   posterImage?: string;
   sandboxCheckpointId?: string;
   nextUnits?: NextUnit[];
+  deepLinks?: DeepLink[];
   lang?: Locale;
 }
 
-const { title, videoUrl, posterImage, sandboxCheckpointId, nextUnits = [], lang = DEFAULT_LOCALE } = Astro.props;
+const { title, videoUrl, posterImage, sandboxCheckpointId, nextUnits = [], deepLinks = [], lang = DEFAULT_LOCALE } = Astro.props;
 
 const allUnits = await getCollection("learn");
 const localeUnits = filterByLocale(allUnits, lang);
@@ -38,6 +44,26 @@ function findUnit(slug: string) {
   </div>
 
   <SandboxCta checkpointId={sandboxCheckpointId} lang={lang} />
+
+  {
+    deepLinks.length > 0 && (
+      <div class="flex flex-col gap-3">
+        <Title level={3} class="text-xl font-bold">
+          {t(lang, "docs.learnMore")}
+        </Title>
+        <div class="flex flex-wrap gap-2">
+          {deepLinks.map((link) => (
+            <a
+              href={link.url}
+              class="inline-flex items-center gap-1.5 rounded-md border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-surface)] px-3 py-1.5 text-sm font-medium text-[var(--color-peach-paper-accent)] transition-colors hover:border-[var(--color-peach-paper-border-strong)] hover:bg-[var(--color-peach-paper-surface-soft)]"
+            >
+              {link.label} &rarr;
+            </a>
+          ))}
+        </div>
+      </div>
+    )
+  }
 
   {
     nextUnits.length > 0 && (

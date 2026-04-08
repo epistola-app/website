@@ -9,6 +9,13 @@ nextUnits:
     label: "Technical architecture"
   - slug: "welcome"
     label: "Back to start"
+deepLinks:
+  - label: "Document Generation"
+    url: "/en/docs/document-generation"
+  - label: "Jobs"
+    url: "/en/docs/jobs"
+  - label: "Rendering"
+    url: "/en/docs/rendering"
 tags:
   - getting-started
 sortOrder: 4

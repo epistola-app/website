@@ -63,6 +63,7 @@ const isExploreMode = Astro.url.searchParams.get("mode") === "explore";
           posterImage={unit.data.posterImage}
           sandboxCheckpointId={unit.data.sandboxCheckpointId}
           nextUnits={isExploreMode ? [] : unit.data.nextUnits}
+          deepLinks={unit.data.deepLinks}
           lang={lang}
         >
           <Content />

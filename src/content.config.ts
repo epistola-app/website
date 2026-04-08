@@ -10,6 +10,11 @@ const nextUnitSchema = z.object({
   label: z.string(),
 });
 
+const deepLinkSchema = z.object({
+  label: z.string(),
+  url: z.string(),
+});
+
 export const collections = {
   learn: defineCollection({
     type: "content",
@@ -20,7 +25,18 @@ export const collections = {
       posterImage: z.string().optional(),
       sandboxCheckpointId: z.string().optional(),
       nextUnits: z.array(nextUnitSchema).default([]),
+      deepLinks: z.array(deepLinkSchema).default([]),
       tags: z.array(z.string()).default([]),
+      sortOrder: z.number(),
+    }),
+  }),
+
+  docs: defineCollection({
+    type: "content",
+    schema: z.object({
+      title: z.string(),
+      description: z.string(),
+      section: z.enum(["core-concepts", "editor", "generation", "platform"]),
       sortOrder: z.number(),
     }),
   }),

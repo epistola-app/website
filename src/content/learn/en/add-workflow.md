@@ -7,6 +7,11 @@ sandboxCheckpointId: "workflow-created"
 nextUnits:
   - slug: "generate-document"
     label: "Generate a document"
+deepLinks:
+  - label: "API Overview"
+    url: "/en/docs/api-overview"
+  - label: "Environments"
+    url: "/en/docs/environments"
 tags:
   - getting-started
   - technical

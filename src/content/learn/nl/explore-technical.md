@@ -8,6 +8,13 @@ nextUnits:
     label: "Terug naar start"
   - slug: "create-template"
     label: "Maak een template"
+deepLinks:
+  - label: "API-overzicht"
+    url: "/nl/docs/api-overview"
+  - label: "Multi-tenancy"
+    url: "/nl/docs/multi-tenancy"
+  - label: "Rendering"
+    url: "/nl/docs/rendering"
 tags:
   - technical
 sortOrder: 5
