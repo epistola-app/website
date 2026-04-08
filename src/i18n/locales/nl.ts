@@ -264,6 +264,13 @@ const nl: Record<TranslationKey, string> = {
   "docs.backToDocs": "← Terug naar Documentatie",
   "docs.seeInAction": "Bekijk dit in actie",
 
+  "integrationDocs.eyebrow": "Integratiegidsen",
+  "integrationDocs.title": "Integratiedocumentatie",
+  "integrationDocs.description": "Handleidingen voor het koppelen van Epistola aan workflow-engines en platformen.",
+  "integrationDocs.nav.title": "Integratiedocs",
+  "integrationDocs.backToIntegrations": "← Terug naar Integraties",
+  "integrationDocs.plugin.valtimo": "Valtimo Plugin",
+
   "privacy.eyebrow": "Privacy",
   "privacy.title": "Hoe wij met data omgaan",
   "privacy.intro": "Epistola is een open-source renderer. Wanneer u zelf host, behoudt uw organisatie volledige controle over alle data. De volgende details beschrijven hoe wij informatie behandelen voor onze publieke website, demo-omgeving en optionele managed service.",

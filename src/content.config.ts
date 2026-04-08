@@ -41,6 +41,16 @@ export const collections = {
     }),
   }),
 
+  integrations: defineCollection({
+    type: "content",
+    schema: z.object({
+      title: z.string(),
+      description: z.string(),
+      plugin: z.string(),
+      sortOrder: z.number(),
+    }),
+  }),
+
   blog: defineCollection({
     type: "content",
     schema: z.object({

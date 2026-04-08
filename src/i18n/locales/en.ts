@@ -262,6 +262,13 @@ const en = {
   "docs.backToDocs": "← Back to Documentation",
   "docs.seeInAction": "See this in action",
 
+  "integrationDocs.eyebrow": "Integration Guides",
+  "integrationDocs.title": "Integration Documentation",
+  "integrationDocs.description": "Guides for connecting Epistola to workflow engines and platforms.",
+  "integrationDocs.nav.title": "Integration Docs",
+  "integrationDocs.backToIntegrations": "← Back to Integrations",
+  "integrationDocs.plugin.valtimo": "Valtimo Plugin",
+
   "privacy.eyebrow": "Privacy",
   "privacy.title": "How we handle data",
   "privacy.intro": "Epistola is an open-source renderer. When you self-host it, your organization remains in full control of all data. The following details cover how we treat information for our public website, demo environment, and optional managed service.",
