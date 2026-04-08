@@ -8,8 +8,6 @@ sandboxCheckpointId: "editor-open"
 nextUnits:
   - slug: "publish-and-deploy"
     label: "Publish and deploy"
-  - slug: "explore-technical"
-    label: "Learn about expressions"
 deepLinks:
   - label: "Editor Overview"
     url: "/en/learn/suite/editor-overview"

@@ -31,8 +31,8 @@ Je kunt het te genereren template op drie manieren selecteren:
 
 ## Datamapping
 
-De datamapping verbindt zaak- en procesgegevens met het datacontract van het template. Zie [Datamapping](/nl/integrations/valtimo-data-mapping) voor de volledige referentie.
+De datamapping verbindt zaak- en procesgegevens met het datacontract van het template. Zie [Datamapping](/nl/learn/integrations/valtimo-data-mapping) voor de volledige referentie.
 
 ## Wat er na verzending gebeurt
 
-De actie retourneert direct met een verzoek-ID. De daadwerkelijke documentgeneratie vindt asynchroon plaats. Gebruik een BPMN-berichtvangstgebeurtenis om op voltooiing te wachten — zie [Async Patronen](/nl/integrations/valtimo-async-patterns).
+De actie retourneert direct met een verzoek-ID. De daadwerkelijke documentgeneratie vindt asynchroon plaats. Gebruik een BPMN-berichtvangstgebeurtenis om op voltooiing te wachten — zie [Async Patronen](/nl/learn/integrations/valtimo-async-patterns).

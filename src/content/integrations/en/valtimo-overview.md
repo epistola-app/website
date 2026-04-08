@@ -31,7 +31,7 @@ These actions can be composed in any BPMN process to generate documents at the r
 
 ## Related documentation
 
-- [Configuration](/en/integrations/valtimo-configuration) — set up the plugin connection
-- [Document Generation Action](/en/integrations/valtimo-generate-action) — configure the main BPMN action
-- [Data Mapping](/en/integrations/valtimo-data-mapping) — map case data to template fields
-- [Async Patterns & BPMN](/en/integrations/valtimo-async-patterns) — recommended process patterns
+- [Configuration](/en/learn/integrations/valtimo-configuration) — set up the plugin connection
+- [Document Generation Action](/en/learn/integrations/valtimo-generate-action) — configure the main BPMN action
+- [Data Mapping](/en/learn/integrations/valtimo-data-mapping) — map case data to template fields
+- [Async Patterns & BPMN](/en/learn/integrations/valtimo-async-patterns) — recommended process patterns

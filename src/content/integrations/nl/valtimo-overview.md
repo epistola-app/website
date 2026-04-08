@@ -31,7 +31,7 @@ Deze acties kunnen in elk BPMN-proces worden gecombineerd om documenten op het j
 
 ## Gerelateerde documentatie
 
-- [Configuratie](/nl/integrations/valtimo-configuration) — stel de pluginverbinding in
-- [Documentgeneratieactie](/nl/integrations/valtimo-generate-action) — configureer de belangrijkste BPMN-actie
-- [Datamapping](/nl/integrations/valtimo-data-mapping) — koppel zaakgegevens aan templatevelden
-- [Async Patronen & BPMN](/nl/integrations/valtimo-async-patterns) — aanbevolen procespatronen
+- [Configuratie](/nl/learn/integrations/valtimo-configuration) — stel de pluginverbinding in
+- [Documentgeneratieactie](/nl/learn/integrations/valtimo-generate-action) — configureer de belangrijkste BPMN-actie
+- [Datamapping](/nl/learn/integrations/valtimo-data-mapping) — koppel zaakgegevens aan templatevelden
+- [Async Patronen & BPMN](/nl/learn/integrations/valtimo-async-patterns) — aanbevolen procespatronen

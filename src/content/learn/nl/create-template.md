@@ -8,8 +8,6 @@ sandboxCheckpointId: "template-created"
 nextUnits:
   - slug: "edit-in-editor"
     label: "Bewerk in de visuele editor"
-  - slug: "explore-technical"
-    label: "Varianten instellen"
 deepLinks:
   - label: "Templates"
     url: "/nl/learn/suite/templates"

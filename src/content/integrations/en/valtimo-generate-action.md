@@ -31,8 +31,8 @@ You can select the template to generate in three ways:
 
 ## Data mapping
 
-The data mapping connects case and process data to the template's data contract. See [Data Mapping](/en/integrations/valtimo-data-mapping) for the full reference.
+The data mapping connects case and process data to the template's data contract. See [Data Mapping](/en/learn/integrations/valtimo-data-mapping) for the full reference.
 
 ## What happens after submission
 
-The action returns immediately with a request ID. The actual document generation happens asynchronously. Use a BPMN message catch event to wait for completion — see [Async Patterns](/en/integrations/valtimo-async-patterns).
+The action returns immediately with a request ID. The actual document generation happens asynchronously. Use a BPMN message catch event to wait for completion — see [Async Patterns](/en/learn/integrations/valtimo-async-patterns).

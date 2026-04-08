@@ -8,8 +8,6 @@ sandboxCheckpointId: "template-created"
 nextUnits:
   - slug: "edit-in-editor"
     label: "Edit in the visual editor"
-  - slug: "explore-technical"
-    label: "Set up variants"
 deepLinks:
   - label: "Templates"
     url: "/en/learn/suite/templates"

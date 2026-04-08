@@ -32,4 +32,4 @@ De API-sleutel wordt opgeslagen via Valtimo's secretbeheer — deze wordt nooit 
 
 ## Volgende stappen
 
-- [Documentgeneratieactie](/nl/integrations/valtimo-generate-action) — configureer de belangrijkste BPMN-actie
+- [Documentgeneratieactie](/nl/learn/integrations/valtimo-generate-action) — configureer de belangrijkste BPMN-actie

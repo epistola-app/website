@@ -32,4 +32,4 @@ The API key is stored using Valtimo's secret management — it is never exposed 
 
 ## Next steps
 
-- [Document Generation Action](/en/integrations/valtimo-generate-action) — configure the main BPMN action
+- [Document Generation Action](/en/learn/integrations/valtimo-generate-action) — configure the main BPMN action
