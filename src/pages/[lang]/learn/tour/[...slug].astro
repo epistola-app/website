@@ -60,6 +60,8 @@ const isExploreMode = Astro.url.searchParams.get("mode") === "explore";
         <ContentUnit
           title={unit.data.title}
           videoUrl={unit.data.videoUrl}
+          videoBrief={unit.data.videoBrief}
+          videoCaptions={unit.data.videoCaptions}
           posterImage={unit.data.posterImage}
           sandboxCheckpointId={unit.data.sandboxCheckpointId}
           nextUnits={isExploreMode ? [] : unit.data.nextUnits}

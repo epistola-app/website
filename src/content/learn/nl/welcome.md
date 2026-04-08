@@ -2,6 +2,7 @@
 title: "Wat is Epistola?"
 summary: "Ontdek Epistola — de open-source documentgeneratie-engine voor enterprise teams."
 videoUrl: ""
+videoBrief: "30-second overview: show the Epistola dashboard, a template being opened, a quick edit in the visual editor, and a PDF being generated — conveying the full create-to-output cycle at a glance."
 posterImage: ""
 sandboxCheckpointId: "blank-workspace"
 nextUnits:

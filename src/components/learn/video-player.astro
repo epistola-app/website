@@ -1,13 +1,22 @@
 ---
+import { Play } from "@lucide/astro";
+
+import type { Locale } from "../../i18n";
+
 interface Props {
   videoUrl?: string;
+  videoBrief?: string;
+  videoCaptions?: string;
   posterImage?: string;
   title: string;
+  lang?: Locale;
 }
 
-const { videoUrl, posterImage, title } = Astro.props;
+const { videoUrl, videoBrief, videoCaptions, posterImage, title, lang = "en" } = Astro.props;
 const hasVideo = videoUrl && videoUrl.length > 0;
+const hasCaptions = videoCaptions && videoCaptions.length > 0;
 const hasPoster = posterImage && posterImage.length > 0;
+const hasBrief = videoBrief && videoBrief.length > 0;
 ---
 
 {
@@ -22,7 +31,22 @@ const hasPoster = posterImage && posterImage.length > 0;
         aria-label={title}
       >
         <source src={videoUrl} type="video/mp4" />
+        {hasCaptions && <track kind="subtitles" src={videoCaptions} srclang={lang} label={lang === "nl" ? "Nederlands" : "English"} default />}
       </video>
+    </div>
+  ) : hasBrief ? (
+    <div class="relative aspect-video w-full overflow-hidden rounded-none border border-dashed border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-surface)]">
+      <div class="absolute inset-0 flex flex-col items-center justify-center gap-4 p-8 text-center">
+        <div class="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--color-peach-paper-chip-bg)]">
+          <Play class="h-5 w-5 text-[var(--color-peach-paper-accent)]" />
+        </div>
+        <div class="max-w-md">
+          <p class="text-xs font-bold uppercase tracking-wider text-[var(--color-peach-paper-accent)] font-[family-name:var(--font-mono)]">
+            Video planned
+          </p>
+          <p class="mt-2 text-sm text-[var(--muted-text)]">{videoBrief}</p>
+        </div>
+      </div>
     </div>
   ) : hasPoster ? (
     <div class="relative aspect-video w-full overflow-hidden rounded-none border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-surface)]">

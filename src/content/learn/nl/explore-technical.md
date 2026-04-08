@@ -2,6 +2,7 @@
 title: "Technische architectuur"
 summary: "Begrijp hoe Epistola is gebouwd — van de editor tot de render-engine."
 videoUrl: ""
+videoBrief: "30-second animated diagram or screen recording: show the architecture flow — API request comes in, variant resolution picks the right template, the iText engine renders a PDF, the response goes back. Optionally show the multi-tenant isolation and environment concept."
 posterImage: ""
 nextUnits:
   - slug: "welcome"

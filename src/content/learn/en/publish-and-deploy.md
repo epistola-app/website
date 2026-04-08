@@ -2,6 +2,7 @@
 title: "Publish and deploy"
 summary: "Publish a draft version, deploy to environments via the deployment matrix, and manage the version lifecycle."
 videoUrl: ""
+videoBrief: "25-second screen recording: open the version history, publish a draft version, then switch to the Deployments tab showing the deployment matrix. Select the newly published version in a cell to deploy it to an environment. Show the status updating."
 posterImage: ""
 sandboxCheckpointId: "version-published"
 nextUnits:

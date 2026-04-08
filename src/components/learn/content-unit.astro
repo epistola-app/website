@@ -19,6 +19,8 @@ interface DeepLink {
 interface Props {
   title: string;
   videoUrl?: string;
+  videoBrief?: string;
+  videoCaptions?: string;
   posterImage?: string;
   sandboxCheckpointId?: string;
   nextUnits?: NextUnit[];
@@ -26,7 +28,7 @@ interface Props {
   lang?: Locale;
 }
 
-const { title, videoUrl, posterImage, sandboxCheckpointId, nextUnits = [], deepLinks = [], lang = DEFAULT_LOCALE } = Astro.props;
+const { title, videoUrl, videoBrief, videoCaptions, posterImage, sandboxCheckpointId, nextUnits = [], deepLinks = [], lang = DEFAULT_LOCALE } = Astro.props;
 
 const allUnits = await getCollection("learn");
 const localeUnits = filterByLocale(allUnits, lang);
@@ -37,7 +39,7 @@ function findUnit(slug: string) {
 ---
 
 <article class="flex flex-col gap-8">
-  <VideoPlayer videoUrl={videoUrl} posterImage={posterImage} title={title} />
+  <VideoPlayer videoUrl={videoUrl} videoBrief={videoBrief} videoCaptions={videoCaptions} posterImage={posterImage} title={title} lang={lang} />
 
   <div class="prose prose-lg dark:prose-invert max-w-none">
     <slot />

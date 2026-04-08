@@ -2,6 +2,7 @@
 title: "Genereer een document"
 summary: "Genereer documenten via de API — synchrone preview, asynchrone generatie, batchjobs en variantresolutie."
 videoUrl: ""
+videoBrief: "25-second screen recording: send a generation request via the API docs page or a curl command, show the job appearing in the generation history dashboard, then download and open the resulting PDF."
 posterImage: ""
 sandboxCheckpointId: "document-generated"
 nextUnits:
