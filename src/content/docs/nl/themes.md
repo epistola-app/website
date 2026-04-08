@@ -1,42 +1,40 @@
 ---
 title: "Thema's"
-description: "Stijldefinities, pagina-instellingen, de stijlcascade en themaselectie."
+description: "Herbruikbare stijldefinities met documentstijlen, pagina-instellingen, blokstijlpresets en een meervoudige stijlcascade."
 section: "core-concepts"
-sortOrder: 5
+sortOrder: 8
 ---
 
 ## Thema's
 
-Thema's definiëren de visuele opmaak van documenten — lettertypen, kleuren, tussenruimtes, paginadimensies en meer. Ze cascaderen van tenant naar template naar variant.
+Thema's zijn herbruikbare stijldefinities die gedeeld worden over templates. Een thema bepaalt hoe documenten eruitzien — van typografie en kleuren tot paginadimensies en blokformattering.
 
-### Stijldefinities
+### Wat een thema bevat
 
-Een thema omvat:
-
-- **Typografie** — Lettertypefamilies, groottes, regelhoogtes
-- **Kleuren** — Tekst-, accent-, rand- en achtergrondkleuren
-- **Pagina-instellingen** — Papierformaat, marges, oriëntatie
-- **Tussenruimtes** — Sectiespacing, alineaspacing, lijstinspringing
-
-### Pagina-instellingen
-
-Thema's bepalen fysieke pagina-eigenschappen:
-
-- Papierformaat (A4, Letter, aangepast)
-- Marges (boven, onder, links, rechts)
-- Oriëntatie (staand, liggend)
-- Kop- en voettekstdimensies
+- **Documentstijlen** — Typografie (lettertypefamilies, groottes, regelhoogtes), kleuren (tekst, accent, rand, achtergrond) en uitlijningsstandaarden
+- **Pagina-instellingen** — Papierformaat (A4, Letter, etc.), oriëntatie (staand, liggend) en marges (boven, onder, links, rechts)
+- **Blokstijlpresets** — Benoemde stijlsets per bloktype, voor consistente opmaak over blokken van hetzelfde type
+- **Spacing-eenheid** — Een basiseenheid in punten die gebruikt wordt om consistente spacing door het hele document af te leiden
 
 ### Stijlcascade
 
-Thema's cascaderen door drie niveaus:
+Stijlen worden opgelost via een vierniveau-cascade:
 
-1. **Tenantstandaard** — Basisthema toegepast op alle templates binnen een tenant
-2. **Templateoverschrijving** — Template-specifieke aanpassingen (bijv. watermerk toevoegen)
-3. **Variantaanpassing** — Variant-specifieke verfijningen (bijv. koplettertype wisselen voor een merk)
+1. **Thema-documentstijlen** — De basisstijlen van het geselecteerde thema
+2. **Template-documentstijloverschrijvingen** — Template-specifieke aanpassingen
+3. **Blokstijlpreset** — De benoemde preset toegepast op een specifiek blok
+4. **Blok inline-stijlen** — Per-blok overschrijvingen die direct in de editor zijn ingesteld
 
-Elk niveau erft van het bovenliggende en kan specifieke eigenschappen overschrijven.
+Elk niveau erft van het bovenliggende niveau en kan specifieke eigenschappen overschrijven.
 
-### Themaselectie
+### Themaselectiecascade
 
-Wanneer een versie wordt gepubliceerd, wordt het actieve thema gesnapt en bevroren met de versie. Dit zorgt ervoor dat rendering deterministisch is — dezelfde versie gebruikt altijd hetzelfde thema, ongeacht latere themawijzigingen.
+Het thema dat gebruikt wordt voor rendering wordt opgelost via drie niveaus:
+
+1. **Variant-niveau overschrijving** — Als de variant een thema specificeert, wordt dat thema gebruikt
+2. **Template-niveau** — Als er geen variantoverschrijving is, wordt het standaardthema van de template toegepast
+3. **Tenant-standaard** — Als noch variant noch template een thema specificeert, wordt het standaardthema van de tenant gebruikt
+
+### In de UI
+
+De themalijstpagina toont alle thema's met zoekfiltering. De thema-editor is een ingebed webcomponent dat visuele bewerking biedt van alle thema-eigenschappen — typografie, kleuren, pagina-instellingen en blokstijlpresets.

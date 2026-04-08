@@ -1,39 +1,37 @@
 ---
-title: "Rijke tekst"
-description: "ProseMirror-gebaseerde opmaak en invoegen van expressiechips."
+title: "Rich Text"
+description: "ProseMirror-gebaseerde inline bewerking met opmaak, lijsten, links en expressiechip-invoeging."
 section: "editor"
-sortOrder: 10
+sortOrder: 13
 ---
 
-## Rijke tekst
+## Rich Text
 
-De Epistola-editor gebruikt ProseMirror voor rijke-tekstbewerking en biedt een vertrouwde tekstverwerkingservaring binnen de templateontwerper.
+Tekstblokken in de Epistola-editor gebruiken ProseMirror voor inline rich text-bewerking. Auteurs krijgen een vertrouwde tekstverwerker-ervaring binnen de templateontwerper.
 
 ### Opmaak
 
-Ondersteunde opmaakopties zijn:
+Ondersteunde opmaakopties:
 
 - **Vet**, *cursief* en onderstrepen
-- Koppen (H1–H6)
-- Genummerde en ongenummerde lijsten
-- Tekstuitlijning (links, gecentreerd, rechts, uitvullen)
-- Lettergrootte- en kleuroverschrijvingen
-- Links
+- Subscript en superscript
+- Links met tekstbehoud
 
-### Expressiechip invoegen
+### Lijsten
 
-Binnen elk rijke-tekstblok kunnen auteurs expressiechips invoegen die resolven naar dynamische data tijdens rendering. Om een chip in te voegen:
+- Geordende lijsten (genummerd) met nestondersteuning
+- Ongeordende lijsten (opsommingstekens) met nestondersteuning
 
-1. Plaats de cursor waar de dynamische waarde moet verschijnen
-2. Open de expressiepicker
-3. Kies het expressietype (eenvoudig pad, JSONata of JavaScript)
-4. Voer de expressie in
-5. De chip verschijnt inline met een preview van de geresolvede waarde
+### Expressiechips
 
-### Statische en dynamische inhoud combineren
+Auteurs kunnen expressiechips direct in tekstinhoud invoegen via een inline dialoog. Chips verschijnen als afzonderlijke visuele elementen binnen de tekststroom, die dynamische data duidelijk onderscheiden van statische inhoud.
 
-Tekstblokken mixen vrij statische tekst met expressiechips. Bijvoorbeeld:
+Elke chip toont de opgeloste waarde uit het geselecteerde datavoorbeeld, zodat auteurs realistische output zien terwijl ze bewerken.
 
-> Geachte **{ontvanger}**, uw aanvraag van **{aanvraagdatum}** is **{besluit}**.
+### Statische en dynamische inhoud mixen
 
-Elke chip resolveert onafhankelijk, wat complexe zinnen mogelijk maakt die zijn opgebouwd uit meerdere datapunten.
+Tekstblokken mengen vrij statische tekst met expressiechips. Bijvoorbeeld:
+
+> Geachte **{{ontvanger}}**, uw aanvraag van **{{aanvraagdatum}}** is **{{besluit}}**.
+
+Elke chip wordt onafhankelijk opgelost, wat complexe zinnen mogelijk maakt die zijn opgebouwd uit meerdere datapunten.

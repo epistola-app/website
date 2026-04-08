@@ -1,57 +1,59 @@
 ---
 title: "Expressies"
-description: "Expressietalen: JSONata, JavaScript, eenvoudige paden en live evaluatie."
+description: "Drie expressietalen — JSONata, JavaScript, Eenvoudig Pad — met live-evaluatie en inline chiprendering."
 section: "editor"
-sortOrder: 9
+sortOrder: 12
 ---
 
 ## Expressies
 
-Expressies vormen de brug tussen uw data en uw template. Ze resolven dynamische waarden uit de renderpayload naar het document.
+Expressies verbinden templateinhoud met data. Elke expressie wordt opgeslagen in alle drie ondersteunde talen, en de renderingengine evalueert degene die overeenkomt met de geconfigureerde standaard.
 
-### Expressietypen
+### Expressietalen
 
-Epistola ondersteunt drie expressietalen:
+#### Eenvoudig Pad
 
-#### Eenvoudig pad
-
-Directe property-toegang met puntnotatie:
+Lichtgewicht dot-path-traversal voor eenvoudige datatoegang:
 
 ```
 ontvanger
 adres.stad
-items[0].omschrijving
+items[0].beschrijving
 ```
 
-Ideaal voor eenvoudige databindings zonder transformatie.
+Het beste voor directe property-lookups zonder transformatie.
 
 #### JSONata
 
-Een krachtige query- en transformatietaal voor JSON-data:
+De standaard expressietaal, met de Dashjoin-implementatie. Ondersteunt paden, filters, aggregaties en opmaak:
 
 ```
 $uppercase(ontvanger)
 $sum(items.bedrag)
 $now('[D] [MNn] [Y]')
+items[prijs > 100].beschrijving
 ```
-
-Gebruik JSONata wanneer u data moet filteren, aggregeren of formatteren.
 
 #### JavaScript
 
-Volledige JavaScript-expressies voor complexe logica:
+GraalJS-gesandboxed JavaScript voor complexe logica. Geen bestandssysteem- of netwerktoegang beschikbaar:
 
 ```javascript
 data.items.filter(i => i.bedrag > 100).length
 new Date(data.besluitdatum).toLocaleDateString('nl-NL')
 ```
 
-Gebruik JavaScript wanneer JSONata niet in uw transformatiebehoeften voorziet.
+### Waar expressies worden gebruikt
 
-### Inline chips
+- **Tekstinterpolatie** — `{{expressie}}` binnen rich text-blokken, gerenderd als inline chips
+- **Conditionele zichtbaarheid** — Bepaalt of een conditieblok wordt getoond of verborgen
+- **Lusiteratie** — Definieert de array waarover een lusblok itereert
+- **Tabelcelwaarden** — Bindt datatabelkolommen aan datapaden
 
-In de editor verschijnen expressies als inline chips binnen tekstblokken. Chips zijn visueel onderscheidend van statische tekst, waardoor duidelijk is welke delen van het document dynamisch zijn.
+### In de UI
 
-### Live evaluatie
+Het expressiedialog laat auteurs expressies schrijven en testen. Het biedt:
 
-De editor evalueert expressies in realtime tegen het geselecteerde datavoorbeeld. Auteurs kunnen daadwerkelijk geresolvede waarden zien terwijl ze bewerken, wat trial-and-error tijdens templateontwerp vermindert.
+- **Live-evaluatiepreview** — Toont de opgeloste waarde tegen het geselecteerde datavoorbeeld in realtime
+- **JSONata-referentie** — Ingebouwde documentatie voor JSONata-syntax en -functies
+- **Taalselector** — Wissel tussen Eenvoudig Pad, JSONata en JavaScript

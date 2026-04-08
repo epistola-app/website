@@ -1,42 +1,56 @@
 ---
 title: "API Overview"
-description: "REST API structure, versioned media type, authentication, and roles."
+description: "Tenant-scoped REST API with versioned media type, OAuth2/API key auth, role-based access, and resource endpoints."
 section: "platform"
-sortOrder: 18
+sortOrder: 22
 ---
 
 ## API Overview
 
-Epistola exposes a REST API defined by an OpenAPI 3.1 specification. The API is the primary integration point for workflow engines, applications, and automation.
-
-### REST API structure
-
-The API is organized around resources:
-
-- `/templates` — Template CRUD and listing
-- `/templates/{slug}/variants` — Variant management
-- `/templates/{slug}/render` — Document generation
-- `/jobs` — Job status and management
-- `/assets` — Asset upload and retrieval
-- `/themes` — Theme management
+Epistola exposes a REST API defined by an OpenAPI 3.1 specification. All endpoints are tenant-scoped under `/api/tenants/{tenantId}/...`.
 
 ### Versioned media type
 
-API versioning uses content negotiation via the `Accept` header. Clients specify the API version they support, and the server responds with the appropriate representation.
+The API uses a versioned media type for content negotiation:
+
+```
+application/vnd.epistola.v1+json
+```
 
 ### Authentication
 
-All API requests require authentication via bearer tokens issued by Keycloak. Tokens carry the tenant context and user roles, ensuring proper scoping and authorization.
+Four authentication methods are supported:
+
+| Method | Use case |
+|---|---|
+| **OAuth2/OIDC** (Keycloak) | Production single sign-on |
+| **API key** (`X-API-Key` header) | Service-to-service integration |
+| **JWT bearer tokens** | Direct token authentication |
+| **Form login** | Development and demo environments |
 
 ### Roles
 
-Epistola defines several roles:
+Access control is role-based:
 
 | Role | Capabilities |
 |---|---|
-| **Viewer** | Read templates and download generated documents |
-| **Author** | Create and edit template drafts |
-| **Publisher** | Publish versions and manage environment activations |
-| **Admin** | Manage tenant settings, attributes, and user access |
+| **reader** | Read templates, view jobs, download documents |
+| **editor** | Create and edit template drafts |
+| **generator** | Submit render requests and manage jobs |
+| **manager** | Publish versions, manage environments and deployments |
+| **tenant_control** | Manage tenant settings, attributes, and user access |
 
-Roles are assigned through Keycloak and enforced at the API level.
+### Resource endpoints
+
+The API provides endpoints for:
+
+- **Templates** — CRUD, listing, and search
+- **Variants** — Create, update, and manage per template
+- **Versions** — Create drafts, publish, archive
+- **Themes** — CRUD and listing
+- **Environments** — CRUD and listing
+- **Attributes** — CRUD and listing
+- **Generation** — Preview (sync), generate (async), batch (async)
+- **Jobs** — Status, listing, cancellation
+- **Documents** — Download generated documents
+- **Stencils** — CRUD, versioning, and usage tracking

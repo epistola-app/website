@@ -1,37 +1,51 @@
 ---
 title: "Editoroverzicht"
-description: "De Epistola Suite-editor: gesplitste weergave, WYSIWYG-bewerking, automatisch opslaan en drag-and-drop."
+description: "Volledige-pagina WYSIWYG-editor met splitweergave, live PDF-preview, automatisch opslaan, ongedaan maken/opnieuw, en stencilbeheer."
 section: "editor"
-sortOrder: 7
+sortOrder: 10
 ---
 
 ## Editoroverzicht
 
-De Epistola Suite bevat een rijke documenttemplate-editor gebouwd met Lit en ProseMirror webcomponents.
+De Epistola Suite bevat een volledige-pagina WYSIWYG-editor voor het ontwerpen van documenttemplates. Deze is gebouwd met Lit- en ProseMirror-webcomponenten.
 
-### Gesplitste weergave
+### Splitweergave
 
-De editor biedt een gesplitste lay-out:
+De editor gebruikt een aanpasbare splitweergave-lay-out:
 
-- **Linkerdeelvenster** — Templatestructuur en inhoudbewerking
-- **Rechterdeelvenster** — Live preview met voorbeelddata
+- **Linkerpaneel** — Templatestructuur en inhoudsbewerking met een blokboom, werkbalk en inline bewerking
+- **Rechterpaneel** — Live PDF-preview gerenderd met het geselecteerde testdatavoorbeeld
 
-Wijzigingen in de editor worden direct weergegeven in de preview, wat auteurs onmiddellijke feedback geeft op hun documentontwerp.
+De scheidingslijn tussen panelen kan worden gesleept om de verhouding aan te passen.
 
-### WYSIWYG-bewerking
+### Live PDF-preview
 
-De editor is volledig WYSIWYG (What You See Is What You Get). Auteurs werken met een visuele representatie van het document in plaats van ruwe opmaak. Opmaak, lay-out en databindings worden allemaal visueel toegepast.
+Het previewpaneel rendert een echte PDF met de huidige templatestatus en een geselecteerd datavoorbeeld. Wijzigingen in de editor worden na een korte debounce weergegeven in de preview. Auteurs kunnen wisselen tussen datavoorbeelden via een dropdown boven de preview.
 
 ### Automatisch opslaan
 
-Conceptversies worden automatisch opgeslagen terwijl auteurs werken. Er is geen handmatig opslaan nodig — de editor bewaart wijzigingen continu zodat werk nooit verloren gaat.
+Conceptversies worden automatisch opgeslagen met een debounce van 3 seconden na elke wijziging. Handmatig opslaan is ook beschikbaar via Ctrl+S. Werk gaat nooit verloren — de editor slaat wijzigingen continu op.
 
-### Drag-and-drop
+### Ongedaan maken en opnieuw
 
-Inhoudblokken kunnen worden herschikt met drag-and-drop. Auteurs kunnen:
+De editor onderhoudt aparte ongedaan maken/opnieuw-stacks voor blokniveau-operaties (toevoegen, verwijderen, herordenen) en rich text-bewerking. Dit laat auteurs een tekstopmaakwijziging ongedaan maken zonder de blokstructuur te beïnvloeden, en vice versa.
 
-- Blokken herschikken binnen een sectie
-- Blokken verplaatsen tussen secties
-- Nieuwe blokken invoegen vanuit het blokkenpalet
+### Slepen en neerzetten
 
-Dit maakt lay-outaanpassingen intuïtief en snel.
+Inhoudsblokken kunnen herordend worden met slepen en neerzetten. Pak de handgreep van elk blok en verplaats het naar een nieuwe positie in de documentboom.
+
+### Stencilbeheer
+
+Vanuit de editor kunnen auteurs:
+
+- **Zoeken** in beschikbare stencils en ze in de template invoegen
+- **Controleren op updates** bij ingevoegde stencils om te zien of er nieuwere versies bestaan
+- **Nieuwe stencils aanmaken** van geselecteerde blokken in de huidige template
+
+### Asset-kiezer
+
+De editor bevat een asset-kiezerdialoog voor het invoegen van afbeeldingen. Auteurs kunnen geüploade assets doorbladeren, miniaturen bekijken en afbeeldingen selecteren om in de template op te nemen.
+
+### Datacontract-editor
+
+De datacontract-editor bevindt zich in een apart tabblad op de template-detailpagina (niet in de visuele editor). Het biedt een dedicated interface voor het bewerken van het JSON Schema en het beheren van benoemde datavoorbeelden.

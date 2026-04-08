@@ -1,46 +1,43 @@
 ---
 title: "Templates"
-description: "What templates are, data contracts, and named data examples."
+description: "The core resource in Epistola: name, data contract, data examples, settings, and the template detail page."
 section: "core-concepts"
 sortOrder: 1
 ---
 
 ## Templates
 
-Templates are the core building block in Epistola. Each template defines the structure, layout, and data contract for a specific document type.
+Templates are the core resource in Epistola. A template represents a specific document type — such as a decision letter, invoice, or permit — and holds everything needed to produce it.
 
-### What is a template?
+### What a template contains
 
-A template combines:
+Each template has:
 
-- **Layout** — The visual structure of the document, designed in the Epistola Suite editor
-- **Data contract** — A JSON Schema that defines what data the template expects
-- **Named data examples** — Sample payloads that validate the schema and preview the document
+- **Name** — A display name and a unique slug scoped to the tenant (e.g., `decision-letter`)
+- **Data contract** — A JSON Schema (Draft 2020-12) defining the required input data structure
+- **Named data examples** — Saved JSON payloads for testing and previewing the template
+- **Settings** — Default theme selection and PDF/A compliance toggle
 
-### Data contracts
+### Templates list page
 
-Every template declares a JSON Schema (Draft 2020-12) that describes the shape of the data it accepts. When a render request arrives, Epistola validates the payload against this schema before processing.
+The templates list page provides:
 
-```json
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "properties": {
-    "recipientName": { "type": "string" },
-    "decisionDate": { "type": "string", "format": "date" }
-  },
-  "required": ["recipientName", "decisionDate"]
-}
-```
+- **Search** — Filter templates by name or slug
+- **Table view** — Each row shows the template name, slug, variant count, and last-modified timestamp
 
-### Named data examples
+From here, click any template to open its detail page.
 
-Templates can include named data examples — saved JSON payloads that conform to the schema. These serve as:
+### Template detail page
 
-- **Preview data** — Quickly see how the template renders with realistic content
-- **Regression tests** — Automatically replay examples in CI to catch breaking changes
-- **Documentation** — Show consumers exactly what data structure the template expects
+The template detail page is organized into four tabs:
+
+| Tab | Purpose |
+|---|---|
+| **Variants** | Manage presentation variants — create, edit, set attributes, mark default |
+| **Deployments** | View and control which version is active per variant per environment |
+| **Data Contract** | Edit the JSON Schema and manage named data examples |
+| **Settings** | Configure the default theme and PDF/A compliance |
 
 ### Template slugs
 
-Each template has a unique slug scoped to its tenant (e.g., `decision-letter`). The slug is the stable identifier used in API calls and workflow configurations.
+The slug is the stable identifier used in API calls, workflow configurations, and catalog references. It is unique within a tenant and immutable once set.

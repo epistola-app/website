@@ -1,39 +1,35 @@
 ---
 title: "Omgevingen"
-description: "Deploydoelen, versieactivatie en de activatiematrix."
+description: "Tenant-scoped deploymentdoelen voor versieactivering en de deploymentmatrix."
 section: "core-concepts"
-sortOrder: 4
+sortOrder: 6
 ---
 
 ## Omgevingen
 
-Omgevingen vertegenwoordigen deployfasen (bijv. ontwikkeling, acceptatie, productie). Elke omgeving bepaalt onafhankelijk welke templateversie actief is.
+Omgevingen zijn tenant-scoped deploymentdoelen — zoals productie, staging of ontwikkeling. Ze bepalen welke templateversie actief is voor documentgeneratie in elke context.
 
-### Deploydoelen
+### Omgevingseigenschappen
 
-Typische omgevingen zijn:
+Elke omgeving heeft:
 
-- **Ontwikkeling** — Voor template-auteurs om wijzigingen te testen
-- **Acceptatie** — Voor belanghebbenden om te beoordelen vóór productie
-- **Productie** — Live, verwerkt echte documentgeneratieverzoeken
+- **Slug** — Een unieke identifier binnen de tenant (bijv. `productie`)
+- **Naam** — Een weergavenaam (bijv. "Productie")
+- **Beschrijving** — Een optionele uitleg van het doel van de omgeving
 
-### Versieactivatie
+### Publiceren en activeren
 
-Elke omgeving heeft een actieve versiepointer per variant. Promoveren betekent deze pointer naar een nieuwere gepubliceerde versie wijzigen.
+Het publiceren van een versie naar een omgeving bevriest het concept en activeert het voor dat specifieke variant/omgevingspaar. De gepubliceerde versie wordt degene die gebruikt wordt wanneer documentgeneratieverzoeken die omgeving targeten.
 
-- **Promotie** is direct — wijzig alleen de pointer
-- **Rollback** is even snel — wijs terug naar de vorige versie
-- Oudere versies blijven gearchiveerd en toegankelijk
+### Omgevingen in de deploymentmatrix
 
-### Activatiematrix
+Omgevingen vormen de kolommen van de deploymentmatrix op de template-detailpagina. Elke cel toont welke versie actief is voor een gegeven variant in die omgeving, wat een snelle visuele vergelijking mogelijk maakt van wat waar gedeployd is.
 
-De activatiematrix toont welke versie actief is in elke omgeving voor elke variant. Dit geeft platformteams een helder overzicht van wat waar is gedeployd.
+### In de UI
 
-| Variant | Ontwikkeling | Acceptatie | Productie |
-|---|---|---|---|
-| nl-standaard | v5 (concept) | v4 | v3 |
-| en-standaard | v3 (concept) | v2 | v2 |
+De omgevingenlijstpagina biedt:
 
-### Omgevingsisolatie
+- **Zoeken** — Filter omgevingen op naam of slug
+- **Tabelweergave** — Elke rij toont de omgevingsnaam, slug en beschrijving
 
-Omgevingen zijn volledig geïsoleerd. Het activeren van een nieuwe versie in ontwikkeling heeft geen effect op productie. Dit laat auteurs veilig itereren zonder risico voor live documentgeneratie.
+Omgevingen worden beheerd op tenantniveau en gedeeld over alle templates.

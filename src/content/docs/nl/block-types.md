@@ -1,50 +1,43 @@
 ---
 title: "Bloktypen"
-description: "Beschikbare inhoudblokken: tekst, tabellen, afbeeldingen, containers, conditionelen, loops en meer."
+description: "Inhoud-, lay-out-, logica- en paginablokken: tekst, tabellen, afbeeldingen, containers, condities, lussen en meer."
 section: "editor"
-sortOrder: 8
+sortOrder: 11
 ---
 
 ## Bloktypen
 
-De Epistola-editor biedt diverse inhoudblokken voor het bouwen van documenttemplates.
+De Epistola-editor organiseert templateinhoud in blokken. Elk blok heeft een specifiek type dat het gedrag en de rendering bepaalt.
 
-### Tekst
+### Inhoudsblokken
 
-Rijke-tekstblokken met volledige opmaakundersteuning — koppen, alinea's, vet, cursief, lijsten en inline expressiechips voor dynamische data.
+| Blok | Beschrijving |
+|---|---|
+| **Tekst** | Rich text met inline opmaak en expressiechips voor dynamische data |
+| **Tabel** | Gestructureerde tabel met configureerbare kolombreedtes. Cellen ondersteunen rich text en expressies |
+| **Datatabel** | Dynamische tabel gebonden aan een array in de data. Kolommen worden gedefinieerd met databindings; rijen herhalen per array-item |
+| **Afbeelding** | Statische of dynamische afbeelding met de asset-kiezer. Configureerbare grootte en uitlijning |
+| **QR-code** | Genereert een QR-code uit een dynamische datawaarde |
 
-### Tabel
+### Lay-outblokken
 
-Statische tabellen met configureerbare rijen en kolommen. Celinhoud ondersteunt rijke tekst en expressies.
+| Blok | Beschrijving |
+|---|---|
+| **Container** | Groepeert kindblokken samen voor gedeelde styling of conditionele zichtbaarheid |
+| **Kolommen** | Naast-elkaar-lay-out met configureerbare kolombreedtes |
+| **Paginakoptekst** | Herhaalt bovenaan elke pagina |
+| **Paginavoettekst** | Herhaalt onderaan elke pagina |
+| **Stencil** | Een herbruikbaar component ingevoegd als kopie uit de stencilbibliotheek |
 
-### Datatabel
+### Logicablokken
 
-Dynamische tabellen die rijen herhalen op basis van arraydata. Definieer de kolommen en bind elke aan een datapad — Epistola genereert één rij per array-item.
+| Blok | Beschrijving |
+|---|---|
+| **Conditie** | Toont of verbergt kindblokken op basis van een expressie-evaluatie |
+| **Lus** | Herhaalt kindblokken voor elk item in een data-array |
 
-### Afbeelding
+### Paginablokken
 
-Voeg statische afbeeldingen in of verwijs dynamisch naar afbeeldingen uit uw datapayload. Ondersteunt configureerbare grootte, uitlijning en alt-tekst.
-
-### QR-code
-
-Genereer QR-codes uit datawaarden. Handig voor het koppelen van fysieke documenten aan digitale bronnen of tracking-ID's.
-
-### Containers en kolommen
-
-Lay-outblokken die andere blokken groeperen. Kolommen maken zij-aan-zij arrangementen mogelijk binnen het document.
-
-### Conditioneel
-
-Toon of verberg blokken op basis van expressie-evaluatie. Gebruik condities om templates te maken die zich aanpassen aan verschillende datascenario's.
-
-### Loop
-
-Herhaal een set blokken voor elk item in een array. Loops werken met elk datapad dat resolveert naar een array.
-
-### Pagina-einde
-
-Forceer een pagina-einde op een specifiek punt in het document.
-
-### Kop- en voetteksten
-
-Definieer paginakopteksten en -voetteksten met ondersteuning voor paginanummers, datums en andere dynamische inhoud. Kop- en voetteksten kunnen verschillen tussen de eerste pagina en volgende pagina's.
+| Blok | Beschrijving |
+|---|---|
+| **Pagina-einde** | Forceert een pagina-einde op die positie in het document |

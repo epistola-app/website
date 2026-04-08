@@ -1,39 +1,41 @@
 ---
 title: "Varianten"
-description: "Meerdere presentaties van een template, attribuutmatching en de variantresolver."
+description: "Presentatievariaties van een template met attribuutgebaseerde resolutie, scoring en standaard-fallback."
 section: "core-concepts"
-sortOrder: 2
+sortOrder: 3
 ---
 
 ## Varianten
 
-Varianten maken het mogelijk dat een enkele template verschillende documentpresentaties produceert op basis van context — zoals taal, merk of kanaal.
+Varianten zijn presentatievariaties van een enkele template. Een `besluitbrief`-template kan varianten hebben voor Nederlands, Engels, zakelijke huisstijl of consumentenhuisstijl — elk met dezelfde datacontract maar met een eigen lay-out en stijl.
 
-### Meerdere presentaties
+### Varianteigenschappen
 
-Een template kan een willekeurig aantal varianten hebben. Elke variant deelt het datacontract van de bovenliggende template maar behoudt zijn eigen lay-out, opmaak en versiegeschiedenis.
+Elke variant heeft:
 
-Bijvoorbeeld, een `besluitbrief`-template kan hebben:
+- **Titel** — Een weergavenaam (bijv. "Nederlands — Zakelijk")
+- **Slug** — Een unieke identifier binnen de template
+- **Attributen** — Sleutel-waardeparen afgeleid van de attribuutdefinities van de tenant (bijv. `taal=nl`, `merk=zakelijk`)
+- **Standaardvlag** — Precies één variant per template is gemarkeerd als standaard
 
-- `nl-standaard` — Nederlandse versie met gemeentelijke branding
-- `en-standaard` — Engelse vertaling
-- `nl-zakelijk` — Nederlandse versie met zakelijke branding
+### Variantresolutie
 
-### Attributen
+Wanneer een renderverzoek attributen meestuurt in plaats van een specifiek variant-ID, selecteert de resolver automatisch de beste match:
 
-Varianten worden getagd met attributen — sleutel-waardeparen die hun kenmerken beschrijven (bijv. `language=nl`, `brand=business`). Deze attributen sturen het automatische variantresolutieproces aan.
+1. **Filter** — Elimineer varianten die een vereist attribuut uit het verzoek missen
+2. **Score** — Ken punten toe voor overeenkomende optionele attributen (10x gewogen) met attribuutaantal als tiebreaker
+3. **Selecteer** — Kies de variant met de hoogste score
+4. **Fallback** — Als er geen kandidaten overblijven, gebruik de standaardvariant
 
-### Standaardvariant
+Dit laat API-consumenten intentie beschrijven (bijv. "Nederlands, zakelijk merk") zonder specifieke variant-ID's te kennen.
 
-Elke template moet precies één standaardvariant hebben. De standaard wordt gebruikt als terugval wanneer geen andere variant overeenkomt met de gevraagde attributen.
+### In de UI
 
-### Resolutie-algoritme
+Varianten verschijnen als kaarten op het tabblad Varianten van de template-detailpagina. Elke kaart toont:
 
-Wanneer een renderverzoek attributen bevat in plaats van een specifiek variant-ID, doet de resolver het volgende:
+- De varianttitel en slug
+- Attribuutbadges voor toegewezen sleutel-waardeparen
+- Statusbadges met aantallen concept- en gepubliceerde versies
+- Inline bewerking voor titel, slug en attributen
 
-1. **Filteren** — Verwijdert varianten die een verplicht attribuut missen
-2. **Scoren** — Kent punten toe voor optionele attribuutmatches en specificiteit
-3. **Selecteren** — Kiest de variant met de hoogste score
-4. **Terugvallen** — Gebruikt de standaardvariant als er geen kandidaten overblijven
-
-Dit laat API-consumenten hun intentie beschrijven (bijv. "Nederlands, zakelijk merk") zonder het exacte variant-ID te hoeven kennen.
+Gebruik het attribuutfilter boven de kaarten om de lijst te beperken op specifieke attribuutwaarden.

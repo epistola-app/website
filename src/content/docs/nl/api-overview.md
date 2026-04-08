@@ -1,42 +1,56 @@
 ---
 title: "API-overzicht"
-description: "REST API-structuur, versiebeheerd mediatype, authenticatie en rollen."
+description: "Tenant-scoped REST API met versiebeheerd mediatype, OAuth2/API-sleutelauthenticatie, rolgebaseerde toegang en resource-eindpunten."
 section: "platform"
-sortOrder: 18
+sortOrder: 22
 ---
 
 ## API-overzicht
 
-Epistola stelt een REST API beschikbaar gedefinieerd door een OpenAPI 3.1-specificatie. De API is het primaire integratiepunt voor workflow-engines, applicaties en automatisering.
-
-### REST API-structuur
-
-De API is georganiseerd rond resources:
-
-- `/templates` — Template CRUD en listing
-- `/templates/{slug}/variants` — Variantbeheer
-- `/templates/{slug}/render` — Documentgeneratie
-- `/jobs` — Jobstatus en -beheer
-- `/assets` — Assetupload en -ophaling
-- `/themes` — Themabeheer
+Epistola stelt een REST API beschikbaar die is gedefinieerd door een OpenAPI 3.1-specificatie. Alle eindpunten zijn tenant-scoped onder `/api/tenants/{tenantId}/...`.
 
 ### Versiebeheerd mediatype
 
-API-versiebeheer gebruikt content negotiation via de `Accept`-header. Clients specificeren de API-versie die ze ondersteunen en de server antwoordt met de juiste representatie.
+De API gebruikt een versiebeheerd mediatype voor contentonderhandeling:
+
+```
+application/vnd.epistola.v1+json
+```
 
 ### Authenticatie
 
-Alle API-verzoeken vereisen authenticatie via bearer tokens uitgegeven door Keycloak. Tokens bevatten de tenantcontext en gebruikersrollen, wat zorgt voor juiste scoping en autorisatie.
+Vier authenticatiemethoden worden ondersteund:
+
+| Methode | Use case |
+|---|---|
+| **OAuth2/OIDC** (Keycloak) | Productie single sign-on |
+| **API-sleutel** (`X-API-Key`-header) | Service-naar-service-integratie |
+| **JWT bearer tokens** | Directe tokenauthenticatie |
+| **Formulierinlog** | Ontwikkel- en demo-omgevingen |
 
 ### Rollen
 
-Epistola definieert verschillende rollen:
+Toegangscontrole is rolgebaseerd:
 
 | Rol | Mogelijkheden |
 |---|---|
-| **Viewer** | Templates lezen en gegenereerde documenten downloaden |
-| **Auteur** | Templateconcepten aanmaken en bewerken |
-| **Publisher** | Versies publiceren en omgevingsactivaties beheren |
-| **Admin** | Tenantinstellingen, attributen en gebruikerstoegang beheren |
+| **reader** | Templates lezen, jobs bekijken, documenten downloaden |
+| **editor** | Templateconcepten aanmaken en bewerken |
+| **generator** | Renderverzoeken indienen en jobs beheren |
+| **manager** | Versies publiceren, omgevingen en deployments beheren |
+| **tenant_control** | Tenantinstellingen, attributen en gebruikerstoegang beheren |
 
-Rollen worden toegewezen via Keycloak en afgedwongen op API-niveau.
+### Resource-eindpunten
+
+De API biedt eindpunten voor:
+
+- **Templates** — CRUD, lijsten en zoeken
+- **Varianten** — Aanmaken, bijwerken en beheren per template
+- **Versies** — Concepten aanmaken, publiceren, archiveren
+- **Thema's** — CRUD en lijsten
+- **Omgevingen** — CRUD en lijsten
+- **Attributen** — CRUD en lijsten
+- **Generatie** — Preview (synchroon), genereren (asynchroon), batch (asynchroon)
+- **Jobs** — Status, lijsten, annulering
+- **Documenten** — Gegenereerde documenten downloaden
+- **Stencils** — CRUD, versiebeheer en gebruikstracking

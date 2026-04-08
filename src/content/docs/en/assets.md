@@ -1,37 +1,36 @@
 ---
 title: "Assets"
-description: "Image and document upload, and the asset picker."
+description: "Tenant-scoped image upload with drag-and-drop, format restrictions, asset grid, and editor integration."
 section: "platform"
-sortOrder: 17
+sortOrder: 21
 ---
 
 ## Assets
 
-Assets are files — typically images and documents — that templates reference during rendering.
+Assets are images uploaded to tenant storage for use in document templates. They are referenced by ID in templates and resolved at render time.
 
-### Image upload
+### Accepted formats
 
-Authors can upload images through the Epistola Suite:
+- PNG, JPEG, WebP, and SVG
+- Maximum file size: 5 MB per file
 
-- Logos, signatures, and letterhead graphics
-- Photos and illustrations for document content
-- Icons and decorative elements
+### Upload
 
-Uploaded images are stored tenant-scoped and available across all templates within the tenant.
+The upload interface provides:
 
-### Document upload
+- **Drag-and-drop zone** — Drop files directly onto the upload area
+- **Click-to-browse fallback** — Standard file picker for selecting files from disk
 
-In addition to images, templates can reference other document files:
+### Asset grid
 
-- PDF attachments to include in generated output
-- Reference documents for compliance or legal requirements
+Uploaded assets are displayed in a grid showing:
 
-### Asset picker
+- **Preview thumbnail** — A visual preview of the image
+- **Name** — The original filename
+- **Type** — The file format (PNG, JPEG, etc.)
+- **Dimensions** — Width and height in pixels
+- **File size** — The size on disk
 
-The editor includes an asset picker that lets authors browse and select from uploaded assets. The picker provides:
+### Editor integration
 
-- **Thumbnail previews** for quick visual identification
-- **Search and filter** by name or type
-- **Upload inline** — add new assets without leaving the editor
-
-Selected assets are referenced by ID in the template, ensuring they resolve correctly at render time regardless of filename changes.
+In the template editor, the asset picker dialog lets authors browse and select from uploaded assets. Selected images are inserted into the template as Image blocks, referencing the asset by ID.

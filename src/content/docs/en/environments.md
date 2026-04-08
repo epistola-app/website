@@ -1,39 +1,35 @@
 ---
 title: "Environments"
-description: "Deployment targets, version activation, and the activation matrix."
+description: "Tenant-scoped deployment targets for version activation and the deployment matrix."
 section: "core-concepts"
-sortOrder: 4
+sortOrder: 6
 ---
 
 ## Environments
 
-Environments represent deployment stages (e.g., development, acceptance, production). Each environment independently controls which template version is active.
+Environments are tenant-scoped deployment targets — such as production, staging, or development. They control which template version is active for document generation in each context.
 
-### Deployment targets
+### Environment properties
 
-Typical environments include:
+Each environment has:
 
-- **Development** — For template authors to test changes
-- **Acceptance** — For stakeholders to review before production
-- **Production** — Live, serving real document generation requests
+- **Slug** — A unique identifier within the tenant (e.g., `production`)
+- **Name** — A display name (e.g., "Production")
+- **Description** — An optional explanation of the environment's purpose
 
-### Version activation
+### Publishing and activation
 
-Each environment has an active version pointer per variant. Promoting a template means switching this pointer to a newer published version.
+Publishing a version to an environment freezes the draft and activates it for that specific variant/environment pair. The published version becomes the one used when document generation requests target that environment.
 
-- **Promotion** is instant — just update the pointer
-- **Rollback** is equally fast — point back to the previous version
-- Older versions remain archived and accessible
+### Environments in the deployment matrix
 
-### Activation matrix
+Environments form the columns of the deployment matrix on the template detail page. Each cell shows which version is active for a given variant in that environment, allowing quick visual comparison of what's deployed where.
 
-The activation matrix shows which version is active in each environment for every variant. This gives platform teams a clear overview of what's deployed where.
+### In the UI
 
-| Variant | Development | Acceptance | Production |
-|---|---|---|---|
-| nl-default | v5 (draft) | v4 | v3 |
-| en-default | v3 (draft) | v2 | v2 |
+The environments list page provides:
 
-### Environment isolation
+- **Search** — Filter environments by name or slug
+- **Table view** — Each row shows the environment name, slug, and description
 
-Environments are fully isolated. Activating a new version in development has no effect on production. This lets authors iterate safely without risk to live document generation.
+Environments are managed at the tenant level and shared across all templates.

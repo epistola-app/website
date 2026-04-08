@@ -1,41 +1,34 @@
 ---
 title: "Versions"
-description: "Template version lifecycle: Draft, Published, and Archived states."
+description: "Numbered version lifecycle per variant: Draft, Published, and Archived states with immutability guarantees."
 section: "core-concepts"
-sortOrder: 3
+sortOrder: 4
 ---
 
 ## Versions
 
-Every variant maintains an immutable version history. Versions move through a strict lifecycle that ensures reproducibility and auditability.
+Every variant maintains a numbered version history. Versions range from 1 to 200 per variant and move through a strict lifecycle that ensures reproducibility and auditability.
 
 ### Lifecycle states
 
-| State | Description |
-|---|---|
-| **Draft** | Work in progress — editable, not yet available for rendering |
-| **Published** | Locked and available for rendering in assigned environments |
-| **Archived** | No longer active but preserved for audit and reproduction |
+| State | Editable | Description |
+|---|---|---|
+| **DRAFT** | Yes | Work in progress. At most one draft per variant at any time. Can be edited and previewed. |
+| **PUBLISHED** | No | Frozen and immutable. Content, theme snapshot, and schema hash are locked. Can be previewed or archived. |
+| **ARCHIVED** | No | Read-only, preserved for audit. Can only be previewed. |
 
 ### Immutability
 
-Once a version is published, its content is frozen:
-
-- The template layout is locked
-- The theme snapshot is captured
-- The schema hash is recorded
-
-This guarantees that the same input data will always produce the same output, even years later.
+Once a version is published, its content cannot change. The layout, theme snapshot, and schema hash are all frozen. This guarantees that the same input data always produces the same output, even years later.
 
 ### Version numbering
 
-Versions are numbered sequentially within each variant (v1, v2, v3, ...). Each new draft automatically receives the next version number.
+Versions are numbered sequentially within each variant (v1, v2, v3, ...). Each new draft automatically receives the next available number.
 
-### Publishing
+### In the UI
 
-Publishing a draft version:
+The version history dialog shows a table with:
 
-1. Locks the layout and theme snapshot
-2. Records the schema hash for reproducibility
-3. Makes the version available for environment activation
-4. Creates an audit trail entry
+- **Version number** and **status badge**
+- **Created** and **last-modified timestamps**
+- **Actions** that vary by status: draft versions can be edited or previewed, published versions can be previewed or archived, archived versions are preview-only

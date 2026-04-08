@@ -1,34 +1,35 @@
 ---
 title: "Attributen"
-description: "Tenant-level attribuutdefinities, toegestane waarden en variantmatching."
+description: "Tenant-scoped attribuutregister met sleutels, weergavenamen, toegestane waarden en variantclassificatie."
 section: "platform"
-sortOrder: 15
+sortOrder: 18
 ---
 
 ## Attributen
 
-Attributen zijn tenant-level sleutel-waardedefinities die worden gebruikt om varianten te taggen en automatische variantresolutie aan te sturen.
+Attributen zijn een tenant-scoped register van sleutels die worden gebruikt om varianten te classificeren en automatische variantresolutie aan te sturen.
 
-### Tenant-level definities
+### Attribuutdefinities
 
-Elke tenant definieert zijn eigen set attributen. Veelvoorkomende voorbeelden zijn:
+Elke attribuutdefinitie heeft:
 
-- `language` — Documenttaal (nl, en, de, ...)
-- `brand` — Bedrijfsonderdeel of merkidentiteit
-- `channel` — Outputkanaal (print, e-mail, web)
+- **Sleutel** — Een slug-identifier (bijv. `taal`, `merk`, `kanaal`)
+- **Weergavenaam** — Een leesbaar label (bijv. "Taal", "Merk")
+- **Toegestane waarden** — Een optionele lijst van toegestane waarden. Indien leeg, wordt elke waarde geaccepteerd
 
-### Toegestane waarden
+### Gebruik
 
-Attributen kunnen een gedefinieerde set toegestane waarden hebben. Dit voorkomt typefouten en waarborgt consistentie tussen templates en API-aanroepen.
+Attributen dienen twee doelen:
 
-Bijvoorbeeld, een `language`-attribuut kan toestaan: `nl`, `en`, `de`, `fr`.
+1. **Variantclassificatie** — Varianten worden getagd met attribuut-sleutel-waardeparen (bijv. `taal=nl`, `merk=zakelijk`) die hun kenmerken beschrijven
+2. **Automatische variantresolutie** — Wanneer een renderverzoek attributen bevat, matcht de resolver deze tegen variantattributen om de beste match te vinden
 
-### Variantmatching
+### In de UI
 
-Wanneer een renderverzoek attributen bevat, gebruikt de variantresolver deze om de best passende variant te vinden:
+De attribuutlijstpagina toont een tabel met kolommen voor:
 
-1. **Verplichte attributen** — Het verzoek markeert bepaalde attributen als verplicht; varianten die deze missen worden geëlimineerd
-2. **Optionele attributen** — Extra attributen die de matchscore verbeteren
-3. **Scoring** — Varianten ontvangen punten voor matchende optionele attributen en voor specificiteit
+- **Sleutel** — De attribuutslug
+- **Weergavenaam** — Het leesbare label
+- **Toegestane waarden** — Weergegeven als badges
 
-Dit mechanisme laat API-consumenten hun intentie beschrijven zonder te koppelen aan specifieke variant-ID's.
+Klikken op een attribuut opent een bewerkdialoog (geladen via HTMX) voor het wijzigen van de weergavenaam en toegestane waarden.

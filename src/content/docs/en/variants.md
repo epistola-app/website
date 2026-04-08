@@ -1,39 +1,41 @@
 ---
 title: "Variants"
-description: "Multiple presentations of a template, attribute matching, and the variant resolver."
+description: "Presentation variations of a template with attribute-based resolution, scoring, and default fallback."
 section: "core-concepts"
-sortOrder: 2
+sortOrder: 3
 ---
 
 ## Variants
 
-Variants allow a single template to produce different document presentations based on context — such as language, brand, or channel.
+Variants are presentation variations of a single template. A `decision-letter` template might have variants for Dutch, English, corporate branding, or consumer branding — each sharing the same data contract but with its own layout and styling.
 
-### Multiple presentations
+### Variant properties
 
-A template can have any number of variants. Each variant shares the parent template's data contract but maintains its own layout, styling, and version history.
+Each variant has:
 
-For example, a `decision-letter` template might have:
+- **Title** — A display name (e.g., "Dutch — Corporate")
+- **Slug** — A unique identifier within the template
+- **Attributes** — Key-value pairs drawn from the tenant's attribute definitions (e.g., `language=nl`, `brand=corporate`)
+- **Default flag** — Exactly one variant per template is marked as default
 
-- `nl-default` — Dutch version with municipal branding
-- `en-default` — English translation
-- `nl-business` — Dutch version with business unit branding
+### Variant resolution
 
-### Attributes
+When a render request provides attributes instead of a specific variant ID, the resolver automatically selects the best match:
 
-Variants are tagged with attributes — key-value pairs that describe their characteristics (e.g., `language=nl`, `brand=business`). These attributes drive the automatic variant resolution process.
+1. **Filter** — Eliminate variants that lack any required attribute from the request
+2. **Score** — Award points for matching optional attributes (weighted 10x) with attribute count as tiebreaker
+3. **Select** — Pick the highest-scoring variant
+4. **Fallback** — If no candidates remain, use the default variant
 
-### Default variant
+This lets API consumers describe intent (e.g., "Dutch, business brand") without knowing specific variant IDs.
 
-Every template must have exactly one default variant. The default is used as a fallback when no other variant matches the requested attributes.
+### In the UI
 
-### Resolution algorithm
+Variants appear as cards on the Variants tab of the template detail page. Each card shows:
 
-When a render request includes attributes instead of a specific variant ID, the resolver:
+- The variant title and slug
+- Attribute badges for assigned key-value pairs
+- Status badges showing draft and published version counts
+- Inline editing for title, slug, and attributes
 
-1. **Filters** — Removes variants missing any required attribute
-2. **Scores** — Awards points for optional attribute matches and specificity
-3. **Selects** — Picks the highest-scoring variant
-4. **Falls back** — Uses the default variant if no candidates remain
-
-This lets API consumers describe their intent (e.g., "Dutch, business brand") without knowing the exact variant ID.
+Use the attribute filter above the cards to narrow the list by specific attribute values.

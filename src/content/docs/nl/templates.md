@@ -1,46 +1,43 @@
 ---
 title: "Templates"
-description: "Wat templates zijn, datacontracten en benoemde datavoorbeelden."
+description: "De kernresource in Epistola: naam, datacontract, datavoorbeelden, instellingen en de template-detailpagina."
 section: "core-concepts"
 sortOrder: 1
 ---
 
 ## Templates
 
-Templates zijn de kernbouwsteen in Epistola. Elke template definieert de structuur, lay-out en het datacontract voor een specifiek documenttype.
+Templates zijn de kernresource in Epistola. Een template vertegenwoordigt een specifiek documenttype — zoals een besluitbrief, factuur of vergunning — en bevat alles wat nodig is om het te produceren.
 
-### Wat is een template?
+### Wat een template bevat
 
-Een template combineert:
+Elke template heeft:
 
-- **Lay-out** — De visuele structuur van het document, ontworpen in de Epistola Suite-editor
-- **Datacontract** — Een JSON Schema dat definieert welke data de template verwacht
-- **Benoemde datavoorbeelden** — Voorbeeld-payloads die het schema valideren en het document previewen
+- **Naam** — Een weergavenaam en een unieke slug gescoped naar de tenant (bijv. `besluitbrief`)
+- **Datacontract** — Een JSON Schema (Draft 2020-12) dat de vereiste invoerdatastructuur definieert
+- **Benoemde datavoorbeelden** — Opgeslagen JSON-payloads voor het testen en previewen van de template
+- **Instellingen** — Standaardthemaselectie en PDF/A-compliancetoggle
 
-### Datacontracten
+### Templatelijstpagina
 
-Elke template declareert een JSON Schema (Draft 2020-12) dat de vorm van de geaccepteerde data beschrijft. Wanneer een renderverzoek binnenkomt, valideert Epistola de payload tegen dit schema vóór verwerking.
+De templatelijstpagina biedt:
 
-```json
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "properties": {
-    "ontvanger": { "type": "string" },
-    "besluitdatum": { "type": "string", "format": "date" }
-  },
-  "required": ["ontvanger", "besluitdatum"]
-}
-```
+- **Zoeken** — Filter templates op naam of slug
+- **Tabelweergave** — Elke rij toont de templatenaam, slug, aantal varianten en laatst-gewijzigd-tijdstempel
 
-### Benoemde datavoorbeelden
+Klik op een template om de detailpagina te openen.
 
-Templates kunnen benoemde datavoorbeelden bevatten — opgeslagen JSON-payloads die voldoen aan het schema. Deze dienen als:
+### Template-detailpagina
 
-- **Preview-data** — Snel zien hoe de template rendert met realistische inhoud
-- **Regressietests** — Voorbeelden automatisch afspelen in CI om breaking changes te detecteren
-- **Documentatie** — Consumenten precies laten zien welke datastructuur de template verwacht
+De template-detailpagina is georganiseerd in vier tabbladen:
+
+| Tabblad | Doel |
+|---|---|
+| **Varianten** | Beheer presentatievarianten — aanmaken, bewerken, attributen instellen, standaard markeren |
+| **Deployments** | Bekijk en beheer welke versie actief is per variant per omgeving |
+| **Datacontract** | Bewerk het JSON Schema en beheer benoemde datavoorbeelden |
+| **Instellingen** | Configureer het standaardthema en PDF/A-compliance |
 
 ### Templateslugs
 
-Elke template heeft een unieke slug die is gescoped naar zijn tenant (bijv. `besluitbrief`). De slug is de stabiele identifier die wordt gebruikt in API-aanroepen en workflowconfiguraties.
+De slug is de stabiele identifier die wordt gebruikt in API-aanroepen, workflowconfiguraties en catalogusreferenties. Deze is uniek binnen een tenant en onveranderlijk zodra ingesteld.

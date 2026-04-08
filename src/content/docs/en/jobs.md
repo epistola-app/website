@@ -1,39 +1,45 @@
 ---
 title: "Jobs"
-description: "Job lifecycle, status tracking, cancellation, and batch items."
+description: "Job lifecycle from PENDING to COMPLETED, per-item batch tracking, filtering, and cancellation."
 section: "generation"
-sortOrder: 12
+sortOrder: 15
 ---
 
 ## Jobs
 
-Every document generation request creates a job. Jobs track the lifecycle of rendering from request to completion.
+Every document generation request creates a job. Jobs track the full lifecycle of rendering from request to completion.
 
 ### Job lifecycle
 
+Jobs move through these states:
+
 | State | Description |
 |---|---|
-| **Pending** | Job created, queued for processing |
-| **Processing** | Template is being rendered with the provided data |
-| **Completed** | Document is ready for download |
-| **Failed** | Rendering failed (validation error, engine error, etc.) |
-| **Cancelled** | Job was cancelled before completion |
+| **PENDING** | Job created, queued for processing |
+| **IN_PROGRESS** | Template is being rendered with the provided data |
+| **COMPLETED** | Document is ready for download |
+| **FAILED** | Rendering failed (validation error, engine error, etc.) |
+| **CANCELLED** | Job was cancelled before completion |
 
-### Status tracking
+### Batch item tracking
 
-Jobs expose a status endpoint that returns the current state, progress (for batch jobs), and any error details. Consumers can:
+In a batch job, each data payload is tracked as a separate item with its own lifecycle. Items process independently — a failed item does not block other items in the batch.
 
-- **Poll** the status endpoint periodically
-- **Subscribe** to webhook notifications for state changes
+### Filtering
+
+Jobs can be filtered by:
+
+- **Status** — Show only completed, failed, in-progress, or cancelled jobs
+- **Date range** — Narrow results to a specific time period
 
 ### Cancellation
 
-Jobs can be cancelled while in the Pending or Processing state. Cancelled jobs release their resources and stop further processing. Already-completed batch items remain available for download.
+Jobs in the PENDING or IN_PROGRESS state can be cancelled. Cancellation stops further processing and releases resources. Already-completed batch items remain available for download.
 
-### Batch items
+### Job retention
 
-In a batch job, each data payload is tracked as a separate batch item with its own lifecycle:
+Jobs follow configurable retention and cleanup policies. Completed jobs and their documents are retained for a defined period before automatic cleanup.
 
-- Items process independently and can complete in any order
-- Failed items don't block other items in the batch
-- The parent job tracks overall progress as a percentage of completed items
+### In the UI
+
+The recent jobs table in the generation history dashboard displays jobs with color-coded status badges: green for completed, blue for in-progress, red for failed, and yellow for cancelled.

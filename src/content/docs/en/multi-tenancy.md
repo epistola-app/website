@@ -1,35 +1,24 @@
 ---
 title: "Multi-tenancy"
-description: "Tenant scoping, data isolation, and tenant management."
+description: "Tenant-scoped resources with slug identifiers, data isolation, tenant switcher, and per-tenant dashboards."
 section: "platform"
-sortOrder: 14
+sortOrder: 17
 ---
 
 ## Multi-tenancy
 
-Epistola is multi-tenant by default. Every resource — templates, themes, assets, and configurations — is scoped to a tenant.
+Epistola is multi-tenant by default. Tenants are the top-level organizational unit, and every resource — templates, themes, assets, environments, attributes — is scoped to a tenant.
 
-### Tenant scoping
+### Tenant identifiers
 
-All API operations are scoped to the authenticated tenant. A template slug like `decision-letter` is unique within a tenant but can exist independently in other tenants.
+Each tenant has a slug identifier: 3–63 characters, kebab-case (e.g., `gemeente-amsterdam`). The slug appears in all API paths and is the primary key for tenant scoping.
 
 ### Data isolation
 
-Tenants are fully isolated:
+All resources are tenant-scoped. Data isolation is enforced at the business logic layer — there is no cross-tenant data access. A template slug like `decision-letter` is unique within a tenant but can exist independently in other tenants.
 
-- **Templates** — Each tenant manages its own template library
-- **Themes** — Tenant-specific styling and branding
-- **Assets** — Uploaded images and resources are tenant-scoped
-- **Configurations** — Attributes, environments, and settings per tenant
+### In the UI
 
-There is no cross-tenant data access. The platform enforces isolation at the API and database level.
-
-### Tenant management
-
-Tenants are managed through Keycloak:
-
-- Each tenant maps to a Keycloak realm or group
-- Users authenticate via SSO and are automatically scoped to their tenant
-- Role-based access control governs who can author, publish, and manage templates
-
-Platform operators can onboard new tenants without deploying additional infrastructure.
+- **Tenant list page** — A standalone page (outside the main application shell) showing all tenants the user has access to
+- **Tenant switcher** — Located in the navigation bar (top right), allowing quick switching between tenants without leaving the application
+- **Tenant dashboard** — Each tenant has its own dashboard with statistics and quick-action shortcuts for common tasks

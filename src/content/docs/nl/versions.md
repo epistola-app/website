@@ -1,41 +1,34 @@
 ---
 title: "Versies"
-description: "Templateversielevenscyclus: Concept, Gepubliceerd en Gearchiveerd."
+description: "Genummerde versielevenscyclus per variant: Concept, Gepubliceerd en Gearchiveerd met onveranderlijkheidsgaranties."
 section: "core-concepts"
-sortOrder: 3
+sortOrder: 4
 ---
 
 ## Versies
 
-Elke variant behoudt een onveranderlijke versiegeschiedenis. Versies doorlopen een strikte levenscyclus die reproduceerbaarheid en controleerbaarheid waarborgt.
+Elke variant heeft een genummerde versiegeschiedenis. Versies lopen van 1 tot 200 per variant en doorlopen een strikte levenscyclus die reproduceerbaarheid en controleerbaarheid garandeert.
 
 ### Levenscyclusstatussen
 
-| Status | Beschrijving |
-|---|---|
-| **Concept** | In bewerking — bewerkbaar, nog niet beschikbaar voor rendering |
-| **Gepubliceerd** | Vergrendeld en beschikbaar voor rendering in toegewezen omgevingen |
-| **Gearchiveerd** | Niet meer actief maar bewaard voor audit en reproductie |
+| Status | Bewerkbaar | Beschrijving |
+|---|---|---|
+| **CONCEPT** | Ja | Werk in uitvoering. Maximaal één concept per variant tegelijk. Kan bewerkt en gepreviewd worden. |
+| **GEPUBLICEERD** | Nee | Bevroren en onveranderlijk. Inhoud, themasnapshot en schemahash zijn vergrendeld. Kan gepreviewd of gearchiveerd worden. |
+| **GEARCHIVEERD** | Nee | Alleen-lezen, bewaard voor audit. Kan alleen gepreviewd worden. |
 
 ### Onveranderlijkheid
 
-Zodra een versie is gepubliceerd, wordt de inhoud bevroren:
-
-- De templatelay-out wordt vergrendeld
-- De themasnapshot wordt vastgelegd
-- De schemahash wordt geregistreerd
-
-Dit garandeert dat dezelfde invoerdata altijd dezelfde output produceert, zelfs jaren later.
+Zodra een versie is gepubliceerd, kan de inhoud niet meer wijzigen. De lay-out, themasnapshot en schemahash zijn allemaal bevroren. Dit garandeert dat dezelfde invoerdata altijd dezelfde output produceert, zelfs jaren later.
 
 ### Versienummering
 
-Versies worden sequentieel genummerd binnen elke variant (v1, v2, v3, ...). Elk nieuw concept ontvangt automatisch het volgende versienummer.
+Versies worden sequentieel genummerd binnen elke variant (v1, v2, v3, ...). Elk nieuw concept krijgt automatisch het volgende beschikbare nummer.
 
-### Publiceren
+### In de UI
 
-Het publiceren van een conceptversie:
+Het versiegeschiedenisdialoog toont een tabel met:
 
-1. Vergrendelt de lay-out en themasnapshot
-2. Registreert de schemahash voor reproduceerbaarheid
-3. Maakt de versie beschikbaar voor omgevingsactivatie
-4. Creëert een audittrail-vermelding
+- **Versienummer** en **statusbadge**
+- **Aangemaakt** en **laatst-gewijzigd-tijdstempels**
+- **Acties** die variëren per status: conceptversies kunnen bewerkt of gepreviewd worden, gepubliceerde versies kunnen gepreviewd of gearchiveerd worden, gearchiveerde versies zijn alleen preview

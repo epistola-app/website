@@ -1,39 +1,37 @@
 ---
 title: "Rich Text"
-description: "ProseMirror-based formatting and expression chip insertion."
+description: "ProseMirror-based inline editing with formatting, lists, links, and expression chip insertion."
 section: "editor"
-sortOrder: 10
+sortOrder: 13
 ---
 
 ## Rich Text
 
-The Epistola editor uses ProseMirror for rich text editing, providing a familiar word-processor experience within the template designer.
+Text blocks in the Epistola editor use ProseMirror for inline rich text editing. Authors get a familiar word-processor experience within the template designer.
 
 ### Formatting
 
-Supported formatting options include:
+Supported formatting options:
 
 - **Bold**, *italic*, and underline
-- Headings (H1–H6)
-- Ordered and unordered lists
-- Text alignment (left, center, right, justify)
-- Font size and color overrides
-- Links
+- Subscript and superscript
+- Links with text preservation
 
-### Expression chip insertion
+### Lists
 
-Within any rich text block, authors can insert expression chips that resolve to dynamic data at render time. To insert a chip:
+- Ordered lists (numbered) with nesting support
+- Unordered lists (bulleted) with nesting support
 
-1. Place the cursor where the dynamic value should appear
-2. Open the expression picker
-3. Choose the expression type (simple path, JSONata, or JavaScript)
-4. Enter the expression
-5. The chip appears inline with a preview of the resolved value
+### Expression chips
+
+Authors can insert expression chips directly into text content via an inline dialog. Chips appear as distinct visual elements within the text flow, clearly distinguishing dynamic data from static content.
+
+Each chip shows the resolved value from the selected data example, so authors see realistic output as they edit.
 
 ### Mixing static and dynamic content
 
 Text blocks freely mix static text with expression chips. For example:
 
-> Dear **{recipientName}**, your application dated **{applicationDate}** has been **{decision}**.
+> Dear **{{recipientName}}**, your application dated **{{applicationDate}}** has been **{{decision}}**.
 
 Each chip resolves independently, allowing complex sentences built from multiple data points.

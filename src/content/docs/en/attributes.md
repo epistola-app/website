@@ -1,34 +1,35 @@
 ---
 title: "Attributes"
-description: "Tenant-level attribute definitions, allowed values, and variant matching."
+description: "Tenant-scoped attribute registry with keys, display names, allowed values, and variant classification."
 section: "platform"
-sortOrder: 15
+sortOrder: 18
 ---
 
 ## Attributes
 
-Attributes are tenant-level key-value definitions used to tag variants and drive automatic variant resolution.
+Attributes are a tenant-scoped registry of keys used to classify variants and drive automatic variant resolution.
 
-### Tenant-level definitions
+### Attribute definitions
 
-Each tenant defines its own set of attributes. Common examples include:
+Each attribute definition has:
 
-- `language` — Document language (nl, en, de, ...)
-- `brand` — Business unit or brand identity
-- `channel` — Output channel (print, email, web)
+- **Key** — A slug identifier (e.g., `language`, `brand`, `channel`)
+- **Display name** — A human-readable label (e.g., "Language", "Brand")
+- **Allowed values** — An optional list of permitted values. If empty, any value is accepted
 
-### Allowed values
+### Usage
 
-Attributes can have a defined set of allowed values. This prevents typos and ensures consistency across templates and API calls.
+Attributes serve two purposes:
 
-For example, a `language` attribute might allow: `nl`, `en`, `de`, `fr`.
+1. **Variant classification** — Variants are tagged with attribute key-value pairs (e.g., `language=nl`, `brand=corporate`) that describe their characteristics
+2. **Automatic variant resolution** — When a render request includes attributes, the resolver matches them against variant attributes to find the best fit
 
-### Variant matching
+### In the UI
 
-When a render request includes attributes, the variant resolver uses them to find the best matching variant:
+The attributes list page shows a table with columns for:
 
-1. **Required attributes** — The request marks certain attributes as required; variants missing these are eliminated
-2. **Optional attributes** — Additional attributes that improve the match score
-3. **Scoring** — Variants receive points for matching optional attributes and for specificity
+- **Key** — The attribute slug
+- **Display name** — The human-readable label
+- **Allowed values** — Displayed as badges
 
-This mechanism lets API consumers describe their intent without coupling to specific variant IDs.
+Clicking an attribute opens an edit dialog (loaded via HTMX) for modifying the display name and allowed values.

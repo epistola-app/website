@@ -1,40 +1,41 @@
 ---
 title: "Stencils"
-description: "Herbruikbare templatecomponenten met versiebeheer en upgrade-propagatie."
+description: "Versiebeheerde, herbruikbare templatecomponenten met insert-als-kopie-semantiek en bulk-upgradepropagatie."
 section: "core-concepts"
-sortOrder: 6
+sortOrder: 9
 ---
 
 ## Stencils
 
-Stencils zijn herbruikbare documentcomponenten die gedeeld kunnen worden tussen templates. Ze maken consistente bouwstenen mogelijk zonder inhoud te dupliceren.
+Stencils zijn versiebeheerde, herbruikbare templatecomponenten — zoals adresblokken, standaardheaders, handtekeningblokken of juridische disclaimers. Ze laten teams consistente bouwstenen onderhouden over templates heen.
 
-### Wat zijn stencils?
+### Insert-als-kopie
 
-Een stencil is een voorgebouwd documentfragment — zoals een standaard koptekst, voettekst, handtekeningblok of juridische disclaimer. Auteurs kunnen stencils in elke template invoegen om consistentie te behouden.
+Wanneer een stencil in een template wordt ingevoegd, wordt de inhoud gekopieerd op het moment van invoegen. De template behoudt geen live referentie naar de stencil. Dit betekent:
 
-### Versiebeheer
-
-Stencils volgen hetzelfde versiemodel als templates:
-
-- Elke stencil heeft zijn eigen versiegeschiedenis
-- Gepubliceerde versies zijn onveranderlijk
-- Updates creëren nieuwe versies zonder bestaand gebruik te beïnvloeden
-
-### Invoegen-als-kopie
-
-Wanneer een stencil in een template wordt ingevoegd, wordt de inhoud gekopieerd op het moment van invoegen. Dit betekent:
-
-- De template is zelfstandig — hij is niet afhankelijk van de stencil tijdens rendering
-- Wijzigingen aan de stencil propageren niet automatisch naar bestaande templates
+- Templates zijn zelfstandig op het moment van rendering
+- Wijzigingen aan de stencil propageren niet automatisch
 - Auteurs kunnen de ingevoegde inhoud aanpassen voor hun specifieke template
 
-### Upgrade-propagatie
+### Versielevenscyclus
 
-Wanneer een stencil wordt bijgewerkt, ontvangen auteurs upgrademeldingen voor templates die oudere versies gebruiken. Ze kunnen:
+Stencils volgen dezelfde versielevenscyclus als templates:
 
-- De wijzigingen in de nieuwe stencilversie **bekijken**
-- De upgrade **accepteren** om de nieuwste inhoud op te halen
-- De upgrade **overslaan** en hun huidige versie behouden
+| Status | Beschrijving |
+|---|---|
+| **CONCEPT** | Bewerkbaar, werk in uitvoering |
+| **GEPUBLICEERD** | Bevroren en onveranderlijk |
+| **GEARCHIVEERD** | Alleen-lezen, bewaard voor audit |
 
-Dit geeft teams de voordelen van hergebruik met behoud van controle over wanneer wijzigingen propageren.
+### Upgradeworkflow
+
+Wanneer een nieuwe stencilversie wordt gepubliceerd, kunnen auteurs de update propageren naar templates die oudere versies gebruiken:
+
+1. **Selecteer versie** — Kies de nieuwe stencilversie om te propageren
+2. **Selecteer templates** — Kies welke templates de update moeten ontvangen
+3. **Bulk toepassen** — Pas de upgrade toe met voortgangsregistratie
+
+### In de UI
+
+- **Stencilslijst** — Zoek en filter op tags. Elke kaart toont de stencilnaam en tagbadges
+- **Stencil-detailpagina** — Toont versiegeschiedenis, een gebruikstabel met alle templates die de stencil bevatten, en de bulk-upgradepropagatiebediening

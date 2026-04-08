@@ -1,39 +1,45 @@
 ---
 title: "Jobs"
-description: "Joblevenscyclus, statustracking, annulering en batch-items."
+description: "Joblevenscyclus van PENDING tot COMPLETED, per-item batchtracking, filtering en annulering."
 section: "generation"
-sortOrder: 12
+sortOrder: 15
 ---
 
 ## Jobs
 
-Elk documentgeneratieverzoek creëert een job. Jobs volgen de levenscyclus van rendering van verzoek tot voltooiing.
+Elk documentgeneratieverzoek maakt een job aan. Jobs volgen de volledige levenscyclus van rendering, van verzoek tot voltooiing.
 
 ### Joblevenscyclus
 
+Jobs doorlopen deze statussen:
+
 | Status | Beschrijving |
 |---|---|
-| **In wachtrij** | Job aangemaakt, in de wachtrij voor verwerking |
-| **Verwerking** | Template wordt gerenderd met de aangeleverde data |
-| **Voltooid** | Document is klaar voor download |
-| **Mislukt** | Rendering mislukt (validatiefout, enginefout, etc.) |
-| **Geannuleerd** | Job is geannuleerd vóór voltooiing |
+| **PENDING** | Job aangemaakt, in wachtrij voor verwerking |
+| **IN_PROGRESS** | Template wordt gerenderd met de verstrekte data |
+| **COMPLETED** | Document is klaar om te downloaden |
+| **FAILED** | Rendering mislukt (validatiefout, enginefout, etc.) |
+| **CANCELLED** | Job is geannuleerd vóór voltooiing |
 
-### Statustracking
+### Batch-itemtracking
 
-Jobs bieden een statuseindpunt dat de huidige status, voortgang (voor batchjobs) en eventuele foutdetails retourneert. Consumenten kunnen:
+In een batchjob wordt elke datapayload bijgehouden als een apart item met een eigen levenscyclus. Items worden onafhankelijk verwerkt — een mislukt item blokkeert andere items in de batch niet.
 
-- Het statuseindpunt periodiek **pollen**
-- **Abonneren** op webhooknotificaties voor statuswijzigingen
+### Filtering
+
+Jobs kunnen gefilterd worden op:
+
+- **Status** — Toon alleen voltooide, mislukte, lopende of geannuleerde jobs
+- **Datumbereik** — Beperk resultaten tot een specifieke periode
 
 ### Annulering
 
-Jobs kunnen worden geannuleerd terwijl ze in de status In wachtrij of Verwerking zijn. Geannuleerde jobs geven hun resources vrij en stoppen verdere verwerking. Reeds voltooide batch-items blijven beschikbaar voor download.
+Jobs in de PENDING- of IN_PROGRESS-status kunnen worden geannuleerd. Annulering stopt verdere verwerking en maakt resources vrij. Reeds voltooide batch-items blijven beschikbaar voor download.
 
-### Batch-items
+### Jobretentie
 
-In een batchjob wordt elke datapayload gevolgd als een apart batch-item met zijn eigen levenscyclus:
+Jobs volgen configureerbare retentie- en opschoonbeleiden. Voltooide jobs en hun documenten worden bewaard voor een gedefinieerde periode vóór automatische opschoning.
 
-- Items worden onafhankelijk verwerkt en kunnen in willekeurige volgorde voltooid worden
-- Mislukte items blokkeren geen andere items in de batch
-- De bovenliggende job volgt de totale voortgang als percentage van voltooide items
+### In de UI
+
+De recente-jobstabel in het generatiegeschiedenisdashboard toont jobs met kleurgecodeerde statusbadges: groen voor voltooid, blauw voor lopend, rood voor mislukt en geel voor geannuleerd.

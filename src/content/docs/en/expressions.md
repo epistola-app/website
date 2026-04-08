@@ -1,21 +1,19 @@
 ---
 title: "Expressions"
-description: "Expression languages: JSONata, JavaScript, simple paths, and live evaluation."
+description: "Three expression languages — JSONata, JavaScript, Simple Path — with live evaluation and inline chip rendering."
 section: "editor"
-sortOrder: 9
+sortOrder: 12
 ---
 
 ## Expressions
 
-Expressions are the bridge between your data and your template. They resolve dynamic values from the render payload into the document.
+Expressions connect template content to data. Each expression is stored in all three supported languages, and the rendering engine evaluates the one matching the configured default.
 
-### Expression types
+### Expression languages
 
-Epistola supports three expression languages:
+#### Simple Path
 
-#### Simple path
-
-Direct property access using dot notation:
+Lightweight dot-path traversal for straightforward data access:
 
 ```
 recipientName
@@ -23,35 +21,39 @@ address.city
 items[0].description
 ```
 
-Best for straightforward data bindings without transformation.
+Best for direct property lookups without transformation.
 
 #### JSONata
 
-A powerful query and transformation language for JSON data:
+The default expression language, using the Dashjoin implementation. Supports paths, filters, aggregations, and formatting:
 
 ```
 $uppercase(recipientName)
 $sum(items.amount)
 $now('[D] [MNn] [Y]')
+items[price > 100].description
 ```
-
-Use JSONata when you need to filter, aggregate, or format data.
 
 #### JavaScript
 
-Full JavaScript expressions for complex logic:
+GraalJS-sandboxed JavaScript for complex logic. No file system or network access is available:
 
 ```javascript
 data.items.filter(i => i.amount > 100).length
 new Date(data.decisionDate).toLocaleDateString('nl-NL')
 ```
 
-Use JavaScript when JSONata doesn't cover your transformation needs.
+### Where expressions are used
 
-### Inline chips
+- **Text interpolation** — `{{expression}}` within rich text blocks, rendered as inline chips
+- **Conditional visibility** — Determines whether a conditional block is shown or hidden
+- **Loop iteration** — Defines the array that a loop block iterates over
+- **Table cell values** — Binds data table columns to data paths
 
-In the editor, expressions appear as inline chips within text blocks. Chips are visually distinct from static text, making it clear which parts of the document are dynamic.
+### In the UI
 
-### Live evaluation
+The expression dialog lets authors write and test expressions. It provides:
 
-The editor evaluates expressions in real-time against the selected data example. Authors can see actual resolved values as they edit, reducing trial-and-error during template design.
+- **Live evaluation preview** — Shows the resolved value against the selected data example in real time
+- **JSONata reference** — Built-in documentation for JSONata syntax and functions
+- **Language selector** — Switch between Simple Path, JSONata, and JavaScript

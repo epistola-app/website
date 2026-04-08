@@ -1,42 +1,40 @@
 ---
 title: "Themes"
-description: "Style definitions, page settings, the style cascade, and theme selection."
+description: "Reusable style definitions with document styles, page settings, block style presets, and a multi-level style cascade."
 section: "core-concepts"
-sortOrder: 5
+sortOrder: 8
 ---
 
 ## Themes
 
-Themes define the visual styling of documents — fonts, colors, spacing, page dimensions, and more. They cascade from tenant to template to variant.
+Themes are reusable style definitions shared across templates. A theme controls how documents look — from typography and colors to page dimensions and block-level formatting.
 
-### Style definitions
+### What a theme contains
 
-A theme includes:
-
-- **Typography** — Font families, sizes, line heights
-- **Colors** — Text, accent, border, and background colors
-- **Page settings** — Paper size, margins, orientation
-- **Spacing** — Section gaps, paragraph spacing, list indentation
-
-### Page settings
-
-Themes control physical page properties:
-
-- Paper size (A4, Letter, custom)
-- Margins (top, bottom, left, right)
-- Orientation (portrait, landscape)
-- Header and footer dimensions
+- **Document styles** — Typography (font families, sizes, line heights), colors (text, accent, border, background), and alignment defaults
+- **Page settings** — Paper format (A4, Letter, etc.), orientation (portrait, landscape), and margins (top, bottom, left, right)
+- **Block style presets** — Named style sets per block type, allowing consistent formatting across blocks of the same type
+- **Spacing unit** — A base unit in points used to derive consistent spacing throughout the document
 
 ### Style cascade
 
-Themes cascade through three levels:
+Styles resolve through a four-level cascade:
 
-1. **Tenant default** — Base theme applied to all templates within a tenant
-2. **Template override** — Template-specific adjustments (e.g., add watermark)
-3. **Variant tweak** — Variant-specific refinements (e.g., switch heading font for a brand)
+1. **Theme document styles** — The base styles from the selected theme
+2. **Template document style overrides** — Template-specific adjustments
+3. **Block style preset** — The named preset applied to a specific block
+4. **Block inline styles** — Per-block overrides set directly in the editor
 
 Each level inherits from the one above and can override specific properties.
 
-### Theme selection
+### Theme selection cascade
 
-When a version is published, the active theme is snapshotted and frozen with the version. This ensures that rendering is deterministic — the same version always uses the same theme, regardless of later theme changes.
+The theme used for rendering resolves through three levels:
+
+1. **Variant-level override** — If the variant specifies a theme, that theme is used
+2. **Template-level** — If no variant override, the template's default theme applies
+3. **Tenant default** — If neither variant nor template specifies a theme, the tenant's default theme is used
+
+### In the UI
+
+The themes list page shows all themes with search filtering. The theme editor is an embedded web component that provides visual editing of all theme properties — typography, colors, page settings, and block style presets.

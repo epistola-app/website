@@ -1,38 +1,38 @@
 ---
 title: "Rendering"
-description: "iText PDF-engine, HTML-terugval en PDF/A-compliance."
+description: "iText Core PDF-engine, Playwright HTML-fallback, PDF/A-2b-compliance en outputformaten."
 section: "generation"
-sortOrder: 13
+sortOrder: 16
 ---
 
 ## Rendering
 
-Epistola gebruikt de iText PDF-bibliotheek als primaire renderingengine en produceert high-fidelity PDF-documenten uit templatedefinities en datapayloads.
+Epistola gebruikt iText Core 9.5.0 (Kotlin) als primaire renderingengine en produceert PDF-documenten direct vanuit de node/slot-grafiek van de template.
 
-### iText PDF-engine
+### Primaire engine: iText
 
-De iText-engine handelt het volgende af:
+De iText-engine mapt de interne node/slot-grafiek van de template direct naar iText-lay-outelementen. Belangrijke kenmerken:
 
-- **Lay-out** — Precieze paginalay-out die overeenkomt met het templateontwerp
-- **Typografie** — Font-embedding, kerning en Unicode-ondersteuning
-- **Graphics** — Afbeeldingen, QR-codes en vectorelementen
-- **Prestaties** — Typische rendertijden van 50–200ms per document
+- **Snel** — Typische rendertijden van 10–200ms per document
+- **Pure JVM** — Geen externe processen of afhankelijkheden nodig
+- **Directe mapping** — Templatenodes worden direct geconverteerd naar iText-elementen zonder tussenrepresentatie
 
-### HTML-terugval
+### Renderingfuncties
 
-Voor use cases die geen PDF-output vereisen, kan Epistola templates renderen naar HTML. Dit is handig voor:
+- **Automatische paginakop- en -voetteksten** — Gerenderd via iText event handlers, herhalend op elke pagina
+- **Automatische paginering** — Inhoud stroomt over pagina's met configureerbare spacing tussen blokken
+- **Cascade-opgeloste stijlen** — De volledige stijlcascade (thema → template → preset → inline) wordt opgelost bij rendering
+- **Server-side expressie-evaluatie** — Alle expressies worden op de server geëvalueerd vóór rendering
 
-- Webgebaseerde documentpreviews
-- E-mailbodygeneratie
-- Toegankelijkheidsscenario's waar HTML de voorkeur heeft
+### PDF/A-2b-compliance
 
-### PDF/A-compliance
+PDF/A-compliance kan per template worden in- of uitgeschakeld in het instellingentabblad. Wanneer ingeschakeld, produceert de engine documenten die voldoen aan de PDF/A-2b-standaard — met alle lettertypen ingebed, zonder externe afhankelijkheden, en met vereiste metadata voor langetermijnarchivering.
 
-Epistola ondersteunt PDF/A-output voor langdurige archivering. PDF/A-documenten:
+### Fallback: Playwright + HTML
 
-- Embedden alle lettertypen en resources
-- Vermijden externe afhankelijkheden
-- Bevatten documentmetadata
-- Voldoen aan ISO 19005 archiveringsstandaarden
+Voor lay-outs die complexe CSS vereisen die de iText-engine niet ondersteunt, gebruikt een fallbackpad Playwright om HTML naar PDF te renderen. Dit is langzamer maar handelt randgevallen af met geavanceerde CSS-lay-outs.
 
-Dit is cruciaal voor overheid en gereguleerde sectoren waar documenten tientallen jaren reproduceerbaar en toegankelijk moeten zijn.
+### Outputformaten
+
+- **PDF** — Het standaard outputformaat, gebruikt voor productiedocumenten
+- **HTML** — Beschikbaar voor e-mailbodygeneratie en webgebaseerde previews

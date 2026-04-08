@@ -1,40 +1,41 @@
 ---
 title: "Stencils"
-description: "Reusable template components with versioning and upgrade propagation."
+description: "Versioned, reusable template components with insert-as-copy semantics and bulk upgrade propagation."
 section: "core-concepts"
-sortOrder: 6
+sortOrder: 9
 ---
 
 ## Stencils
 
-Stencils are reusable document components that can be shared across templates. They enable consistent building blocks without duplicating content.
-
-### What are stencils?
-
-A stencil is a pre-built document fragment — such as a standard header, footer, signature block, or legal disclaimer. Authors can insert stencils into any template to maintain consistency.
-
-### Versioning
-
-Stencils follow the same versioning model as templates:
-
-- Each stencil has its own version history
-- Published versions are immutable
-- Updates create new versions without affecting existing usage
+Stencils are versioned, reusable template components — such as address blocks, standard headers, signature blocks, or legal disclaimers. They let teams maintain consistent building blocks across templates.
 
 ### Insert-as-copy
 
-When a stencil is inserted into a template, the content is copied at insertion time. This means:
+When a stencil is inserted into a template, the content is copied at insertion time. The template does not maintain a live reference to the stencil. This means:
 
-- The template is self-contained — it doesn't depend on the stencil at render time
-- Changes to the stencil don't automatically propagate to existing templates
+- Templates are self-contained at render time
+- Changes to the stencil do not automatically propagate
 - Authors can customize the inserted content for their specific template
 
-### Upgrade propagation
+### Version lifecycle
 
-When a stencil is updated, authors receive upgrade notifications for templates that use older versions. They can:
+Stencils follow the same version lifecycle as templates:
 
-- **Review** the changes in the new stencil version
-- **Accept** the upgrade to pull in the latest content
-- **Skip** the upgrade and keep their current version
+| State | Description |
+|---|---|
+| **DRAFT** | Editable, work in progress |
+| **PUBLISHED** | Frozen and immutable |
+| **ARCHIVED** | Read-only, preserved for audit |
 
-This gives teams the benefits of reuse while maintaining control over when changes propagate.
+### Upgrade workflow
+
+When a new stencil version is published, authors can propagate the update to templates that use older versions:
+
+1. **Select version** — Choose the new stencil version to propagate
+2. **Select templates** — Pick which templates should receive the update
+3. **Bulk apply** — Apply the upgrade with progress tracking
+
+### In the UI
+
+- **Stencils list** — Search and filter by tags. Each card shows the stencil name and tag badges
+- **Stencil detail page** — Shows version history, a usage tracking table listing all templates that contain the stencil, and the bulk upgrade propagation controls

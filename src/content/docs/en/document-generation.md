@@ -1,38 +1,38 @@
 ---
 title: "Document Generation"
-description: "Sync preview, async single and batch generation, and variant resolution."
+description: "Three generation modes — sync preview, async single, async batch — with variant resolution and schema validation."
 section: "generation"
-sortOrder: 11
+sortOrder: 14
 ---
 
 ## Document Generation
 
-Epistola generates documents by combining a published template version with a JSON data payload. There are several generation modes depending on the use case.
+Epistola generates documents by combining a published template version with a JSON data payload. Three generation modes serve different use cases.
 
-### Sync preview
+### Synchronous preview
 
-During template design, the editor provides synchronous preview rendering. Authors see a live preview of their template with sample data, updated in real time as they make changes.
+Used during template editing in the Suite. The editor sends preview requests and receives rendered output directly. Preview mode is rate-limited and does not produce PDF/A-compliant output.
 
-### Async single generation
+### Asynchronous single document
 
-For production use, documents are generated asynchronously:
+For production use. Submit a render request and receive a job ID immediately. The document is rendered in the background and produces a PDF/A-compliant, production-ready PDF.
 
-1. Submit a render request with the template slug and data payload
-2. Receive a job ID immediately
-3. Poll or receive a webhook when the document is ready
-4. Download the rendered PDF
+### Asynchronous batch
 
-Typical render times are 50–200ms for a single document.
+For high-volume scenarios. Submit an array of documents in a single request and receive a single job ID. Each document is tracked as a separate batch item with its own status.
 
-### Async batch generation
+### Features
 
-For high-volume scenarios, batch generation processes multiple documents in a single job:
+- **Variant resolution** — Specify a variant explicitly by ID, or provide attributes for automatic resolution via the scoring algorithm
+- **Environment selection** — Target a specific environment to use the version deployed there
+- **JSON Schema validation** — The data payload is validated against the template's data contract before rendering begins
+- **Customizable filename** — Set a custom filename for the generated document
+- **Correlation ID** — Attach a correlation ID for tracing through your systems
 
-1. Submit a batch request with the template slug and an array of data payloads
-2. Each payload becomes a batch item with its own status
-3. Webhooks notify your system as items complete
-4. Download individual documents or a combined archive
+### In the UI
 
-### Variant resolution
+The generation history dashboard shows:
 
-Render requests can specify a variant ID directly, or provide attributes for automatic resolution. The variant resolver scores all available variants and picks the best match, falling back to the default variant when no candidates meet the criteria.
+- **Stats cards** — Total jobs, queued, completed, and failed counts
+- **Most-used templates** — A table of the most frequently generated templates
+- **Recent jobs** — A filterable table of recent generation jobs with status badges
