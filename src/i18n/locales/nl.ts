@@ -7,6 +7,7 @@ const nl: Record<TranslationKey, string> = {
   "nav.platform": "Platform",
   "nav.integrations": "Integraties",
   "nav.pricing": "Prijzen",
+  "banner.wip": "Deze site is in ontwikkeling — inhoud en ontwerp kunnen veranderen.",
   "nav.about": "Over ons",
   "nav.company": "Bedrijf",
   "nav.docs": "Documentatie",

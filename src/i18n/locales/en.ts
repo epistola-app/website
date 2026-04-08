@@ -5,6 +5,7 @@ const en = {
   "nav.platform": "Platform",
   "nav.integrations": "Integrations",
   "nav.pricing": "Pricing",
+  "banner.wip": "This site is a work in progress — content and design may change.",
   "nav.about": "About",
   "nav.company": "Company",
   "nav.docs": "Docs",

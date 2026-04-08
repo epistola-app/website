@@ -265,6 +265,9 @@ const articleSchema = isArticle ? {
     </script>
   </head>
   <body class="font-sans antialiased flex flex-col min-h-screen overflow-x-hidden">
+    <div class="bg-[var(--color-peach-paper-accent)] text-white text-center text-xs font-medium py-1.5 px-4">
+      {t(lang, "banner.wip")}
+    </div>
     <Header lang={lang} />
     <main class="relative z-10 flex-1 bg-[var(--color-peach-paper-surface-soft)]">
       <slot />
