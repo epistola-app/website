@@ -36,8 +36,8 @@ const { lang = DEFAULT_LOCALE } = Astro.props;
       </p>
       <div class="flex flex-col gap-3 w-full justify-center lg:flex-row lg:gap-4 lg:justify-start">
         <SuiteDemoButton lang={lang} />
-        <Button href={localePath(lang, "/tour")} variant="secondary" size="md"> {t(lang, "tour.cta.startTour")} </Button>
-        <Button href={localePath(lang, "/docs")} variant="secondary" size="md"> {t(lang, "hero.cta.exploreDocs")} </Button>
+        <Button href={localePath(lang, "/learn/tour")} variant="secondary" size="md"> {t(lang, "tour.cta.startTour")} </Button>
+        <Button href={localePath(lang, "/learn")} variant="secondary" size="md"> {t(lang, "hero.cta.exploreDocs")} </Button>
       </div>
     </div>
   </div>

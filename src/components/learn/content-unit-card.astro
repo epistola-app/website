@@ -13,7 +13,7 @@ interface Props {
 }
 
 const { slug, title, summary, tags = [], lang = DEFAULT_LOCALE } = Astro.props;
-const href = localePath(lang, `/learn/${slug}`);
+const href = localePath(lang, `/learn/tour/${slug}`);
 ---
 
 <a href={href} class="group block">

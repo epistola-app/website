@@ -10,11 +10,11 @@ nextUnits:
     label: "Maak een template"
 deepLinks:
   - label: "API-overzicht"
-    url: "/nl/docs/api-overview"
+    url: "/nl/learn/suite/api-overview"
   - label: "Multi-tenancy"
-    url: "/nl/docs/multi-tenancy"
+    url: "/nl/learn/suite/multi-tenancy"
   - label: "Rendering"
-    url: "/nl/docs/rendering"
+    url: "/nl/learn/suite/rendering"
 tags:
   - technical
 sortOrder: 5

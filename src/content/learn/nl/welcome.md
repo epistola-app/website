@@ -11,11 +11,11 @@ nextUnits:
     label: "Technisch overzicht"
 deepLinks:
   - label: "Templates"
-    url: "/nl/docs/templates"
+    url: "/nl/learn/suite/templates"
   - label: "Versies"
-    url: "/nl/docs/versions"
+    url: "/nl/learn/suite/versions"
   - label: "Multi-tenancy"
-    url: "/nl/docs/multi-tenancy"
+    url: "/nl/learn/suite/multi-tenancy"
 tags:
   - getting-started
   - business

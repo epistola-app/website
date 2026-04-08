@@ -9,9 +9,9 @@ nextUnits:
     label: "Generate a document"
 deepLinks:
   - label: "API Overview"
-    url: "/en/docs/api-overview"
+    url: "/en/learn/suite/api-overview"
   - label: "Environments"
-    url: "/en/docs/environments"
+    url: "/en/learn/suite/environments"
 tags:
   - getting-started
   - technical

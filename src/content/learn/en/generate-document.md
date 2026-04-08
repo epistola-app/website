@@ -11,11 +11,11 @@ nextUnits:
     label: "Back to start"
 deepLinks:
   - label: "Document Generation"
-    url: "/en/docs/document-generation"
+    url: "/en/learn/suite/document-generation"
   - label: "Jobs"
-    url: "/en/docs/jobs"
+    url: "/en/learn/suite/jobs"
   - label: "Rendering"
-    url: "/en/docs/rendering"
+    url: "/en/learn/suite/rendering"
 tags:
   - getting-started
 sortOrder: 4

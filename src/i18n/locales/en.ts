@@ -286,6 +286,23 @@ const en = {
   "learn.description": "Explore Epistola through guided content units — from first template to production deployment.",
   "learn.filterAll": "All",
   "learn.readMore": "Read more",
+  "learn.path.tour.title": "Interactive Tour",
+  "learn.path.tour.description": "Take a guided walkthrough of Epistola with short videos and hands-on demos.",
+  "learn.path.suite.title": "Epistola Suite",
+  "learn.path.suite.description": "Reference documentation for templates, the editor, document generation, and the platform.",
+  "learn.path.integrations.title": "Integrations",
+  "learn.path.integrations.description": "Guides for connecting Epistola to Valtimo, ZGW, and other workflow engines.",
+
+  "suite.eyebrow": "Epistola Suite",
+  "suite.title": "Suite Documentation",
+  "suite.description": "Reference guides for every part of the Epistola document generation platform.",
+  "pages.suite.title": "Suite Documentation · Epistola",
+  "pages.suite.description": "Reference guides for templates, editor, generation, and the Epistola platform.",
+
+  "pages.integrationDocs.title": "Integration Guides · Epistola",
+  "pages.integrationDocs.description": "Guides for integrating Epistola with Valtimo, ZGW, and other platforms.",
+
+  "integrations.cta.viewDocs": "View integration guides",
 
   "tour.title": "Interactive Tour · Epistola",
   "tour.description": "Take a guided tour through Epistola and explore document generation step by step.",

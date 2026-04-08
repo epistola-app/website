@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../../../components/layout.astro";
-import { getStaticLocalePaths, filterByLocale, localePath, t, type Locale } from "../../../i18n";
+import Layout from "../../../../components/layout.astro";
+import { getStaticLocalePaths, filterByLocale, localePath, t, type Locale } from "../../../../i18n";
 
 export const getStaticPaths = getStaticLocalePaths;
 
@@ -12,7 +12,7 @@ const units = filterByLocale(allUnits, lang);
 
 const firstUnit = units[0];
 const firstSlug = firstUnit ? firstUnit.slug.replace(`${lang}/`, "") : "welcome";
-const redirectUrl = localePath(lang, `/learn/${firstSlug}`) + "?mode=explore";
+const redirectUrl = localePath(lang, `/learn/tour/${firstSlug}`) + "?mode=explore";
 ---
 
 <Layout lang={lang} title={t(lang, "pages.tour.title")} description={t(lang, "pages.tour.description")}>

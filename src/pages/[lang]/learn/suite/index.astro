@@ -1,8 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../../components/layout.astro";
-import Title from "../../components/ui/title.astro";
-import { getStaticLocalePaths, t, localePath, filterByLocale, type Locale } from "../../i18n";
+import Layout from "../../../../components/layout.astro";
+import Title from "../../../../components/ui/title.astro";
+import { getStaticLocalePaths, t, localePath, filterByLocale, type Locale } from "../../../../i18n";
 
 export const getStaticPaths = getStaticLocalePaths;
 const lang = Astro.params.lang as Locale;
@@ -20,15 +20,15 @@ const sections = [
 
 <Layout
   lang={lang}
-  title={t(lang, "pages.docs.title")}
-  description={t(lang, "pages.docs.description")}
+  title={t(lang, "pages.suite.title")}
+  description={t(lang, "pages.suite.description")}
 >
   <section class="pt-32 pb-16">
     <div class="mx-auto max-w-3xl px-4 text-center">
-      <p class="eyebrow">{t(lang, "docs.eyebrow")}</p>
-      <Title level={1} class="mt-6">{t(lang, "docs.title")}</Title>
+      <p class="eyebrow">{t(lang, "suite.eyebrow")}</p>
+      <Title level={1} class="mt-6">{t(lang, "suite.title")}</Title>
       <p class="mt-4 text-lg text-[var(--muted-text)]">
-        {t(lang, "docs.description")}
+        {t(lang, "suite.description")}
       </p>
     </div>
   </section>
@@ -46,7 +46,7 @@ const sections = [
                 const slug = doc.slug.replace(`${lang}/`, "");
                 return (
                   <a
-                    href={localePath(lang, `/docs/${slug}`)}
+                    href={localePath(lang, `/learn/suite/${slug}`)}
                     class="group block rounded-xl border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-surface)] p-5 transition-colors hover:border-[var(--color-peach-paper-border-strong)] hover:bg-[var(--color-peach-paper-surface-soft)]"
                   >
                     <h3 class="font-semibold text-[var(--color-peach-paper-heading)] group-hover:text-[var(--color-peach-paper-accent)]">

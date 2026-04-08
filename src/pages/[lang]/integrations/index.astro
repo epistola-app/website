@@ -1,33 +1,14 @@
 ---
-import { getCollection } from "astro:content";
 import Layout from "../../../components/layout.astro";
 import IntegrationsOverview from "../../../components/integrations-overview.astro";
 import IntegrationsProcess from "../../../components/integrations-process.astro";
 import Join from "../../../components/join.astro";
 import PageHero from "../../../components/page-hero.astro";
-import Title from "../../../components/ui/title.astro";
-import { getStaticLocalePaths, t, localePath, filterByLocale, type Locale, type TranslationKey } from "../../../i18n";
+import Button from "../../../components/ui/button.astro";
+import { getStaticLocalePaths, t, localePath, type Locale } from "../../../i18n";
 
 export const getStaticPaths = getStaticLocalePaths;
 const lang = Astro.params.lang as Locale;
-
-const allIntegrations = await getCollection("integrations");
-const localeIntegrations = filterByLocale(allIntegrations, lang);
-
-// Group by plugin, derive order from minimum sortOrder
-const pluginMap = new Map<string, typeof localeIntegrations>();
-for (const doc of localeIntegrations) {
-  const key = doc.data.plugin;
-  if (!pluginMap.has(key)) pluginMap.set(key, []);
-  pluginMap.get(key)!.push(doc);
-}
-
-const plugins = [...pluginMap.entries()]
-  .map(([key, docs]) => ({
-    key,
-    docs: docs.sort((a, b) => a.data.sortOrder - b.data.sortOrder),
-  }))
-  .sort((a, b) => a.docs[0].data.sortOrder - b.docs[0].data.sortOrder);
 ---
 
 <Layout
@@ -43,49 +24,13 @@ const plugins = [...pluginMap.entries()]
   <IntegrationsOverview lang={lang} />
   <IntegrationsProcess lang={lang} />
 
-  {plugins.length > 0 && (
-    <section class="pb-24">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="mx-auto max-w-4xl">
-          <div class="mb-8 text-center">
-            <p class="eyebrow">{t(lang, "integrationDocs.eyebrow")}</p>
-            <Title level={2} class="mt-4">{t(lang, "integrationDocs.title")}</Title>
-            <p class="mt-3 text-lg text-[var(--muted-text)]">
-              {t(lang, "integrationDocs.description")}
-            </p>
-          </div>
-
-          <div class="space-y-12">
-            {plugins.map((plugin) => (
-              <div>
-                <h3 class="mb-4 text-xs font-bold uppercase tracking-wider text-[var(--muted-text)] font-[family-name:var(--font-mono)]">
-                  {t(lang, `integrationDocs.plugin.${plugin.key}` as TranslationKey)}
-                </h3>
-                <div class="grid gap-4 sm:grid-cols-2">
-                  {plugin.docs.map((doc) => {
-                    const slug = doc.slug.replace(`${lang}/`, "");
-                    return (
-                      <a
-                        href={localePath(lang, `/integrations/${slug}`)}
-                        class="group block rounded-xl border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-surface)] p-5 transition-colors hover:border-[var(--color-peach-paper-border-strong)] hover:bg-[var(--color-peach-paper-surface-soft)]"
-                      >
-                        <h4 class="font-semibold text-[var(--color-peach-paper-heading)] group-hover:text-[var(--color-peach-paper-accent)]">
-                          {doc.data.title}
-                        </h4>
-                        <p class="mt-1 text-sm text-[var(--muted-text)]">
-                          {doc.data.description}
-                        </p>
-                      </a>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
-  )}
+  <section class="pb-16">
+    <div class="container mx-auto px-4 text-center">
+      <Button href={localePath(lang, "/learn/integrations")} variant="secondary" size="md">
+        {t(lang, "integrations.cta.viewDocs")}
+      </Button>
+    </div>
+  </section>
 
   <Join lang={lang} />
 </Layout>

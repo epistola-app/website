@@ -1,10 +1,10 @@
 ---
 import { getCollection } from "astro:content";
-import Layout from "../../../components/layout.astro";
-import ContentUnit from "../../../components/learn/content-unit.astro";
-import TourNav from "../../../components/learn/tour-nav.astro";
-import Title from "../../../components/ui/title.astro";
-import { LOCALES, t, localePath, type Locale } from "../../../i18n";
+import Layout from "../../../../components/layout.astro";
+import ContentUnit from "../../../../components/learn/content-unit.astro";
+import TourNav from "../../../../components/learn/tour-nav.astro";
+import Title from "../../../../components/ui/title.astro";
+import { LOCALES, t, localePath, type Locale } from "../../../../i18n";
 
 export async function getStaticPaths() {
   const units = await getCollection("learn");

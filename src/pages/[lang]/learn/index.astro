@@ -1,20 +1,33 @@
 ---
-import { getCollection } from "astro:content";
 import Layout from "../../../components/layout.astro";
-import LearnIndex from "../../../components/learn/learn-index.astro";
-import { getStaticLocalePaths, filterByLocale, t, type Locale } from "../../../i18n";
+import Title from "../../../components/ui/title.astro";
+import Card from "../../../components/ui/card.astro";
+import { getStaticLocalePaths, t, localePath, type Locale } from "../../../i18n";
+import { BookOpen, Play, Plug } from "@lucide/astro";
 
 export const getStaticPaths = getStaticLocalePaths;
-
 const lang = Astro.params.lang as Locale;
 
-const allUnits = await getCollection("learn");
-const units = filterByLocale(allUnits, lang).map((unit) => ({
-  slug: unit.slug.replace(`${lang}/`, ""),
-  title: unit.data.title,
-  summary: unit.data.summary,
-  tags: unit.data.tags,
-}));
+const paths = [
+  {
+    title: t(lang, "learn.path.tour.title"),
+    description: t(lang, "learn.path.tour.description"),
+    href: localePath(lang, "/learn/tour"),
+    Icon: Play,
+  },
+  {
+    title: t(lang, "learn.path.suite.title"),
+    description: t(lang, "learn.path.suite.description"),
+    href: localePath(lang, "/learn/suite"),
+    Icon: BookOpen,
+  },
+  {
+    title: t(lang, "learn.path.integrations.title"),
+    description: t(lang, "learn.path.integrations.description"),
+    href: localePath(lang, "/learn/integrations"),
+    Icon: Plug,
+  },
+];
 ---
 
 <Layout
@@ -22,7 +35,41 @@ const units = filterByLocale(allUnits, lang).map((unit) => ({
   title={t(lang, "pages.learn.title")}
   description={t(lang, "pages.learn.description")}
 >
-  <div class="pt-32 pb-20">
-    <LearnIndex units={units} lang={lang} />
-  </div>
+  <section class="pt-32 pb-16">
+    <div class="mx-auto max-w-3xl px-4 text-center">
+      <p class="eyebrow">{t(lang, "learn.monoTitle")}</p>
+      <Title level={1} class="mt-6">{t(lang, "learn.title")}</Title>
+      <p class="mt-4 text-lg text-[var(--muted-text)]">
+        {t(lang, "learn.description")}
+      </p>
+    </div>
+  </section>
+
+  <section class="pb-24">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto grid max-w-4xl gap-6 sm:grid-cols-3">
+        {paths.map(({ title, description, href, Icon }) => (
+          <a href={href} class="group block">
+            <Card
+              as="article"
+              variant="default"
+              padding="lg"
+              shadow="sm"
+              class="h-full transition-all duration-200 group-hover:border-[var(--color-peach-paper-border-strong)] group-hover:shadow-md"
+            >
+              <div class="flex flex-col gap-4">
+                <div class="flex h-10 w-10 items-center justify-center rounded-md bg-[var(--color-peach-paper-chip-bg)] text-[var(--color-peach-paper-accent)]">
+                  <Icon class="h-5 w-5" />
+                </div>
+                <Title level={2} class="text-xl font-bold transition-colors group-hover:text-[var(--color-peach-paper-accent)]">
+                  {title}
+                </Title>
+                <p class="text-sm text-[var(--muted-text)]">{description}</p>
+              </div>
+            </Card>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
 </Layout>

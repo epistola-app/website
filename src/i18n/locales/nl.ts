@@ -288,6 +288,23 @@ const nl: Record<TranslationKey, string> = {
   "learn.description": "Ontdek Epistola via begeleide inhoudseenheden — van eerste template tot productie-deployment.",
   "learn.filterAll": "Alles",
   "learn.readMore": "Lees meer",
+  "learn.path.tour.title": "Interactieve Tour",
+  "learn.path.tour.description": "Maak een begeleide wandeling door Epistola met korte video's en hands-on demo's.",
+  "learn.path.suite.title": "Epistola Suite",
+  "learn.path.suite.description": "Referentiedocumentatie voor templates, de editor, documentgeneratie en het platform.",
+  "learn.path.integrations.title": "Integraties",
+  "learn.path.integrations.description": "Handleidingen voor het koppelen van Epistola aan Valtimo, ZGW en andere workflow-engines.",
+
+  "suite.eyebrow": "Epistola Suite",
+  "suite.title": "Suite-documentatie",
+  "suite.description": "Referentiegidsen voor elk onderdeel van het Epistola-documentgeneratieplatform.",
+  "pages.suite.title": "Suite-documentatie · Epistola",
+  "pages.suite.description": "Referentiegidsen voor templates, editor, generatie en het Epistola-platform.",
+
+  "pages.integrationDocs.title": "Integratiegidsen · Epistola",
+  "pages.integrationDocs.description": "Handleidingen voor het integreren van Epistola met Valtimo, ZGW en andere platformen.",
+
+  "integrations.cta.viewDocs": "Bekijk integratiegidsen",
 
   "tour.title": "Interactieve Tour · Epistola",
   "tour.description": "Neem een begeleide tour door Epistola en ontdek stap voor stap hoe documentgeneratie werkt.",

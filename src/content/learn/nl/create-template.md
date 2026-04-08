@@ -11,13 +11,13 @@ nextUnits:
     label: "Genereer een document"
 deepLinks:
   - label: "Templates"
-    url: "/nl/docs/templates"
+    url: "/nl/learn/suite/templates"
   - label: "Varianten"
-    url: "/nl/docs/variants"
+    url: "/nl/learn/suite/variants"
   - label: "Editoroverzicht"
-    url: "/nl/docs/editor-overview"
+    url: "/nl/learn/suite/editor-overview"
   - label: "Bloktypen"
-    url: "/nl/docs/block-types"
+    url: "/nl/learn/suite/block-types"
 tags:
   - getting-started
 sortOrder: 2
