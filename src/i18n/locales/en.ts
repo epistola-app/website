@@ -5,7 +5,9 @@ const en = {
   "nav.platform": "Platform",
   "nav.integrations": "Integrations",
   "nav.pricing": "Pricing",
+  "banner.wip": "This site is a work in progress — content and design may change.",
   "nav.about": "About",
+  "nav.company": "Company",
   "nav.docs": "Docs",
   "nav.blog": "Blog",
   "nav.contact": "Contact",
@@ -251,11 +253,23 @@ const en = {
   "demo.cta.reviewPlans": "Review plans",
 
   "docs.eyebrow": "Documentation",
-  "docs.title": "Documentation is coming",
-  "docs.description": "We're working on comprehensive guides, API references, and integration tutorials for Epistola.",
-  "docs.card.title": "Stay tuned",
-  "docs.card.description": "In the meantime, explore the demo environment to get a feel for how Epistola works.",
-  "docs.card.cta": "Try demo",
+  "docs.title": "Documentation",
+  "docs.description": "Guides, references, and deep dives into every part of the Epistola platform.",
+  "docs.section.core-concepts": "Core Concepts",
+  "docs.section.editor": "Editor",
+  "docs.section.generation": "Generation & Output",
+  "docs.section.platform": "Platform",
+  "docs.nav.title": "Documentation",
+  "docs.learnMore": "Learn more",
+  "docs.backToDocs": "← Back to Documentation",
+  "docs.seeInAction": "See this in action",
+
+  "integrationDocs.eyebrow": "Integration Guides",
+  "integrationDocs.title": "Integration Documentation",
+  "integrationDocs.description": "Guides for connecting Epistola to workflow engines and platforms.",
+  "integrationDocs.nav.title": "Integration Docs",
+  "integrationDocs.backToIntegrations": "← Back to Integrations",
+  "integrationDocs.plugin.valtimo": "Valtimo Plugin",
 
   "privacy.eyebrow": "Privacy",
   "privacy.title": "How we handle data",
@@ -266,6 +280,48 @@ const en = {
 
   "terms.eyebrow": "Terms",
   "terms.title": "Terms of use",
+
+  "nav.learn": "Learn",
+
+  "learn.monoTitle": "/ Learn Epistola",
+  "learn.title": "Learn Epistola",
+  "learn.description": "Explore Epistola through guided content units — from first template to production deployment.",
+  "learn.filterAll": "All",
+  "learn.readMore": "Read more",
+  "learn.path.tour.title": "Interactive Tour",
+  "learn.path.tour.description": "Take a guided walkthrough of Epistola with short videos and hands-on demos.",
+  "learn.path.suite.title": "Epistola Suite",
+  "learn.path.suite.description": "Reference documentation for templates, the editor, document generation, and the platform.",
+  "learn.path.integrations.title": "Integrations",
+  "learn.path.integrations.description": "Guides for connecting Epistola to Valtimo, ZGW, and other workflow engines.",
+
+  "suite.eyebrow": "Epistola Suite",
+  "suite.title": "Suite Documentation",
+  "suite.description": "Reference guides for every part of the Epistola document generation platform.",
+  "pages.suite.title": "Suite Documentation · Epistola",
+  "pages.suite.description": "Reference guides for templates, editor, generation, and the Epistola platform.",
+
+  "pages.integrationDocs.title": "Integration Guides · Epistola",
+  "pages.integrationDocs.description": "Guides for integrating Epistola with Valtimo, ZGW, and other platforms.",
+
+  "integrations.cta.viewDocs": "View integration guides",
+
+  "tour.title": "Interactive Tour · Epistola",
+  "tour.description": "Take a guided tour through Epistola and explore document generation step by step.",
+  "tour.nav.progress": "Step {current} of {total}",
+  "tour.nav.nextSteps": "Next steps",
+  "tour.nav.backToLearn": "← Back to Learn",
+  "tour.cta.startTour": "Start interactive tour",
+
+  "sandbox.cta.tryIt": "Try it yourself",
+
+  "video.planned": "Video planned",
+  "video.subtitleLabel": "English",
+
+  "pages.learn.title": "Learn · Epistola",
+  "pages.learn.description": "Explore Epistola through guided content — from first template to production deployment.",
+  "pages.tour.title": "Interactive Tour · Epistola",
+  "pages.tour.description": "Take a guided tour through Epistola and explore document generation step by step.",
 
   "blog.title": "Our Blog",
   "blog.subtitle": "Latest news, updates, and insights",

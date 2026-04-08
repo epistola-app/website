@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../../../components/layout.astro";
+import { getStaticLocalePaths, filterByLocale, stripLocalePrefix, localePath, t, type Locale } from "../../../../i18n";
+
+export const getStaticPaths = getStaticLocalePaths;
+
+const lang = Astro.params.lang as Locale;
+
+const allUnits = await getCollection("learn");
+const units = filterByLocale(allUnits, lang);
+
+const firstUnit = units[0];
+const firstSlug = firstUnit ? stripLocalePrefix(firstUnit.slug, lang) : "welcome";
+const redirectUrl = localePath(lang, `/learn/tour/${firstSlug}`) + "?mode=explore";
+---
+
+<Layout lang={lang} title={t(lang, "pages.tour.title")} description={t(lang, "pages.tour.description")}>
+  <meta slot="head" http-equiv="refresh" content={`0;url=${redirectUrl}`} />
+  <script is:inline define:vars={{ redirectUrl }}>
+    window.location.replace(redirectUrl);
+  </script>
+  <div class="flex min-h-[50vh] items-center justify-center">
+    <p class="text-[var(--muted-text)]">Redirecting...</p>
+  </div>
+</Layout>

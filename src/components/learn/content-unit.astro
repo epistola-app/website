@@ -1,0 +1,95 @@
+---
+import VideoPlayer from "./video-player.astro";
+import SandboxCta from "./sandbox-cta.astro";
+import ContentUnitCard from "./content-unit-card.astro";
+import Title from "../ui/title.astro";
+import { getCollection } from "astro:content";
+import { filterByLocale, stripLocalePrefix, t, type Locale, DEFAULT_LOCALE } from "../../i18n";
+
+interface NextUnit {
+  slug: string;
+  label: string;
+}
+
+interface DeepLink {
+  label: string;
+  url: string;
+}
+
+interface Props {
+  title: string;
+  videoUrl?: string;
+  videoBrief?: string;
+  videoCaptions?: string;
+  posterImage?: string;
+  sandboxCheckpointId?: string;
+  nextUnits?: NextUnit[];
+  deepLinks?: DeepLink[];
+  lang?: Locale;
+}
+
+const { title, videoUrl, videoBrief, videoCaptions, posterImage, sandboxCheckpointId, nextUnits = [], deepLinks = [], lang = DEFAULT_LOCALE } = Astro.props;
+
+const allUnits = await getCollection("learn");
+const localeUnits = filterByLocale(allUnits, lang);
+
+function findUnit(slug: string) {
+  return localeUnits.find((u) => stripLocalePrefix(u.slug, lang) === slug);
+}
+---
+
+<article class="flex flex-col gap-8">
+  <VideoPlayer videoUrl={videoUrl} videoBrief={videoBrief} videoCaptions={videoCaptions} posterImage={posterImage} title={title} lang={lang} />
+
+  <div class="prose prose-lg dark:prose-invert max-w-none">
+    <slot />
+  </div>
+
+  <SandboxCta checkpointId={sandboxCheckpointId} lang={lang} />
+
+  {
+    deepLinks.length > 0 && (
+      <div class="flex flex-col gap-3">
+        <Title level={3} class="text-xl font-bold">
+          {t(lang, "docs.learnMore")}
+        </Title>
+        <div class="flex flex-wrap gap-2">
+          {deepLinks.map((link) => (
+            <a
+              href={link.url}
+              class="inline-flex items-center gap-1.5 rounded-md border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-surface)] px-3 py-1.5 text-sm font-medium text-[var(--color-peach-paper-accent)] transition-colors hover:border-[var(--color-peach-paper-border-strong)] hover:bg-[var(--color-peach-paper-surface-soft)]"
+            >
+              {link.label} &rarr;
+            </a>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  {
+    nextUnits.length > 0 && (
+      <div class="flex flex-col gap-6">
+        <Title level={3} class="text-xl font-bold">
+          {t(lang, "tour.nav.nextSteps")}
+        </Title>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {nextUnits.map((next) => {
+            const unit = findUnit(next.slug);
+            return unit ? (
+              <ContentUnitCard
+                slug={next.slug}
+                title={unit.data.title}
+                description={unit.data.description}
+                tags={unit.data.tags}
+                lang={lang}
+              />
+            ) : (
+              <ContentUnitCard slug={next.slug} title={next.label} description="" lang={lang} />
+            );
+          })}
+        </div>
+      </div>
+    )
+  }
+</article>

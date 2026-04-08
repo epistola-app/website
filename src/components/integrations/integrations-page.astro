@@ -1,0 +1,25 @@
+---
+import SidebarLayout from "../ui/sidebar-layout.astro";
+import IntegrationsNav from "./integrations-nav.astro";
+import { t, localePath, type Locale, DEFAULT_LOCALE } from "../../i18n";
+
+interface Props {
+  title: string;
+  description: string;
+  currentSlug: string;
+  lang?: Locale;
+}
+
+const { title, description, currentSlug, lang = DEFAULT_LOCALE } = Astro.props;
+---
+
+<SidebarLayout
+  title={title}
+  description={description}
+  backHref={localePath(lang, "/learn/integrations")}
+  backLabel={t(lang, "integrationDocs.backToIntegrations")}
+  lang={lang}
+>
+  <IntegrationsNav slot="nav" lang={lang} currentSlug={currentSlug} />
+  <slot />
+</SidebarLayout>

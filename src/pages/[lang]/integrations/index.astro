@@ -1,0 +1,36 @@
+---
+import Layout from "../../../components/layout.astro";
+import IntegrationsOverview from "../../../components/integrations-overview.astro";
+import IntegrationsProcess from "../../../components/integrations-process.astro";
+import Join from "../../../components/join.astro";
+import PageHero from "../../../components/page-hero.astro";
+import Button from "../../../components/ui/button.astro";
+import { getStaticLocalePaths, t, localePath, type Locale } from "../../../i18n";
+
+export const getStaticPaths = getStaticLocalePaths;
+const lang = Astro.params.lang as Locale;
+---
+
+<Layout
+  lang={lang}
+  title={t(lang, "pages.integrations.title")}
+  description={t(lang, "pages.integrations.description")}
+>
+  <PageHero
+    monoTitle={t(lang, "integrations.hero.monoTitle")}
+    title={t(lang, "integrations.hero.title")}
+    description={t(lang, "integrations.hero.description")}
+  />
+  <IntegrationsOverview lang={lang} />
+  <IntegrationsProcess lang={lang} />
+
+  <section class="pb-16">
+    <div class="container mx-auto px-4 text-center">
+      <Button href={localePath(lang, "/learn/integrations")} variant="secondary" size="md">
+        {t(lang, "integrations.cta.viewDocs")}
+      </Button>
+    </div>
+  </section>
+
+  <Join lang={lang} />
+</Layout>

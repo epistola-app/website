@@ -1,0 +1,61 @@
+---
+import { getCollection } from "astro:content";
+import { filterByLocale, stripLocalePrefix, t, localePath, type Locale, type TranslationKey, DEFAULT_LOCALE } from "../../i18n";
+
+interface Props {
+  lang?: Locale;
+  currentSlug?: string;
+}
+
+const { lang = DEFAULT_LOCALE, currentSlug } = Astro.props;
+
+const allIntegrations = await getCollection("integrations");
+const localeIntegrations = filterByLocale(allIntegrations, lang);
+
+// Group by plugin, derive order from minimum sortOrder within each group
+const pluginMap = new Map<string, typeof localeIntegrations>();
+for (const doc of localeIntegrations) {
+  const key = doc.data.plugin;
+  if (!pluginMap.has(key)) pluginMap.set(key, []);
+  pluginMap.get(key)!.push(doc);
+}
+
+const plugins = [...pluginMap.entries()]
+  .map(([key, docs]) => ({
+    key,
+    docs: docs.sort((a, b) => a.data.sortOrder - b.data.sortOrder),
+  }))
+  .sort((a, b) => a.docs[0].data.sortOrder - b.docs[0].data.sortOrder);
+---
+
+<nav class="flex flex-col gap-6" aria-label={t(lang, "integrationDocs.nav.title")}>
+  {plugins.map((plugin) => (
+    <div>
+      <h3 class="mb-2 text-xs font-bold uppercase tracking-wider text-[var(--muted-text)] font-[family-name:var(--font-mono)]">
+        {t(lang, `integrationDocs.plugin.${plugin.key}` as TranslationKey)}
+      </h3>
+      <ul class="flex flex-col gap-1">
+        {plugin.docs.map((doc) => {
+          const slug = stripLocalePrefix(doc.slug, lang);
+          const isActive = slug === currentSlug;
+          return (
+            <li>
+              <a
+                href={localePath(lang, `/learn/integrations/${slug}`)}
+                class:list={[
+                  "block rounded-md px-3 py-1.5 text-sm transition-colors",
+                  isActive
+                    ? "bg-[var(--color-peach-paper-chip-bg)] font-semibold text-[var(--color-peach-paper-accent)]"
+                    : "text-[var(--color-peach-paper-copy)] hover:bg-[var(--color-peach-paper-surface-soft)] hover:text-[var(--color-peach-paper-heading)]",
+                ]}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {doc.data.title}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  ))}
+</nav>

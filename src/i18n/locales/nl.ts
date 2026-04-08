@@ -7,7 +7,9 @@ const nl: Record<TranslationKey, string> = {
   "nav.platform": "Platform",
   "nav.integrations": "Integraties",
   "nav.pricing": "Prijzen",
+  "banner.wip": "Deze site is in ontwikkeling — inhoud en ontwerp kunnen veranderen.",
   "nav.about": "Over ons",
+  "nav.company": "Bedrijf",
   "nav.docs": "Documentatie",
   "nav.blog": "Blog",
   "nav.contact": "Contact",
@@ -253,11 +255,23 @@ const nl: Record<TranslationKey, string> = {
   "demo.cta.reviewPlans": "Bekijk plannen",
 
   "docs.eyebrow": "Documentatie",
-  "docs.title": "Documentatie komt eraan",
-  "docs.description": "We werken aan uitgebreide handleidingen, API-referenties en integratietutorials voor Epistola.",
-  "docs.card.title": "Houd ons in de gaten",
-  "docs.card.description": "Bekijk in de tussentijd de demo-omgeving om een gevoel te krijgen voor hoe Epistola werkt.",
-  "docs.card.cta": "Probeer demo",
+  "docs.title": "Documentatie",
+  "docs.description": "Handleidingen, referenties en verdiepingen in elk onderdeel van het Epistola-platform.",
+  "docs.section.core-concepts": "Kernconcepten",
+  "docs.section.editor": "Editor",
+  "docs.section.generation": "Generatie & Output",
+  "docs.section.platform": "Platform",
+  "docs.nav.title": "Documentatie",
+  "docs.learnMore": "Meer lezen",
+  "docs.backToDocs": "← Terug naar Documentatie",
+  "docs.seeInAction": "Bekijk dit in actie",
+
+  "integrationDocs.eyebrow": "Integratiegidsen",
+  "integrationDocs.title": "Integratiedocumentatie",
+  "integrationDocs.description": "Handleidingen voor het koppelen van Epistola aan workflow-engines en platformen.",
+  "integrationDocs.nav.title": "Integratiedocs",
+  "integrationDocs.backToIntegrations": "← Terug naar Integraties",
+  "integrationDocs.plugin.valtimo": "Valtimo Plugin",
 
   "privacy.eyebrow": "Privacy",
   "privacy.title": "Hoe wij met data omgaan",
@@ -268,6 +282,48 @@ const nl: Record<TranslationKey, string> = {
 
   "terms.eyebrow": "Voorwaarden",
   "terms.title": "Gebruiksvoorwaarden",
+
+  "nav.learn": "Leren",
+
+  "learn.monoTitle": "/ Leer Epistola",
+  "learn.title": "Leer Epistola",
+  "learn.description": "Ontdek Epistola via begeleide inhoudseenheden — van eerste template tot productie-deployment.",
+  "learn.filterAll": "Alles",
+  "learn.readMore": "Lees meer",
+  "learn.path.tour.title": "Interactieve Tour",
+  "learn.path.tour.description": "Maak een begeleide wandeling door Epistola met korte video's en hands-on demo's.",
+  "learn.path.suite.title": "Epistola Suite",
+  "learn.path.suite.description": "Referentiedocumentatie voor templates, de editor, documentgeneratie en het platform.",
+  "learn.path.integrations.title": "Integraties",
+  "learn.path.integrations.description": "Handleidingen voor het koppelen van Epistola aan Valtimo, ZGW en andere workflow-engines.",
+
+  "suite.eyebrow": "Epistola Suite",
+  "suite.title": "Suite-documentatie",
+  "suite.description": "Referentiegidsen voor elk onderdeel van het Epistola-documentgeneratieplatform.",
+  "pages.suite.title": "Suite-documentatie · Epistola",
+  "pages.suite.description": "Referentiegidsen voor templates, editor, generatie en het Epistola-platform.",
+
+  "pages.integrationDocs.title": "Integratiegidsen · Epistola",
+  "pages.integrationDocs.description": "Handleidingen voor het integreren van Epistola met Valtimo, ZGW en andere platformen.",
+
+  "integrations.cta.viewDocs": "Bekijk integratiegidsen",
+
+  "tour.title": "Interactieve Tour · Epistola",
+  "tour.description": "Neem een begeleide tour door Epistola en ontdek stap voor stap hoe documentgeneratie werkt.",
+  "tour.nav.progress": "Stap {current} van {total}",
+  "tour.nav.nextSteps": "Volgende stappen",
+  "tour.nav.backToLearn": "← Terug naar Leren",
+  "tour.cta.startTour": "Start interactieve tour",
+
+  "sandbox.cta.tryIt": "Zelf proberen",
+
+  "video.planned": "Video gepland",
+  "video.subtitleLabel": "Nederlands",
+
+  "pages.learn.title": "Leren · Epistola",
+  "pages.learn.description": "Ontdek Epistola via begeleide inhoud — van eerste template tot productie-deployment.",
+  "pages.tour.title": "Interactieve Tour · Epistola",
+  "pages.tour.description": "Neem een begeleide tour door Epistola en ontdek documentgeneratie stap voor stap.",
 
   "blog.title": "Ons blog",
   "blog.subtitle": "Laatste nieuws, updates en inzichten",

@@ -1,11 +1,65 @@
 import { defineCollection, z } from "astro:content";
+import { DOCS_SECTIONS } from "./config/docs-sections";
 
 const stageSchema = z.object({
   label: z.string(),
   detail: z.string(),
 });
 
+const nextUnitSchema = z.object({
+  slug: z.string(),
+  label: z.string(),
+});
+
+const deepLinkSchema = z.object({
+  label: z.string(),
+  url: z.string(),
+});
+
+const videoSchema = z.object({
+  videoUrl: z.string().optional(),
+  videoBrief: z.string().optional(),
+  videoCaptions: z.string().optional(),
+});
+
 export const collections = {
+  learn: defineCollection({
+    type: "content",
+    schema: z.object({
+      title: z.string(),
+      description: z.string(),
+      ...videoSchema.shape,
+      posterImage: z.string().optional(),
+      sandboxCheckpointId: z.string().optional(),
+      nextUnits: z.array(nextUnitSchema).default([]),
+      deepLinks: z.array(deepLinkSchema).default([]),
+      tags: z.array(z.string()).default([]),
+      sortOrder: z.number(),
+    }),
+  }),
+
+  docs: defineCollection({
+    type: "content",
+    schema: z.object({
+      title: z.string(),
+      description: z.string(),
+      section: z.enum(DOCS_SECTIONS),
+      ...videoSchema.shape,
+      sortOrder: z.number(),
+    }),
+  }),
+
+  integrations: defineCollection({
+    type: "content",
+    schema: z.object({
+      title: z.string(),
+      description: z.string(),
+      ...videoSchema.shape,
+      plugin: z.string(),
+      sortOrder: z.number(),
+    }),
+  }),
+
   blog: defineCollection({
     type: "content",
     schema: z.object({

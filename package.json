@@ -9,7 +9,11 @@
     "check": "astro check",
     "preview": "astro preview",
     "astro": "astro",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "check:links": "mise exec -- lychee --offline --no-progress --root-dir dist 'dist/**/*.html'",
+    "demo:create-template": "tsx src/content/learn/en/create-template.demo.ts",
+    "demo:all": "tsx scripts/generate-videos.ts",
+    "demo:all:force": "tsx scripts/generate-videos.ts --force"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.1",
@@ -25,14 +29,17 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
+      "ffmpeg-static",
       "sharp"
     ]
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.8",
     "@tailwindcss/typography": "^0.5.19",
+    "demo-reel": "github:whit3st/demo-reel",
     "prettier": "^3.8.1",
     "prettier-plugin-astro": "^0.14.1",
+    "tsx": "^4.21.0",
     "typescript": "^6.0.2"
   }
 }

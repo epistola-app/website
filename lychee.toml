@@ -1,0 +1,5 @@
+## Lychee link checker config
+## Run: pnpm run check:links (requires build first)
+
+cache = false
+timeout = 10

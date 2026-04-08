@@ -136,6 +136,7 @@ const articleSchema = isArticle ? {
                      style-src 'self' 'unsafe-inline';
                      font-src 'self';
                      img-src 'self';
+                     media-src 'self';
                      worker-src 'self' blob:;
                      connect-src 'self' https://automation.cs.epistola.io;
                      form-action 'self';
@@ -265,6 +266,11 @@ const articleSchema = isArticle ? {
     </script>
   </head>
   <body class="font-sans antialiased flex flex-col min-h-screen overflow-x-hidden">
+    {import.meta.env.PUBLIC_SHOW_WIP_BANNER !== "false" && (
+      <div class="bg-[var(--color-peach-paper-accent)] text-white text-center text-xs font-medium py-1.5 px-4">
+        {t(lang, "banner.wip")}
+      </div>
+    )}
     <Header lang={lang} />
     <main class="relative z-10 flex-1 bg-[var(--color-peach-paper-surface-soft)]">
       <slot />

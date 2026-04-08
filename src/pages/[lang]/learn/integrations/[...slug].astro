@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../../../components/layout.astro";
+import IntegrationsPage from "../../../../components/integrations/integrations-page.astro";
+import { LOCALES, stripLocalePrefix, t, type Locale } from "../../../../i18n";
+
+export async function getStaticPaths() {
+  const integrations = await getCollection("integrations");
+  return LOCALES.flatMap((lang) =>
+    integrations
+      .filter((doc) => doc.slug.startsWith(`${lang}/`))
+      .map((doc) => ({
+        params: { lang, slug: stripLocalePrefix(doc.slug, lang) },
+        props: { doc },
+      }))
+  );
+}
+
+const lang = Astro.params.lang as Locale;
+const { doc } = Astro.props;
+const { Content } = await doc.render();
+---
+
+<Layout
+  lang={lang}
+  title={`${doc.data.title} · ${t(lang, "integrationDocs.title")}`}
+  description={doc.data.description}
+>
+  <IntegrationsPage
+    title={doc.data.title}
+    description={doc.data.description}
+    currentSlug={Astro.params.slug as string}
+    lang={lang}
+  >
+    <Content />
+  </IntegrationsPage>
+</Layout>

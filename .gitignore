@@ -20,3 +20,9 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# demo-reel working files
+.demo-reel-cache/
+.demo-reel-sessions/
+output/
+public/videos/**/*-narration.mp3

@@ -1,0 +1,100 @@
+---
+import ContentUnitCard from "./content-unit-card.astro";
+import Section from "../ui/section.astro";
+import { t, type Locale, DEFAULT_LOCALE } from "../../i18n";
+
+interface UnitData {
+  slug: string;
+  title: string;
+  description: string;
+  tags: string[];
+}
+
+interface Props {
+  units: UnitData[];
+  lang?: Locale;
+}
+
+const { units, lang = DEFAULT_LOCALE } = Astro.props;
+
+const allTags = [...new Set(units.flatMap((u) => u.tags))].sort();
+---
+
+<Section
+  monoTitle={t(lang, "learn.monoTitle")}
+  title={t(lang, "learn.title")}
+  description={t(lang, "learn.description")}
+>
+  <div class="mx-auto flex max-w-6xl flex-col gap-8">
+    {
+      allTags.length > 0 && (
+        <div class="flex flex-wrap justify-center gap-2" role="group" aria-label="Filter by tag">
+          <button
+            data-tag-filter="all"
+            class="tag-filter-btn active rounded-full border border-[var(--color-peach-paper-border-strong)] bg-[var(--color-peach-paper-accent)] px-4 py-1.5 text-sm font-medium text-white transition-colors"
+          >
+            {t(lang, "learn.filterAll")}
+          </button>
+          {allTags.map((tag) => (
+            <button
+              data-tag-filter={tag}
+              class="tag-filter-btn rounded-full border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-4 py-1.5 text-sm font-medium text-[var(--color-peach-paper-copy)] transition-colors hover:border-[var(--color-peach-paper-border-strong)]"
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+      )
+    }
+
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" id="learn-grid">
+      {
+        units.map((unit) => (
+          <div data-tags={unit.tags.join(",")}>
+            <ContentUnitCard
+              slug={unit.slug}
+              title={unit.title}
+              description={unit.description}
+              tags={unit.tags}
+              lang={lang}
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</Section>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>(".tag-filter-btn");
+  const items = document.querySelectorAll<HTMLElement>("#learn-grid > [data-tags]");
+
+  const activeClass = [
+    "border-[var(--color-peach-paper-border-strong)]",
+    "bg-[var(--color-peach-paper-accent)]",
+    "text-white",
+  ];
+  const inactiveClass = [
+    "border-[var(--color-peach-paper-border)]",
+    "bg-[var(--color-peach-paper-chip-bg)]",
+    "text-[var(--color-peach-paper-copy)]",
+  ];
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const tag = btn.dataset.tagFilter;
+
+      buttons.forEach((b) => {
+        b.classList.remove(...activeClass, "active");
+        b.classList.add(...inactiveClass);
+      });
+      btn.classList.remove(...inactiveClass);
+      btn.classList.add(...activeClass, "active");
+
+      items.forEach((item) => {
+        const tags = item.dataset.tags?.split(",") ?? [];
+        item.style.display = tag === "all" || tags.includes(tag!) ? "" : "none";
+      });
+    });
+  });
+</script>

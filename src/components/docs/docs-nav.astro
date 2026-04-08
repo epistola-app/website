@@ -1,0 +1,52 @@
+---
+import { getCollection } from "astro:content";
+import { filterByLocale, stripLocalePrefix, t, localePath, type Locale, DEFAULT_LOCALE } from "../../i18n";
+import { DOCS_SECTIONS } from "../../config/docs-sections";
+
+interface Props {
+  lang?: Locale;
+  currentSlug?: string;
+}
+
+const { lang = DEFAULT_LOCALE, currentSlug } = Astro.props;
+
+const allDocs = await getCollection("docs");
+const localeDocs = filterByLocale(allDocs, lang);
+
+const sections = DOCS_SECTIONS.map((key) => ({
+  key,
+  docs: localeDocs.filter((d) => d.data.section === key),
+}));
+---
+
+<nav class="flex flex-col gap-6" aria-label={t(lang, "docs.nav.title")}>
+  {sections.map((section) => (
+    <div>
+      <h3 class="mb-2 text-xs font-bold uppercase tracking-wider text-[var(--muted-text)] font-[family-name:var(--font-mono)]">
+        {t(lang, `docs.section.${section.key}`)}
+      </h3>
+      <ul class="flex flex-col gap-1">
+        {section.docs.map((doc) => {
+          const slug = stripLocalePrefix(doc.slug, lang);
+          const isActive = slug === currentSlug;
+          return (
+            <li>
+              <a
+                href={localePath(lang, `/learn/suite/${slug}`)}
+                class:list={[
+                  "block rounded-md px-3 py-1.5 text-sm transition-colors",
+                  isActive
+                    ? "bg-[var(--color-peach-paper-chip-bg)] font-semibold text-[var(--color-peach-paper-accent)]"
+                    : "text-[var(--color-peach-paper-copy)] hover:bg-[var(--color-peach-paper-surface-soft)] hover:text-[var(--color-peach-paper-heading)]",
+                ]}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {doc.data.title}
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  ))}
+</nav>

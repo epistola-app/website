@@ -6,6 +6,29 @@ All notable changes to this project will be documented here.
 
 ### Added
 
+- **Learn hub** (`/learn/`) — unified entry point for all educational content with three paths:
+  - **Interactive tour** (`/learn/tour/`) — 8-step guided product walkthrough covering the full story from template design to citizen document delivery
+  - **Suite documentation** (`/learn/suite/`) — 22 reference pages across Core Concepts, Editor, Generation & Output, and Platform sections
+  - **Integration guides** (`/learn/integrations/`) — per-plugin documentation, starting with Valtimo (5 pages)
+- Content collections: `learn` (tour units), `docs` (suite reference), `integrations` (plugin guides) — all bilingual EN + NL
+- Video placeholder system with `videoBrief` field describing what each video should show, rendered as dashed cards until real video URLs are added
+- Subtitle/caption support via `videoCaptions` field (WebVTT) with locale-aware `srclang`
+- Sandbox CTA component resolving checkpoint IDs to demo launch URLs
+- Automatic reverse linking: docs pages show "See this in action" links to tour units that reference them
+- Work-in-progress banner at top of site
+- Reusable components: `VideoPlayer`, `SandboxCta`, `ContentUnitCard`, `ContentUnit`, `TourNav`, `LearnIndex`, `DocsNav`, `DocsPage`, `IntegrationsNav`, `IntegrationsPage`
+
+### Changed
+
+- Site navigation reordered: Platform → Integrations → Learn → Pricing → Company → Blog → Contact
+- "About" renamed to "Company" in navigation
+- Marketing integrations page (`/integrations/`) now links to integration guides under `/learn/integrations/`
+- Homepage hero CTAs updated to link to Learn hub and tour
+
+### Removed
+
+- Separate `/docs/` and `/tour/` top-level routes (consolidated under `/learn/`)
+
 - Client-side browser language detection on root page (redirects to `/en/` or `/nl/` based on `navigator.language`).
 - `@astrojs/sitemap` integration for automatic sitemap generation.
 - `robots.txt` with sitemap reference.

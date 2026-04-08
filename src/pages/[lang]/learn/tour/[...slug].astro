@@ -1,0 +1,86 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../../../components/layout.astro";
+import ContentUnit from "../../../../components/learn/content-unit.astro";
+import TourNav from "../../../../components/learn/tour-nav.astro";
+import Title from "../../../../components/ui/title.astro";
+import { LOCALES, stripLocalePrefix, t, localePath, type Locale } from "../../../../i18n";
+
+export async function getStaticPaths() {
+  const units = await getCollection("learn");
+  return LOCALES.flatMap((lang) =>
+    units
+      .filter((unit) => unit.slug.startsWith(`${lang}/`))
+      .map((unit) => ({
+        params: { lang, slug: stripLocalePrefix(unit.slug, lang) },
+        props: { unit },
+      }))
+  );
+}
+
+const lang = Astro.params.lang as Locale;
+const { unit } = Astro.props;
+const { Content } = await unit.render();
+
+const isExploreMode = Astro.url.searchParams.get("mode") === "explore";
+---
+
+<Layout
+  lang={lang}
+  title={`${unit.data.title} · ${t(lang, "learn.title")}`}
+  description={unit.data.description}
+>
+  <div class="pt-32 pb-20">
+    <div class="container mx-auto px-4">
+      <div class="mx-auto max-w-4xl">
+        <header class="mb-8">
+          <a
+            href={localePath(lang, "/learn")}
+            class="mb-4 inline-block text-sm font-semibold text-[var(--color-peach-paper-accent)] hover:underline"
+          >
+            {t(lang, "tour.nav.backToLearn")}
+          </a>
+          <Title level={1} class="mb-4 font-black leading-tight">
+            {unit.data.title}
+          </Title>
+          <p class="text-lg text-[var(--muted-text)]">{unit.data.description}</p>
+          {
+            unit.data.tags.length > 0 && (
+              <div class="mt-4 flex flex-wrap gap-2">
+                {unit.data.tags.map((tag: string) => (
+                  <span class="rounded-full border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-3 py-1 text-sm font-medium text-[var(--color-peach-paper-accent)]">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )
+          }
+        </header>
+
+        <ContentUnit
+          title={unit.data.title}
+          videoUrl={unit.data.videoUrl}
+          videoBrief={unit.data.videoBrief}
+          videoCaptions={unit.data.videoCaptions}
+          posterImage={unit.data.posterImage}
+          sandboxCheckpointId={unit.data.sandboxCheckpointId}
+          nextUnits={isExploreMode ? [] : unit.data.nextUnits}
+          deepLinks={unit.data.deepLinks}
+          lang={lang}
+        >
+          <Content />
+        </ContentUnit>
+
+        {
+          isExploreMode && (
+            <TourNav
+              currentSlug={Astro.params.slug as string}
+              nextUnits={unit.data.nextUnits}
+              lang={lang}
+            />
+          )
+        }
+      </div>
+    </div>
+  </div>
+</Layout>
