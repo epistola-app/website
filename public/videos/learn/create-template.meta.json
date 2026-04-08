@@ -1,0 +1,34 @@
+{
+  "video": "create-template.mp4",
+  "scenes": [
+    {
+      "index": 0,
+      "narration": "Welkom in Epistola. Vanuit het dashboard navigeren we naar het templateoverzicht.",
+      "isIntro": true,
+      "visualStartMs": 2389,
+      "visualEndMs": 6524,
+      "audioStartMs": 300,
+      "audioEndMs": 4435
+    },
+    {
+      "index": 1,
+      "narration": "We maken een nieuw template aan. Geef het een ID en een naam.",
+      "isIntro": false,
+      "visualStartMs": 6524,
+      "visualEndMs": 16976,
+      "audioStartMs": 4435,
+      "audioEndMs": 14887
+    },
+    {
+      "index": 2,
+      "narration": "Het template is aangemaakt. Je ziet de detailpagina met tabbladen voor varianten, deployments, datacontracten en instellingen.",
+      "isIntro": false,
+      "visualStartMs": 16976,
+      "visualEndMs": 23607,
+      "audioStartMs": 14887,
+      "audioEndMs": 21518
+    }
+  ],
+  "introEndMs": 6524,
+  "totalDurationMs": 23607
+}

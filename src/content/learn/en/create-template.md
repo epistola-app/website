@@ -1,7 +1,8 @@
 ---
 title: "Create your first template"
 description: "Walk through creating a document template, understanding the detail page, and setting up variants."
-videoUrl: ""
+videoUrl: "/videos/learn/create-template.mp4"
+videoCaptions: "/videos/learn/create-template.vtt"
 videoBrief: "20-second screen recording: click 'New Template' from the templates list, enter a name, see the template detail page appear with its four tabs (Variants, Deployments, Data Contract, Settings). End on the variant cards view."
 posterImage: ""
 sandboxCheckpointId: "template-created"

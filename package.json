@@ -10,7 +10,10 @@
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write .",
-    "check:links": "mise exec -- lychee --offline --no-progress --root-dir dist 'dist/**/*.html'"
+    "check:links": "mise exec -- lychee --offline --no-progress --root-dir dist 'dist/**/*.html'",
+    "demo:create-template": "tsx src/content/learn/en/create-template.demo.ts",
+    "demo:all": "tsx scripts/generate-videos.ts",
+    "demo:all:force": "tsx scripts/generate-videos.ts --force"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.1",
