@@ -8,6 +8,7 @@ const nl: Record<TranslationKey, string> = {
   "nav.integrations": "Integraties",
   "nav.pricing": "Prijzen",
   "nav.about": "Over ons",
+  "nav.company": "Bedrijf",
   "nav.docs": "Documentatie",
   "nav.blog": "Blog",
   "nav.contact": "Contact",
