@@ -269,6 +269,28 @@ const nl: Record<TranslationKey, string> = {
   "terms.eyebrow": "Voorwaarden",
   "terms.title": "Gebruiksvoorwaarden",
 
+  "nav.learn": "Leren",
+
+  "learn.monoTitle": "/ Leer Epistola",
+  "learn.title": "Leer Epistola",
+  "learn.description": "Ontdek Epistola via begeleide inhoudseenheden — van eerste template tot productie-deployment.",
+  "learn.filterAll": "Alles",
+  "learn.readMore": "Lees meer",
+
+  "tour.title": "Interactieve Tour · Epistola",
+  "tour.description": "Neem een begeleide tour door Epistola en ontdek stap voor stap hoe documentgeneratie werkt.",
+  "tour.nav.progress": "Stap {current} van {total}",
+  "tour.nav.nextSteps": "Volgende stappen",
+  "tour.nav.backToLearn": "← Terug naar Leren",
+  "tour.cta.startTour": "Start interactieve tour",
+
+  "sandbox.cta.tryIt": "Zelf proberen",
+
+  "pages.learn.title": "Leren · Epistola",
+  "pages.learn.description": "Ontdek Epistola via begeleide inhoud — van eerste template tot productie-deployment.",
+  "pages.tour.title": "Interactieve Tour · Epistola",
+  "pages.tour.description": "Neem een begeleide tour door Epistola en ontdek documentgeneratie stap voor stap.",
+
   "blog.title": "Ons blog",
   "blog.subtitle": "Laatste nieuws, updates en inzichten",
   "blog.readMore": "Lees meer",

@@ -1,0 +1,49 @@
+---
+import Card from "../ui/card.astro";
+import Title from "../ui/title.astro";
+import { localePath, t, type Locale, DEFAULT_LOCALE } from "../../i18n";
+import { ArrowRight } from "@lucide/astro";
+
+interface Props {
+  slug: string;
+  title: string;
+  summary: string;
+  tags?: string[];
+  lang?: Locale;
+}
+
+const { slug, title, summary, tags = [], lang = DEFAULT_LOCALE } = Astro.props;
+const href = localePath(lang, `/learn/${slug}`);
+---
+
+<a href={href} class="group block">
+  <Card
+    as="article"
+    variant="default"
+    padding="md"
+    shadow="sm"
+    class="h-full transition-all duration-200 group-hover:border-[var(--color-peach-paper-border-strong)] group-hover:shadow-md"
+  >
+    <div class="flex flex-col gap-3">
+      {
+        tags.length > 0 && (
+          <div class="flex flex-wrap gap-2">
+            {tags.map((tag) => (
+              <span class="rounded-full border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-chip-bg)] px-2.5 py-0.5 text-xs font-medium text-[var(--color-peach-paper-accent)]">
+                {tag}
+              </span>
+            ))}
+          </div>
+        )
+      }
+      <Title level={3} class="text-lg font-bold transition-colors group-hover:text-[var(--color-peach-paper-accent)]">
+        {title}
+      </Title>
+      <p class="text-sm text-[var(--muted-text)] line-clamp-2">{summary}</p>
+      <span class="inline-flex items-center gap-1 text-sm font-semibold text-[var(--color-peach-paper-accent)]">
+        {t(lang, "learn.readMore")}
+        <ArrowRight class="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+      </span>
+    </div>
+  </Card>
+</a>

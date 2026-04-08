@@ -1,0 +1,85 @@
+---
+import ContentUnitCard from "./content-unit-card.astro";
+import Title from "../ui/title.astro";
+import { getCollection } from "astro:content";
+import { filterByLocale, localePath, t, type Locale, DEFAULT_LOCALE } from "../../i18n";
+
+interface NextUnit {
+  slug: string;
+  label: string;
+}
+
+interface Props {
+  currentSlug: string;
+  nextUnits?: NextUnit[];
+  lang?: Locale;
+}
+
+const { currentSlug, nextUnits = [], lang = DEFAULT_LOCALE } = Astro.props;
+
+const allUnits = await getCollection("learn");
+const localeUnits = filterByLocale(allUnits, lang);
+const totalUnits = localeUnits.length;
+
+const currentIndex = localeUnits.findIndex((u) => u.slug.replace(`${lang}/`, "") === currentSlug);
+const currentStep = currentIndex >= 0 ? currentIndex + 1 : 1;
+
+function findUnit(slug: string) {
+  return localeUnits.find((u) => u.slug.replace(`${lang}/`, "") === slug);
+}
+---
+
+<nav class="flex flex-col gap-6 border-t border-[var(--color-peach-paper-border)] pt-8" aria-label="Tour navigation">
+  <div class="flex items-center justify-between">
+    <a
+      href={localePath(lang, "/learn")}
+      class="text-sm font-semibold text-[var(--color-peach-paper-accent)] hover:underline"
+    >
+      {t(lang, "tour.nav.backToLearn")}
+    </a>
+    <span class="text-sm text-[var(--muted-text)] font-[family-name:var(--font-mono)]">
+      {t(lang, "tour.nav.progress", { current: String(currentStep), total: String(totalUnits) })}
+    </span>
+  </div>
+
+  <div class="flex gap-1">
+    {
+      localeUnits.map((_, i) => (
+        <div
+          class:list={[
+            "h-1 flex-1 rounded-full",
+            i < currentStep
+              ? "bg-[var(--color-peach-paper-accent)]"
+              : "bg-[var(--color-peach-paper-border)]",
+          ]}
+        />
+      ))
+    }
+  </div>
+
+  {
+    nextUnits.length > 0 && (
+      <div class="flex flex-col gap-4">
+        <Title level={4} class="text-base font-bold">
+          {t(lang, "tour.nav.nextSteps")}
+        </Title>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {nextUnits.map((next) => {
+            const unit = findUnit(next.slug);
+            return unit ? (
+              <ContentUnitCard
+                slug={next.slug}
+                title={unit.data.title}
+                summary={unit.data.summary}
+                tags={unit.data.tags}
+                lang={lang}
+              />
+            ) : (
+              <ContentUnitCard slug={next.slug} title={next.label} summary="" lang={lang} />
+            );
+          })}
+        </div>
+      </div>
+    )
+  }
+</nav>

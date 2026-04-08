@@ -1,0 +1,67 @@
+---
+import VideoPlayer from "./video-player.astro";
+import SandboxCta from "./sandbox-cta.astro";
+import ContentUnitCard from "./content-unit-card.astro";
+import Title from "../ui/title.astro";
+import { getCollection } from "astro:content";
+import { filterByLocale, t, type Locale, DEFAULT_LOCALE } from "../../i18n";
+
+interface NextUnit {
+  slug: string;
+  label: string;
+}
+
+interface Props {
+  title: string;
+  videoUrl?: string;
+  posterImage?: string;
+  sandboxCheckpointId?: string;
+  nextUnits?: NextUnit[];
+  lang?: Locale;
+}
+
+const { title, videoUrl, posterImage, sandboxCheckpointId, nextUnits = [], lang = DEFAULT_LOCALE } = Astro.props;
+
+const allUnits = await getCollection("learn");
+const localeUnits = filterByLocale(allUnits, lang);
+
+function findUnit(slug: string) {
+  return localeUnits.find((u) => u.slug.replace(`${lang}/`, "") === slug);
+}
+---
+
+<article class="flex flex-col gap-8">
+  <VideoPlayer videoUrl={videoUrl} posterImage={posterImage} title={title} />
+
+  <div class="prose prose-lg dark:prose-invert max-w-none">
+    <slot />
+  </div>
+
+  <SandboxCta checkpointId={sandboxCheckpointId} lang={lang} />
+
+  {
+    nextUnits.length > 0 && (
+      <div class="flex flex-col gap-6">
+        <Title level={3} class="text-xl font-bold">
+          {t(lang, "tour.nav.nextSteps")}
+        </Title>
+        <div class="grid gap-4 sm:grid-cols-2">
+          {nextUnits.map((next) => {
+            const unit = findUnit(next.slug);
+            return unit ? (
+              <ContentUnitCard
+                slug={next.slug}
+                title={unit.data.title}
+                summary={unit.data.summary}
+                tags={unit.data.tags}
+                lang={lang}
+              />
+            ) : (
+              <ContentUnitCard slug={next.slug} title={next.label} summary="" lang={lang} />
+            );
+          })}
+        </div>
+      </div>
+    )
+  }
+</article>

@@ -267,6 +267,28 @@ const en = {
   "terms.eyebrow": "Terms",
   "terms.title": "Terms of use",
 
+  "nav.learn": "Learn",
+
+  "learn.monoTitle": "/ Learn Epistola",
+  "learn.title": "Learn Epistola",
+  "learn.description": "Explore Epistola through guided content units — from first template to production deployment.",
+  "learn.filterAll": "All",
+  "learn.readMore": "Read more",
+
+  "tour.title": "Interactive Tour · Epistola",
+  "tour.description": "Take a guided tour through Epistola and explore document generation step by step.",
+  "tour.nav.progress": "Step {current} of {total}",
+  "tour.nav.nextSteps": "Next steps",
+  "tour.nav.backToLearn": "← Back to Learn",
+  "tour.cta.startTour": "Start interactive tour",
+
+  "sandbox.cta.tryIt": "Try it yourself",
+
+  "pages.learn.title": "Learn · Epistola",
+  "pages.learn.description": "Explore Epistola through guided content — from first template to production deployment.",
+  "pages.tour.title": "Interactive Tour · Epistola",
+  "pages.tour.description": "Take a guided tour through Epistola and explore document generation step by step.",
+
   "blog.title": "Our Blog",
   "blog.subtitle": "Latest news, updates, and insights",
   "blog.readMore": "Read more",

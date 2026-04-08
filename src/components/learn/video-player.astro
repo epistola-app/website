@@ -1,0 +1,32 @@
+---
+interface Props {
+  videoUrl?: string;
+  posterImage?: string;
+  title: string;
+}
+
+const { videoUrl, posterImage, title } = Astro.props;
+const hasVideo = videoUrl && videoUrl.length > 0;
+const hasPoster = posterImage && posterImage.length > 0;
+---
+
+{
+  hasVideo ? (
+    <div class="relative aspect-video w-full overflow-hidden rounded-none border border-[var(--color-peach-paper-border)] bg-black">
+      <video
+        controls
+        muted
+        preload="metadata"
+        poster={hasPoster ? posterImage : undefined}
+        class="h-full w-full object-cover"
+        aria-label={title}
+      >
+        <source src={videoUrl} type="video/mp4" />
+      </video>
+    </div>
+  ) : hasPoster ? (
+    <div class="relative aspect-video w-full overflow-hidden rounded-none border border-[var(--color-peach-paper-border)] bg-[var(--color-peach-paper-surface)]">
+      <img src={posterImage} alt={title} class="h-full w-full object-cover" />
+    </div>
+  ) : null
+}

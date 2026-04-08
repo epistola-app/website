@@ -1,0 +1,27 @@
+---
+import Button from "../ui/button.astro";
+import { sandboxCheckpoints } from "../../config/sandbox-checkpoints";
+import { t, type Locale, DEFAULT_LOCALE } from "../../i18n";
+
+interface Props {
+  checkpointId?: string;
+  lang?: Locale;
+}
+
+const { checkpointId, lang = DEFAULT_LOCALE } = Astro.props;
+
+const checkpoint = checkpointId ? sandboxCheckpoints[checkpointId] : undefined;
+---
+
+{
+  checkpoint && (
+    <div class="flex flex-col gap-3 rounded-none border border-[var(--color-peach-paper-border-strong)] bg-[var(--color-peach-paper-chip-bg)] p-6">
+      <p class="text-sm font-semibold uppercase tracking-wider font-[family-name:var(--font-mono)] text-[var(--color-peach-paper-accent)]">
+        {t(lang, "sandbox.cta.tryIt")}
+      </p>
+      <Button href={checkpoint.url} variant="primary" size="md" external>
+        {checkpoint.label}
+      </Button>
+    </div>
+  )
+}

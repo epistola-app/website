@@ -5,7 +5,26 @@ const stageSchema = z.object({
   detail: z.string(),
 });
 
+const nextUnitSchema = z.object({
+  slug: z.string(),
+  label: z.string(),
+});
+
 export const collections = {
+  learn: defineCollection({
+    type: "content",
+    schema: z.object({
+      title: z.string(),
+      summary: z.string(),
+      videoUrl: z.string().optional(),
+      posterImage: z.string().optional(),
+      sandboxCheckpointId: z.string().optional(),
+      nextUnits: z.array(nextUnitSchema).default([]),
+      tags: z.array(z.string()).default([]),
+      sortOrder: z.number(),
+    }),
+  }),
+
   blog: defineCollection({
     type: "content",
     schema: z.object({

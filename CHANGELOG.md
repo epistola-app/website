@@ -6,6 +6,18 @@ All notable changes to this project will be documented here.
 
 ### Added
 
+- Interactive product introduction system with guided tour and learn pages.
+  - New `learn` content collection with schema for content units (title, summary, video, sandbox checkpoint, next-unit branching, tags).
+  - 5 placeholder content units in English and Dutch: welcome, create-template, add-workflow, generate-document, explore-technical.
+  - Sandbox checkpoint config mapping checkpoint IDs to demo launch URLs.
+  - 6 new components: `VideoPlayer`, `SandboxCta`, `ContentUnitCard`, `ContentUnit`, `TourNav`, `LearnIndex`.
+  - Learn index page (`/[lang]/learn/`) with tag-based filtering.
+  - Learn detail page (`/[lang]/learn/[slug]`) with docs mode and explore mode (`?mode=explore`).
+  - Tour entry page (`/[lang]/tour/`) that redirects to the first content unit in explore mode.
+  - "Start interactive tour" CTA button added to the homepage hero.
+  - "Learn" link added to the header navigation.
+  - i18n translation keys for learn/tour UI strings in both English and Dutch.
+
 - Client-side browser language detection on root page (redirects to `/en/` or `/nl/` based on `navigator.language`).
 - `@astrojs/sitemap` integration for automatic sitemap generation.
 - `robots.txt` with sitemap reference.
