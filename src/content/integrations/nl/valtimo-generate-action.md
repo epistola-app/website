@@ -2,6 +2,8 @@
 title: "Documentgeneratieactie"
 description: "Hoe je de generate-document BPMN-servicetaakactie configureert in Valtimo."
 plugin: "valtimo"
+videoUrl: ""
+videoBrief: "30-second screen recording: configure a BPMN service task — select the Epistola generate-document action, pick a template, choose attribute-based variant selection, map a few case fields."
 sortOrder: 3
 ---
 

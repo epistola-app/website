@@ -8,8 +8,6 @@ sandboxCheckpointId: "blank-workspace"
 nextUnits:
   - slug: "create-template"
     label: "Maak je eerste template"
-  - slug: "explore-technical"
-    label: "Technisch overzicht"
 deepLinks:
   - label: "Templates"
     url: "/nl/learn/suite/templates"

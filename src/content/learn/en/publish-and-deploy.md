@@ -6,10 +6,8 @@ videoBrief: "25-second screen recording: open the version history, publish a dra
 posterImage: ""
 sandboxCheckpointId: "version-published"
 nextUnits:
-  - slug: "generate-document"
-    label: "Generate a document"
-  - slug: "explore-technical"
-    label: "Learn about variants"
+  - slug: "connect-to-workflow"
+    label: "Connect to a workflow"
 deepLinks:
   - label: "Versions"
     url: "/en/learn/suite/versions"

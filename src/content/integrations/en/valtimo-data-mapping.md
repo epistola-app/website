@@ -2,6 +2,8 @@
 title: "Data Mapping"
 description: "How to map case and process data to Epistola template fields using value resolvers."
 plugin: "valtimo"
+videoUrl: ""
+videoBrief: "25-second screen recording: show the data mapping UI — map simple case fields, then demonstrate a nested object mapping and an array with field renaming."
 sortOrder: 4
 ---
 

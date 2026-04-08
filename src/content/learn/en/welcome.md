@@ -8,8 +8,6 @@ sandboxCheckpointId: "blank-workspace"
 nextUnits:
   - slug: "create-template"
     label: "Create your first template"
-  - slug: "explore-technical"
-    label: "Technical overview"
 deepLinks:
   - label: "Templates"
     url: "/en/learn/suite/templates"

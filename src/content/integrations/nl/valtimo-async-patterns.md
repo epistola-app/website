@@ -2,6 +2,8 @@
 title: "Async Patronen & BPMN"
 description: "Aanbevolen BPMN-patronen voor asynchrone documentgeneratie met de Valtimo Epistola-plugin."
 plugin: "valtimo"
+videoUrl: ""
+videoBrief: "30-second screen recording: show a BPMN diagram with the recommended pattern. Run the process, watch it pause at the catch event, then continue when the document completes."
 sortOrder: 5
 ---
 

@@ -2,6 +2,8 @@
 title: "Datamapping"
 description: "Hoe je zaak- en procesgegevens koppelt aan Epistola-templatevelden met value resolvers."
 plugin: "valtimo"
+videoUrl: ""
+videoBrief: "25-second screen recording: show the data mapping UI — map simple case fields, then demonstrate a nested object mapping and an array with field renaming."
 sortOrder: 4
 ---
 

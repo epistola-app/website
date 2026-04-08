@@ -2,6 +2,8 @@
 title: "Configuration"
 description: "How to configure the Valtimo Epistola plugin — connection settings, API keys, and optional parameters."
 plugin: "valtimo"
+videoUrl: ""
+videoBrief: "20-second screen recording: walk through the plugin configuration dialog in Valtimo — enter the Epistola base URL, paste the API key, set the tenant ID, save."
 sortOrder: 2
 ---
 

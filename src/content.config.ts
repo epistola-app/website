@@ -51,6 +51,9 @@ export const collections = {
     schema: z.object({
       title: z.string(),
       description: z.string(),
+      videoUrl: z.string().optional(),
+      videoBrief: z.string().optional(),
+      videoCaptions: z.string().optional(),
       plugin: z.string(),
       sortOrder: z.number(),
     }),

@@ -2,6 +2,8 @@
 title: "Valtimo Plugin Overview"
 description: "What the Valtimo Epistola plugin is and how it connects GZAC/Valtimo to Epistola."
 plugin: "valtimo"
+videoUrl: ""
+videoBrief: "30-second screen recording: show a case in Valtimo, trigger document generation, the document appearing in the case — the full workflow integration at a glance."
 sortOrder: 1
 ---
 
