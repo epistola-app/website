@@ -1,6 +1,6 @@
 ---
 title: "Generate a document"
-summary: "Send data to the Epistola API and receive a rendered PDF."
+summary: "Generate documents via the API — sync preview, async generation, batch jobs, and variant resolution."
 videoUrl: ""
 posterImage: ""
 sandboxCheckpointId: "document-generated"
@@ -16,37 +16,59 @@ deepLinks:
     url: "/en/learn/suite/jobs"
   - label: "Rendering"
     url: "/en/learn/suite/rendering"
+  - label: "API Overview"
+    url: "/en/learn/suite/api-overview"
 tags:
   - getting-started
-sortOrder: 4
+  - technical
+sortOrder: 6
 ---
 
-## Generating your first document
+## Generating documents
 
-With a template published and a workflow connected, generating a document is straightforward: send a JSON payload to the render endpoint.
+With a template published and deployed, you can now generate documents by sending data to the Epistola API. This is the payoff — you built a template, now produce output.
 
-### The render flow
+### Three generation modes
 
-1. **Request** — Your system sends a POST request with the template slug and data payload
-2. **Validate** — Epistola validates the payload against the template's JSON Schema
-3. **Resolve** — The variant resolver picks the best matching variant based on attributes
-4. **Render** — The iText engine processes the template with your data
-5. **Return** — You receive a PDF document (typically in 50–200ms)
+#### Synchronous preview
+
+Used during editing. The editor sends preview requests and receives rendered output directly. Rate-limited and non-PDF/A — designed for fast iteration, not production.
+
+#### Asynchronous single document
+
+For production use. Submit a render request with the template slug and data payload:
+
+```http
+POST /api/tenants/{tenantId}/generation/generate
+Content-Type: application/vnd.epistola.v1+json
+
+{
+  "templateSlug": "decision-letter",
+  "environment": "production",
+  "data": {
+    "recipientName": "Jan de Vries",
+    "decisionDate": "2026-04-08",
+    "subject": "Building permit approval"
+  }
+}
+```
+
+You receive a job ID immediately. The document renders in the background and produces a PDF/A-compliant PDF.
+
+#### Asynchronous batch
+
+For high-volume scenarios. Submit an array of documents in a single request. Each document is tracked as a separate batch item with its own status.
+
+### Variant resolution
+
+You can specify a variant explicitly by ID, or provide attributes for automatic resolution. The resolver scores all variants against your attributes and picks the best match, falling back to the default variant.
+
+### Job tracking
+
+Every generation request creates a job that moves through: PENDING → IN_PROGRESS → COMPLETED | FAILED | CANCELLED. The generation history dashboard shows stats, most-used templates, and recent jobs with color-coded status badges.
 
 ### What you get
 
-- A pixel-perfect PDF that matches your template design
+- A production-ready PDF matching your template design
 - An audit trail linking the document to its template version, schema, and input data
 - Reproducibility — the same input always produces the same output
-
-### Error handling
-
-If your payload doesn't match the schema, Epistola returns a clear validation error before any rendering happens. This fail-fast approach prevents wasted compute and makes debugging easy.
-
-### Batch generation
-
-Need to generate hundreds of documents? Epistola supports batch operations with webhook callbacks, so your workflow engine gets notified when each document is ready.
-
-### What's next?
-
-Dive into the technical architecture to understand how Epistola is built, or head back to the start to explore a different path.

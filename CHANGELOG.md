@@ -4,7 +4,23 @@ All notable changes to this project will be documented here.
 
 ## [Unreleased]
 
+### Changed
+
+- Rewrote all 18 documentation pages with accurate, UI-based content describing actual Epistola Suite features.
+- Revised tour flow from 5 to 6 units following the natural user journey: welcome → create template → edit in editor → publish and deploy → explore technical → generate document.
+- Updated sandbox checkpoint configuration with new editor and publish states.
+
 ### Added
+
+- 4 new documentation pages: Data Contracts, Deployment Matrix, Version Comparison, Import & Export (EN + NL).
+- 2 new tour units: "Edit in the visual editor" and "Publish and deploy" (EN + NL).
+- New "Generate a document" tour unit covering API-based document generation (EN + NL).
+
+### Removed
+
+- "Add a workflow" tour unit (replaced by "Edit in the visual editor").
+
+### Previously added
 
 - Documentation system with 18 reference pages across 4 sections (Core Concepts, Editor, Generation & Output, Platform) in both English and Dutch.
   - New `docs` content collection with schema (title, description, section, sortOrder).

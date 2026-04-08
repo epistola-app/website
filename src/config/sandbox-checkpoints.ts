@@ -7,9 +7,13 @@ export const sandboxCheckpoints: Record<string, { url: string; label: string }> 
     url: "https://demo.epistola.app/?state=template",
     label: "Open with template",
   },
-  "workflow-created": {
-    url: "https://demo.epistola.app/?state=workflow",
-    label: "Continue with workflow",
+  "editor-open": {
+    url: "https://demo.epistola.app/?state=editor",
+    label: "Open in editor",
+  },
+  "version-published": {
+    url: "https://demo.epistola.app/?state=published",
+    label: "View published version",
   },
   "document-generated": {
     url: "https://demo.epistola.app/?state=document",

@@ -24,23 +24,22 @@ sortOrder: 1
 
 ## Welcome to Epistola
 
-Epistola is an open-source document generation engine built for enterprise teams. It does one job exceptionally well: turning structured data into perfect PDFs.
+Epistola is an open-source document generation engine built for enterprise teams. It turns structured data into pixel-perfect PDFs — with full version control, multi-tenant isolation, and a visual template editor.
 
-### Why Epistola?
+### What Epistola does
 
-Many organisations struggle with document generation. Templates are scattered across Word files, PDF output is inconsistent, and there's no audit trail. Epistola solves this by providing:
-
-- **Template management** — Author, version, and promote document templates through environments
-- **Schema validation** — JSON Schema Draft 2020-12 ensures your data is always valid before rendering
-- **Immutable versions** — Every published template version is locked and reproducible
-- **Multi-tenant support** — Scoped templates, themes, and configurations per tenant
+- **Template management** — Design document templates in a visual WYSIWYG editor with live PDF preview
+- **Version control** — Every published template version is immutable and reproducible. Draft, publish, and archive with a clear lifecycle
+- **Data contracts** — JSON Schema Draft 2020-12 validates your data before rendering, catching errors early
+- **Multi-tenant** — Templates, themes, assets, and configurations are fully isolated per tenant
+- **Variant resolution** — Automatically pick the right template variant based on attributes like language or brand
 
 ### How it works
 
-1. **Design** your template in the Epistola Suite editor
-2. **Define** a JSON Schema for the data your template expects
-3. **Publish** the template version to your target environment
-4. **Render** by sending a JSON payload to the API — get a perfect PDF back
+1. **Design** a template in the Epistola Suite editor — add text, tables, images, conditionals, and loops
+2. **Define** a data contract (JSON Schema) for the data your template expects
+3. **Publish** the template version and deploy it to an environment
+4. **Generate** documents by sending a JSON payload to the API — get a production-ready PDF back
 
 ### Ready to explore?
 

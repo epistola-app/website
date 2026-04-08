@@ -1,23 +1,23 @@
 ---
 title: "Create your first template"
-summary: "Walk through creating a document template in the Epistola Suite editor."
+summary: "Walk through creating a document template, understanding the detail page, and setting up variants."
 videoUrl: ""
 posterImage: ""
 sandboxCheckpointId: "template-created"
 nextUnits:
-  - slug: "add-workflow"
-    label: "Add a workflow"
-  - slug: "generate-document"
-    label: "Generate a document"
+  - slug: "edit-in-editor"
+    label: "Edit in the visual editor"
+  - slug: "explore-technical"
+    label: "Set up variants"
 deepLinks:
   - label: "Templates"
     url: "/en/learn/suite/templates"
   - label: "Variants"
     url: "/en/learn/suite/variants"
-  - label: "Editor Overview"
-    url: "/en/learn/suite/editor-overview"
-  - label: "Block Types"
-    url: "/en/learn/suite/block-types"
+  - label: "Data Contracts"
+    url: "/en/learn/suite/data-contracts"
+  - label: "Environments"
+    url: "/en/learn/suite/environments"
 tags:
   - getting-started
 sortOrder: 2
@@ -25,36 +25,28 @@ sortOrder: 2
 
 ## Creating a template
 
-Templates are the core building block in Epistola. Each template defines the structure and appearance of a document type — from a simple letter to a complex multi-page report.
+Templates are the core building block in Epistola. Each template defines everything needed to produce a specific document type.
 
-### Step 1: Open the Suite editor
+### Start from the templates list
 
-Navigate to the Epistola Suite and create a new template. Give it a meaningful slug (e.g. `decision-letter`) and a display name.
+Navigate to the templates page in the Epistola Suite. You'll see a searchable table of all templates in your tenant. Click **New template** to create one — give it a meaningful slug (e.g., `decision-letter`) and a display name.
 
-### Step 2: Define your schema
+### The template detail page
 
-Every template needs a JSON Schema that describes the data it expects. This ensures that render requests are validated before processing:
+Once created, you land on the template detail page with four tabs:
 
-```json
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "properties": {
-    "recipientName": { "type": "string" },
-    "decisionDate": { "type": "string", "format": "date" },
-    "subject": { "type": "string" }
-  },
-  "required": ["recipientName", "decisionDate", "subject"]
-}
-```
+- **Variants** — Manage presentation variants (e.g., different languages or brands). Each variant has its own layout and version history
+- **Deployments** — The deployment matrix showing which version is active per variant per environment
+- **Data Contract** — Edit the JSON Schema defining the data your template expects, and manage named data examples for testing
+- **Settings** — Configure the default theme and toggle PDF/A compliance
 
-### Step 3: Design the layout
+### Define your data contract
 
-Use the visual editor to lay out your document. Add text blocks, data bindings, headers, footers, and styling. The editor supports rich formatting and live preview.
+Switch to the Data Contract tab and define the JSON Schema for your template. This contract describes the exact shape of the data payload — field names, types, and which fields are required. Add named data examples so you can preview the template with realistic content.
 
-### Step 4: Create a variant
+### Set up variants
 
-Variants let you have multiple versions of the same template — for example, different languages or brands. The variant resolver automatically picks the right one based on attributes you specify.
+Back on the Variants tab, your template starts with one default variant. Create additional variants for different languages, brands, or channels. Tag each variant with attributes (e.g., `language=nl`) so the variant resolver can automatically select the right one when documents are generated.
 
 ### Try it yourself
 

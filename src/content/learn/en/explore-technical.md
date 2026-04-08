@@ -6,8 +6,8 @@ posterImage: ""
 nextUnits:
   - slug: "welcome"
     label: "Back to start"
-  - slug: "create-template"
-    label: "Create a template"
+  - slug: "generate-document"
+    label: "Generate a document"
 deepLinks:
   - label: "API Overview"
     url: "/en/learn/suite/api-overview"
@@ -15,6 +15,8 @@ deepLinks:
     url: "/en/learn/suite/multi-tenancy"
   - label: "Rendering"
     url: "/en/learn/suite/rendering"
+  - label: "Expressions"
+    url: "/en/learn/suite/expressions"
 tags:
   - technical
 sortOrder: 5
@@ -27,28 +29,26 @@ Epistola follows a DocOps architecture: a single lane from template authoring to
 ### The stack
 
 - **Epistola Suite** — Kotlin 2 + Spring Boot 4 monorepo with Thymeleaf server-side rendering and HTMX for interactivity
-- **Template editor** — Lit + ProseMirror web components for rich template editing
-- **Render engine** — iText for PDF generation with 50–200ms render times
-- **API layer** — OpenAPI 3.1 specification with generated server stubs and client libraries
+- **Template editor** — Lit + ProseMirror web components embedded in the Suite for rich WYSIWYG editing
+- **Render engine** — iText Core 9.5.0 for direct PDF generation (10–200ms typical). Playwright + HTML fallback for complex CSS layouts
+- **API layer** — OpenAPI 3.1 specification with versioned media type `application/vnd.epistola.v1+json`. Generated server stubs and client libraries
 
-### Key design decisions
+### Multi-tenancy
 
-#### Contract-first API
+All resources are tenant-scoped with data isolation enforced at the business logic layer. Tenants have slug identifiers (3–63 chars, kebab-case), a switcher in the navigation bar, and per-tenant dashboards.
 
-The OpenAPI specification in `epistola-contract` is the single source of truth. Server stubs and client libraries are generated from it, ensuring perfect alignment between API consumers and providers.
+### Expression languages
 
-#### Immutable template versions
+Templates support three expression languages: JSONata (default, Dashjoin implementation), JavaScript (GraalJS sandboxed), and Simple Path (dot-path traversal). All expressions are evaluated server-side at render time.
 
-Once a template version is published, it's locked. The theme snapshot and schema hash are frozen so that every render request can be reproduced — even years later.
+### Authentication and roles
 
-#### Multi-tenant by default
+OAuth2/OIDC (Keycloak), API key, JWT bearer tokens, or form login. Five roles control access: reader, editor, generator, manager, and tenant_control.
 
-Templates, themes, and configurations are scoped per tenant. Keycloak handles authentication, and each tenant gets isolated data without separate deployments.
+### PDF/A compliance
 
-### Deployment
-
-Epistola ships as Docker containers with Helm charts for Kubernetes deployment. Health probes, metrics, and structured logging are built in, so it fits naturally into your existing platform infrastructure.
+PDF/A-2b compliance is toggleable per template, producing archival-standard documents with embedded fonts and metadata.
 
 ### Open source
 
-The entire stack is open source. You can self-host with full control over your data, or use the managed service for hands-off operation.
+The entire stack is open source. Self-host with full control, or use the managed service for hands-off operation.

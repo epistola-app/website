@@ -1,6 +1,6 @@
 ---
 title: "Genereer een document"
-summary: "Stuur data naar de Epistola API en ontvang een gerenderde PDF."
+summary: "Genereer documenten via de API — synchrone preview, asynchrone generatie, batchjobs en variantresolutie."
 videoUrl: ""
 posterImage: ""
 sandboxCheckpointId: "document-generated"
@@ -16,37 +16,59 @@ deepLinks:
     url: "/nl/learn/suite/jobs"
   - label: "Rendering"
     url: "/nl/learn/suite/rendering"
+  - label: "API-overzicht"
+    url: "/nl/learn/suite/api-overview"
 tags:
   - getting-started
-sortOrder: 4
+  - technical
+sortOrder: 6
 ---
 
-## Uw eerste document genereren
+## Documenten genereren
 
-Met een gepubliceerde template en een verbonden workflow is het genereren van een document eenvoudig: stuur een JSON-payload naar het render-eindpunt.
+Met een gepubliceerde en gedeployde template kunt u nu documenten genereren door data naar de Epistola API te sturen. Dit is het resultaat — u hebt een template gebouwd, nu produceert u output.
 
-### De renderflow
+### Drie generatiemodi
 
-1. **Verzoek** — Uw systeem stuurt een POST-verzoek met de templateslug en datapayload
-2. **Valideer** — Epistola valideert de payload tegen het JSON Schema van de template
-3. **Resolven** — De variantresolver kiest de best passende variant op basis van attributen
-4. **Render** — De iText-engine verwerkt de template met uw data
-5. **Retourneer** — U ontvangt een PDF-document (doorgaans in 50–200ms)
+#### Synchrone preview
+
+Gebruikt tijdens bewerking. De editor stuurt previewverzoeken en ontvangt gerenderde output direct. Rate-limited en niet-PDF/A — ontworpen voor snelle iteratie, niet voor productie.
+
+#### Asynchroon enkel document
+
+Voor productiegebruik. Dien een renderverzoek in met de templateslug en datapayload:
+
+```http
+POST /api/tenants/{tenantId}/generation/generate
+Content-Type: application/vnd.epistola.v1+json
+
+{
+  "templateSlug": "besluitbrief",
+  "environment": "productie",
+  "data": {
+    "ontvanger": "Jan de Vries",
+    "besluitdatum": "2026-04-08",
+    "onderwerp": "Goedkeuring bouwvergunning"
+  }
+}
+```
+
+U ontvangt direct een job-ID. Het document wordt op de achtergrond gerenderd en produceert een PDF/A-compliant PDF.
+
+#### Asynchrone batch
+
+Voor hoog-volume scenario's. Dien een array van documenten in als één verzoek. Elk document wordt bijgehouden als een apart batch-item met een eigen status.
+
+### Variantresolutie
+
+U kunt een variant expliciet specificeren op ID, of attributen meesturen voor automatische resolutie. De resolver scoort alle varianten tegen uw attributen en kiest de beste match, met fallback naar de standaardvariant.
+
+### Jobtracking
+
+Elk generatieverzoek maakt een job aan die doorloopt: PENDING → IN_PROGRESS → COMPLETED | FAILED | CANCELLED. Het generatiegeschiedenisdashboard toont statistieken, meest gebruikte templates en recente jobs met kleurgecodeerde statusbadges.
 
 ### Wat u krijgt
 
-- Een pixelperfecte PDF die overeenkomt met uw templateontwerp
+- Een productieklare PDF die overeenkomt met uw templateontwerp
 - Een audittrail die het document koppelt aan zijn templateversie, schema en invoerdata
 - Reproduceerbaarheid — dezelfde invoer produceert altijd dezelfde output
-
-### Foutafhandeling
-
-Als uw payload niet overeenkomt met het schema, retourneert Epistola een duidelijke validatiefout voordat er gerenderd wordt. Deze fail-fast-aanpak voorkomt verspilde rekenkracht en maakt debugging eenvoudig.
-
-### Batchgeneratie
-
-Moet u honderden documenten genereren? Epistola ondersteunt batchoperaties met webhook-callbacks, zodat uw workflow-engine wordt genotificeerd wanneer elk document klaar is.
-
-### Wat nu?
-
-Duik in de technische architectuur om te begrijpen hoe Epistola is gebouwd, of ga terug naar het begin om een ander pad te verkennen.

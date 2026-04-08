@@ -1,23 +1,23 @@
 ---
 title: "Maak je eerste template"
-summary: "Doorloop het aanmaken van een documenttemplate in de Epistola Suite-editor."
+summary: "Doorloop het aanmaken van een documenttemplate, de detailpagina begrijpen en varianten instellen."
 videoUrl: ""
 posterImage: ""
 sandboxCheckpointId: "template-created"
 nextUnits:
-  - slug: "add-workflow"
-    label: "Voeg een workflow toe"
-  - slug: "generate-document"
-    label: "Genereer een document"
+  - slug: "edit-in-editor"
+    label: "Bewerk in de visuele editor"
+  - slug: "explore-technical"
+    label: "Varianten instellen"
 deepLinks:
   - label: "Templates"
     url: "/nl/learn/suite/templates"
   - label: "Varianten"
     url: "/nl/learn/suite/variants"
-  - label: "Editoroverzicht"
-    url: "/nl/learn/suite/editor-overview"
-  - label: "Bloktypen"
-    url: "/nl/learn/suite/block-types"
+  - label: "Datacontracten"
+    url: "/nl/learn/suite/data-contracts"
+  - label: "Omgevingen"
+    url: "/nl/learn/suite/environments"
 tags:
   - getting-started
 sortOrder: 2
@@ -25,36 +25,28 @@ sortOrder: 2
 
 ## Een template aanmaken
 
-Templates zijn de kernbouwsteen in Epistola. Elke template definieert de structuur en weergave van een documenttype — van een eenvoudige brief tot een complex meerpagina-rapport.
+Templates zijn de kernbouwsteen in Epistola. Elke template definieert alles wat nodig is om een specifiek documenttype te produceren.
 
-### Stap 1: Open de Suite-editor
+### Begin vanaf de templatelijst
 
-Navigeer naar de Epistola Suite en maak een nieuwe template aan. Geef het een betekenisvolle slug (bijv. `besluitbrief`) en een weergavenaam.
+Navigeer naar de templatepagina in de Epistola Suite. U ziet een doorzoekbare tabel van alle templates in uw tenant. Klik op **Nieuwe template** om er een aan te maken — geef het een betekenisvolle slug (bijv. `besluitbrief`) en een weergavenaam.
 
-### Stap 2: Definieer uw schema
+### De template-detailpagina
 
-Elke template heeft een JSON Schema nodig dat de verwachte data beschrijft. Dit zorgt ervoor dat renderverzoeken worden gevalideerd vóór verwerking:
+Na aanmaak komt u op de template-detailpagina met vier tabbladen:
 
-```json
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "properties": {
-    "ontvanger": { "type": "string" },
-    "besluitdatum": { "type": "string", "format": "date" },
-    "onderwerp": { "type": "string" }
-  },
-  "required": ["ontvanger", "besluitdatum", "onderwerp"]
-}
-```
+- **Varianten** — Beheer presentatievarianten (bijv. verschillende talen of merken). Elke variant heeft een eigen lay-out en versiegeschiedenis
+- **Deployments** — De deploymentmatrix die toont welke versie actief is per variant per omgeving
+- **Datacontract** — Bewerk het JSON Schema dat de data definieert die uw template verwacht, en beheer benoemde datavoorbeelden voor testen
+- **Instellingen** — Configureer het standaardthema en schakel PDF/A-compliance in
 
-### Stap 3: Ontwerp de lay-out
+### Definieer uw datacontract
 
-Gebruik de visuele editor om uw document op te maken. Voeg tekstblokken, databindings, kop- en voetteksten en opmaak toe. De editor ondersteunt rijke opmaak en live preview.
+Schakel naar het tabblad Datacontract en definieer het JSON Schema voor uw template. Dit contract beschrijft de exacte vorm van de datapayload — veldnamen, typen en welke velden verplicht zijn. Voeg benoemde datavoorbeelden toe zodat u de template kunt previewen met realistische inhoud.
 
-### Stap 4: Maak een variant
+### Varianten instellen
 
-Varianten laten u meerdere versies van dezelfde template hebben — bijvoorbeeld voor verschillende talen of merken. De variantresolver kiest automatisch de juiste op basis van attributen die u opgeeft.
+Terug op het tabblad Varianten begint uw template met één standaardvariant. Maak extra varianten voor verschillende talen, merken of kanalen. Tag elke variant met attributen (bijv. `taal=nl`) zodat de variantresolver automatisch de juiste kan selecteren wanneer documenten worden gegenereerd.
 
 ### Probeer het zelf
 

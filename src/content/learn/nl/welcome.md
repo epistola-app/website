@@ -24,23 +24,22 @@ sortOrder: 1
 
 ## Welkom bij Epistola
 
-Epistola is een open-source documentgeneratie-engine gebouwd voor enterprise teams. Het doet één ding uitzonderlijk goed: gestructureerde data omzetten in perfecte PDF's.
+Epistola is een open-source documentgeneratie-engine gebouwd voor enterprise teams. Het zet gestructureerde data om in pixelperfecte PDF's — met volledig versiebeheer, multi-tenant isolatie en een visuele template-editor.
 
-### Waarom Epistola?
+### Wat Epistola doet
 
-Veel organisaties worstelen met documentgeneratie. Templates zijn verspreid over Word-bestanden, PDF-output is inconsistent en er is geen audittrail. Epistola lost dit op met:
-
-- **Templatebeheer** — Ontwerp, versiebeheer en promoveer documenttemplates door omgevingen
-- **Schemavalidatie** — JSON Schema Draft 2020-12 zorgt ervoor dat uw data altijd geldig is vóór rendering
-- **Onveranderlijke versies** — Elke gepubliceerde templateversie is vergrendeld en reproduceerbaar
-- **Multi-tenant ondersteuning** — Scoped templates, thema's en configuraties per tenant
+- **Templatebeheer** — Ontwerp documenttemplates in een visuele WYSIWYG-editor met live PDF-preview
+- **Versiebeheer** — Elke gepubliceerde templateversie is onveranderlijk en reproduceerbaar. Concept, publiceer en archiveer met een duidelijke levenscyclus
+- **Datacontracten** — JSON Schema Draft 2020-12 valideert uw data vóór rendering, waardoor fouten vroeg worden opgespoord
+- **Multi-tenant** — Templates, thema's, assets en configuraties zijn volledig geïsoleerd per tenant
+- **Variantresolutie** — Selecteer automatisch de juiste templatevariant op basis van attributen zoals taal of merk
 
 ### Hoe het werkt
 
-1. **Ontwerp** uw template in de Epistola Suite-editor
-2. **Definieer** een JSON Schema voor de data die uw template verwacht
-3. **Publiceer** de templateversie naar uw doelomgeving
-4. **Render** door een JSON-payload naar de API te sturen — ontvang een perfecte PDF terug
+1. **Ontwerp** een template in de Epistola Suite-editor — voeg tekst, tabellen, afbeeldingen, condities en lussen toe
+2. **Definieer** een datacontract (JSON Schema) voor de data die uw template verwacht
+3. **Publiceer** de templateversie en deploy naar een omgeving
+4. **Genereer** documenten door een JSON-payload naar de API te sturen — ontvang een productieklare PDF terug
 
 ### Klaar om te verkennen?
 

@@ -6,8 +6,8 @@ posterImage: ""
 nextUnits:
   - slug: "welcome"
     label: "Terug naar start"
-  - slug: "create-template"
-    label: "Maak een template"
+  - slug: "generate-document"
+    label: "Genereer een document"
 deepLinks:
   - label: "API-overzicht"
     url: "/nl/learn/suite/api-overview"
@@ -15,6 +15,8 @@ deepLinks:
     url: "/nl/learn/suite/multi-tenancy"
   - label: "Rendering"
     url: "/nl/learn/suite/rendering"
+  - label: "Expressies"
+    url: "/nl/learn/suite/expressions"
 tags:
   - technical
 sortOrder: 5
@@ -27,28 +29,26 @@ Epistola volgt een DocOps-architectuur: een enkele lane van template-authoring t
 ### De stack
 
 - **Epistola Suite** — Kotlin 2 + Spring Boot 4 monorepo met Thymeleaf server-side rendering en HTMX voor interactiviteit
-- **Template-editor** — Lit + ProseMirror webcomponents voor rijke template-editing
-- **Render-engine** — iText voor PDF-generatie met 50–200ms rendertijden
-- **API-laag** — OpenAPI 3.1 specificatie met gegenereerde server stubs en clientbibliotheken
+- **Template-editor** — Lit + ProseMirror webcomponenten ingebed in de Suite voor rijke WYSIWYG-editing
+- **Render-engine** — iText Core 9.5.0 voor directe PDF-generatie (10–200ms typisch). Playwright + HTML fallback voor complexe CSS-lay-outs
+- **API-laag** — OpenAPI 3.1-specificatie met versiebeheerd mediatype `application/vnd.epistola.v1+json`. Gegenereerde server stubs en clientbibliotheken
 
-### Belangrijke ontwerpbeslissingen
+### Multi-tenancy
 
-#### Contract-first API
+Alle resources zijn tenant-scoped met data-isolatie afgedwongen op de businesslogicalaag. Tenants hebben slug-identifiers (3–63 tekens, kebab-case), een wisselaar in de navigatiebalk en per-tenant dashboards.
 
-De OpenAPI-specificatie in `epistola-contract` is de enige bron van waarheid. Server stubs en clientbibliotheken worden ervan gegenereerd, wat perfecte afstemming garandeert tussen API-consumenten en -aanbieders.
+### Expressietalen
 
-#### Onveranderlijke templateversies
+Templates ondersteunen drie expressietalen: JSONata (standaard, Dashjoin-implementatie), JavaScript (GraalJS gesandboxed) en Eenvoudig Pad (dot-path traversal). Alle expressies worden server-side geëvalueerd bij rendering.
 
-Zodra een templateversie is gepubliceerd, is deze vergrendeld. De themasnapshot en schemahash worden bevroren zodat elk renderverzoek kan worden gereproduceerd — zelfs jaren later.
+### Authenticatie en rollen
 
-#### Multi-tenant als standaard
+OAuth2/OIDC (Keycloak), API-sleutel, JWT bearer tokens of formulierinlog. Vijf rollen beheren toegang: reader, editor, generator, manager en tenant_control.
 
-Templates, thema's en configuraties zijn scoped per tenant. Keycloak handelt authenticatie af en elke tenant krijgt geïsoleerde data zonder aparte deployments.
+### PDF/A-compliance
 
-### Deployment
-
-Epistola wordt geleverd als Docker-containers met Helm-charts voor Kubernetes-deployment. Health probes, metrics en gestructureerde logging zijn ingebouwd, zodat het natuurlijk past in uw bestaande platforminfrastructuur.
+PDF/A-2b-compliance is schakelbaar per template en produceert archiveringstandaard-documenten met ingebedde lettertypen en metadata.
 
 ### Open source
 
-De volledige stack is open source. U kunt self-hosten met volledige controle over uw data, of de managed service gebruiken voor hands-off operatie.
+De volledige stack is open source. Self-host met volledige controle, of gebruik de managed service voor hands-off operatie.
