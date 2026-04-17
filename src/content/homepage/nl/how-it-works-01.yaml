@@ -1,4 +1,5 @@
 type: how-it-works
 sortOrder: 1
-title: "Modelleer + ontwerp"
-body: "Definieer invoervariabelen per template, beheer varianten en sleep blokken in de visuele editor met live PDF-preview."
+title: "Modelleer"
+body: "Definieer input variabelen per template en beheer varianten met JSON Schema validatie."
+illustration: "/illustrations/how-it-works/step1.svg"
